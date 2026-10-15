@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How to Count Cards in Blackjack: Hi-Lo Step by Step — Blackjack Play</title>
+<meta name="description" content="Learn to count cards in blackjack with the Hi-Lo system: card values, running count, true count, bet spread and index plays. Practice for free with a 3D card counting trainer.">
+<link rel="canonical" href="https://blackjack-play.app/en/card-counting">
+<link rel="alternate" hreflang="fr" href="https://blackjack-play.app/compter-les-cartes-blackjack">
+<link rel="alternate" hreflang="en" href="https://blackjack-play.app/en/card-counting">
+<link rel="alternate" hreflang="x-default" href="https://blackjack-play.app/en/card-counting">
+<meta name="theme-color" content="#0d0b09">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Blackjack Play">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="Learn to count cards in blackjack">
+<meta property="og:description" content="Learn to count cards in blackjack with the Hi-Lo system: card values, running count, true count, bet spread and index plays. Practice for free with a 3D card counting trainer.">
+<meta property="og:url" content="https://blackjack-play.app/en/card-counting">
+<meta property="og:image" content="https://blackjack-play.app/assets/img/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="preload" href="/assets/fonts/source-serif-4-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/site.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"How to count cards in blackjack: Hi-Lo step by step","inLanguage":"en","image":"https://blackjack-play.app/assets/img/screens/comptage.webp","datePublished":"2026-10-15","author":{"@type":"Organization","name":"Blackjack Play"},"publisher":{"@type":"Organization","name":"Blackjack Play","logo":{"@type":"ImageObject","url":"https://blackjack-play.app/assets/img/icon-512.png"}},"mainEntityOfPage":"https://blackjack-play.app/en/card-counting"}</script>
+</head>
+<body class="" data-lang="en" data-alt="/compter-les-cartes-blackjack">
+<a class="skip" href="#contenu">Skip to content</a>
+<header class="site-head">
+  <div class="wrap">
+    <a class="logo" href="/en/" aria-label="Blackjack Play, home"><svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true"><rect x="3" y="5" width="18" height="24" rx="3" fill="#efe6d2" transform="rotate(-10 12 17)"/><rect x="11" y="3" width="18" height="24" rx="3" fill="#c9a24a"/><path d="M20 9c-3 3-5 5-5 7.5a2.5 2.5 0 0 0 4.4 1.6c-.2 1.2-.8 2.2-1.6 2.9h4.4c-.8-.7-1.4-1.7-1.6-2.9a2.5 2.5 0 0 0 4.4-1.6C25 14 23 12 20 9z" fill="#14100c"/></svg><span>Blackjack Play</span></a>
+    <nav class="nav" aria-label="Main navigation"><a href="/en/">Home</a><a href="/game/?lang=en">Play</a><a href="/en/download">Download</a><a href="/en/learn">Learn</a><a href="/en/stats">Stats</a></nav>
+    <div class="head-cta"><div class="lang-switch" role="group" aria-label="Language">
+      <a href="/compter-les-cartes-blackjack" hreflang="fr" lang="fr" data-setlang="fr" title="Français"><svg viewBox="0 0 30 20" width="24" height="16" aria-hidden="true"><rect width="10" height="20" fill="#002654"/><rect x="10" width="10" height="20" fill="#fff"/><rect x="20" width="10" height="20" fill="#ce1126"/></svg><span>FR</span></a>
+      <a href="/en/card-counting" hreflang="en" lang="en" data-setlang="en" title="English" aria-current="true"><svg viewBox="0 0 60 40" width="24" height="16" aria-hidden="true"><clipPath id="uk"><rect width="60" height="40"/></clipPath><g clip-path="url(#uk)"><rect width="60" height="40" fill="#012169"/><path d="M0 0l60 40M60 0L0 40" stroke="#fff" stroke-width="8"/><path d="M0 0l60 40M60 0L0 40" stroke="#c8102e" stroke-width="3"/><path d="M30 0v40M0 20h60" stroke="#fff" stroke-width="12"/><path d="M30 0v40M0 20h60" stroke="#c8102e" stroke-width="7"/></g></svg><span>EN</span></a>
+    </div><a class="btn btn-gold btn-sm" href="/game/?lang=en"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="6 3 20 12 6 21 6 3" /></svg>Play</a></div>
+    <button class="menu-btn" aria-label="Menu" aria-expanded="false"><svg class="ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h.01" /> <path d="M3 18h.01" /> <path d="M3 6h.01" /> <path d="M8 12h13" /> <path d="M8 18h13" /> <path d="M8 6h13" /></svg></button>
+  </div>
+</header>
+<main id="contenu">
+<header class="page-head">
+  <div class="wrap">
+    <div class="crumbs"><a href="/en/">Home</a> › <a href="/en/learn">Learn</a> › Card counting</div>
+    <h1>How to count cards in blackjack</h1>
+    <p>You don't need to be a math genius: counting means adding or subtracting 1. Here's the Hi-Lo system, the most widely used in the world, in five steps.</p>
+  </div>
+</header>
+<div class="wrap doc">
+  <nav class="toc" aria-label="Contents"><p>On this page</p><ol><li><a href="#why">Why it works</a></li><li><a href="#hilo">Step 1: Hi-Lo values</a></li><li><a href="#running">Step 2: running count</a></li><li><a href="#true">Step 3: true count</a></li><li><a href="#bets">Step 4: bet spread</a></li><li><a href="#index">Step 5: index plays</a></li><li><a href="#systems">Other systems</a></li><li><a href="#legal">Is it legal?</a></li><li><a href="#practice">How to practice</a></li></ol></nav>
+  <article class="prose">
+    <h2 id="why">Why card counting works</h2>
+    <p>In blackjack, cards that have been dealt don't go back into the shoe until the shuffle. When lots of small cards are gone, there are proportionally more tens and aces left. That favors the player: more 3-to-2 blackjacks, more successful doubles, more dealer busts. Counting tells you when that happens so you can bet more.</p>
+
+    <h2 id="hilo">Step 1: the value of each card (Hi-Lo)</h2>
+    <div class="tags">
+      <div class="h">2</div><div class="h">3</div><div class="h">4</div><div class="h">5</div><div class="h">6</div><div class="h">7</div><div class="h">8</div><div class="h">9</div><div class="h">10</div><div class="h">A</div>
+      <div class="p">+1</div><div class="p">+1</div><div class="p">+1</div><div class="p">+1</div><div class="p">+1</div><div>0</div><div>0</div><div>0</div><div class="n">−1</div><div class="n">−1</div>
+    </div>
+    <p>Small cards: +1. Middle cards: 0. Big cards: −1. A full deck adds up to exactly 0, which makes it a "balanced" system.</p>
+
+    <h2 id="running">Step 2: the running count</h2>
+    <p>Start at 0 after the shuffle and add the value of every card you see. Example: 5, king, 3, 2, ace, 6 gives +1 −1 +1 +1 −1 +1 = <strong>+2</strong>.</p>
+    <div class="callout"><p><strong>Pro tip:</strong> count cards in pairs. A ten and a four cancel out, so you skip them at a glance. Target: a full deck in under 25 seconds.</p></div>
+
+    <h2 id="true">Step 3: the true count</h2>
+    <p>A +6 at the start of a six-deck shoe is diluted across a lot of cards; near the end it carries real weight. So you divide the running count by the number of decks still to be dealt.</p>
+    <table class="tbl"><thead><tr><th>Running count</th><th>Decks left</th><th>True count</th></tr></thead><tbody><tr><td>+6</td><td>5</td><td>+1</td></tr><tr><td>+6</td><td>3</td><td>+2</td></tr><tr><td>+6</td><td>1.5</td><td>+4</td></tr><tr><td>−4</td><td>2</td><td>−2</td></tr></tbody></table>
+    <p>To estimate decks left, look at the height of the discard tray. In the game, the tray fills up at real scale so you get used to it.</p>
+
+    <h2 id="bets">Step 4: spreading your bets</h2>
+    <p>Each point of true count adds roughly 0.5% to the player's edge, so the player moves ahead around +1. A classic 1-to-8 spread:</p>
+    <table class="tbl"><thead><tr><th>True count</th><th>≤ 0</th><th>+1</th><th>+2</th><th>+3</th><th>+4 or more</th></tr></thead><tbody><tr><td>Bet (units)</td><td>1</td><td>2</td><td>4</td><td>6</td><td>8</td></tr></tbody></table>
+    <p>The resulting edge is small (around 0.5 to 1%) and the swings are huge: the simulator shows it takes tens of thousands of hands for the edge to show up.</p>
+
+    <h2 id="index">Step 5: index plays (deviations)</h2>
+    <p>Some decisions change with the true count. The most valuable ones: take insurance at +3, stand on 16 vs 10 at 0 or higher, stand on 15 vs 10 at +4, double 11 vs ace at +1, split tens vs 6 at +4 and vs 5 at +5. The full Illustrious 18 and Fab 4 list is in <a href="/en/learn#deviations">the guide</a>.</p>
+
+    <h2 id="systems">Other counting systems</h2>
+    <table class="tbl"><thead><tr><th>System</th><th>Level</th><th>What's special</th></tr></thead><tbody>
+      <tr><td>Hi-Lo</td><td>1</td><td>The standard, best place to start</td></tr>
+      <tr><td>KO (Knock-Out)</td><td>1</td><td>Unbalanced: no true count conversion</td></tr>
+      <tr><td>Hi-Opt I</td><td>1</td><td>Ace-neutral, often paired with a side ace count</td></tr>
+      <tr><td>Hi-Opt II, Omega II, Zen</td><td>2</td><td>More accurate, harder</td></tr>
+      <tr><td>Wong Halves</td><td>3</td><td>Half-point values, for experts</td></tr>
+      <tr><td>Red Seven</td><td>1</td><td>Hi-Lo plus red sevens, unbalanced</td></tr>
+    </tbody></table>
+    <p>All of them are available in the game (Settings → Counting).</p>
+
+    <h2 id="legal">Is card counting legal?</h2>
+    <p>Counting in your head isn't illegal: it's just paying attention. Casinos can still refuse a player they suspect of counting, and any device at the table is prohibited. Here you practice with play chips: the goal is to understand the game, not to make money.</p>
+
+    <h2 id="practice">Practice, in order</h2>
+    <ol>
+      <li><a href="/game/?lang=en&amp;drill=countdown">Deck countdown</a>: speed and accuracy.</li>
+      <li><a href="/game/?lang=en&amp;drill=truecount">True count conversion</a> from the discard tray.</li>
+      <li><a href="/game/?lang=en&amp;mode=comptage">Counting table</a>: AI players, dealer quizzes, suggested bets.</li>
+      <li><a href="/game/?lang=en&amp;drill=deviations">Index plays drill</a>.</li>
+    </ol>
+    <figure style="margin:24px 0"><img src="/assets/img/screens/comptage-960.webp" alt="Blackjack card counting practice with running count and true count on screen" width="960" height="540" loading="lazy" style="border-radius:10px;border:1px solid var(--line)"></figure>
+    <div class="try"><p>Ready to count for real, at a full table?</p><a class="btn btn-gold" href="/game/?lang=en&amp;mode=comptage"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z" /> <path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z" /> <path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4" /> <path d="M17.599 6.5a3 3 0 0 0 .399-1.375" /> <path d="M6.003 5.125A3 3 0 0 0 6.401 6.5" /> <path d="M3.477 10.896a4 4 0 0 1 .585-.396" /> <path d="M19.938 10.5a4 4 0 0 1 .585.396" /> <path d="M6 18a4 4 0 0 1-1.967-.516" /> <path d="M19.967 17.484A4 4 0 0 1 18 18" /></svg>Counting table</a></div>
+  </article>
+</div>
+
+</main>
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="logo" href="/en/"><svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true"><rect x="3" y="5" width="18" height="24" rx="3" fill="#efe6d2" transform="rotate(-10 12 17)"/><rect x="11" y="3" width="18" height="24" rx="3" fill="#c9a24a"/><path d="M20 9c-3 3-5 5-5 7.5a2.5 2.5 0 0 0 4.4 1.6c-.2 1.2-.8 2.2-1.6 2.9h4.4c-.8-.7-1.4-1.7-1.6-2.9a2.5 2.5 0 0 0 4.4-1.6C25 14 23 12 20 9z" fill="#14100c"/></svg><span>Blackjack Play</span></a>
+        <p style="margin:14px 0 14px;max-width:36ch">Free 3D blackjack trainer, in your browser or on your computer.</p>
+        <span class="no-money">Play chips only · no real money</span>
+        <div style="margin-top:16px"><div class="lang-switch" role="group" aria-label="Language">
+      <a href="/compter-les-cartes-blackjack" hreflang="fr" lang="fr" data-setlang="fr" title="Français"><svg viewBox="0 0 30 20" width="24" height="16" aria-hidden="true"><rect width="10" height="20" fill="#002654"/><rect x="10" width="10" height="20" fill="#fff"/><rect x="20" width="10" height="20" fill="#ce1126"/></svg><span>FR</span></a>
+      <a href="/en/card-counting" hreflang="en" lang="en" data-setlang="en" title="English" aria-current="true"><svg viewBox="0 0 60 40" width="24" height="16" aria-hidden="true"><clipPath id="uk"><rect width="60" height="40"/></clipPath><g clip-path="url(#uk)"><rect width="60" height="40" fill="#012169"/><path d="M0 0l60 40M60 0L0 40" stroke="#fff" stroke-width="8"/><path d="M0 0l60 40M60 0L0 40" stroke="#c8102e" stroke-width="3"/><path d="M30 0v40M0 20h60" stroke="#fff" stroke-width="12"/><path d="M30 0v40M0 20h60" stroke="#c8102e" stroke-width="7"/></g></svg><span>EN</span></a>
+    </div></div>
+      </div>
+      <div><h4>Game</h4><ul><li><a href="/en/free-blackjack-game">Free blackjack game</a></li><li><a href="/game/?lang=en">Play online</a></li><li><a href="/en/download">Windows, macOS, Linux</a></li><li><a href="/en/stats">My stats</a></li><li><a href="/game/?lang=en&drill=flash">Flash drill</a></li></ul></div>
+      <div><h4>Learn</h4><ul><li><a href="/en/blackjack-rules">Blackjack rules</a></li><li><a href="/en/basic-strategy">Basic strategy</a></li><li><a href="/en/card-counting">Card counting</a></li><li><a href="/en/blackjack-simulator">Simulator</a></li><li><a href="/en/learn">Full guide</a></li></ul></div>
+      <div><h4>Info</h4><ul><li><a href="/en/credits">Credits & licenses</a></li><li><a href="/en/credits#privacy">Privacy</a></li><li><a href="/en/credits#responsible-gaming">Responsible gaming</a></li></ul></div>
+    </div>
+    <div class="foot-legal">
+      <span>Blackjack Play is a training tool. No betting, no real money, no winnings. Real blackjack is still a game of chance where the casino keeps the edge.</span>
+      <span>Version 1.1.1</span>
+    </div>
+  </div>
+</footer>
+<script src="/assets/js/site.js" defer></script>
+
+</body>
+</html>

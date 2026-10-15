@@ -1,0 +1,79 @@
+<!--
+{
+  "lang": "en",
+  "alt": "/strategie-de-base-blackjack",
+  "path": "/en/basic-strategy",
+  "priority": 0.9,
+  "title": "Blackjack Basic Strategy Chart (with explanations) — Blackjack Play",
+  "ogTitle": "Blackjack basic strategy chart, explained",
+  "description": "The complete blackjack basic strategy chart for hard hands, soft hands and pairs, with the reasoning behind every rule: when to hit, stand, double, split or surrender. Free interactive trainer.",
+  "jsonld": {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Blackjack basic strategy chart, explained",
+    "inLanguage": "en",
+    "image": "{{domain}}/assets/img/screens/strategie.webp",
+    "datePublished": "{{releaseDate}}",
+    "author": { "@type": "Organization", "name": "Blackjack Play" },
+    "publisher": { "@type": "Organization", "name": "Blackjack Play", "logo": { "@type": "ImageObject", "url": "{{domain}}/assets/img/icon-512.png" } },
+    "mainEntityOfPage": "{{domain}}/en/basic-strategy"
+  }
+}
+-->
+<header class="page-head">
+  <div class="wrap">
+    <div class="crumbs"><a href="/en/">Home</a> › <a href="/en/learn">Learn</a> › Basic strategy</div>
+    <h1>Blackjack basic strategy</h1>
+    <p>For every hand against every dealer upcard there is one best play, worked out mathematically. Here it is as a chart, along with the reasoning behind each cell.</p>
+  </div>
+</header>
+<div class="wrap doc">
+  <nav class="toc" aria-label="Contents"><p>On this page</p><ol><li><a href="#idea">The core idea</a></li><li><a href="#chart">The chart</a></li><li><a href="#hard">Hard hands</a></li><li><a href="#soft">Soft hands</a></li><li><a href="#pairs">Pairs</a></li><li><a href="#surrender">Surrender</a></li><li><a href="#insurance">Insurance</a></li><li><a href="#memorize">Memorizing it</a></li></ol></nav>
+  <article class="prose">
+    <h2 id="idea">The core idea: look at the dealer's card first</h2>
+    <p>The dealer must draw until 17. With a <strong>2, 3, 4, 5 or 6</strong> showing, they start weak and bust often (up to 42% of the time with a 6). With <strong>7 through ace</strong>, they usually end up on 17 or better.</p>
+    <p>Hence the two big ideas: against a weak card, take few risks and double whenever you can; against a strong card, improve your hand even when it's risky. Played without mistakes, basic strategy cuts the house edge to about 0.5%.</p>
+
+    <h2 id="chart">The full chart</h2>
+    <p>Rules: 4 to 8 decks, dealer stands on soft 17, double after split, late surrender. Rows: your hand. Columns: dealer upcard.</p>
+    <div class="legend"><span><i class="c-H"></i>H Hit</span><span><i class="c-S"></i>S Stand</span><span><i class="c-D"></i>D Double (else hit)</span><span><i class="c-Ds"></i>Ds Double (else stand)</span><span><i class="c-P"></i>P Split</span><span><i class="c-Rh"></i>Rh Surrender (else hit)</span></div>
+    <h3 id="hard">Hard hands (no ace counted as 11)</h3>
+    {{chart:hard}}
+    <ul>
+      <li><strong>12 to 16 vs 2 to 6: stand</strong> (except 12 vs 2 and 3). Let the dealer take the risk.</li>
+      <li><strong>12 to 16 vs 7 through ace: hit.</strong> Standing loses about three times out of four.</li>
+      <li><strong>11: double</strong> against everything but an ace. <strong>10: double</strong> vs 2 to 9. <strong>9: double</strong> vs 3 to 6.</li>
+    </ul>
+    <h3 id="soft">Soft hands (with an ace counted as 11)</h3>
+    {{chart:soft}}
+    <ul>
+      <li>A soft hand can't bust with one card, so hitting and doubling are cheap.</li>
+      <li><strong>A,7 (soft 18)</strong>: double vs 3 to 6, stand vs 2, 7 and 8, <strong>hit vs 9, 10 and ace</strong>.</li>
+      <li><strong>A,8 and A,9</strong>: always stand.</li>
+    </ul>
+    <h3 id="pairs">Pairs</h3>
+    {{chart:pairs}}
+    <ul>
+      <li><strong>Always split aces and eights.</strong> Never split tens or fives.</li>
+      <li><strong>9,9</strong>: split, except against 7, 10 and ace (stand).</li>
+      <li><strong>2,2 / 3,3 / 7,7</strong>: split vs 2 to 7. <strong>6,6</strong>: vs 2 to 6. <strong>4,4</strong>: only vs 5 and 6.</li>
+    </ul>
+
+    <h2 id="surrender">When to surrender</h2>
+    <p>If the table offers late surrender: give up <strong>16 vs 9, 10 and ace</strong>, and <strong>15 vs 10</strong>. Getting half your bet back costs less than playing those hands out.</p>
+
+    <h2 id="insurance">Why you should decline insurance</h2>
+    <p>Insurance pays 2 to 1 when the dealer has a ten under their ace. In a six-deck shoe that happens about 31% of the time; you'd need 33.3% to break even. So insurance loses about 7% of what you put on it. The exception: card counters take it at a Hi-Lo true count of +3 or higher (see <a href="/en/card-counting">card counting</a>).</p>
+
+    <h2 id="memorize">How to memorize it fast</h2>
+    <ol>
+      <li>Learn hard hands first: they cover roughly 75% of the situations you'll face.</li>
+      <li>Add pairs: two absolute rules (aces and eights) and a few cases.</li>
+      <li>Finish with soft hands, the ones people get wrong most often.</li>
+      <li>Drill against the clock until you answer without hesitating.</li>
+    </ol>
+    <figure style="margin:24px 0"><img src="/assets/img/screens/flash-960.webp" alt="Blackjack basic strategy flash drill" width="960" height="540" loading="lazy" style="border-radius:10px;border:1px solid var(--line)"></figure>
+    <div class="try"><p>Flash drill: one hand, one dealer card, find the right play.</p><a class="btn btn-gold" href="/game/?lang=en&amp;drill=flash">{{ico:target}}Start the drill</a></div>
+    <p>Different rules at your table (H17, single deck, European no-hole-card)? The chart inside the game recalculates itself from your settings.</p>
+  </article>
+</div>

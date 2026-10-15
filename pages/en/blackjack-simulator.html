@@ -1,0 +1,55 @@
+<!--
+{
+  "lang": "en",
+  "alt": "/simulateur-blackjack",
+  "path": "/en/blackjack-simulator",
+  "priority": 0.75,
+  "title": "Blackjack Simulator: House Edge, Variance and Risk of Ruin — Blackjack Play",
+  "ogTitle": "Free blackjack simulator",
+  "description": "Free blackjack simulator: play 100,000 to 1,000,000 rounds with perfect strategy to measure the house edge, the effect of a rule, a bet spread or card counting, and your risk of ruin.",
+  "jsonld": {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Blackjack Play simulator",
+    "url": "{{domain}}/game/?lang=en&drill=sim",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Web browser",
+    "inLanguage": "en",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+}
+-->
+<header class="page-head">
+  <div class="wrap">
+    <div class="crumbs"><a href="/en/">Home</a> › Simulator</div>
+    <h1>Blackjack simulator</h1>
+    <p>Got a question about a rule, a strategy or a bet spread? The simulator plays hundreds of thousands of rounds in seconds, with perfect strategy, and gives you the numbers.</p>
+    <div class="hero-cta" style="margin-top:26px"><a class="btn btn-gold btn-lg" href="/game/?lang=en&amp;drill=sim">{{ico:chart-column}}Open the simulator</a></div>
+  </div>
+</header>
+<div class="wrap doc">
+  <nav class="toc" aria-label="Contents"><p>On this page</p><ol><li><a href="#what">What it measures</a></li><li><a href="#questions">Typical questions</a></li><li><a href="#reading">Reading the results</a></li><li><a href="#trust">Accuracy</a></li></ol></nav>
+  <article class="prose">
+    <figure style="margin:0 0 24px"><img src="/assets/img/screens/simulateur-960.webp" alt="Blackjack simulator: edge, standard deviation, risk of ruin and bankroll curve" width="960" height="540" loading="lazy" style="border-radius:10px;border:1px solid var(--line)"></figure>
+    <h2 id="what">What the simulator measures</h2>
+    <ul>
+      <li><strong>Player edge</strong> (negative = house edge), with its margin of error.</li>
+      <li><strong>Average win per round and per hour</strong> (at 100 rounds an hour).</li>
+      <li><strong>Standard deviation</strong>: how big the swings are.</li>
+      <li><strong>Risk of ruin</strong>: the chance of losing your whole starting bankroll.</li>
+      <li><strong>Bankroll curve</strong> across the whole simulation.</li>
+    </ul>
+    <h2 id="questions">Questions it answers</h2>
+    <ul>
+      <li>How much does a 6:5 blackjack table cost you compared to 3:2?</li>
+      <li>Does a dealer hitting soft 17 really matter?</li>
+      <li>Does a Hi-Lo counter with a 1-to-8 spread make money? With what bankroll?</li>
+      <li>How much do the Illustrious 18 add on top of the bet spread?</li>
+    </ul>
+    <h2 id="reading">Reading the results</h2>
+    <p>With the default rules (6 decks, S17, double after split, late surrender) and flat betting, the measured edge comes out around <strong>−0.4%</strong>: the casino keeps 40 cents per $100 wagered. Counting with a 1-to-8 spread pushes it slightly above zero, but the standard deviation shows how long the losing stretches can last.</p>
+    <h2 id="trust">Why you can trust it</h2>
+    <p>The engine running the table is the same one the simulator uses: same rules, same shoe, same strategy. We validated it over 2 million rounds and the results match published reference values. Every result shows its margin of error; the more rounds, the smaller it gets.</p>
+    <div class="try"><p>Try it: default rules, then 6:5 blackjack. Compare.</p><a class="btn btn-gold" href="/game/?lang=en&amp;drill=sim">{{ico:chart-column}}Run a simulation</a></div>
+  </article>
+</div>

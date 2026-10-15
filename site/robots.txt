@@ -3,6 +3,7 @@ Allow: /
 Disallow: /downloads/
 Disallow: /tableau/
 Disallow: /merci
+Disallow: /en/thanks
 Disallow: /api/
 
 Sitemap: https://blackjack-play.app/sitemap.xml

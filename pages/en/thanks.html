@@ -1,0 +1,49 @@
+<!--
+{
+  "alt": "/merci",
+  "lang": "en",
+  "path": "/en/thanks",
+  "noindex": true,
+  "title": "Your download has started — Blackjack Play",
+  "description": "Installing Blackjack Play: the steps for Windows, macOS and Linux.",
+  "head": "<meta name=\"robots\" content=\"noindex\">",
+  "scripts": "<script src=\"/assets/js/merci.js\" defer></script>"
+}
+-->
+<section class="block" style="padding-top:64px">
+  <div class="wrap" style="max-width:920px">
+    <p class="kicker" id="dl-kicker">Download</p>
+    <h2 class="title" id="dl-title">Your download has started</h2>
+    <p class="intro" id="dl-file" style="margin-bottom:18px">Preparing the file…</p>
+    <p style="margin:0 0 40px;color:var(--ink-3)">Nothing happening? <a href="#" id="dl-retry">Restart the download</a> · <a href="/en/download">All versions</a></p>
+
+    <div id="steps"></div>
+
+    <div class="browser-strip" style="margin-top:40px">
+      <p><b>While it downloads…</b>You can already play in your browser. Your progress can be exported to the app later (Settings → Data).</p>
+      <a class="btn btn-gold" href="/game/?lang=en">{{ico:play}}Play online</a>
+    </div>
+  </div>
+</section>
+
+<template id="tpl-windows">
+  <div class="modes-grid">
+    <article class="mode-card"><span class="tag">Step 1</span><h3>Open the file</h3><p>Click the downloaded file at the bottom or top right of your browser, or in your Downloads folder.</p></article>
+    <article class="mode-card"><span class="tag">Step 2</span><h3>Allow the install</h3><p>If Windows shows "Windows protected your PC", click <strong>More info</strong>, then <strong>Run anyway</strong>. That's normal for a new app without a paid certificate.</p></article>
+    <article class="mode-card"><span class="tag">Step 3</span><h3>Install and play</h3><p>Choose a folder and click <strong>Install</strong>. Blackjack Play launches at the end and a desktop shortcut is created.</p></article>
+  </div>
+</template>
+<template id="tpl-mac">
+  <div class="modes-grid">
+    <article class="mode-card"><span class="tag">Step 1</span><h3>Open the .dmg</h3><p>Double-click the downloaded file, then drag <strong>Blackjack Play</strong> into <strong>Applications</strong>.</p></article>
+    <article class="mode-card"><span class="tag">Step 2</span><h3>First launch</h3><p>In Applications, <strong>right-click Blackjack Play → Open</strong> and confirm. macOS only asks once.</p></article>
+    <article class="mode-card"><span class="tag">If needed</span><h3>"App is damaged"</h3><p>Open Terminal and run <code>xattr -cr "/Applications/Blackjack Play.app"</code>, then open the app again.</p></article>
+  </div>
+</template>
+<template id="tpl-linux">
+  <div class="modes-grid">
+    <article class="mode-card"><span class="tag">AppImage</span><h3>Make it executable</h3><p>Right-click → Properties → Allow executing, or <code>chmod +x</code> the file, then double-click.</p></article>
+    <article class="mode-card"><span class="tag">.deb</span><h3>Ubuntu, Debian, Mint</h3><p>Double-click to open in Software, or <code>sudo apt install ./file.deb</code>.</p></article>
+    <article class="mode-card"><span class="tag">.rpm</span><h3>Fedora, openSUSE</h3><p><code>sudo dnf install ./file.rpm</code> or <code>sudo zypper install ./file.rpm</code>.</p></article>
+  </div>
+</template>

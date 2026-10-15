@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Blackjack Simulator: House Edge, Variance and Risk of Ruin — Blackjack Play</title>
+<meta name="description" content="Free blackjack simulator: play 100,000 to 1,000,000 rounds with perfect strategy to measure the house edge, the effect of a rule, a bet spread or card counting, and your risk of ruin.">
+<link rel="canonical" href="https://blackjack-play.app/en/blackjack-simulator">
+<link rel="alternate" hreflang="fr" href="https://blackjack-play.app/simulateur-blackjack">
+<link rel="alternate" hreflang="en" href="https://blackjack-play.app/en/blackjack-simulator">
+<link rel="alternate" hreflang="x-default" href="https://blackjack-play.app/en/blackjack-simulator">
+<meta name="theme-color" content="#0d0b09">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Blackjack Play">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="Free blackjack simulator">
+<meta property="og:description" content="Free blackjack simulator: play 100,000 to 1,000,000 rounds with perfect strategy to measure the house edge, the effect of a rule, a bet spread or card counting, and your risk of ruin.">
+<meta property="og:url" content="https://blackjack-play.app/en/blackjack-simulator">
+<meta property="og:image" content="https://blackjack-play.app/assets/img/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="preload" href="/assets/fonts/source-serif-4-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/site.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Blackjack Play simulator","url":"https://blackjack-play.app/game/?lang=en&drill=sim","applicationCategory":"UtilitiesApplication","operatingSystem":"Web browser","inLanguage":"en","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+</head>
+<body class="" data-lang="en" data-alt="/simulateur-blackjack">
+<a class="skip" href="#contenu">Skip to content</a>
+<header class="site-head">
+  <div class="wrap">
+    <a class="logo" href="/en/" aria-label="Blackjack Play, home"><svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true"><rect x="3" y="5" width="18" height="24" rx="3" fill="#efe6d2" transform="rotate(-10 12 17)"/><rect x="11" y="3" width="18" height="24" rx="3" fill="#c9a24a"/><path d="M20 9c-3 3-5 5-5 7.5a2.5 2.5 0 0 0 4.4 1.6c-.2 1.2-.8 2.2-1.6 2.9h4.4c-.8-.7-1.4-1.7-1.6-2.9a2.5 2.5 0 0 0 4.4-1.6C25 14 23 12 20 9z" fill="#14100c"/></svg><span>Blackjack Play</span></a>
+    <nav class="nav" aria-label="Main navigation"><a href="/en/">Home</a><a href="/game/?lang=en">Play</a><a href="/en/download">Download</a><a href="/en/learn">Learn</a><a href="/en/stats">Stats</a></nav>
+    <div class="head-cta"><div class="lang-switch" role="group" aria-label="Language">
+      <a href="/simulateur-blackjack" hreflang="fr" lang="fr" data-setlang="fr" title="Français"><svg viewBox="0 0 30 20" width="24" height="16" aria-hidden="true"><rect width="10" height="20" fill="#002654"/><rect x="10" width="10" height="20" fill="#fff"/><rect x="20" width="10" height="20" fill="#ce1126"/></svg><span>FR</span></a>
+      <a href="/en/blackjack-simulator" hreflang="en" lang="en" data-setlang="en" title="English" aria-current="true"><svg viewBox="0 0 60 40" width="24" height="16" aria-hidden="true"><clipPath id="uk"><rect width="60" height="40"/></clipPath><g clip-path="url(#uk)"><rect width="60" height="40" fill="#012169"/><path d="M0 0l60 40M60 0L0 40" stroke="#fff" stroke-width="8"/><path d="M0 0l60 40M60 0L0 40" stroke="#c8102e" stroke-width="3"/><path d="M30 0v40M0 20h60" stroke="#fff" stroke-width="12"/><path d="M30 0v40M0 20h60" stroke="#c8102e" stroke-width="7"/></g></svg><span>EN</span></a>
+    </div><a class="btn btn-gold btn-sm" href="/game/?lang=en"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="6 3 20 12 6 21 6 3" /></svg>Play</a></div>
+    <button class="menu-btn" aria-label="Menu" aria-expanded="false"><svg class="ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h.01" /> <path d="M3 18h.01" /> <path d="M3 6h.01" /> <path d="M8 12h13" /> <path d="M8 18h13" /> <path d="M8 6h13" /></svg></button>
+  </div>
+</header>
+<main id="contenu">
+<header class="page-head">
+  <div class="wrap">
+    <div class="crumbs"><a href="/en/">Home</a> › Simulator</div>
+    <h1>Blackjack simulator</h1>
+    <p>Got a question about a rule, a strategy or a bet spread? The simulator plays hundreds of thousands of rounds in seconds, with perfect strategy, and gives you the numbers.</p>
+    <div class="hero-cta" style="margin-top:26px"><a class="btn btn-gold btn-lg" href="/game/?lang=en&amp;drill=sim"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v16a2 2 0 0 0 2 2h16" /> <path d="M18 17V9" /> <path d="M13 17V5" /> <path d="M8 17v-3" /></svg>Open the simulator</a></div>
+  </div>
+</header>
+<div class="wrap doc">
+  <nav class="toc" aria-label="Contents"><p>On this page</p><ol><li><a href="#what">What it measures</a></li><li><a href="#questions">Typical questions</a></li><li><a href="#reading">Reading the results</a></li><li><a href="#trust">Accuracy</a></li></ol></nav>
+  <article class="prose">
+    <figure style="margin:0 0 24px"><img src="/assets/img/screens/simulateur-960.webp" alt="Blackjack simulator: edge, standard deviation, risk of ruin and bankroll curve" width="960" height="540" loading="lazy" style="border-radius:10px;border:1px solid var(--line)"></figure>
+    <h2 id="what">What the simulator measures</h2>
+    <ul>
+      <li><strong>Player edge</strong> (negative = house edge), with its margin of error.</li>
+      <li><strong>Average win per round and per hour</strong> (at 100 rounds an hour).</li>
+      <li><strong>Standard deviation</strong>: how big the swings are.</li>
+      <li><strong>Risk of ruin</strong>: the chance of losing your whole starting bankroll.</li>
+      <li><strong>Bankroll curve</strong> across the whole simulation.</li>
+    </ul>
+    <h2 id="questions">Questions it answers</h2>
+    <ul>
+      <li>How much does a 6:5 blackjack table cost you compared to 3:2?</li>
+      <li>Does a dealer hitting soft 17 really matter?</li>
+      <li>Does a Hi-Lo counter with a 1-to-8 spread make money? With what bankroll?</li>
+      <li>How much do the Illustrious 18 add on top of the bet spread?</li>
+    </ul>
+    <h2 id="reading">Reading the results</h2>
+    <p>With the default rules (6 decks, S17, double after split, late surrender) and flat betting, the measured edge comes out around <strong>−0.4%</strong>: the casino keeps 40 cents per $100 wagered. Counting with a 1-to-8 spread pushes it slightly above zero, but the standard deviation shows how long the losing stretches can last.</p>
+    <h2 id="trust">Why you can trust it</h2>
+    <p>The engine running the table is the same one the simulator uses: same rules, same shoe, same strategy. We validated it over 2 million rounds and the results match published reference values. Every result shows its margin of error; the more rounds, the smaller it gets.</p>
+    <div class="try"><p>Try it: default rules, then 6:5 blackjack. Compare.</p><a class="btn btn-gold" href="/game/?lang=en&amp;drill=sim"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v16a2 2 0 0 0 2 2h16" /> <path d="M18 17V9" /> <path d="M13 17V5" /> <path d="M8 17v-3" /></svg>Run a simulation</a></div>
+  </article>
+</div>
+
+</main>
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="logo" href="/en/"><svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true"><rect x="3" y="5" width="18" height="24" rx="3" fill="#efe6d2" transform="rotate(-10 12 17)"/><rect x="11" y="3" width="18" height="24" rx="3" fill="#c9a24a"/><path d="M20 9c-3 3-5 5-5 7.5a2.5 2.5 0 0 0 4.4 1.6c-.2 1.2-.8 2.2-1.6 2.9h4.4c-.8-.7-1.4-1.7-1.6-2.9a2.5 2.5 0 0 0 4.4-1.6C25 14 23 12 20 9z" fill="#14100c"/></svg><span>Blackjack Play</span></a>
+        <p style="margin:14px 0 14px;max-width:36ch">Free 3D blackjack trainer, in your browser or on your computer.</p>
+        <span class="no-money">Play chips only · no real money</span>
+        <div style="margin-top:16px"><div class="lang-switch" role="group" aria-label="Language">
+      <a href="/simulateur-blackjack" hreflang="fr" lang="fr" data-setlang="fr" title="Français"><svg viewBox="0 0 30 20" width="24" height="16" aria-hidden="true"><rect width="10" height="20" fill="#002654"/><rect x="10" width="10" height="20" fill="#fff"/><rect x="20" width="10" height="20" fill="#ce1126"/></svg><span>FR</span></a>
+      <a href="/en/blackjack-simulator" hreflang="en" lang="en" data-setlang="en" title="English" aria-current="true"><svg viewBox="0 0 60 40" width="24" height="16" aria-hidden="true"><clipPath id="uk"><rect width="60" height="40"/></clipPath><g clip-path="url(#uk)"><rect width="60" height="40" fill="#012169"/><path d="M0 0l60 40M60 0L0 40" stroke="#fff" stroke-width="8"/><path d="M0 0l60 40M60 0L0 40" stroke="#c8102e" stroke-width="3"/><path d="M30 0v40M0 20h60" stroke="#fff" stroke-width="12"/><path d="M30 0v40M0 20h60" stroke="#c8102e" stroke-width="7"/></g></svg><span>EN</span></a>
+    </div></div>
+      </div>
+      <div><h4>Game</h4><ul><li><a href="/en/free-blackjack-game">Free blackjack game</a></li><li><a href="/game/?lang=en">Play online</a></li><li><a href="/en/download">Windows, macOS, Linux</a></li><li><a href="/en/stats">My stats</a></li><li><a href="/game/?lang=en&drill=flash">Flash drill</a></li></ul></div>
+      <div><h4>Learn</h4><ul><li><a href="/en/blackjack-rules">Blackjack rules</a></li><li><a href="/en/basic-strategy">Basic strategy</a></li><li><a href="/en/card-counting">Card counting</a></li><li><a href="/en/blackjack-simulator">Simulator</a></li><li><a href="/en/learn">Full guide</a></li></ul></div>
+      <div><h4>Info</h4><ul><li><a href="/en/credits">Credits & licenses</a></li><li><a href="/en/credits#privacy">Privacy</a></li><li><a href="/en/credits#responsible-gaming">Responsible gaming</a></li></ul></div>
+    </div>
+    <div class="foot-legal">
+      <span>Blackjack Play is a training tool. No betting, no real money, no winnings. Real blackjack is still a game of chance where the casino keeps the edge.</span>
+      <span>Version 1.1.1</span>
+    </div>
+  </div>
+</footer>
+<script src="/assets/js/site.js" defer></script>
+
+</body>
+</html>

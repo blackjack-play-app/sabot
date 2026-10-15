@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Blackjack Play — Free 3D Blackjack Trainer (Basic Strategy & Card Counting)</title>
+<meta name="description" content="Practice blackjack at a real 3D table with a live-looking dealer: up to 5 hands, a basic strategy coach, card counting drills and a simulator. Free, play chips only, in your browser or on Windows, macOS and Linux.">
+<link rel="canonical" href="https://blackjack-play.app/en/">
+<link rel="alternate" hreflang="fr" href="https://blackjack-play.app/">
+<link rel="alternate" hreflang="en" href="https://blackjack-play.app/en/">
+<link rel="alternate" hreflang="x-default" href="https://blackjack-play.app/en/">
+<meta name="theme-color" content="#0d0b09">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Blackjack Play">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="Blackjack Play — free 3D blackjack trainer">
+<meta property="og:description" content="Practice blackjack at a real 3D table with a live-looking dealer: up to 5 hands, a basic strategy coach, card counting drills and a simulator. Free, play chips only, in your browser or on Windows, macOS and Linux.">
+<meta property="og:url" content="https://blackjack-play.app/en/">
+<meta property="og:image" content="https://blackjack-play.app/assets/img/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="preload" href="/assets/fonts/source-serif-4-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/site.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["VideoGame","SoftwareApplication"],"name":"Blackjack Play","description":"3D blackjack trainer: basic strategy coach, card counting (Hi-Lo, KO, Omega II…), drills, simulator and stats. Play chips only.","url":"https://blackjack-play.app/en/","image":"https://blackjack-play.app/assets/img/og-image.jpg","screenshot":["https://blackjack-play.app/assets/img/screens/hero.webp","https://blackjack-play.app/assets/img/screens/comptage.webp","https://blackjack-play.app/assets/img/screens/cinq-mains.webp"],"genre":["Card game","Blackjack","Educational game"],"gamePlatform":["Web browser","Windows","macOS","Linux"],"operatingSystem":"Windows 10, Windows 11, macOS 11+, Linux, web browser","applicationCategory":"GameApplication","inLanguage":["en","fr"],"playMode":"SinglePlayer","softwareVersion":"1.1.1","datePublished":"2026-10-15","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Can I win or lose real money on Blackjack Play?","acceptedAnswer":{"@type":"Answer","text":"No. Blackjack Play only uses play chips with no value. You cannot buy, bet or cash out anything."}},{"@type":"Question","name":"Is Blackjack Play free?","acceptedAnswer":{"@type":"Answer","text":"Yes, completely: no subscription, no ads, no account."}},{"@type":"Question","name":"Can I learn card counting with Blackjack Play?","acceptedAnswer":{"@type":"Answer","text":"Yes. Counting mode fills the table with AI players and supports 8 systems (Hi-Lo, KO, Hi-Opt I and II, Omega II, Zen, Wong Halves, Red Seven), with count quizzes and true count drills."}},{"@type":"Question","name":"Does it work offline?","acceptedAnswer":{"@type":"Answer","text":"Yes. The desktop app runs fully offline, and the browser version keeps working offline after your first visit."}}]}]}</script>
+</head>
+<body class="home" data-lang="en" data-alt="/">
+<a class="skip" href="#contenu">Skip to content</a>
+<header class="site-head">
+  <div class="wrap">
+    <a class="logo" href="/en/" aria-label="Blackjack Play, home"><svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true"><rect x="3" y="5" width="18" height="24" rx="3" fill="#efe6d2" transform="rotate(-10 12 17)"/><rect x="11" y="3" width="18" height="24" rx="3" fill="#c9a24a"/><path d="M20 9c-3 3-5 5-5 7.5a2.5 2.5 0 0 0 4.4 1.6c-.2 1.2-.8 2.2-1.6 2.9h4.4c-.8-.7-1.4-1.7-1.6-2.9a2.5 2.5 0 0 0 4.4-1.6C25 14 23 12 20 9z" fill="#14100c"/></svg><span>Blackjack Play</span></a>
+    <nav class="nav" aria-label="Main navigation"><a href="/en/" aria-current="page">Home</a><a href="/game/?lang=en">Play</a><a href="/en/download">Download</a><a href="/en/learn">Learn</a><a href="/en/stats">Stats</a></nav>
+    <div class="head-cta"><div class="lang-switch" role="group" aria-label="Language">
+      <a href="/" hreflang="fr" lang="fr" data-setlang="fr" title="Français"><svg viewBox="0 0 30 20" width="24" height="16" aria-hidden="true"><rect width="10" height="20" fill="#002654"/><rect x="10" width="10" height="20" fill="#fff"/><rect x="20" width="10" height="20" fill="#ce1126"/></svg><span>FR</span></a>
+      <a href="/en/" hreflang="en" lang="en" data-setlang="en" title="English" aria-current="true"><svg viewBox="0 0 60 40" width="24" height="16" aria-hidden="true"><clipPath id="uk"><rect width="60" height="40"/></clipPath><g clip-path="url(#uk)"><rect width="60" height="40" fill="#012169"/><path d="M0 0l60 40M60 0L0 40" stroke="#fff" stroke-width="8"/><path d="M0 0l60 40M60 0L0 40" stroke="#c8102e" stroke-width="3"/><path d="M30 0v40M0 20h60" stroke="#fff" stroke-width="12"/><path d="M30 0v40M0 20h60" stroke="#c8102e" stroke-width="7"/></g></svg><span>EN</span></a>
+    </div><a class="btn btn-gold btn-sm" href="/game/?lang=en"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="6 3 20 12 6 21 6 3" /></svg>Play</a></div>
+    <button class="menu-btn" aria-label="Menu" aria-expanded="false"><svg class="ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h.01" /> <path d="M3 18h.01" /> <path d="M3 6h.01" /> <path d="M8 12h13" /> <path d="M8 18h13" /> <path d="M8 6h13" /></svg></button>
+  </div>
+</header>
+<main id="contenu">
+<section class="hero">
+  <div class="hero-media">
+    <picture>
+      <source media="(max-width: 960px)" srcset="/assets/img/screens/hero-clean-960.webp">
+      <img src="/assets/img/screens/hero-clean.webp" alt="Blackjack Play 3D table: the dealer facing three hands in play" width="1920" height="1080" fetchpriority="high">
+    </picture>
+  </div>
+  <div class="wrap hero-body">
+    <div class="tagline">Blackjack trainer · free</div>
+    <h1>Learn blackjack at a real table.</h1>
+    <p class="lede">A 3D dealer, up to five hands at once, a coach that explains every decision and a mode built to teach card counting. Everything is played with play chips.</p>
+    <div class="hero-cta">
+      <a class="btn btn-gold btn-lg" href="/game/?lang=en"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="6 3 20 12 6 21 6 3" /></svg>Play in your browser</a>
+      <a class="btn btn-lg" href="/en/download" data-os-btn><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /> <polyline points="7 10 12 15 17 10" /> <line x1="12" x2="12" y1="15" y2="3" /></svg><span data-os-label>Download</span></a>
+    </div>
+    <p class="hero-note">Also on <a href="/en/download#mac">macOS</a> and <a href="/en/download#linux">Linux</a> · no sign-up · works offline</p>
+  </div>
+</section>
+
+<div class="facts">
+  <ul class="wrap">
+    <li><b>5 hands</b><span>played at once</span></li>
+    <li><b>6 dealers</b><span>modeled in 3D</span></li>
+    <li><b>8 systems</b><span>for card counting</span></li>
+    <li><b>16 rules</b><span>you can adjust</span></li>
+    <li><b>$0</b><span>play chips only</span></li>
+  </ul>
+</div>
+
+<section class="block" id="screenshots">
+  <div class="wrap">
+    <p class="kicker">Screenshots</p>
+    <h2 class="title">What you'll see at the table</h2>
+    <p class="intro">Every image is taken straight from the game, unedited.</p>
+    <div class="gallery" data-gallery>
+      <a href="/assets/img/screens/cinq-mains.webp"><figure style="margin:0;height:100%"><img src="/assets/img/screens/cinq-mains-960.webp" alt="Five hands played at once with the round results" loading="lazy" width="960" height="540"><figcaption>Five hands, one split, round results</figcaption></figure></a>
+      <a href="/assets/img/screens/comptage.webp"><figure style="margin:0;height:100%"><img src="/assets/img/screens/comptage-960.webp" alt="Counting mode with the female dealer, AI players and the count shown" loading="lazy" width="960" height="540"><figcaption>Counting mode, blue felt</figcaption></figure></a>
+      <a href="/assets/img/screens/premiere-base.webp"><figure style="margin:0;height:100%"><img src="/assets/img/screens/premiere-base-960.webp" alt="View from first base, red felt" loading="lazy" width="960" height="540"><figcaption>First base view</figcaption></figure></a>
+      <a href="/assets/img/screens/strategie.webp"><figure style="margin:0;height:100%"><img src="/assets/img/screens/strategie-960.webp" alt="Basic strategy chart with the current hand highlighted" loading="lazy" width="960" height="540"><figcaption>Live strategy chart</figcaption></figure></a>
+      <a href="/assets/img/screens/simulateur.webp"><figure style="margin:0;height:100%"><img src="/assets/img/screens/simulateur-960.webp" alt="Simulator results over 100,000 rounds" loading="lazy" width="960" height="540"><figcaption>Simulator</figcaption></figure></a>
+      <a href="/assets/img/screens/stats.webp"><figure style="margin:0;height:100%"><img src="/assets/img/screens/stats-960.webp" alt="Stats panel and weak spots" loading="lazy" width="960" height="540"><figcaption>Stats and weak spots</figcaption></figure></a>
+      <a href="/assets/img/screens/flash.webp"><figure style="margin:0;height:100%"><img src="/assets/img/screens/flash-960.webp" alt="Basic strategy flash drill" loading="lazy" width="960" height="540"><figcaption>Strategy flash drill</figcaption></figure></a>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="features">
+  <div class="wrap">
+    <p class="kicker">Inside the game</p>
+    <h2 class="title">Built to make you better, not to make you bet</h2>
+
+    <div class="feature">
+      <div class="f-media"><img src="/assets/img/screens/cinq-mains-crop.webp" alt="Five hands on the table with totals and results" loading="lazy" width="1200" height="675"></div>
+      <div class="f-text">
+        <h3>A table that feels like a table</h3>
+        <p>The dealer pulls cards from the shoe, looks at the hand being played, checks the hole card and sweeps losing bets. Used cards stack up in the discard tray, just like in a casino.</p>
+        <ul>
+          <li><b>Up to 5 hands</b> of your own, with a clear summary of each one</li>
+          <li><b>Zoom and 5 camera views</b>, plus a locked view made for phones</li>
+          <li><b>Recorded sounds</b> of real cards and chips, adjustable dealer voice</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="feature rev">
+      <div class="f-media"><img src="/assets/img/screens/hero-crop.webp" alt="The coach recommends standing and explains why" loading="lazy" width="1200" height="675"></div>
+      <div class="f-text">
+        <h3>A coach that explains, not just corrects</h3>
+        <p>Every tip comes with the reason, in plain words: "The dealer shows a 6 and must draw, so he busts often. Don't take any risk."</p>
+        <ul>
+          <li><b>3 help levels</b>: before every move, feedback after, or none</li>
+          <li><b>Strategy computed</b> for your table rules (decks, H17, surrender…)</li>
+          <li><b>Mistakes are logged</b> by situation so you can fix your weak spots</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="feature">
+      <div class="f-media"><img src="/assets/img/screens/comptage-crop.webp" alt="Running count, true count and suggested bet on screen" loading="lazy" width="1200" height="675"></div>
+      <div class="f-text">
+        <h3>Card counting, for real</h3>
+        <p>AI players fill the table so cards come out at a realistic pace. Every now and then the dealer stops and asks you for the count.</p>
+        <ul>
+          <li><b>8 systems</b>: Hi-Lo, KO, Hi-Opt I and II, Omega II, Zen, Wong Halves, Red Seven</li>
+          <li><b>True count</b> from the decks remaining, bet ramp from 1 to 8 units</li>
+          <li><b>Illustrious 18 and Fab 4</b> deviations built into the advice</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="feature rev">
+      <div class="f-media"><img src="/assets/img/screens/simulateur-crop.webp" alt="Simulator with the bankroll curve" loading="lazy" width="1200" height="675"></div>
+      <div class="f-text">
+        <h3>Short drills and a simulator</h3>
+        <p>Got ten minutes? Run a focused drill. Wondering whether a rule really matters? The simulator plays 100,000 rounds in a few seconds.</p>
+        <ul>
+          <li><b>Strategy flash</b> drill against the clock, by hand type</li>
+          <li><b>Deck countdown</b> and true count conversion</li>
+          <li><b>Simulator</b>: edge, standard deviation, risk of ruin, bankroll curve</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="modes">
+  <div class="wrap">
+    <p class="kicker">Three ways to play</p>
+    <h2 class="title">Pick your level when you sit down</h2>
+    <p class="intro">You can switch modes at any time from the top bar. New to blackjack? Start with <a href="/en/blackjack-rules">the rules</a>, then <a href="/en/basic-strategy">basic strategy</a>.</p>
+    <div class="modes-grid">
+      <article class="mode-card"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z" /> <path d="M22 10v6" /> <path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5" /></svg><h3>Coach</h3><span class="tag">Beginner</span><p>The right move is highlighted before every decision. Pick something else and the game asks if you're sure.</p></article>
+      <article class="mode-card"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18" /></svg><h3>Free play</h3><span class="tag">Intermediate</span><p>You play on your own. Make a mistake and the game explains it right after, without stopping the round.</p></article>
+      <article class="mode-card"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z" /> <path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z" /> <path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4" /> <path d="M17.599 6.5a3 3 0 0 0 .399-1.375" /> <path d="M6.003 5.125A3 3 0 0 0 6.401 6.5" /> <path d="M3.477 10.896a4 4 0 0 1 .585-.396" /> <path d="M19.938 10.5a4 4 0 0 1 .585.396" /> <path d="M6 18a4 4 0 0 1-1.967-.516" /> <path d="M19.967 17.484A4 4 0 0 1 18 18" /></svg><h3>Counting</h3><span class="tag">Advanced</span><p>Full table, hidden count, regular quizzes, bets suggested from the true count.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="download">
+  <div class="wrap">
+    <p class="kicker">Version 1.1.1</p>
+    <h2 class="title">Play online or install it</h2>
+    <p class="intro">The browser and desktop versions are identical. The desktop app runs offline and full screen.</p>
+    <div class="dl-grid">
+      <div class="dl-card" data-os="windows" id="windows">
+        <h3><svg class="ico" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M3 5.5 10.5 4.5v7H3zM11.5 4.3 21 3v8.5h-9.5zM3 12.5h7.5v7L3 18.5zM11.5 12.5H21V21l-9.5-1.3z"/></svg>Windows</h3>
+        <p class="meta">Windows 10 and 11 · 64-bit · ≈ 102 MB</p>
+        <a class="btn btn-gold" href="https://github.com/blackjack-play-app/sabot/releases/download/v1.1.1/BlackjackPlay-Setup-1.1.1-x64.exe" data-dl="win"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /> <polyline points="7 10 12 15 17 10" /> <line x1="12" x2="12" y1="15" y2="3" /></svg>Download installer</a>
+        <div class="alt"><a href="https://github.com/blackjack-play-app/sabot/releases/download/v1.1.1/BlackjackPlay-1.1.1-Portable.exe" data-dl="winPortable">Portable version (no install)</a></div>
+      </div>
+      <div class="dl-card" data-os="mac" id="mac">
+        <h3><svg class="ico" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M16.4 12.6c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.1-2.8.9-3.5.9s-1.8-.9-3-.8c-1.5 0-3 .9-3.8 2.3-1.6 2.8-.4 7 1.2 9.3.8 1.1 1.7 2.4 2.9 2.3 1.2 0 1.6-.7 3-.7s1.8.7 3 .7 2-1.1 2.8-2.3c.9-1.3 1.2-2.5 1.2-2.6 0 0-2.4-.9-2.4-3.8zM14.1 5.8c.6-.8 1.1-1.8 1-2.8-.9 0-2 .6-2.7 1.4-.6.7-1.1 1.7-1 2.7 1 .1 2-.5 2.7-1.3z"/></svg>macOS</h3>
+        <p class="meta">macOS 11 or later · Intel and Apple Silicon · ≈ 196 MB</p>
+        <a class="btn btn-gold" href="https://github.com/blackjack-play-app/sabot/releases/download/v1.1.1/BlackjackPlay-1.1.1-macOS-universal.dmg" data-dl="mac"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /> <polyline points="7 10 12 15 17 10" /> <line x1="12" x2="12" y1="15" y2="3" /></svg>Download .dmg</a>
+        <div class="alt"><a href="/en/download#install-mac">Opening it the first time</a></div>
+      </div>
+      <div class="dl-card" data-os="linux" id="linux">
+        <h3><svg class="ico" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2c-2.2 0-3.6 1.8-3.6 4.4 0 1.3.3 2.2.1 3.1-.3 1.2-2.5 3.3-3.1 5.9-.3 1.3 0 2.2.5 2.6-.4.5-1.6 1-1.4 1.9.2.9 2.3.9 3.4 1.6 1 .6 2 .6 2.6-.2.5.1 1 .2 1.5.2s1-.1 1.5-.2c.6.8 1.6.8 2.6.2 1.1-.7 3.2-.7 3.4-1.6.2-.9-1-1.4-1.4-1.9.5-.4.8-1.3.5-2.6-.6-2.6-2.8-4.7-3.1-5.9-.2-.9.1-1.8.1-3.1C15.6 3.8 14.2 2 12 2zm-1.6 4.3c.4 0 .7.5.7 1.1s-.3 1.1-.7 1.1-.7-.5-.7-1.1.3-1.1.7-1.1zm3.2 0c.4 0 .7.5.7 1.1s-.3 1.1-.7 1.1-.7-.5-.7-1.1.3-1.1.7-1.1zM12 9.4c.9 0 2 .5 2 .9s-1.1 1.1-2 1.1-2-.7-2-1.1.9-.9 2-.9z"/></svg>Linux</h3>
+        <p class="meta">x86-64 and ARM64 · ≈ 127 MB</p>
+        <a class="btn btn-gold" href="https://github.com/blackjack-play-app/sabot/releases/download/v1.1.1/BlackjackPlay-1.1.1-Linux-x86_64.AppImage" data-dl="linuxAppImage"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /> <polyline points="7 10 12 15 17 10" /> <line x1="12" x2="12" y1="15" y2="3" /></svg>Download AppImage</a>
+        <div class="alt"><a href="https://github.com/blackjack-play-app/sabot/releases/download/v1.1.1/BlackjackPlay-1.1.1-Linux-amd64.deb" data-dl="linuxDeb">.deb package (Ubuntu, Debian, Mint)</a></div>
+      </div>
+    </div>
+    <div class="browser-strip">
+      <p><b>Don't want to install anything?</b>The full game runs in Chrome, Edge, Firefox and Safari.</p>
+      <a class="btn btn-gold" href="/game/?lang=en"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="6 3 20 12 6 21 6 3" /></svg>Play now</a>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="requirements">
+  <div class="wrap">
+    <p class="kicker">System requirements</p>
+    <h2 class="title">What you need to play</h2>
+    <p class="intro">Graphics quality adjusts itself to your device and drops automatically if the game slows down. You can also set it yourself.</p>
+    <div class="reqs">
+      <div>
+        <h3>Minimum</h3>
+        <table>
+          <tr><th>Browser</th><td>Recent Chrome, Edge, Firefox or Safari with WebGL</td></tr>
+          <tr><th>OS</th><td>Windows 10, macOS 11, 64-bit Linux, Android, iPadOS</td></tr>
+          <tr><th>CPU</th><td>2 cores</td></tr>
+          <tr><th>Memory</th><td>4 GB</td></tr>
+          <tr><th>Graphics</th><td>Integrated GPU (Intel HD 4000 or similar)</td></tr>
+          <tr><th>Storage</th><td>300 MB (desktop app)</td></tr>
+        </table>
+      </div>
+      <div>
+        <h3>Recommended</h3>
+        <table>
+          <tr><th>Browser</th><td>Latest Chrome or Edge</td></tr>
+          <tr><th>OS</th><td>Windows 11, macOS 13 or later</td></tr>
+          <tr><th>CPU</th><td>4 cores</td></tr>
+          <tr><th>Memory</th><td>8 GB</td></tr>
+          <tr><th>Graphics</th><td>Dedicated GPU, Intel Iris Xe, Apple M1 or newer</td></tr>
+          <tr><th>Display</th><td>1920 × 1080, keyboard and mouse</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="faq">
+  <div class="wrap">
+    <p class="kicker">Questions</p>
+    <h2 class="title">Frequently asked questions</h2>
+    <div class="faq">
+      <details><summary>Can I win or lose real money?</summary><p>No. Blackjack Play only uses play chips with no value. There's nothing to buy, bet or cash out. If your stack runs dry, you refill it for free.</p></details>
+      <details><summary>Is it really free?</summary><p>Yes. No subscription, no ads, no account.</p></details>
+      <details><summary>Does it work on my phone?</summary><p>Yes, in the browser, portrait or landscape. A locked camera view and tap-to-bet chips make it easy with one finger. It's even more comfortable on a computer with keyboard shortcuts (H to hit, S to stand…).</p></details>
+      <details><summary>Where are my stats stored?</summary><p>Only on your device. Nothing is sent to a server. You can export them to a file and import them on another computer (Settings → Data).</p></details>
+      <details><summary>Is card counting legal?</summary><p>Counting in your head isn't a crime. Casinos can still ask a suspected counter to leave, and using any device at the table is prohibited. Blackjack Play is for understanding the game and practicing, not for gambling.</p></details>
+      <details><summary>Windows says "Windows protected your PC". What do I do?</summary><p>That message shows up for new apps without a paid code-signing certificate. Click "More info", then "Run anyway". Or simply play in your browser, nothing to install.</p></details>
+      <details><summary>Which rules are used?</summary><p>By default: 6 decks, dealer stands on soft 17, blackjack pays 3 to 2, double after split, late surrender. Six presets (Las Vegas, Atlantic City, European no-hole-card…) and 16 rules can be changed, and the advice adapts automatically.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="final">
+  <div class="wrap">
+    <h2>The table is open.</h2>
+    <p>The game loads in a few seconds in your browser. Your settings and stats are saved for next time.</p>
+    <a class="btn btn-gold btn-lg" href="/game/?lang=en"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="6 3 20 12 6 21 6 3" /></svg>Play now</a>
+  </div>
+</section>
+
+</main>
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="logo" href="/en/"><svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true"><rect x="3" y="5" width="18" height="24" rx="3" fill="#efe6d2" transform="rotate(-10 12 17)"/><rect x="11" y="3" width="18" height="24" rx="3" fill="#c9a24a"/><path d="M20 9c-3 3-5 5-5 7.5a2.5 2.5 0 0 0 4.4 1.6c-.2 1.2-.8 2.2-1.6 2.9h4.4c-.8-.7-1.4-1.7-1.6-2.9a2.5 2.5 0 0 0 4.4-1.6C25 14 23 12 20 9z" fill="#14100c"/></svg><span>Blackjack Play</span></a>
+        <p style="margin:14px 0 14px;max-width:36ch">Free 3D blackjack trainer, in your browser or on your computer.</p>
+        <span class="no-money">Play chips only · no real money</span>
+        <div style="margin-top:16px"><div class="lang-switch" role="group" aria-label="Language">
+      <a href="/" hreflang="fr" lang="fr" data-setlang="fr" title="Français"><svg viewBox="0 0 30 20" width="24" height="16" aria-hidden="true"><rect width="10" height="20" fill="#002654"/><rect x="10" width="10" height="20" fill="#fff"/><rect x="20" width="10" height="20" fill="#ce1126"/></svg><span>FR</span></a>
+      <a href="/en/" hreflang="en" lang="en" data-setlang="en" title="English" aria-current="true"><svg viewBox="0 0 60 40" width="24" height="16" aria-hidden="true"><clipPath id="uk"><rect width="60" height="40"/></clipPath><g clip-path="url(#uk)"><rect width="60" height="40" fill="#012169"/><path d="M0 0l60 40M60 0L0 40" stroke="#fff" stroke-width="8"/><path d="M0 0l60 40M60 0L0 40" stroke="#c8102e" stroke-width="3"/><path d="M30 0v40M0 20h60" stroke="#fff" stroke-width="12"/><path d="M30 0v40M0 20h60" stroke="#c8102e" stroke-width="7"/></g></svg><span>EN</span></a>
+    </div></div>
+      </div>
+      <div><h4>Game</h4><ul><li><a href="/en/free-blackjack-game">Free blackjack game</a></li><li><a href="/game/?lang=en">Play online</a></li><li><a href="/en/download">Windows, macOS, Linux</a></li><li><a href="/en/stats">My stats</a></li><li><a href="/game/?lang=en&drill=flash">Flash drill</a></li></ul></div>
+      <div><h4>Learn</h4><ul><li><a href="/en/blackjack-rules">Blackjack rules</a></li><li><a href="/en/basic-strategy">Basic strategy</a></li><li><a href="/en/card-counting">Card counting</a></li><li><a href="/en/blackjack-simulator">Simulator</a></li><li><a href="/en/learn">Full guide</a></li></ul></div>
+      <div><h4>Info</h4><ul><li><a href="/en/credits">Credits & licenses</a></li><li><a href="/en/credits#privacy">Privacy</a></li><li><a href="/en/credits#responsible-gaming">Responsible gaming</a></li></ul></div>
+    </div>
+    <div class="foot-legal">
+      <span>Blackjack Play is a training tool. No betting, no real money, no winnings. Real blackjack is still a game of chance where the casino keeps the edge.</span>
+      <span>Version 1.1.1</span>
+    </div>
+  </div>
+</footer>
+<script src="/assets/js/site.js" defer></script>
+
+</body>
+</html>

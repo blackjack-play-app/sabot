@@ -1,0 +1,148 @@
+<!--
+{
+  "lang": "en",
+  "alt": "/apprendre",
+  "path": "/en/learn",
+  "priority": 0.9,
+  "title": "Learn Blackjack: Rules, Basic Strategy and Card Counting (Complete Guide) — Blackjack Play",
+  "ogTitle": "Blackjack guide: rules, basic strategy, card counting",
+  "description": "A complete, free guide to learning blackjack: rules, when to hit, double or split, the basic strategy chart, Hi-Lo card counting, the true count and index plays. With interactive drills.",
+  "jsonld": {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Learn blackjack: rules, basic strategy and card counting",
+    "inLanguage": "en",
+    "image": "{{domain}}/assets/img/screens/strategie.webp",
+    "datePublished": "{{releaseDate}}",
+    "author": { "@type": "Organization", "name": "Blackjack Play" },
+    "publisher": { "@type": "Organization", "name": "Blackjack Play", "logo": { "@type": "ImageObject", "url": "{{domain}}/assets/img/icon-512.png" } },
+    "mainEntityOfPage": "{{domain}}/en/learn"
+  }
+}
+-->
+<header class="page-head">
+  <div class="wrap">
+    <div class="crumbs"><a href="/en/">Home</a> › Learn</div>
+    <h1>Learn blackjack</h1>
+    <p>Rules, basic strategy and card counting, explained simply. Each part links to a drill in the game so you can practice right away.</p>
+  </div>
+</header>
+
+<div class="wrap doc">
+  <nav class="toc" aria-label="Contents">
+    <p>Contents</p>
+    <ol>
+      <li><a href="#rules">1. The rules</a></li>
+      <li><a href="#decisions">2. Hit, stand, double, split</a></li>
+      <li><a href="#strategy">3. Basic strategy</a></li>
+      <li><a href="#chart">4. The full chart</a></li>
+      <li><a href="#insurance">5. Insurance</a></li>
+      <li><a href="#table-rules">6. Rules that matter</a></li>
+      <li><a href="#counting">7. Counting cards</a></li>
+      <li><a href="#true-count">8. The true count</a></li>
+      <li><a href="#deviations">9. Index plays</a></li>
+      <li><a href="#mistakes">10. Common mistakes</a></li>
+      <li><a href="#plan">11. A 4-week plan</a></li>
+    </ol>
+  </nav>
+
+  <article class="prose">
+    <h2 id="rules">1. The rules of blackjack</h2>
+    <p>You play against the dealer, not the other players. The goal is a hand closer to 21 than the dealer's, <strong>without going over 21</strong>. Cards 2–10 count their face value, face cards count 10, aces count 1 or 11. An ace and a ten-value card as your first two cards is a <strong>blackjack</strong>, paid 3 to 2. The dealer must draw until 17. Detailed version: <a href="/en/blackjack-rules">blackjack rules</a>.</p>
+    <div class="try"><p>The easiest way to get it: a few rounds in Coach mode.</p><a class="btn btn-gold" href="/game/?lang=en&amp;mode=coach">{{ico:play}}Try Coach mode</a></div>
+
+    <h2 id="decisions">2. Hit, stand, double, split, surrender</h2>
+    <table class="tbl">
+      <thead><tr><th>Decision</th><th>What it does</th><th>When it's good</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Hit</strong></td><td>You take one more card.</td><td>Your hand is weak and the dealer shows a strong card.</td></tr>
+        <tr><td><strong>Stand</strong></td><td>You keep your hand.</td><td>Your hand is good, or the dealer is likely to bust.</td></tr>
+        <tr><td><strong>Double</strong></td><td>Double your bet, get exactly one card.</td><td>9, 10 or 11 against a weak dealer card.</td></tr>
+        <tr><td><strong>Split</strong></td><td>A pair becomes two hands, each with a bet.</td><td>Always with aces and eights, never with tens.</td></tr>
+        <tr><td><strong>Surrender</strong></td><td>Give up the hand and get half your bet back.</td><td>16 vs 9, 10 or ace, and 15 vs 10.</td></tr>
+      </tbody>
+    </table>
+
+    <h2 id="strategy">3. Basic strategy</h2>
+    <p>For every combination of your hand and the dealer's upcard there is a play that loses the least over time. It was worked out in the 1950s and is called <strong>basic strategy</strong>. Played correctly, it brings the house edge down to about <strong>0.5%</strong>, versus 2 to 4% for someone playing on gut feeling.</p>
+    <p>The key idea in one line: <strong>look at the dealer's card first</strong>. Against 2–6 the dealer is in trouble, so stand on stiff hands and double often. Against 7–ace they'll usually make 17+, so improve your hand. Full explanations: <a href="/en/basic-strategy">basic strategy, explained</a>.</p>
+
+    <h2 id="chart">4. The full chart</h2>
+    <p>For 4 to 8 decks, dealer stands on soft 17, double after split, late surrender. In the game, the chart recalculates when you change the rules.</p>
+    <div class="legend"><span><i class="c-H"></i>H Hit</span><span><i class="c-S"></i>S Stand</span><span><i class="c-D"></i>D Double (else hit)</span><span><i class="c-Ds"></i>Ds Double (else stand)</span><span><i class="c-P"></i>P Split</span><span><i class="c-Rh"></i>Rh Surrender (else hit)</span></div>
+    <h3>Hard hands</h3>
+    {{chart:hard}}
+    <h3>Soft hands (with an ace)</h3>
+    {{chart:soft}}
+    <h3>Pairs</h3>
+    {{chart:pairs}}
+    <div class="try"><p>Test yourself: one hand, one dealer card, the clock is running.</p><a class="btn btn-gold" href="/game/?lang=en&amp;drill=flash">{{ico:target}}Flash drill</a></div>
+
+    <h2 id="insurance">5. Insurance: why you should decline it</h2>
+    <p>When the dealer shows an ace, you can insure for half your bet, paid 2 to 1 if they have blackjack. In a six-deck shoe the hole card is a ten about <strong>31% of the time</strong>; insurance needs 33% to break even, so it costs you about 7% of what you put on it. Same thing for "even money" when you hold a blackjack. The only exception: a counter takes it at a Hi-Lo true count of +3.</p>
+
+    <h2 id="table-rules">6. The rules that change everything</h2>
+    <table class="tbl">
+      <thead><tr><th>Rule</th><th>Effect for the player</th></tr></thead>
+      <tbody>
+        <tr><td>Blackjack pays 6:5 instead of 3:2</td><td>−1.4% (avoid)</td></tr>
+        <tr><td>Dealer hits soft 17 (H17)</td><td>−0.2%</td></tr>
+        <tr><td>No double after split</td><td>−0.14%</td></tr>
+        <tr><td>Double on 10 and 11 only</td><td>−0.18%</td></tr>
+        <tr><td>No hole card (European rule)</td><td>−0.11%</td></tr>
+        <tr><td>Late surrender</td><td>+0.08%</td></tr>
+        <tr><td>Single deck instead of six</td><td>+0.48%</td></tr>
+      </tbody>
+    </table>
+
+    <h2 id="counting">7. Counting cards (Hi-Lo)</h2>
+    <p>Big cards (tens and aces) help the player; small cards help the dealer. Counting means tracking the balance of big and small cards already played. With Hi-Lo, 2–6 count +1, 7–9 count 0, tens and aces count −1. The running total is the <strong>running count</strong>. Step by step: <a href="/en/card-counting">how to count cards</a>.</p>
+    <div class="try"><p>Practice on a full deck flashing by, against the clock.</p><a class="btn btn-gold" href="/game/?lang=en&amp;drill=countdown">{{ico:timer}}Deck countdown</a></div>
+
+    <h2 id="true-count">8. The true count</h2>
+    <p>Divide the running count by the decks left to be dealt. Running count +6 with 3 decks left = true count +2. Estimate decks left from the height of the discard tray.</p>
+    <div class="try"><p>Drill: convert the running count from the discard tray.</p><a class="btn btn-gold" href="/game/?lang=en&amp;drill=truecount">{{ico:gauge}}True count drill</a></div>
+
+    <h2 id="deviations">9. Index plays (Illustrious 18 and Fab 4)</h2>
+    <table class="tbl">
+      <thead><tr><th>Situation</th><th>Basic strategy</th><th>Deviation</th></tr></thead>
+      <tbody>
+        <tr><td>Insurance</td><td>Decline</td><td>Take at +3</td></tr>
+        <tr><td>16 vs 10</td><td>Hit</td><td>Stand at 0 or higher</td></tr>
+        <tr><td>15 vs 10</td><td>Hit</td><td>Stand at +4 (surrender at 0)</td></tr>
+        <tr><td>10-10 vs 5 / 6</td><td>Stand</td><td>Split at +5 / +4</td></tr>
+        <tr><td>10 vs 10</td><td>Hit</td><td>Double at +4</td></tr>
+        <tr><td>12 vs 3 / 2</td><td>Hit</td><td>Stand at +2 / +3</td></tr>
+        <tr><td>11 vs ace</td><td>Hit (S17)</td><td>Double at +1</td></tr>
+        <tr><td>9 vs 2 / 7</td><td>Hit</td><td>Double at +1 / +3</td></tr>
+        <tr><td>16 vs 9</td><td>Hit</td><td>Stand at +5</td></tr>
+        <tr><td>13 vs 2</td><td>Stand</td><td>Hit at −1</td></tr>
+        <tr><td>12 vs 4 / 5 / 6</td><td>Stand</td><td>Hit below 0 / at −2 / at −1</td></tr>
+      </tbody>
+    </table>
+    <div class="try"><p>Memorize them with the dedicated drill: the true count is shown, you decide.</p><a class="btn btn-gold" href="/game/?lang=en&amp;drill=deviations">{{ico:brain}}Index plays drill</a></div>
+
+    <h2 id="mistakes">10. The most common mistakes</h2>
+    <ul>
+      <li><strong>Standing on 12–16 against a 7 or higher</strong> "so you don't bust". You lose more often by standing than by hitting.</li>
+      <li><strong>Not doubling 11</strong> out of fear. It's the best double in the game.</li>
+      <li><strong>Splitting tens.</strong> 20 already wins about 85% of the time.</li>
+      <li><strong>Standing on soft 18 against 9, 10 or ace.</strong></li>
+      <li><strong>Taking insurance</strong> "to protect a good hand".</li>
+      <li><strong>Raising your bet after a loss.</strong> Cards have no memory; only the count does.</li>
+    </ul>
+
+    <h2 id="plan">11. A 4-week plan</h2>
+    <table class="tbl">
+      <thead><tr><th>Week</th><th>Goal</th><th>In Blackjack Play</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Hard and soft hands without mistakes</td><td>Coach mode, then Flash "Hard" and "Soft"</td></tr>
+        <tr><td>2</td><td>Pairs, surrender, 95% accuracy</td><td>Free play with feedback, track it in Stats</td></tr>
+        <tr><td>3</td><td>Count a deck in under 30 seconds</td><td>Deck countdown, then the counting table</td></tr>
+        <tr><td>4</td><td>True count, bet spread, index plays</td><td>True count and index drills, help set to "None"</td></tr>
+      </tbody>
+    </table>
+    <div class="callout"><p><strong>Keep in mind:</strong> even played perfectly, real blackjack is still a game of chance. Blackjack Play is for understanding and practice, with chips worth nothing. If gambling is becoming a problem, help is available (in the US: 1-800-GAMBLER; in the UK: GamCare, 0808 8020 133).</p></div>
+    <div class="try"><p>Ready? The table is waiting.</p><a class="btn btn-gold" href="/game/?lang=en">{{ico:play}}Play now</a></div>
+  </article>
+</div>

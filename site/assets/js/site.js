@@ -1,5 +1,30 @@
 // Blackjack Play — scripts communs du site : menu, galerie, détection du système, sommaire.
 (function () {
+  const LANG = document.documentElement.lang === 'en' ? 'en' : 'fr';
+  const TXT = {
+    fr: { you: 'Ton système', dlFor: 'Télécharger pour ', addHome: 'Ajouter à l\'écran d\'accueil', dlPage: '/telecharger', thanks: '/merci' },
+    en: { you: 'Your system', dlFor: 'Download for ', addHome: 'Add to home screen', dlPage: '/en/download', thanks: '/en/thanks' },
+  }[LANG];
+
+  // Langue : choix mémorisé via les drapeaux, sinon langue du navigateur (jamais pour les robots d'indexation)
+  document.querySelectorAll('[data-setlang]').forEach((a) => a.addEventListener('click', () => {
+    try { localStorage.setItem('bp.lang', a.dataset.setlang); } catch { /* ignoré */ }
+  }));
+  try {
+    const bot = /bot|crawl|spider|slurp|lighthouse|headless/i.test(navigator.userAgent);
+    let saved = localStorage.getItem('bp.lang');
+    if (!saved && !bot) {
+      const prefs = (navigator.languages || [navigator.language || 'fr']).map((l) => l.toLowerCase());
+      saved = prefs.find((l) => l.startsWith('fr') || l.startsWith('en'))?.slice(0, 2) || (prefs[0].startsWith('fr') ? 'fr' : 'en');
+      localStorage.setItem('bp.lang', saved);
+      const alt = document.body.dataset.alt;
+      if (saved !== LANG && alt && !sessionStorage.getItem('bp.redirected')) {
+        sessionStorage.setItem('bp.redirected', '1');
+        location.replace(alt + location.search + location.hash);
+        return;
+      }
+    }
+  } catch { /* stockage indisponible : on reste sur la page */ }
   // Menu mobile
   const head = document.querySelector('.site-head');
   const menuBtn = document.querySelector('.menu-btn');
@@ -23,14 +48,14 @@
     card.classList.add('current');
     const tag = document.createElement('span');
     tag.className = 'you';
-    tag.textContent = 'Ton système';
+    tag.textContent = TXT.you;
     card.prepend(tag);
   }
   const osBtn = document.querySelector('[data-os-btn]');
   if (osBtn) {
     const label = osBtn.querySelector('[data-os-label]');
-    if (OS_NAME[os]) { label.textContent = 'Télécharger pour ' + OS_NAME[os]; osBtn.href = '/telecharger#' + os; }
-    else if (os === 'mobile') { label.textContent = 'Ajouter à l\'écran d\'accueil'; osBtn.href = '/telecharger'; }
+    if (OS_NAME[os]) { label.textContent = TXT.dlFor + OS_NAME[os]; osBtn.href = TXT.dlPage + '#' + os; }
+    else if (os === 'mobile') { label.textContent = TXT.addHome; osBtn.href = TXT.dlPage; }
   }
 
   // Liens de téléchargement : adresse définitive lue dans downloads.json
@@ -107,7 +132,7 @@
     // Page « Merci » : le téléchargement démarre et les étapes d'installation s'affichent
     if (!e.ctrlKey && !e.metaKey && !e.shiftKey && e.button === 0) {
       e.preventDefault();
-      location.href = '/merci?f=' + encodeURIComponent(a.dataset.dl);
+      location.href = TXT.thanks + '?f=' + encodeURIComponent(a.dataset.dl);
     }
   });
   const ref = new URLSearchParams(location.search).get('ref');

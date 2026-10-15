@@ -1,0 +1,126 @@
+<!--
+{
+  "lang": "en",
+  "alt": "/telecharger",
+  "path": "/en/download",
+  "priority": 0.8,
+  "title": "Download Blackjack Play — free blackjack game for Windows, macOS and Linux",
+  "description": "Download Blackjack Play, the free 3D blackjack trainer, for Windows 10/11, macOS (Intel and Apple Silicon) and Linux (AppImage, .deb, .rpm, ARM64). Works offline. Play chips only.",
+  "jsonld": {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Blackjack Play",
+    "operatingSystem": "Windows 10, Windows 11, macOS 11+, Linux",
+    "applicationCategory": "GameApplication",
+    "softwareVersion": "{{version}}",
+    "downloadUrl": "{{domain}}/en/download",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+}
+-->
+<header class="page-head">
+  <div class="wrap">
+    <div class="crumbs"><a href="/en/">Home</a> › Download</div>
+    <h1>Download Blackjack Play</h1>
+    <p>Version {{version}}. The desktop app is the same game as the online version: it runs offline, full screen, and keeps your stats on your computer.</p>
+  </div>
+</header>
+
+<section class="block" style="border-bottom:0;padding-top:56px">
+  <div class="wrap">
+    <div class="dl-grid">
+      <div class="dl-card" data-os="windows" id="windows">
+        <h3>{{os:windows}}Windows</h3>
+        <p class="meta">Windows 10 and 11 · 64-bit · {{dl:win:size}}</p>
+        <a class="btn btn-gold" href="{{dl:win:url}}" data-dl="win">{{ico:download}}Installer (.exe)</a>
+        <a class="btn" href="{{dl:winPortable:url}}" data-dl="winPortable">Portable version</a>
+        <div class="alt"><span>The portable version runs without installing, from a USB stick for example.</span></div>
+      </div>
+      <div class="dl-card" data-os="mac" id="mac">
+        <h3>{{os:mac}}macOS</h3>
+        <p class="meta">macOS 11 or later · Intel and Apple Silicon · {{dl:mac:size}}</p>
+        <a class="btn btn-gold" href="{{dl:mac:url}}" data-dl="mac">{{ico:download}}Disk image (.dmg)</a>
+        <div class="alt"><a href="#install-mac">Opening the app the first time</a></div>
+      </div>
+      <div class="dl-card" data-os="linux" id="linux">
+        <h3>{{os:linux}}Linux</h3>
+        <p class="meta">x86-64 · {{dl:linuxAppImage:size}}</p>
+        <a class="btn btn-gold" href="{{dl:linuxAppImage:url}}" data-dl="linuxAppImage">{{ico:download}}AppImage</a>
+        <a class="btn" href="{{dl:linuxDeb:url}}" data-dl="linuxDeb">.deb package (Ubuntu, Debian)</a>
+        <a class="btn" href="{{dl:linuxRpm:url}}" data-dl="linuxRpm">.rpm package (Fedora, openSUSE)</a>
+      </div>
+    </div>
+    <div class="browser-strip">
+      <p><b>On a phone, tablet or Chromebook?</b>Play in the browser. In Chrome or Edge, "Install app" adds Blackjack Play to your home screen.</p>
+      <a class="btn btn-gold" href="/game/?lang=en">{{ico:play}}Play online</a>
+    </div>
+  </div>
+</section>
+
+<section class="block" style="padding-top:20px">
+  <div class="wrap">
+    <div class="doc" style="padding:0">
+      <nav class="toc" aria-label="Contents">
+        <p>Installation</p>
+        <ol>
+          <li><a href="#install-windows">Windows</a></li>
+          <li><a href="#install-mac">macOS</a></li>
+          <li><a href="#install-linux">Linux</a></li>
+          <li><a href="#all">All versions</a></li>
+          <li><a href="#transfer">Moving your stats</a></li>
+          <li><a href="#uninstall">Uninstall</a></li>
+        </ol>
+      </nav>
+      <div class="prose">
+        <h2 id="install-windows">Install on Windows</h2>
+        <ol>
+          <li>Open <strong>{{dl:win:file}}</strong>.</li>
+          <li>If Windows shows "Windows protected your PC", click <strong>More info</strong>, then <strong>Run anyway</strong>. New apps without a paid code-signing certificate get this message.</li>
+          <li>Choose a folder, click <strong>Install</strong>. Blackjack Play starts automatically and a desktop shortcut is created.</li>
+        </ol>
+        <div class="callout"><p><strong>F11</strong> toggles full screen. Graphics quality adjusts itself; you can change it in Settings → Graphics.</p></div>
+
+        <h2 id="install-mac">Install on macOS</h2>
+        <ol>
+          <li>Open <strong>{{dl:mac:file}}</strong> and drag Blackjack Play into Applications.</li>
+          <li>The first time, <strong>right-click Blackjack Play → Open</strong> and confirm. macOS asks this once for apps outside the App Store.</li>
+          <li>If you see "Blackjack Play is damaged", open Terminal and run <code>xattr -cr "/Applications/Blackjack Play.app"</code>, then open it again.</li>
+        </ol>
+
+        <h2 id="install-linux">Install on Linux</h2>
+        <h3>AppImage (any distribution)</h3>
+        <p><code>chmod +x {{dl:linuxAppImage:file}}</code> then <code>./{{dl:linuxAppImage:file}}</code></p>
+        <h3>.deb (Ubuntu, Debian, Mint)</h3>
+        <p><code>sudo apt install ./{{dl:linuxDeb:file}}</code></p>
+        <h3>.rpm (Fedora, openSUSE, RHEL)</h3>
+        <p><code>sudo dnf install ./{{dl:linuxRpm:file}}</code> or <code>sudo zypper install ./{{dl:linuxRpm:file}}</code></p>
+        <h3>Raspberry Pi 4 and 5</h3>
+        <p>Use the ARM64 build (.deb or AppImage) and pick "Low" quality in Settings → Graphics for smooth play.</p>
+
+        <h2 id="all">All versions</h2>
+        <table class="tbl"><thead><tr><th>System</th><th>File</th><th>Size</th></tr></thead><tbody>
+          <tr><td>Windows 10/11 (Intel, AMD)</td><td><a href="{{dl:win:url}}" data-dl="win">{{dl:win:file}}</a></td><td>{{dl:win:size}}</td></tr>
+          <tr><td>Windows on ARM (Snapdragon, Surface)</td><td><a href="{{dl:winArm:url}}" data-dl="winArm">{{dl:winArm:file}}</a></td><td>{{dl:winArm:size}}</td></tr>
+          <tr><td>Windows portable</td><td><a href="{{dl:winPortable:url}}" data-dl="winPortable">{{dl:winPortable:file}}</a></td><td>{{dl:winPortable:size}}</td></tr>
+          <tr><td>macOS 11+ (Intel and Apple Silicon)</td><td><a href="{{dl:mac:url}}" data-dl="mac">{{dl:mac:file}}</a></td><td>{{dl:mac:size}}</td></tr>
+          <tr><td>macOS, .zip archive</td><td><a href="{{dl:macZip:url}}" data-dl="macZip">{{dl:macZip:file}}</a></td><td>{{dl:macZip:size}}</td></tr>
+          <tr><td>Linux x86-64, AppImage</td><td><a href="{{dl:linuxAppImage:url}}" data-dl="linuxAppImage">{{dl:linuxAppImage:file}}</a></td><td>{{dl:linuxAppImage:size}}</td></tr>
+          <tr><td>Linux x86-64, .deb</td><td><a href="{{dl:linuxDeb:url}}" data-dl="linuxDeb">{{dl:linuxDeb:file}}</a></td><td>{{dl:linuxDeb:size}}</td></tr>
+          <tr><td>Linux x86-64, .rpm</td><td><a href="{{dl:linuxRpm:url}}" data-dl="linuxRpm">{{dl:linuxRpm:file}}</a></td><td>{{dl:linuxRpm:size}}</td></tr>
+          <tr><td>Linux x86-64, .tar.gz</td><td><a href="{{dl:linuxTar:url}}" data-dl="linuxTar">{{dl:linuxTar:file}}</a></td><td>{{dl:linuxTar:size}}</td></tr>
+          <tr><td>Linux ARM64, AppImage (Raspberry Pi 4/5)</td><td><a href="{{dl:linuxAppImageArm:url}}" data-dl="linuxAppImageArm">{{dl:linuxAppImageArm:file}}</a></td><td>{{dl:linuxAppImageArm:size}}</td></tr>
+          <tr><td>Linux ARM64, .deb</td><td><a href="{{dl:linuxDebArm:url}}" data-dl="linuxDebArm">{{dl:linuxDebArm:file}}</a></td><td>{{dl:linuxDebArm:size}}</td></tr>
+          <tr><td>Linux ARM64, .rpm</td><td><a href="{{dl:linuxRpmArm:url}}" data-dl="linuxRpmArm">{{dl:linuxRpmArm:file}}</a></td><td>{{dl:linuxRpmArm:size}}</td></tr>
+        </tbody></table>
+        <p>Source code and release history are on <a href="https://github.com/blackjack-play-app/sabot/releases" rel="noopener">GitHub</a>.</p>
+
+        <h2 id="transfer">Moving your stats</h2>
+        <p>The website and the app each keep their data on the device. To move it: <strong>Settings → Data → Export</strong> on the old device, then <strong>Import</strong> on the new one.</p>
+
+        <h2 id="uninstall">Uninstall</h2>
+        <p>Windows: Settings → Apps → Blackjack Play → Uninstall. macOS: move the app to the Trash. Linux: delete the AppImage, or <code>sudo apt remove blackjack-play</code>.</p>
+        <div class="try"><p>Rather try it first?</p><a class="btn btn-gold" href="/game/?lang=en">{{ico:play}}Play online</a></div>
+      </div>
+    </div>
+  </div>
+</section>

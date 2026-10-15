@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Tableau de bord — Blackjack Play</title>
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/site.css">
+<style>
+  body { background: #0b0907; }
+  .dash { padding: 28px 0 80px; }
+  .dash-top { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 18px; }
+  .dash-top h1 { font-family: var(--serif); font-size: 30px; margin: 0; }
+  .dash-top .seg { margin-left: auto; display: flex; gap: 4px; background: var(--bg-2); border: 1px solid var(--line); border-radius: 10px; padding: 3px; }
+  .dash-top .seg button { border: 0; background: none; color: var(--ink-2); padding: 7px 12px; border-radius: 8px; font: inherit; font-size: 14px; cursor: pointer; }
+  .dash-top .seg button[aria-pressed="true"] { background: var(--ink); color: #15110d; }
+  .kpis6 { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; margin-bottom: 14px; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .rows { list-style: none; margin: 0; padding: 0; }
+  .rows li { display: grid; grid-template-columns: minmax(0, 1fr) 90px 54px; gap: 10px; align-items: center; padding: 7px 0; border-top: 1px solid var(--line); font-size: 14.5px; }
+  .rows li span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--ink-2); }
+  .rows li b { text-align: right; font-family: var(--cond); font-size: 17px; }
+  .rows .bar { height: 7px; }
+  .muted { color: var(--ink-3); font-size: 14px; }
+  .legend2 { display: flex; gap: 16px; font-size: 13px; color: var(--ink-2); margin-bottom: 6px; }
+  .legend2 i { display: inline-block; width: 12px; height: 3px; vertical-align: middle; margin-right: 6px; border-radius: 2px; }
+  .gate { max-width: 440px; margin: 12vh auto; text-align: center; }
+  .gate input { width: 100%; height: 48px; border-radius: 10px; border: 1px solid var(--line-2); background: var(--bg-2); color: var(--ink); padding: 0 14px; font: inherit; margin: 14px 0; }
+  .share { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  .share input { flex: 1; min-width: 160px; height: 42px; border-radius: 9px; border: 1px solid var(--line); background: var(--bg-3); color: var(--ink); padding: 0 12px; font: inherit; }
+  .share code { display: block; width: 100%; margin-top: 8px; padding: 10px 12px; background: var(--bg-3); border-radius: 8px; color: var(--gold-2); word-break: break-all; }
+  @media (max-width: 980px) { .kpis6 { grid-template-columns: repeat(3, 1fr); } .grid2, .grid3 { grid-template-columns: 1fr; } }
+  @media (max-width: 560px) { .kpis6 { grid-template-columns: repeat(2, 1fr); } }
+</style>
+</head>
+<body>
+<main class="wrap dash" id="root">
+  <div class="gate">
+    <h1 style="font-family:var(--serif)">Tableau de bord</h1>
+    <p class="muted">Chargement…</p>
+  </div>
+</main>
+<script>
+(() => {
+  const root = document.getElementById('root');
+  const nf = new Intl.NumberFormat('fr-FR');
+  const fmt = (n) => nf.format(Math.round(n || 0));
+  const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+  let key = '';
+  try {
+    const m = location.hash.match(/cle=([\w-]+)/);
+    if (m) { key = m[1]; localStorage.setItem('bp.dashkey', key); history.replaceState(null, '', location.pathname); }
+    else key = localStorage.getItem('bp.dashkey') || '';
+  } catch { /* stockage indisponible */ }
+  let days = 30;
+
+  function gate(msg) {
+    root.innerHTML = `<div class="gate"><h1 style="font-family:var(--serif)">Tableau de bord</h1><p class="muted">${msg}</p>
+      <input id="k" type="password" placeholder="Clé secrète" autocomplete="off"><button class="btn btn-gold" id="go" style="width:100%">Ouvrir</button></div>`;
+    const go = () => { key = document.getElementById('k').value.trim(); try { localStorage.setItem('bp.dashkey', key); } catch {} load(); };
+    document.getElementById('go').onclick = go;
+    document.getElementById('k').onkeydown = (e) => { if (e.key === 'Enter') go(); };
+  }
+
+  const rows = (list, max = 10, label = (x) => x.k, val = (x) => x.visites) => {
+    if (!list || !list.length) return '<p class="muted">Pas encore de données.</p>';
+    const top = Math.max(...list.map(val), 1);
+    return '<ul class="rows">' + list.slice(0, max).map((x) => `<li><span title="${esc(label(x))}">${esc(label(x))}</span><div class="bar"><i style="width:${(val(x) / top) * 100}%"></i></div><b>${fmt(val(x))}</b></li>`).join('') + '</ul>';
+  };
+
+  const SRC_NAMES = { 'www.google.com': 'Google', 'google.com': 'Google', 'www.bing.com': 'Bing', 'duckduckgo.com': 'DuckDuckGo', 'l.facebook.com': 'Facebook', 'lm.facebook.com': 'Facebook', 't.co': 'X (Twitter)', 'www.reddit.com': 'Reddit', 'out.reddit.com': 'Reddit', 'discord.com': 'Discord', 'web.whatsapp.com': 'WhatsApp', 'www.youtube.com': 'YouTube', 'l.instagram.com': 'Instagram', 'www.tiktok.com': 'TikTok', 'sabot-66y.pages.dev': '(aperçu Cloudflare)' };
+  const srcLabel = (x) => (x.k === '(direct)' || !x.k ? 'Accès direct / lien partagé en message' : (SRC_NAMES[x.k] || x.k));
+  const DEV = { desktop: 'Ordinateur', mobile: 'Téléphone', tablet: 'Tablette' };
+  let regionNames = null;
+  try { regionNames = new Intl.DisplayNames(['fr'], { type: 'region' }); } catch { /* ancien navigateur */ }
+  const country = (x) => { try { return regionNames && /^[A-Z]{2}$/.test(x.k) ? regionNames.of(x.k) : x.k; } catch { return x.k; } };
+  const MODES = { libre: 'Partie libre', coach: 'Coach', comptage: 'Comptage' };
+  const DRILLS = { flash: 'Flash stratégie', countdown: 'Décompte d\'un paquet', truecount: 'Compte réel', deviations: 'Déviations', sim: 'Simulateur' };
+  const OSOF = (name) => /Windows|Setup|Portable|\.exe/.test(name) ? 'Windows' : /macOS|\.dmg/.test(name) ? 'macOS' : 'Linux';
+
+  function line(canvas, series) {
+    const dpr = window.devicePixelRatio || 1, w = canvas.clientWidth, h = canvas.clientHeight;
+    canvas.width = w * dpr; canvas.height = h * dpr;
+    const ctx = canvas.getContext('2d'); ctx.scale(dpr, dpr);
+    const n = Math.max(...series.map((s) => s.values.length));
+    if (n < 2) { ctx.fillStyle = '#887c6c'; ctx.font = '14px Barlow'; ctx.textAlign = 'center'; ctx.fillText('Pas encore assez de jours de données', w / 2, h / 2); return; }
+    const max = Math.max(1, ...series.flatMap((s) => s.values));
+    const X = (i) => 36 + (i / (n - 1)) * (w - 46), Y = (v) => 10 + (1 - v / max) * (h - 34);
+    ctx.strokeStyle = 'rgba(255,255,255,.07)'; ctx.fillStyle = '#887c6c'; ctx.font = '12px "Barlow Condensed"';
+    for (let k = 0; k <= 4; k++) { const y = 10 + k * (h - 34) / 4; ctx.beginPath(); ctx.moveTo(36, y); ctx.lineTo(w - 10, y); ctx.stroke(); ctx.fillText(fmt(max * (1 - k / 4)), 2, y + 4); }
+    for (const s of series) {
+      ctx.beginPath(); s.values.forEach((v, i) => (i ? ctx.lineTo(X(i), Y(v)) : ctx.moveTo(X(i), Y(v))));
+      ctx.strokeStyle = s.color; ctx.lineWidth = 2; ctx.stroke();
+    }
+    const labels = series[0].labels;
+    ctx.fillStyle = '#887c6c';
+    [0, Math.floor((n - 1) / 2), n - 1].forEach((i) => { if (labels[i]) { ctx.textAlign = i === 0 ? 'left' : i === n - 1 ? 'right' : 'center'; ctx.fillText(new Date(labels[i]).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' }), X(i), h - 6); } });
+  }
+
+  function render(d) {
+    const web = d.web || {}, jeu = d.jeu || {}, dls = Array.isArray(d.telechargements) ? d.telechargements : [];
+    const sum = (arr, f) => (arr || []).reduce((a, x) => a + (f(x) || 0), 0);
+    const tot = (e, p) => sum((jeu.totaux || []).filter((x) => x.e === e && (p === undefined || x.p === p)), (x) => x.n);
+    const visits = sum(web.jours, (x) => x.visites), views = sum(web.jours, (x) => x.pages);
+    const allFiles = dls.flatMap((r) => r.fichiers);
+    const dlTotal = sum(allFiles, (x) => x.n);
+    const byOs = {}; for (const f of allFiles) byOs[OSOF(f.nom)] = (byOs[OSOF(f.nom)] || 0) + f.n;
+    const group = (e, names) => (jeu.totaux || []).filter((x) => x.e === e).reduce((m, x) => { const k = names ? (names[x.p] || x.p) : x.p; m[k] = (m[k] || 0) + x.n; return m; }, {});
+    const toList = (obj) => Object.entries(obj).map(([k, v]) => ({ k, visites: v })).sort((a, b) => b.visites - a.visites);
+    const dayKeys = (web.jours || []).map((x) => x.k);
+    const roundsByDay = {}; for (const x of jeu.parJour || []) if (x.e === 'round') roundsByDay[x.day] = x.n;
+
+    root.innerHTML = `
+      <div class="dash-top">
+        <a class="logo" href="/" style="font-size:20px"><span>Blackjack Play</span></a>
+        <h1>Tableau de bord</h1>
+        <div class="seg">${[7, 30, 90].map((n) => `<button data-d="${n}" aria-pressed="${n === days}">${n} jours</button>`).join('')}</div>
+      </div>
+      <div class="kpis6">
+        <div class="stat"><span>Visiteurs</span><b>${fmt(visits)}</b><small>${days} derniers jours</small></div>
+        <div class="stat"><span>Pages vues</span><b>${fmt(views)}</b><small>${visits ? (views / visits).toFixed(1) : '0'} par visite</small></div>
+        <div class="stat"><span>Parties lancées</span><b>${fmt(tot('start'))}</b><small>dont appli PC : ${fmt(sum((jeu.totaux || []).filter((x) => x.e === 'start' && x.p === 'desktop'), (x) => x.n))}</small></div>
+        <div class="stat"><span>Donnes jouées</span><b>${fmt(tot('round'))}</b><small>toutes plateformes</small></div>
+        <div class="stat"><span>Clics « Télécharger »</span><b>${fmt(tot('dl'))}</b><small>sur le site</small></div>
+        <div class="stat"><span>Téléchargements</span><b>${fmt(dlTotal)}</b><small>depuis le début (GitHub)</small></div>
+      </div>
+      <div class="panel"><h2>Évolution</h2><div class="legend2"><span><i style="background:#c9a24a"></i>Visiteurs</span><span><i style="background:#55b57f"></i>Donnes jouées</span></div><canvas class="chart" id="c1"></canvas></div>
+      <div class="grid2">
+        <div class="panel"><h2>D'où viennent les visiteurs</h2>${rows(web.sources, 12, srcLabel)}<p class="muted" style="margin-top:10px">« Accès direct » regroupe les liens tapés à la main, les favoris et la plupart des liens envoyés par message (WhatsApp, SMS, Snapchat).</p></div>
+        <div class="panel"><h2>Liens de partage suivis</h2>${rows(toList(group('ref')), 12)}
+          <div class="share" style="margin-top:12px"><input id="refname" placeholder="ex. whatsapp, discord, tiktok, amis" maxlength="24"><button class="btn btn-sm" id="mk">Créer le lien</button><code id="reflink">Tape un nom pour créer un lien de partage suivi.</code></div></div>
+      </div>
+      <div class="grid3">
+        <div class="panel"><h2>Pays</h2>${rows(web.pays, 10, country)}</div>
+        <div class="panel"><h2>Appareils</h2>${rows(web.appareils, 5, (x) => DEV[x.k] || x.k)}<h2 style="margin-top:18px">Systèmes</h2>${rows(web.systemes, 6)}</div>
+        <div class="panel"><h2>Navigateurs</h2>${rows(web.navigateurs, 8)}</div>
+      </div>
+      <div class="grid2">
+        <div class="panel"><h2>Pages les plus vues</h2>${rows(web.pages, 12, (x) => x.k, (x) => x.pages)}</div>
+        <div class="panel"><h2>Dans le jeu</h2>
+          <h3 style="font-size:15px;margin:4px 0">Modes joués (donnes)</h3>${rows(toList(group('round', MODES)), 3)}
+          <h3 style="font-size:15px;margin:14px 0 4px">Exercices ouverts</h3>${rows(toList(group('drill', DRILLS)), 5)}
+          <h3 style="font-size:15px;margin:14px 0 4px">Niveau choisi à l'arrivée</h3>${rows(toList(group('welcome', { coach: 'Je débute', libre: 'Je connais les règles', comptage: 'Compter les cartes', casino: 'Comme au casino' })), 4)}
+          <h3 style="font-size:15px;margin:14px 0 4px">Mains par donne</h3>${rows(toList(group('hands')).sort((a, b) => a.k - b.k).map((x) => ({ ...x, k: x.k + ' main' + (x.k > 1 ? 's' : '') })), 5)}
+        </div>
+      </div>
+      <div class="grid2">
+        <div class="panel"><h2>Téléchargements par système</h2>${rows(toList(byOs), 3)}</div>
+        <div class="panel"><h2>Téléchargements par fichier</h2>${rows(allFiles.map((f) => ({ k: f.nom, visites: f.n })).sort((a, b) => b.visites - a.visites), 14)}</div>
+      </div>
+      <p class="muted">Données : Cloudflare Web Analytics (sans cookies), compteurs anonymes du jeu, GitHub Releases. Mise à jour en direct. Ce lien est privé, ne le partage pas.</p>`;
+    line(document.getElementById('c1'), [
+      { color: '#c9a24a', values: (web.jours || []).map((x) => x.visites), labels: dayKeys },
+      { color: '#55b57f', values: dayKeys.map((k) => roundsByDay[k] || 0), labels: dayKeys },
+    ]);
+    root.querySelectorAll('[data-d]').forEach((b) => { b.onclick = () => { days = Number(b.dataset.d); load(); }; });
+    const mk = () => {
+      const v = document.getElementById('refname').value.toLowerCase().replace(/[^a-z0-9-]/g, '').slice(0, 24);
+      document.getElementById('reflink').textContent = v ? `https://blackjack-play.app/?ref=${v}` : 'Tape un nom pour créer un lien de partage suivi.';
+    };
+    document.getElementById('mk').onclick = mk;
+    document.getElementById('refname').oninput = mk;
+  }
+
+  async function load() {
+    if (!key) return gate('Entre ta clé secrète pour afficher les statistiques.');
+    try {
+      const r = await fetch('/api/dash?jours=' + days, { headers: { 'X-Dash-Key': key }, cache: 'no-store' });
+      if (r.status === 404) { try { localStorage.removeItem('bp.dashkey'); } catch {} return gate('Clé incorrecte.'); }
+      const data = await r.json();
+      try {
+        const g = await fetch('https://api.github.com/repos/blackjack-play-app/sabot/releases?per_page=30', { headers: { Accept: 'application/vnd.github+json' } });
+        const rel = await g.json();
+        data.telechargements = (Array.isArray(rel) ? rel : []).map((x) => ({ version: x.tag_name, fichiers: x.assets.map((a) => ({ nom: a.name, n: a.download_count })) }));
+      } catch { data.telechargements = []; }
+      render(data);
+    } catch (e) { gate('Impossible de charger les données : ' + esc(e.message)); }
+  }
+  load();
+})();
+</script>
+</body>
+</html>

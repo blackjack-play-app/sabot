@@ -1,0 +1,9 @@
+# Configuration Cloudflare Pages (site + fonctions serveur du tableau de bord)
+name = "sabot"
+pages_build_output_dir = "site"
+compatibility_date = "2026-10-01"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "blackjack_stats"
+database_id = "7847655b-b315-4d90-acc1-f8845a489540"

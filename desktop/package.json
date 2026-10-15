@@ -1,7 +1,7 @@
 {
   "name": "sabot",
   "productName": "Blackjack Play",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Blackjack Play — entraîneur de blackjack en 3D (jetons fictifs uniquement)",
   "author": {
     "name": "Blackjack Play",
@@ -19,7 +19,7 @@
   "build": {
     "appId": "app.blackjack-play.sabot",
     "productName": "Blackjack Play",
-    "copyright": "Blackjack Play — jetons fictifs, aucun argent réel",
+    "copyright": "© 2026 Blackjack Play — jetons fictifs, aucun argent réel",
     "directories": {
       "output": "dist",
       "buildResources": "build"
@@ -41,7 +41,9 @@
     ],
     "win": {
       "icon": "build/icon.ico",
-      "artifactName": "BlackjackPlay-${version}-Windows-${arch}-${target}.${ext}"
+      "artifactName": "BlackjackPlay-${version}-Windows-${arch}-${target}.${ext}",
+      "legalTrademarks": "Blackjack Play",
+      "requestedExecutionLevel": "asInvoker"
     },
     "nsis": {
       "oneClick": false,
@@ -54,7 +56,18 @@
       "installerLanguages": [
         "fr_FR"
       ],
-      "license": "build/license.txt"
+      "license": "build/license.txt",
+      "installerSidebar": "build/installerSidebar.bmp",
+      "uninstallerSidebar": "build/uninstallerSidebar.bmp",
+      "installerHeader": "build/installerHeader.bmp",
+      "installerIcon": "build/icon.ico",
+      "uninstallerIcon": "build/icon.ico",
+      "installerHeaderIcon": "build/icon.ico",
+      "runAfterFinish": true,
+      "menuCategory": false,
+      "deleteAppDataOnUninstall": false,
+      "uninstallDisplayName": "Blackjack Play",
+      "include": "build/installer.nsh"
     },
     "portable": {
       "artifactName": "BlackjackPlay-${version}-Portable.${ext}"
@@ -116,7 +129,15 @@
             "arm64"
           ]
         }
-      ]
+      ],
+      "executableName": "blackjack-play",
+      "desktop": {
+        "Name": "Blackjack Play",
+        "GenericName": "Entraîneur de blackjack",
+        "Comment": "Table de blackjack 3D : stratégie de base et comptage des cartes (jetons fictifs)",
+        "Keywords": "blackjack;cartes;casino;stratégie;comptage;"
+      },
+      "description": "Entraîneur de blackjack en 3D : stratégie de base, comptage des cartes, exercices et simulateur. Jetons fictifs uniquement."
     },
     "deb": {
       "artifactName": "BlackjackPlay-${version}-Linux-${arch}.${ext}"
@@ -131,6 +152,29 @@
     ],
     "rpm": {
       "artifactName": "BlackjackPlay-${version}-Linux-${arch}.${ext}"
+    },
+    "dmg": {
+      "title": "Blackjack Play ${version}",
+      "background": "build/background.png",
+      "iconSize": 96,
+      "window": {
+        "width": 540,
+        "height": 380
+      },
+      "contents": [
+        {
+          "x": 130,
+          "y": 200,
+          "type": "file"
+        },
+        {
+          "x": 410,
+          "y": 200,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ],
+      "artifactName": "BlackjackPlay-${version}-macOS-${arch}.${ext}"
     }
   },
   "devDependencies": {

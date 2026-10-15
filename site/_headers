@@ -18,3 +18,6 @@
   Cache-Control: public, max-age=604800
 /sw.js
   Cache-Control: no-cache
+/tableau/*
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: no-store

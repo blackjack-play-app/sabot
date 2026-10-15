@@ -110,6 +110,34 @@ export class TableScene {
     this.ro.observe(this.container);
   }
 
+  // Vue fixe : caméra bloquée, cadrée pour voir toute la table (pratique au doigt)
+  fixedPose() {
+    const w = this.container.clientWidth || 1, h = this.container.clientHeight || 1;
+    const a = w / h;
+    if (a < 0.75) return { pos: [0, TABLE_Y + 2.05, 1.72], target: [0, TABLE_Y - 0.05, 0.36] };       // téléphone vertical
+    if (a < 1.15) return { pos: [0, TABLE_Y + 1.75, 1.65], target: [0, TABLE_Y, 0.1] };             // tablette verticale
+    if (a > 1.9) return { pos: [0, TABLE_Y + 1.42, 1.38], target: [0, TABLE_Y - 0.08, 0.02] };     // téléphone horizontal
+    return { pos: [0, 1.78, 2.12], target: [0, 1.02, 0.02] };                                         // ordinateur
+  }
+
+  setFixed(on, animate = true) {
+    this.fixedView = on;
+    const c = this.controls;
+    c.enableRotate = c.enableZoom = c.enablePan = !on;
+    if (on) this.applyFixed(animate);
+  }
+
+  applyFixed(animate = false) {
+    const p = this.fixedPose();
+    const toPos = new THREE.Vector3(...p.pos), toT = new THREE.Vector3(...p.target);
+    this.idleOrbit = false;
+    if (!animate) { this.camera.position.copy(toPos); this.controls.target.copy(toT); return; }
+    const fromPos = this.camera.position.clone(), fromT = this.controls.target.clone();
+    const s = this.speed; this.speed = 1;
+    this.tween(0.7, (k) => { this.camera.position.lerpVectors(fromPos, toPos, k); this.controls.target.lerpVectors(fromT, toT, k); }, ease.inOutCubic);
+    this.speed = s;
+  }
+
   resize() {
     const w = this.container.clientWidth || 1, h = this.container.clientHeight || 1;
     this.renderer.setSize(w, h, false);
@@ -119,6 +147,7 @@ export class TableScene {
     // Sur écran étroit (téléphone vertical), on élargit le champ de vision.
     this.camera.fov = w / h < 0.9 ? 62 : w / h < 1.3 ? 50 : 42;
     this.camera.updateProjectionMatrix();
+    if (this.fixedView) this.applyFixed(false);
   }
 
   applyQuality(p, reload = false) {
@@ -591,7 +620,16 @@ export class TableScene {
       ndc.set(((e.clientX - rect.left) / rect.width) * 2 - 1, -((e.clientY - rect.top) / rect.height) * 2 + 1);
       ray.setFromCamera(ndc, this.camera);
       const hit = ray.intersectObjects(this.spotMeshes)[0];
-      return hit ? hit.object.userData.spot : -1;
+      if (hit) return hit.object.userData.spot;
+      // Tolérance : place la plus proche du point touché sur le tapis
+      const f = ray.intersectObject(this.felt)[0];
+      if (!f) return -1;
+      let best = -1, bd = 0.2;
+      this.geo.spots.forEach((sp, i) => {
+        const d = Math.hypot(f.point.x - sp.x, f.point.z - sp.z);
+        if (d < bd) { bd = d; best = i; }
+      });
+      return best;
     };
     el.addEventListener('pointerdown', (e) => { downAt = { x: e.clientX, y: e.clientY }; });
     el.addEventListener('pointerup', (e) => {

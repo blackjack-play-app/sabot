@@ -1,4 +1,4 @@
-SABOT — entraîneur de blackjack
+﻿BLACKJACK PLAY — entraîneur de blackjack
 
 Blackjack Play est un logiciel gratuit d'entraînement au blackjack.
 Il fonctionne UNIQUEMENT avec des jetons fictifs : aucun argent réel ne peut être misé, gagné ou perdu.

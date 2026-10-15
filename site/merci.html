@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ton téléchargement a commencé — Blackjack Play</title>
+<meta name="description" content="Installation de Blackjack Play : les étapes pour Windows, macOS et Linux.">
+<link rel="canonical" href="https://blackjack-play.app/merci">
+<meta name="theme-color" content="#0d0b09">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Blackjack Play">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:title" content="Ton téléchargement a commencé — Blackjack Play">
+<meta property="og:description" content="Installation de Blackjack Play : les étapes pour Windows, macOS et Linux.">
+<meta property="og:url" content="https://blackjack-play.app/merci">
+<meta property="og:image" content="https://blackjack-play.app/assets/img/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="preload" href="/assets/fonts/source-serif-4-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/site.css">
+<meta name="robots" content="noindex">
+</head>
+<body class="">
+<a class="skip" href="#contenu">Aller au contenu</a>
+<header class="site-head">
+  <div class="wrap">
+    <a class="logo" href="/" aria-label="Blackjack Play, accueil"><svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true"><rect x="3" y="5" width="18" height="24" rx="3" fill="#efe6d2" transform="rotate(-10 12 17)"/><rect x="11" y="3" width="18" height="24" rx="3" fill="#c9a24a"/><path d="M20 9c-3 3-5 5-5 7.5a2.5 2.5 0 0 0 4.4 1.6c-.2 1.2-.8 2.2-1.6 2.9h4.4c-.8-.7-1.4-1.7-1.6-2.9a2.5 2.5 0 0 0 4.4-1.6C25 14 23 12 20 9z" fill="#14100c"/></svg><span>Blackjack Play</span></a>
+    <nav class="nav" aria-label="Navigation principale"><a href="/">Accueil</a><a href="/game/">Jouer</a><a href="/telecharger">Télécharger</a><a href="/apprendre">Apprendre</a><a href="/statistiques">Statistiques</a></nav>
+    <div class="head-cta"><a class="btn btn-gold btn-sm" href="/game/"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="6 3 20 12 6 21 6 3" /></svg>Jouer</a></div>
+    <button class="menu-btn" aria-label="Menu" aria-expanded="false"><svg class="ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h.01" /> <path d="M3 18h.01" /> <path d="M3 6h.01" /> <path d="M8 12h13" /> <path d="M8 18h13" /> <path d="M8 6h13" /></svg></button>
+  </div>
+</header>
+<main id="contenu">
+<section class="block" style="padding-top:64px">
+  <div class="wrap" style="max-width:920px">
+    <p class="kicker" id="dl-kicker">Téléchargement</p>
+    <h2 class="title" id="dl-title">Ton téléchargement a commencé</h2>
+    <p class="intro" id="dl-file" style="margin-bottom:18px">Préparation du fichier…</p>
+    <p style="margin:0 0 40px;color:var(--ink-3)">Rien ne se passe ? <a href="#" id="dl-retry">Relance le téléchargement</a> · <a href="/telecharger">Toutes les versions</a></p>
+
+    <div id="steps"></div>
+
+    <div class="browser-strip" style="margin-top:40px">
+      <p><b>Pendant que ça télécharge…</b>Tu peux déjà jouer dans le navigateur. Tes progrès s'exportent ensuite vers l'application (Réglages → Données).</p>
+      <a class="btn btn-gold" href="/game/"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="6 3 20 12 6 21 6 3" /></svg>Jouer en ligne</a>
+    </div>
+  </div>
+</section>
+
+<template id="tpl-windows">
+  <div class="modes-grid">
+    <article class="mode-card"><span class="tag">Étape 1</span><h3>Ouvre le fichier</h3><p>Clique sur le fichier téléchargé, en bas ou en haut à droite de ton navigateur, ou dans ton dossier Téléchargements.</p></article>
+    <article class="mode-card"><span class="tag">Étape 2</span><h3>Autorise l'installation</h3><p>Si Windows affiche « Windows a protégé votre ordinateur », clique sur <strong>Informations complémentaires</strong>, puis <strong>Exécuter quand même</strong>. C'est normal pour une application récente sans certificat payant.</p></article>
+    <article class="mode-card"><span class="tag">Étape 3</span><h3>Installe et joue</h3><p>Choisis le dossier, clique sur <strong>Installer</strong>. Blackjack Play se lance tout seul à la fin et un raccourci est créé sur ton bureau.</p></article>
+  </div>
+</template>
+<template id="tpl-mac">
+  <div class="modes-grid">
+    <article class="mode-card"><span class="tag">Étape 1</span><h3>Ouvre le .dmg</h3><p>Double-clique sur le fichier téléchargé, puis glisse <strong>Blackjack Play</strong> dans le dossier <strong>Applications</strong>.</p></article>
+    <article class="mode-card"><span class="tag">Étape 2</span><h3>Première ouverture</h3><p>Dans Applications, fais un <strong>clic droit sur Blackjack Play → Ouvrir</strong>, puis confirme. macOS ne le demande qu'une fois.</p></article>
+    <article class="mode-card"><span class="tag">En cas de souci</span><h3>« Application endommagée »</h3><p>Ouvre le Terminal et tape <code>xattr -cr "/Applications/Blackjack Play.app"</code>, puis relance l'application.</p></article>
+  </div>
+</template>
+<template id="tpl-linux">
+  <div class="modes-grid">
+    <article class="mode-card"><span class="tag">AppImage</span><h3>Rends-le exécutable</h3><p>Clic droit → Propriétés → Autoriser l'exécution, ou <code>chmod +x</code> sur le fichier, puis double-clique.</p></article>
+    <article class="mode-card"><span class="tag">.deb</span><h3>Ubuntu, Debian, Mint</h3><p>Double-clique pour l'ouvrir dans la Logithèque, ou <code>sudo apt install ./fichier.deb</code>.</p></article>
+    <article class="mode-card"><span class="tag">.rpm</span><h3>Fedora, openSUSE</h3><p><code>sudo dnf install ./fichier.rpm</code> ou <code>sudo zypper install ./fichier.rpm</code>.</p></article>
+  </div>
+</template>
+
+</main>
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="logo" href="/"><svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true"><rect x="3" y="5" width="18" height="24" rx="3" fill="#efe6d2" transform="rotate(-10 12 17)"/><rect x="11" y="3" width="18" height="24" rx="3" fill="#c9a24a"/><path d="M20 9c-3 3-5 5-5 7.5a2.5 2.5 0 0 0 4.4 1.6c-.2 1.2-.8 2.2-1.6 2.9h4.4c-.8-.7-1.4-1.7-1.6-2.9a2.5 2.5 0 0 0 4.4-1.6C25 14 23 12 20 9z" fill="#14100c"/></svg><span>Blackjack Play</span></a>
+        <p style="margin:14px 0 14px;max-width:36ch">Entraîneur de blackjack gratuit, en 3D, dans le navigateur ou sur ordinateur.</p>
+        <span class="no-money">Jetons fictifs · aucun argent réel</span>
+      </div>
+      <div><h4>Jeu</h4><ul><li><a href="/jeu-blackjack-gratuit">Jeu de blackjack gratuit</a></li><li><a href="/game/">Jouer en ligne</a></li><li><a href="/telecharger">Windows, macOS, Linux</a></li><li><a href="/statistiques">Mes statistiques</a></li><li><a href="/game/?drill=flash">Exercice flash</a></li></ul></div>
+      <div><h4>Apprendre</h4><ul><li><a href="/regles-du-blackjack">Règles du blackjack</a></li><li><a href="/strategie-de-base-blackjack">Stratégie de base</a></li><li><a href="/compter-les-cartes-blackjack">Compter les cartes</a></li><li><a href="/simulateur-blackjack">Simulateur</a></li><li><a href="/apprendre">Guide complet</a></li></ul></div>
+      <div><h4>Infos</h4><ul><li><a href="/credits">Crédits et licences</a></li><li><a href="/credits#confidentialite">Confidentialité</a></li><li><a href="/credits#jeu-responsable">Jeu responsable</a></li></ul></div>
+    </div>
+    <div class="foot-legal">
+      <span>Blackjack Play est un outil d'entraînement. Aucun pari, aucune mise d'argent, aucun gain. Le blackjack réel reste un jeu de hasard où le casino garde l'avantage.</span>
+      <span>Version 1.1.1</span>
+    </div>
+  </div>
+</footer>
+<script src="/assets/js/site.js" defer></script>
+<script src="/assets/js/merci.js" defer></script>
+</body>
+</html>

@@ -173,7 +173,7 @@ export class Panels {
         h('button', { class: 'btn', onclick: () => this.confirm('Effacer toutes les statistiques ?', () => { a.stats = store.emptyStats(); a.saveStats(); toast('Statistiques effacées'); }) }, icon('trash-2', 16), 'Effacer les stats'),
         h('button', { class: 'btn', onclick: () => this.confirm('Remettre tous les réglages par défaut ?', () => { localStorage.removeItem(store.KEYS.settings); location.reload(); }) }, icon('rotate-ccw', 16), 'Réglages par défaut')));
       body.append(h('div', { class: 'section-title' }, 'À propos'));
-      body.append(h('p', { style: { fontSize: '13px', color: 'var(--ink-3)' } }, 'Blackjack Play 1.1 — entraîneur de blackjack. Jetons fictifs uniquement : aucun argent réel, aucun pari, aucun gain.'));
+      body.append(h('p', { style: { fontSize: '13px', color: 'var(--ink-3)' } }, 'Blackjack Play 1.1.1 — entraîneur de blackjack. Jetons fictifs uniquement : aucun argent réel, aucun pari, aucun gain.'));
       body.append(h('button', { class: 'btn', onclick: () => this.credits() }, icon('scroll-text', 16), 'Crédits et licences'));
     }
 
@@ -383,6 +383,7 @@ export class Panels {
     const a = this.app;
     const choose = (mode, advice) => {
       a.settings.welcomed = true;
+      if (a.track) a.track('welcome', advice === 'off' ? 'casino' : mode);
       a.setMode(mode, true);
       if (advice) { a.settings.adviceMode = advice; a.buildTopbar(); }
       a.saveSettings();

@@ -1,0 +1,47 @@
+<!--
+{
+  "path": "/merci",
+  "noindex": true,
+  "title": "Ton téléchargement a commencé — Blackjack Play",
+  "description": "Installation de Blackjack Play : les étapes pour Windows, macOS et Linux.",
+  "head": "<meta name=\"robots\" content=\"noindex\">",
+  "scripts": "<script src=\"/assets/js/merci.js\" defer></script>"
+}
+-->
+<section class="block" style="padding-top:64px">
+  <div class="wrap" style="max-width:920px">
+    <p class="kicker" id="dl-kicker">Téléchargement</p>
+    <h2 class="title" id="dl-title">Ton téléchargement a commencé</h2>
+    <p class="intro" id="dl-file" style="margin-bottom:18px">Préparation du fichier…</p>
+    <p style="margin:0 0 40px;color:var(--ink-3)">Rien ne se passe ? <a href="#" id="dl-retry">Relance le téléchargement</a> · <a href="/telecharger">Toutes les versions</a></p>
+
+    <div id="steps"></div>
+
+    <div class="browser-strip" style="margin-top:40px">
+      <p><b>Pendant que ça télécharge…</b>Tu peux déjà jouer dans le navigateur. Tes progrès s'exportent ensuite vers l'application (Réglages → Données).</p>
+      <a class="btn btn-gold" href="/game/">{{ico:play}}Jouer en ligne</a>
+    </div>
+  </div>
+</section>
+
+<template id="tpl-windows">
+  <div class="modes-grid">
+    <article class="mode-card"><span class="tag">Étape 1</span><h3>Ouvre le fichier</h3><p>Clique sur le fichier téléchargé, en bas ou en haut à droite de ton navigateur, ou dans ton dossier Téléchargements.</p></article>
+    <article class="mode-card"><span class="tag">Étape 2</span><h3>Autorise l'installation</h3><p>Si Windows affiche « Windows a protégé votre ordinateur », clique sur <strong>Informations complémentaires</strong>, puis <strong>Exécuter quand même</strong>. C'est normal pour une application récente sans certificat payant.</p></article>
+    <article class="mode-card"><span class="tag">Étape 3</span><h3>Installe et joue</h3><p>Choisis le dossier, clique sur <strong>Installer</strong>. Blackjack Play se lance tout seul à la fin et un raccourci est créé sur ton bureau.</p></article>
+  </div>
+</template>
+<template id="tpl-mac">
+  <div class="modes-grid">
+    <article class="mode-card"><span class="tag">Étape 1</span><h3>Ouvre le .dmg</h3><p>Double-clique sur le fichier téléchargé, puis glisse <strong>Blackjack Play</strong> dans le dossier <strong>Applications</strong>.</p></article>
+    <article class="mode-card"><span class="tag">Étape 2</span><h3>Première ouverture</h3><p>Dans Applications, fais un <strong>clic droit sur Blackjack Play → Ouvrir</strong>, puis confirme. macOS ne le demande qu'une fois.</p></article>
+    <article class="mode-card"><span class="tag">En cas de souci</span><h3>« Application endommagée »</h3><p>Ouvre le Terminal et tape <code>xattr -cr "/Applications/Blackjack Play.app"</code>, puis relance l'application.</p></article>
+  </div>
+</template>
+<template id="tpl-linux">
+  <div class="modes-grid">
+    <article class="mode-card"><span class="tag">AppImage</span><h3>Rends-le exécutable</h3><p>Clic droit → Propriétés → Autoriser l'exécution, ou <code>chmod +x</code> sur le fichier, puis double-clique.</p></article>
+    <article class="mode-card"><span class="tag">.deb</span><h3>Ubuntu, Debian, Mint</h3><p>Double-clique pour l'ouvrir dans la Logithèque, ou <code>sudo apt install ./fichier.deb</code>.</p></article>
+    <article class="mode-card"><span class="tag">.rpm</span><h3>Fedora, openSUSE</h3><p><code>sudo dnf install ./fichier.rpm</code> ou <code>sudo zypper install ./fichier.rpm</code>.</p></article>
+  </div>
+</template>

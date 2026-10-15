@@ -94,6 +94,31 @@
     map.forEach((_, id) => { const el = document.getElementById(id); if (el) io.observe(el); });
   }
 
+  // Compteurs anonymes : clics de téléchargement et liens de partage ?ref=
+  const send = (events) => {
+    if (!/(^|\.)blackjack-play\.app$|pages\.dev$/.test(location.hostname)) return;
+    const body = JSON.stringify({ src: 'web', events });
+    try { navigator.sendBeacon('/api/e', new Blob([body], { type: 'text/plain' })); } catch { /* ignoré */ }
+  };
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest('[data-dl]');
+    if (!a) return;
+    send([{ e: 'dl', p: a.dataset.dl }]);
+    // Page « Merci » : le téléchargement démarre et les étapes d'installation s'affichent
+    if (!e.ctrlKey && !e.metaKey && !e.shiftKey && e.button === 0) {
+      e.preventDefault();
+      location.href = '/merci?f=' + encodeURIComponent(a.dataset.dl);
+    }
+  });
+  const ref = new URLSearchParams(location.search).get('ref');
+  if (ref) {
+    const clean = ref.toLowerCase().replace(/[^a-z0-9-]/g, '').slice(0, 24);
+    let seen = false;
+    try { seen = sessionStorage.getItem('bp.ref') === clean; sessionStorage.setItem('bp.ref', clean); } catch { /* ignoré */ }
+    if (clean && !seen) send([{ e: 'ref', p: clean }]);
+    history.replaceState(null, '', location.pathname + location.hash);
+  }
+
   // Hors ligne (PWA)
   if ('serviceWorker' in navigator && location.protocol === 'https:') navigator.serviceWorker.register('/sw.js').catch(() => {});
 })();

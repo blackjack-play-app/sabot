@@ -1,5 +1,8 @@
 User-agent: *
 Allow: /
 Disallow: /downloads/
+Disallow: /tableau/
+Disallow: /merci
+Disallow: /api/
 
 Sitemap: https://blackjack-play.app/sitemap.xml

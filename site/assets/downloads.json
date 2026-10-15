@@ -1,64 +1,64 @@
 {
-  "version": "1.1.0",
+  "version": "1.1.1",
   "base": "https://github.com/blackjack-play-app/sabot/releases/latest/download/",
   "files": {
     "win": {
-      "file": "BlackjackPlay-Setup-1.1.0-x64.exe",
+      "file": "BlackjackPlay-Setup-1.1.1-x64.exe",
       "size": "≈ 102 Mo",
       "label": "Installateur Windows (Intel/AMD)"
     },
     "winArm": {
-      "file": "BlackjackPlay-Setup-1.1.0-arm64.exe",
+      "file": "BlackjackPlay-Setup-1.1.1-arm64.exe",
       "size": "≈ 100 Mo",
       "label": "Installateur Windows ARM (Snapdragon)"
     },
     "winPortable": {
-      "file": "BlackjackPlay-1.1.0-Portable.exe",
+      "file": "BlackjackPlay-1.1.1-Portable.exe",
       "size": "≈ 102 Mo",
       "label": "Version portable Windows"
     },
     "mac": {
-      "file": "BlackjackPlay-1.1.0-macOS-universal.dmg",
+      "file": "BlackjackPlay-1.1.1-macOS-universal.dmg",
       "size": "≈ 196 Mo",
       "label": "macOS (Intel et Apple Silicon)"
     },
     "macZip": {
-      "file": "BlackjackPlay-1.1.0-macOS-universal.zip",
+      "file": "BlackjackPlay-1.1.1-macOS-universal.zip",
       "size": "≈ 190 Mo",
       "label": "macOS, archive .zip"
     },
     "linuxAppImage": {
-      "file": "BlackjackPlay-1.1.0-Linux-x86_64.AppImage",
+      "file": "BlackjackPlay-1.1.1-Linux-x86_64.AppImage",
       "size": "≈ 127 Mo",
       "label": "AppImage x86-64 (toutes distributions)"
     },
     "linuxAppImageArm": {
-      "file": "BlackjackPlay-1.1.0-Linux-arm64.AppImage",
+      "file": "BlackjackPlay-1.1.1-Linux-arm64.AppImage",
       "size": "≈ 127 Mo",
       "label": "AppImage ARM64 (Raspberry Pi 4/5…)"
     },
     "linuxDeb": {
-      "file": "BlackjackPlay-1.1.0-Linux-amd64.deb",
+      "file": "BlackjackPlay-1.1.1-Linux-amd64.deb",
       "size": "≈ 95 Mo",
       "label": ".deb x86-64 (Ubuntu, Debian, Mint, Pop!_OS)"
     },
     "linuxDebArm": {
-      "file": "BlackjackPlay-1.1.0-Linux-arm64.deb",
+      "file": "BlackjackPlay-1.1.1-Linux-arm64.deb",
       "size": "≈ 95 Mo",
       "label": ".deb ARM64 (Raspberry Pi OS)"
     },
     "linuxRpm": {
-      "file": "BlackjackPlay-1.1.0-Linux-x86_64.rpm",
+      "file": "BlackjackPlay-1.1.1-Linux-x86_64.rpm",
       "size": "≈ 95 Mo",
       "label": ".rpm x86-64 (Fedora, openSUSE, RHEL)"
     },
     "linuxRpmArm": {
-      "file": "BlackjackPlay-1.1.0-Linux-aarch64.rpm",
+      "file": "BlackjackPlay-1.1.1-Linux-aarch64.rpm",
       "size": "≈ 95 Mo",
       "label": ".rpm ARM64"
     },
     "linuxTar": {
-      "file": "BlackjackPlay-1.1.0-Linux-x64.tar.gz",
+      "file": "BlackjackPlay-1.1.1-Linux-x64.tar.gz",
       "size": "≈ 122 Mo",
       "label": "Archive .tar.gz x86-64"
     }

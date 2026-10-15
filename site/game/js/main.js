@@ -39,6 +39,8 @@ const S = {
 };
 
 const SPEEDS = { lent: 1.5, normal: 1, rapide: 0.55, eclair: 0.18 };
+const TOUCH = matchMedia('(pointer: coarse)').matches;
+if (settings.fixedView === undefined) settings.fixedView = TOUCH;
 export const MODES = {
   libre: { label: 'Partie libre', desc: 'Joue librement, corrigé après coup.' },
   coach: { label: 'Coach', desc: 'Le conseil s\'affiche avant chaque décision.' },
@@ -103,6 +105,28 @@ const fps = new FpsWatch((f) => {
     toast(`Qualité graphique ajustée (${QUALITY[settings.autoQuality].label}) pour garder le jeu fluide`);
   }
 });
+
+// ------------------------------------------------------------------ Compteurs anonymes (totaux par jour, aucune donnée personnelle)
+const TRACK_SRC = window.sabotDesktop ? 'desktop' : (matchMedia('(display-mode: standalone), (display-mode: fullscreen)').matches ? 'pwa' : 'web');
+const TRACK_URL = window.sabotDesktop ? 'https://blackjack-play.app/api/e' : '/api/e';
+const TRACK_ON = window.sabotDesktop || /(^|\.)blackjack-play\.app$|pages\.dev$/.test(location.hostname);
+let trackQueue = [];
+function track(e, p, n = 1) {
+  if (!TRACK_ON) return;
+  const same = trackQueue.find((x) => x.e === e && x.p === p);
+  if (same) same.n += n; else trackQueue.push({ e, p: String(p), n });
+  clearTimeout(track.t);
+  track.t = setTimeout(flushTrack, 15000);
+}
+function flushTrack() {
+  if (!trackQueue.length) return;
+  const body = JSON.stringify({ src: TRACK_SRC, events: trackQueue.splice(0, 20) });
+  try {
+    if (navigator.sendBeacon) navigator.sendBeacon(TRACK_URL, new Blob([body], { type: 'text/plain' }));
+    else fetch(TRACK_URL, { method: 'POST', body, keepalive: true });
+  } catch { /* hors ligne : tant pis */ }
+}
+document.addEventListener('visibilitychange', () => { if (document.hidden) flushTrack(); });
 
 // ------------------------------------------------------------------ Utilitaires
 function saveSettings() { store.save(store.KEYS.settings, settings); }
@@ -170,7 +194,8 @@ function buildTopbar() {
     iconBtn('chart-column', 'Statistiques (S)', () => togglePanel('stats')),
     iconBtn('sliders-horizontal', 'Réglages (P)', () => togglePanel('settings')),
     iconBtn(settings.audio.muted ? 'volume-x' : 'volume-2', 'Son (M)', toggleMute),
-    iconBtn('maximize', 'Plein écran (F)', toggleFullscreen, 'optional'),
+    iconBtn(settings.fixedView ? 'lock' : 'lock-open', settings.fixedView ? 'Vue fixe activée (B)' : 'Vue libre (B)', toggleFixed),
+    iconBtn('maximize', 'Plein écran (F)', toggleFullscreen),
     iconBtn('circle-help', 'Aide et raccourcis (?)', () => panels.help()),
   );
   $('#tools [aria-label="Afficher le compte (C)"]').setAttribute('aria-pressed', String(settings.showCount));
@@ -211,9 +236,31 @@ function toggleMute() {
   saveSettings();
   buildTopbar();
 }
+function toggleFixed() {
+  settings.fixedView = !settings.fixedView;
+  saveSettings();
+  scene.setFixed(settings.fixedView);
+  if (!settings.fixedView) scene.setView('joueur');
+  buildTopbar();
+  toast(settings.fixedView ? 'Vue fixe : la caméra ne bouge plus, toute la table est visible' : 'Vue libre : glisse pour tourner, pince ou molette pour zoomer');
+}
 function toggleFullscreen() {
-  if (document.fullscreenElement) document.exitFullscreen();
-  else document.documentElement.requestFullscreen?.().catch(() => {});
+  const el = document.documentElement;
+  const req = el.requestFullscreen || el.webkitRequestFullscreen;
+  const exit = document.exitFullscreen || document.webkitExitFullscreen;
+  if (document.fullscreenElement || document.webkitFullscreenElement) { exit?.call(document); return; }
+  if (req && (document.fullscreenEnabled || document.webkitFullscreenEnabled)) {
+    Promise.resolve(req.call(el, { navigationUI: 'hide' })).then(() => { try { screen.orientation?.lock?.('landscape').catch(() => {}); } catch { /* non pris en charge */ } }).catch(() => fullscreenHelp());
+  } else fullscreenHelp();
+}
+function fullscreenHelp() {
+  const ios = /iphone|ipad|ipod/i.test(navigator.userAgent);
+  openModal(h('div', {},
+    h('h2', {}, 'Plein écran'),
+    ios ? h('p', { class: 'lead' }, 'Sur iPhone, Safari ne permet pas le plein écran pour les jeux. L\'astuce : ajoute Blackjack Play à ton écran d\'accueil, il s\'ouvrira alors en plein écran comme une vraie application.')
+      : h('p', { class: 'lead' }, 'Ton navigateur ne permet pas le plein écran ici. Ajoute Blackjack Play à ton écran d\'accueil depuis le menu du navigateur (« Installer l\'application »).'),
+    ios ? h('ol', {}, h('li', {}, 'Touche le bouton Partager (le carré avec une flèche vers le haut).'), h('li', {}, 'Choisis « Sur l\'écran d\'accueil ».'), h('li', {}, 'Lance le jeu depuis la nouvelle icône.')) : null,
+    h('div', { class: 'coach-actions' }, h('button', { class: 'btn primary', onclick: () => closeModal() }, 'Compris'))));
 }
 function togglePanel(kind) {
   if (drawerIs(kind)) { closeDrawer(); return; }
@@ -226,7 +273,10 @@ function togglePanel(kind) {
 function buildCamCtl() {
   const c = $('#camCtl');
   c.innerHTML = '';
+  const unfix = () => { if (settings.fixedView) { settings.fixedView = false; scene.setFixed(false, false); saveSettings(); buildTopbar(); } };
+  const view = (v) => () => { unfix(); scene.setView(v); };
   const zoom = (f) => {
+    unfix();
     scene.idleOrbit = false;
     const t = scene.controls.target, p = scene.camera.position;
     const d = p.clone().sub(t).multiplyScalar(f);
@@ -237,11 +287,11 @@ function buildCamCtl() {
     iconBtn('zoom-in', 'Zoomer (molette)', () => zoom(0.8)),
     iconBtn('zoom-out', 'Dézoomer', () => zoom(1.25)),
     h('div', { class: 'sep' }),
-    iconBtn('user', 'Vue joueur (1)', () => scene.setView('joueur')),
-    iconBtn('layout-grid', 'Vue du dessus (2)', () => scene.setView('plongee')),
-    iconBtn('hand', 'Vue croupier (3)', () => scene.setView('croupier')),
-    iconBtn('layers', 'Première base (4)', () => scene.setView('premiere')),
-    iconBtn('camera', 'Cinéma (5)', () => scene.setView('cinema')),
+    iconBtn('user', 'Vue joueur (1)', view('joueur')),
+    iconBtn('layout-grid', 'Vue du dessus (2)', view('plongee')),
+    iconBtn('hand', 'Vue croupier (3)', view('croupier')),
+    iconBtn('layers', 'Première base (4)', view('premiere')),
+    iconBtn('camera', 'Cinéma (5)', view('cinema')),
   );
   const follow = iconBtn('target', 'Suivre la main active (V)', () => {
     settings.followCam = !settings.followCam;
@@ -255,7 +305,7 @@ function buildCamCtl() {
 }
 
 function focusHand(hand) {
-  if (!settings.followCam || !hand) return;
+  if (!settings.followCam || !hand || settings.fixedView) return;
   const f = scene.handFrame(hand.seat, hand.splitIndex, nInSeat(hand.seat));
   const target = f.base.clone().add(f.toCenter.clone().multiplyScalar(0.05));
   const pos = f.base.clone().add(f.radial.clone().multiplyScalar(0.75)).setY(TABLE_Y + 0.55);
@@ -271,7 +321,15 @@ function buildChips() {
   wrap.innerHTML = '';
   for (const d of CHIP_DENOMS) {
     const b = h('button', { class: 'chip', 'aria-label': `Jeton de ${d.v}`, 'aria-pressed': String(S.chip === d.v), style: { backgroundImage: `url(${chipUrl(d.v)})` } });
-    b.addEventListener('click', () => { S.chip = d.v; audio.play('chip', 0.5); buildChips(); });
+    b.addEventListener('click', () => {
+      S.chip = d.v;
+      if (TOUCH && S.phase === 'betting') {
+        const seat = currentBetSeat();
+        if (seat >= 0) { placeChip(seat, 'add'); buildChips(); return; }
+      }
+      audio.play('chip', 0.5);
+      buildChips();
+    });
     wrap.append(b);
   }
   $('#btnClear').innerHTML = icon('trash-2', 17) + 'Effacer';
@@ -282,6 +340,14 @@ function buildChips() {
 
 function totalBets() { return S.bets.reduce((a, b) => a + b, 0); }
 
+// Place qui reçoit les jetons touchés (la dernière choisie, sinon la première place « Moi »)
+function currentBetSeat() {
+  if (S.selectedSeat >= 0 && settings.seats[S.selectedSeat] === 'player') return S.selectedSeat;
+  const i = settings.seats.indexOf('player');
+  S.selectedSeat = i;
+  return i;
+}
+
 function placeChip(seat, mode) {
   if (S.phase !== 'betting') return;
   if (settings.seats[seat] !== 'player') {
@@ -289,6 +355,7 @@ function placeChip(seat, mode) {
     else return;
   }
   const r = settings.rules;
+  S.selectedSeat = seat;
   if (mode === 'remove') {
     if (!S.bets[seat]) return;
     const chips = TableScene.decompose(S.bets[seat]);
@@ -348,7 +415,8 @@ function updateBetButtons() {
   const players = settings.seats.filter((s) => s === 'player').length;
   hint.textContent = !players
     ? 'Clique sur un cercle pour t\'asseoir (jusqu\'à 5 mains).'
-    : has ? `Mise totale : ${fmt(totalBets())} · min ${settings.rules.minBet} / max ${fmt(settings.rules.maxBet)} par main`
+    : TOUCH ? `Touche un jeton pour miser sur la place ${currentBetSeat() + 1}${has ? ` · total ${fmt(totalBets())}` : ''}. Touche une autre mise pour changer de place.`
+      : has ? `Mise totale : ${fmt(totalBets())} · min ${settings.rules.minBet} / max ${fmt(settings.rules.maxBet)} par main`
       : 'Choisis un jeton puis clique sur un cercle de mise. Clic droit pour retirer.';
 }
 
@@ -393,10 +461,15 @@ function refreshSeats() {
     };
     pill.append(mk('player', 'Moi', 'user'), mk('bot', 'IA', 'bot'));
     e.append(pill);
-    if (owner === 'player') e.append(h('div', { class: 'seat-bet' }, S.bets[i] ? fmt(S.bets[i]) : 'Mise ?'));
+    if (owner === 'player') {
+      const chosen = TOUCH && i === currentBetSeat();
+      const tag = h('button', { class: 'seat-bet' + (chosen ? ' chosen' : ''), onclick: (ev) => { ev.stopPropagation(); S.selectedSeat = i; refreshSeats(); updateBetButtons(); } }, S.bets[i] ? fmt(S.bets[i]) : 'Mise ?');
+      e.append(tag);
+    }
     else if (owner === 'bot') e.append(h('div', { class: 'seat-bet', style: { color: 'var(--ink-3)', fontSize: '13px' } }, 'Joueur IA'));
   }
-  scene.setSpotsEnabled(S.phase === 'betting', settings.seats.map((s, i) => (s === 'player' && !S.bets[i] ? i : -1)).filter((i) => i >= 0));
+  const sel = TOUCH ? currentBetSeat() : -1;
+  scene.setSpotsEnabled(S.phase === 'betting', settings.seats.map((s, i) => (s === 'player' && (TOUCH ? i === sel : !S.bets[i]) ? i : -1)).filter((i) => i >= 0));
   if (S.phase !== 'betting') for (let i = 0; i < 5; i++) { const e = labelEls.get('seat' + i); if (e) { e.remove(); labelEls.delete('seat' + i); } }
 }
 
@@ -408,6 +481,7 @@ function setSeat(i, owner) {
     scene.removeStack('spot' + i);
   }
   settings.seats[i] = owner;
+  if (owner === 'player') S.selectedSeat = i;
   saveSettings();
   refreshSeats();
   updateBetButtons();
@@ -475,6 +549,10 @@ function positionLabels() {
     }
     if (!p) continue;
     const s = scene.project(p);
+    // Garde les étiquettes dans l'écran (places du bord sur téléphone)
+    const half = (e.offsetWidth || 0) / 2 + 4;
+    const W = window.innerWidth;
+    if (half && W > 2 * half) s.x = Math.min(Math.max(s.x, half), W - half);
     e.style.left = s.x + 'px';
     e.style.top = s.y + 'px';
     e.style.opacity = s.visible ? '' : '0';
@@ -828,7 +906,7 @@ function buildIO() {
       hideCoach();
       $('#waitText').textContent = 'Le croupier joue';
       showDock('wait');
-      if (settings.followCam) scene.setView('joueur');
+      if (settings.followCam && !settings.fixedView) scene.setView('joueur');
       scene.dealer.lookAt(new THREE.Vector3(0, TABLE_Y, -0.2));
       refreshLabels();
     },
@@ -911,6 +989,8 @@ async function settle(sum) {
     const splitWins = [...new Set(mine.filter((x) => x.fromSplit).map((x) => x.seat))]
       .some((seat) => mine.filter((x) => x.seat === seat).every((x) => x.result === 'win' || x.result === 'blackjack'));
     saveStats({ playerHands: seatsUsed, splitWins });
+    track('round', settings.mode);
+    track('hands', seatsUsed);
     flashDelta(playerNet);
     if (playerNet > 0) audio.play('win', 0.5);
   }
@@ -1057,7 +1137,7 @@ window.addEventListener('keydown', (e) => {
     if (k === 'x') { clearBets(); return; }
   }
   const views = { 1: 'joueur', 2: 'plongee', 3: 'croupier', 4: 'premiere', 5: 'cinema' };
-  if (views[k]) { scene.setView(views[k]); return; }
+  if (views[k]) { if (settings.fixedView) toggleFixed(); scene.setView(views[k]); return; }
   if (k === 'c') toggleCount();
   else if (k === 't') togglePanel('chart');
   else if (k === 'p' && !S.resolveAction) togglePanel('settings');
@@ -1065,6 +1145,7 @@ window.addEventListener('keydown', (e) => {
   else if (k === 'e') drills.openMenu();
   else if (k === 'm') toggleMute();
   else if (k === 'f') toggleFullscreen();
+  else if (k === 'b') toggleFixed();
   else if (k === 'v') $('#camCtl [aria-label="Suivre la main active (V)"]')?.click();
   else if (k === '?' || k === 'à') panels.help();
 });
@@ -1134,6 +1215,7 @@ const app = {
   resetBank() { setBank(settings.startBank); stats.resets++; saveStats(); updateBetButtons(); },
   newShoe() { if (S.phase !== 'betting') return toast('Attends la fin de la donne'); engine.newShoe(); scene.setDiscard(0); updateShoe(); updateCount(); toast('Nouveau sabot mélangé'); },
   isBetting: () => S.phase === 'betting',
+  track,
   currentSituation,
 };
 const panels = new Panels(app);
@@ -1146,6 +1228,7 @@ async function start() {
   buildCamCtl();
   buildChips();
   setBank(bank, false);
+  if (settings.fixedView) scene.setFixed(true, false);
   setLoad(0.45, 'Arrivée du croupier…');
   await scene.dealerReady;
   setLoad(0.9, 'Mélange du sabot…');
@@ -1162,6 +1245,7 @@ async function start() {
   updateCount();
   updateBetButtons();
   if (!settings.welcomed) panels.welcome();
+  track('start', TRACK_SRC);
   const q = new URLSearchParams(location.search);
   if (q.get('drill')) drills.open(q.get('drill'));
   if (q.get('mode') && MODES[q.get('mode')]) setMode(q.get('mode'));

@@ -132,6 +132,7 @@ fs.writeFileSync(path.join(SITE, 'sitemap.xml'), `<?xml version="1.0" encoding="
 ${sitemap.map((s) => `  <url><loc>${s.loc}</loc><lastmod>${cfg.releaseDate}</lastmod><priority>${s.priority}</priority></url>`).join('\n')}
 </urlset>
 `);
-fs.writeFileSync(path.join(SITE, 'robots.txt'), `User-agent: *\nAllow: /\nDisallow: /downloads/\n\nSitemap: ${DOMAIN}/sitemap.xml\n`);
+fs.writeFileSync(path.join(SITE, 'robots.txt'), `User-agent: *\nAllow: /\nDisallow: /downloads/\nDisallow: /tableau/
+Disallow: /merci\nDisallow: /api/\n\nSitemap: ${DOMAIN}/sitemap.xml\n`);
 fs.writeFileSync(path.join(SITE, 'assets', 'downloads.json'), JSON.stringify({ version: cfg.version, base: cfg.downloadBase, files: cfg.downloads }, null, 2));
 console.log('sitemap + robots ok');

@@ -40,6 +40,7 @@ export class Drills {
     if (id === 'table') { this.app.setMode('comptage'); return; }
     const map = { flash: () => this.flash(), countdown: () => this.countdown(), truecount: () => this.trueCount(), deviations: () => this.flash(true), sim: () => this.sim() };
     if (!map[id]) return;
+    if (this.app.track) this.app.track('drill', id === 'deviations' ? 'deviations' : id);
     this.cleanup();
     this.el.hidden = false;
     this.el.innerHTML = '';

@@ -1,5 +1,5 @@
 // Service worker : jeu disponible hors ligne après la première visite (fichier généré par tools/build-sw.py).
-const VERSION = 'sabot-vd30efd33a1';
+const VERSION = 'sabot-v38ba3b1897';
 const CORE = [
 "/assets/fonts/barlow-condensed-latin-500-normal.woff2",
 "/assets/fonts/barlow-condensed-latin-600-normal.woff2",
@@ -89,7 +89,7 @@ self.addEventListener('activate', (e) => {
 // Tout le reste (pages, styles, scripts) : réseau d'abord pour voir les mises à jour tout de suite.
 self.addEventListener('fetch', (e) => {
   const req = e.request;
-  if (req.method !== 'GET' || new URL(req.url).origin !== location.origin) return;
+  if (req.method !== 'GET' || new URL(req.url).origin !== location.origin || new URL(req.url).pathname.startsWith('/api/')) return;
   const heavy = /\/(models|tex|sfx|vendor|fonts)\//.test(new URL(req.url).pathname);
   if (!heavy) {
     e.respondWith(fetch(req).then((res) => { const copy = res.clone(); caches.open(VERSION).then((c) => c.put(req, copy)); return res; })

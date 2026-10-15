@@ -1,4 +1,4 @@
-# Sabot — entraîneur de blackjack en 3D
+# Blackjack Play — entraîneur de blackjack en 3D
 
 Jeu d'entraînement au blackjack (jetons fictifs uniquement) : table 3D, croupier réaliste, jusqu'à 5 mains, coach de stratégie de base, comptage de cartes, exercices, simulateur et statistiques.
 

@@ -1,0 +1,79 @@
+<!--
+{
+  "path": "/regles-du-blackjack",
+  "priority": 0.85,
+  "title": "Règles du blackjack expliquées simplement (avec exemples) — Blackjack Play",
+  "ogTitle": "Les règles du blackjack, simplement",
+  "description": "Les règles du blackjack expliquées pas à pas : valeur des cartes, blackjack, tirer, rester, doubler, séparer, abandonner, assurance, et ce que fait le croupier. Avec exemples et une table pour essayer.",
+  "jsonld": {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "Comment jouer au blackjack",
+    "description": "Les étapes d'une donne de blackjack, de la mise au paiement.",
+    "inLanguage": "fr",
+    "image": "{{domain}}/assets/img/screens/hero-clean.webp",
+    "step": [
+      { "@type": "HowToStep", "name": "Miser", "text": "Pose ta mise dans le cercle devant toi avant la distribution." },
+      { "@type": "HowToStep", "name": "Recevoir ses cartes", "text": "Tu reçois deux cartes visibles ; le croupier une visible et une cachée." },
+      { "@type": "HowToStep", "name": "Décider", "text": "Tire une carte, reste, double, sépare une paire ou abandonne, pour approcher 21 sans le dépasser." },
+      { "@type": "HowToStep", "name": "Jeu du croupier", "text": "Le croupier retourne sa carte cachée et tire jusqu'à 17." },
+      { "@type": "HowToStep", "name": "Paiement", "text": "La main la plus proche de 21 gagne. Une victoire paie 1 contre 1, un blackjack 3 contre 2." }
+    ]
+  }
+}
+-->
+<header class="page-head">
+  <div class="wrap">
+    <div class="crumbs"><a href="/">Accueil</a> › <a href="/apprendre">Apprendre</a> › Règles</div>
+    <h1>Les règles du blackjack</h1>
+    <p>Tout ce qu'il faut savoir pour s'asseoir à une table, en cinq minutes de lecture. Chaque règle peut être testée tout de suite dans le jeu, avec des jetons fictifs.</p>
+  </div>
+</header>
+<div class="wrap doc">
+  <nav class="toc" aria-label="Sommaire"><p>Sur cette page</p><ol><li><a href="#but">Le but</a></li><li><a href="#valeurs">Valeur des cartes</a></li><li><a href="#blackjack">Le blackjack</a></li><li><a href="#donne">Une donne</a></li><li><a href="#actions">Tes options</a></li><li><a href="#croupier">Le croupier</a></li><li><a href="#paiements">Les paiements</a></li><li><a href="#exemples">Exemples</a></li><li><a href="#variantes">Variantes</a></li></ol></nav>
+  <article class="prose">
+    <h2 id="but">Le but du jeu</h2>
+    <p>Battre le croupier : finir avec un total plus proche de 21 que le sien, <strong>sans dépasser 21</strong>. Les autres joueurs ne sont pas tes adversaires ; chacun joue contre la banque.</p>
+
+    <h2 id="valeurs">La valeur des cartes</h2>
+    <table class="tbl"><thead><tr><th>Carte</th><th>Valeur</th></tr></thead><tbody><tr><td>2 à 10</td><td>Leur chiffre</td></tr><tr><td>Valet, dame, roi</td><td>10</td></tr><tr><td>As</td><td>1 ou 11, au choix le plus avantageux</td></tr></tbody></table>
+    <p>Une main avec un as compté 11 est <strong>souple</strong> : as + 6 vaut 7 ou 17. Elle ne peut pas sauter si tu tires une carte. Sans as compté 11, la main est <strong>dure</strong>.</p>
+
+    <h2 id="blackjack">Le blackjack</h2>
+    <p>Un as et une carte de valeur 10 dès les deux premières cartes. C'est la meilleure main : elle bat tous les autres 21 et paie <strong>3 contre 2</strong> (15 jetons gagnés pour 10 misés). Si le croupier a aussi un blackjack, c'est une égalité. Attention : un 21 obtenu après une séparation ne compte pas comme un blackjack.</p>
+
+    <h2 id="donne">Le déroulement d'une donne</h2>
+    <ol>
+      <li>Tu poses ta mise dans ton cercle.</li>
+      <li>Le croupier distribue deux cartes visibles à chaque joueur, une carte visible pour lui et une carte cachée.</li>
+      <li>Si sa carte visible est un as ou un 10, il vérifie s'il a un blackjack. Si oui, la donne s'arrête : il gagne contre tout le monde sauf les blackjacks.</li>
+      <li>Chaque joueur joue sa main, à tour de rôle.</li>
+      <li>Le croupier joue la sienne selon une règle fixe, puis paie ou ramasse.</li>
+    </ol>
+
+    <h2 id="actions">Tes options pendant une main</h2>
+    <h3>Tirer (carte)</h3><p>Tu reçois une carte de plus. Tu peux tirer autant que tu veux, tant que tu ne dépasses pas 21.</p>
+    <h3>Rester</h3><p>Tu gardes ton total et passes la main.</p>
+    <h3>Doubler</h3><p>Sur tes deux premières cartes, tu doubles ta mise et reçois exactement une carte de plus. C'est le moment de gagner gros, typiquement avec 10 ou 11.</p>
+    <h3>Séparer</h3><p>Avec deux cartes de même valeur, tu en fais deux mains distinctes et tu poses une deuxième mise égale. Sépare toujours les as et les 8, jamais les 10.</p>
+    <h3>Abandonner</h3><p>Quand la table l'autorise, tu peux rendre ta main tout de suite et récupérer la moitié de ta mise. Utile dans les pires situations, comme 16 contre un 10.</p>
+    <h3>L'assurance</h3><p>Proposée quand le croupier montre un as : un pari annexe qui paie 2 contre 1 s'il a un blackjack. C'est un mauvais pari à long terme : <a href="/strategie-de-base-blackjack#assurance">voir pourquoi</a>.</p>
+
+    <h2 id="croupier">Ce que fait le croupier</h2>
+    <p>Le croupier n'a aucun choix. Il tire tant qu'il a 16 ou moins, et s'arrête à 17 ou plus. Sur certaines tables, il tire aussi sur un 17 souple (as + 6) : c'est écrit sur le tapis (« H17 »). S'il dépasse 21, il <strong>saute</strong> et paie tous les joueurs encore en jeu.</p>
+    <div class="callout"><p>L'avantage du casino vient d'une seule règle : si tu sautes, tu perds immédiatement, même si le croupier saute ensuite.</p></div>
+
+    <h2 id="paiements">Les paiements</h2>
+    <table class="tbl"><thead><tr><th>Résultat</th><th>Paiement pour 10 misés</th></tr></thead><tbody><tr><td>Victoire</td><td>+10</td></tr><tr><td>Blackjack (3:2)</td><td>+15</td></tr><tr><td>Égalité</td><td>0 (mise rendue)</td></tr><tr><td>Abandon</td><td>−5</td></tr><tr><td>Défaite</td><td>−10</td></tr><tr><td>Assurance gagnée</td><td>+10 pour 5 assurés</td></tr></tbody></table>
+
+    <h2 id="exemples">Trois exemples</h2>
+    <p><strong>Tu as 10 + 6 = 16, le croupier montre un 10.</strong> Main difficile : tu perds souvent quoi que tu fasses. Si l'abandon est permis, abandonne ; sinon, tire.</p>
+    <p><strong>Tu as as + 7 = 18 souple, le croupier montre un 9.</strong> 18 paraît bon, mais contre un 9 il faut tirer : ta main ne peut pas sauter avec une carte.</p>
+    <p><strong>Tu as 8 + 8, le croupier montre un 7.</strong> Sépare : deux mains qui partent de 8 valent bien mieux qu'un 16.</p>
+
+    <h2 id="variantes">Les variantes de règles</h2>
+    <p>Nombre de jeux, croupier qui tire ou non sur 17 souple, blackjack payé 3:2 ou 6:5, double après séparation, abandon, règle européenne sans carte cachée : ces détails changent l'avantage du casino. Le jeu permet de régler chacun d'eux et affiche leur effet en direct.</p>
+    <div class="try"><p>Le plus simple pour retenir : jouer quelques donnes avec le coach.</p><a class="btn btn-gold" href="/game/?mode=coach">{{ico:play}}Jouer avec le coach</a></div>
+    <p>Pour la suite : <a href="/strategie-de-base-blackjack">la stratégie de base</a>, puis <a href="/compter-les-cartes-blackjack">le comptage des cartes</a>.</p>
+  </article>
+</div>

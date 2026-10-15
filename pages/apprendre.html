@@ -16,8 +16,8 @@
         "image": "{{domain}}/assets/img/screens/strategie.webp",
         "datePublished": "{{releaseDate}}",
         "dateModified": "{{releaseDate}}",
-        "author": { "@type": "Organization", "name": "Sabot" },
-        "publisher": { "@type": "Organization", "name": "Sabot", "logo": { "@type": "ImageObject", "url": "{{domain}}/assets/img/icon-512.png" } },
+        "author": { "@type": "Organization", "name": "Blackjack Play" },
+        "publisher": { "@type": "Organization", "name": "Blackjack Play", "logo": { "@type": "ImageObject", "url": "{{domain}}/assets/img/icon-512.png" } },
         "mainEntityOfPage": "{{domain}}/apprendre"
       },
       {
@@ -61,6 +61,7 @@
 
   <article class="prose">
     <h2 id="regles">1. Les règles du blackjack</h2>
+    <p>Version détaillée avec exemples : <a href="/regles-du-blackjack">les règles du blackjack</a>.</p>
     <p>Le blackjack se joue contre le croupier, pas contre les autres joueurs. Le but : obtenir une main plus proche de 21 que celle du croupier, <strong>sans dépasser 21</strong>.</p>
     <ul>
       <li>Les cartes de 2 à 10 valent leur chiffre.</li>
@@ -112,6 +113,7 @@
     </ul>
 
     <h2 id="tableau">5. Le tableau complet</h2>
+    <p>Explications case par case : <a href="/strategie-de-base-blackjack">la stratégie de base au blackjack</a>.</p>
     <p>Pour 4 à 8 jeux, croupier qui reste sur 17 souple, doubler après séparation autorisé, abandon tardif. Dans le jeu, le tableau se recalcule tout seul quand tu changes les règles.</p>
     <div class="legend"><span><i class="c-H"></i>H Carte</span><span><i class="c-S"></i>S Rester</span><span><i class="c-D"></i>D Doubler (sinon carte)</span><span><i class="c-Ds"></i>Ds Doubler (sinon rester)</span><span><i class="c-P"></i>P Séparer</span><span><i class="c-Rh"></i>Rh Abandonner (sinon carte)</span></div>
     <h3>Mains dures</h3>
@@ -140,9 +142,10 @@
         <tr><td>Un seul jeu au lieu de six</td><td>+0,48 %</td></tr>
       </tbody>
     </table>
-    <p>Dans Sabot, l'avantage du casino est recalculé à chaque changement de règle (Réglages → Règles), et le simulateur permet de le vérifier sur des centaines de milliers de donnes.</p>
+    <p>Dans Blackjack Play, l'avantage du casino est recalculé à chaque changement de règle (Réglages → Règles), et le simulateur permet de le vérifier sur des centaines de milliers de donnes.</p>
 
     <h2 id="comptage">8. Compter les cartes (méthode Hi-Lo)</h2>
+    <p>Guide pas à pas : <a href="/compter-les-cartes-blackjack">compter les cartes au blackjack</a>.</p>
     <p>Les grosses cartes (10 et as) favorisent le joueur : plus de blackjacks payés 3:2, des doubles plus réussis, un croupier qui saute plus. Les petites cartes favorisent le croupier. Compter, c'est simplement <strong>suivre le rapport entre grosses et petites cartes déjà sorties</strong>.</p>
     <p>Avec Hi-Lo, chaque carte vue reçoit une valeur :</p>
     <div class="tags">
@@ -156,7 +159,7 @@
     <h2 id="compte-reel">9. Le compte réel</h2>
     <p>Un compte de +6 n'a pas le même poids au début ou à la fin d'un sabot de 6 jeux. On le divise donc par le nombre de jeux qui restent à distribuer : c'est le <strong>compte réel</strong>.</p>
     <p><strong>Exemple :</strong> compte courant +6, il reste 3 jeux dans le sabot. Compte réel = 6 ÷ 3 = +2.</p>
-    <p>Pour estimer les jeux restants, regarde la <strong>défausse</strong> (le bac où le croupier range les cartes jouées) et soustrais du total. Dans Sabot, la défausse se remplit à l'échelle réelle pour que tu t'y habitues.</p>
+    <p>Pour estimer les jeux restants, regarde la <strong>défausse</strong> (le bac où le croupier range les cartes jouées) et soustrais du total. Dans Blackjack Play, la défausse se remplit à l'échelle réelle pour que tu t'y habitues.</p>
     <div class="try"><p>Exercice : convertir le compte courant à partir de la défausse.</p><a class="btn btn-gold" href="/game/?drill=truecount">{{ico:gauge}}Exercice compte réel</a></div>
 
     <h2 id="mises">10. Adapter ses mises</h2>
@@ -199,7 +202,7 @@
 
     <h2 id="programme">13. Un programme de 4 semaines</h2>
     <table class="tbl">
-      <thead><tr><th>Semaine</th><th>Objectif</th><th>Dans Sabot</th></tr></thead>
+      <thead><tr><th>Semaine</th><th>Objectif</th><th>Dans Blackjack Play</th></tr></thead>
       <tbody>
         <tr><td>1</td><td>Mains dures et souples sans erreur</td><td>Mode Coach, puis Flash « Dures » et « Souples »</td></tr>
         <tr><td>2</td><td>Paires, abandon, 95 % de précision</td><td>Partie libre avec correction après, objectif dans Statistiques</td></tr>
@@ -207,7 +210,7 @@
         <tr><td>4</td><td>Compte réel, mises et déviations</td><td>Exercices compte réel et déviations, aide « Aucune »</td></tr>
       </tbody>
     </table>
-    <div class="callout"><p><strong>À garder en tête :</strong> même parfaitement joué, le blackjack réel reste un jeu de hasard. Sabot sert à comprendre et à s'entraîner, avec des jetons qui ne valent rien. Si le jeu d'argent devient un problème : Joueurs Info Service, 09 74 75 13 13.</p></div>
+    <div class="callout"><p><strong>À garder en tête :</strong> même parfaitement joué, le blackjack réel reste un jeu de hasard. Blackjack Play sert à comprendre et à s'entraîner, avec des jetons qui ne valent rien. Si le jeu d'argent devient un problème : Joueurs Info Service, 09 74 75 13 13.</p></div>
     <div class="try"><p>Prêt ? La table t'attend.</p><a class="btn btn-gold" href="/game/">{{ico:play}}Jouer maintenant</a></div>
   </article>
 </div>

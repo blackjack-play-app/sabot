@@ -423,7 +423,7 @@ export class TableScene {
       }
       await this.dealer.setSkin(REAL_SKINS[key] ? key : 'gilet', this.texRes === '2k' ? 'hd' : 'sd');
     } catch (e) {
-      console.warn('[Sabot] croupier réaliste indisponible, version simplifiée : ' + (e && e.stack || e));
+      console.warn('[Blackjack Play] croupier réaliste indisponible, version simplifiée : ' + (e && e.stack || e));
       this.scene.remove(this.dealer.root);
       this.dealer = new Dealer('classique');
       this.dealer.root.position.set(0, 0, -0.74);

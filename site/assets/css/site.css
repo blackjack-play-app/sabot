@@ -1,4 +1,4 @@
-/* Sabot — site vitrine */
+/* Blackjack Play — site vitrine */
 @font-face { font-family: 'Barlow'; src: url('../fonts/barlow-latin-400-normal.woff2') format('woff2'); font-weight: 400; font-display: swap; }
 @font-face { font-family: 'Barlow'; src: url('../fonts/barlow-latin-500-normal.woff2') format('woff2'); font-weight: 500; font-display: swap; }
 @font-face { font-family: 'Barlow'; src: url('../fonts/barlow-latin-600-normal.woff2') format('woff2'); font-weight: 600; font-display: swap; }
@@ -33,7 +33,7 @@
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--ui); font-size: 17px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
-img { max-width: 100%; display: block; }
+img { max-width: 100%; height: auto; display: block; }
 a { color: var(--gold-2); text-underline-offset: 3px; }
 a:hover { color: var(--ink); }
 .wrap { width: min(var(--wrap), calc(100% - 40px)); margin: 0 auto; }
@@ -109,7 +109,9 @@ h2.title { font-family: var(--serif); font-weight: 700; font-size: clamp(30px, 3
 .feature + .feature { border-top: 1px solid var(--line); }
 .feature.rev { grid-template-columns: 1fr 1.25fr; }
 .feature.rev .f-media { order: 2; }
-.f-media { border-radius: 12px; overflow: hidden; border: 1px solid var(--line); box-shadow: 0 30px 60px rgba(0, 0, 0, .45); }
+.f-media { border-radius: 12px; overflow: hidden; border: 1px solid var(--line); box-shadow: 0 30px 60px rgba(0, 0, 0, .45); aspect-ratio: 16 / 9; background: var(--bg-3); }
+.f-media img { width: 100%; height: 100%; object-fit: cover; }
+.prose figure img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
 .f-text h3 { font-family: var(--serif); font-weight: 700; font-size: 30px; line-height: 1.15; margin: 0 0 14px; }
 .f-text p { color: var(--ink-2); margin: 0 0 14px; }
 .f-text ul { margin: 0; padding: 0; list-style: none; }

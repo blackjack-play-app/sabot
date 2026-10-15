@@ -47,7 +47,7 @@ function layout(meta, body) {
 <link rel="canonical" href="${url}">
 <meta name="theme-color" content="#0d0b09">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="Sabot">
+<meta property="og:site_name" content="Blackjack Play">
 <meta property="og:locale" content="fr_FR">
 <meta property="og:title" content="${meta.ogTitle || meta.title}">
 <meta property="og:description" content="${meta.description}">
@@ -67,7 +67,7 @@ ${meta.head || ''}${ld}
 <a class="skip" href="#contenu">Aller au contenu</a>
 <header class="site-head">
   <div class="wrap">
-    <a class="logo" href="/" aria-label="Sabot, accueil">${LOGO}<span>Sabot</span></a>
+    <a class="logo" href="/" aria-label="Blackjack Play, accueil">${LOGO}<span>Blackjack Play</span></a>
     <nav class="nav" aria-label="Navigation principale">${navHtml}</nav>
     <div class="head-cta"><a class="btn btn-gold btn-sm" href="/game/">${ICON('play', 16)}Jouer</a></div>
     <button class="menu-btn" aria-label="Menu" aria-expanded="false">${ICON('list', 20)}</button>
@@ -80,16 +80,16 @@ ${body}
   <div class="wrap">
     <div class="foot-grid">
       <div>
-        <a class="logo" href="/">${LOGO}<span>Sabot</span></a>
+        <a class="logo" href="/">${LOGO}<span>Blackjack Play</span></a>
         <p style="margin:14px 0 14px;max-width:36ch">Entraîneur de blackjack gratuit, en 3D, dans le navigateur ou sur ordinateur.</p>
         <span class="no-money">Jetons fictifs · aucun argent réel</span>
       </div>
-      <div><h4>Jeu</h4><ul><li><a href="/game/">Jouer en ligne</a></li><li><a href="/telecharger">Windows, macOS, Linux</a></li><li><a href="/statistiques">Mes statistiques</a></li><li><a href="/game/?drill=flash">Exercice flash</a></li></ul></div>
-      <div><h4>Apprendre</h4><ul><li><a href="/apprendre#regles">Règles du blackjack</a></li><li><a href="/apprendre#strategie">Stratégie de base</a></li><li><a href="/apprendre#comptage">Compter les cartes</a></li><li><a href="/apprendre#deviations">Déviations</a></li></ul></div>
+      <div><h4>Jeu</h4><ul><li><a href="/jeu-blackjack-gratuit">Jeu de blackjack gratuit</a></li><li><a href="/game/">Jouer en ligne</a></li><li><a href="/telecharger">Windows, macOS, Linux</a></li><li><a href="/statistiques">Mes statistiques</a></li><li><a href="/game/?drill=flash">Exercice flash</a></li></ul></div>
+      <div><h4>Apprendre</h4><ul><li><a href="/regles-du-blackjack">Règles du blackjack</a></li><li><a href="/strategie-de-base-blackjack">Stratégie de base</a></li><li><a href="/compter-les-cartes-blackjack">Compter les cartes</a></li><li><a href="/simulateur-blackjack">Simulateur</a></li><li><a href="/apprendre">Guide complet</a></li></ul></div>
       <div><h4>Infos</h4><ul><li><a href="/credits">Crédits et licences</a></li><li><a href="/credits#confidentialite">Confidentialité</a></li><li><a href="/credits#jeu-responsable">Jeu responsable</a></li></ul></div>
     </div>
     <div class="foot-legal">
-      <span>Sabot est un outil d'entraînement. Aucun pari, aucune mise d'argent, aucun gain. Le blackjack réel reste un jeu de hasard où le casino garde l'avantage.</span>
+      <span>Blackjack Play est un outil d'entraînement. Aucun pari, aucune mise d'argent, aucun gain. Le blackjack réel reste un jeu de hasard où le casino garde l'avantage.</span>
       <span>Version ${cfg.version}</span>
     </div>
   </div>
@@ -117,6 +117,8 @@ for (const file of fs.readdirSync(PAGES).filter((f) => f.endsWith('.html'))) {
   const meta = JSON.parse(m[1]);
   let body = src.slice(m[0].length);
   body = body.replace(/\{\{([\w:-]+)\}\}/g, (all, k) => (k in vars ? vars[k] : all));
+  // Typographie française : espaces insécables (pas de « ? » ou « : » seuls en début de ligne)
+  body = body.replace(/>([^<]+)</g, (all, txt) => '>' + txt.replace(/« /g, '« ').replace(/ »/g, ' »').replace(/ ([:;?!])(?=\s|$)/g, ' $1') + '<');
   if (meta.jsonld) meta.jsonld = JSON.parse(JSON.stringify(meta.jsonld).replace(/\{\{([\w:-]+)\}\}/g, (all, k) => (k in vars ? String(vars[k]).replace(/"/g, '\\"') : all)));
   const out = layout(meta, body);
   const dest = meta.out || (meta.path === '/' ? 'index.html' : meta.path.replace(/^\//, '') + '.html');

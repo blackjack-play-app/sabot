@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Simulateur de blackjack : avantage maison, variance et risque de ruine — Blackjack Play</title>
+<meta name="description" content="Simulateur de blackjack gratuit : joue 100 000 à 1 000 000 de donnes en stratégie parfaite pour mesurer l'avantage du casino, l'effet d'une règle, d'un écart de mise ou du comptage, et le risque de ruine.">
+<link rel="canonical" href="https://blackjack-play.app/simulateur-blackjack">
+<meta name="theme-color" content="#0d0b09">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Blackjack Play">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:title" content="Simulateur de blackjack gratuit">
+<meta property="og:description" content="Simulateur de blackjack gratuit : joue 100 000 à 1 000 000 de donnes en stratégie parfaite pour mesurer l'avantage du casino, l'effet d'une règle, d'un écart de mise ou du comptage, et le risque de ruine.">
+<meta property="og:url" content="https://blackjack-play.app/simulateur-blackjack">
+<meta property="og:image" content="https://blackjack-play.app/assets/img/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="preload" href="/assets/fonts/source-serif-4-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/site.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Simulateur de blackjack Blackjack Play","url":"https://blackjack-play.app/game/?drill=sim","applicationCategory":"UtilitiesApplication","operatingSystem":"Navigateur web","inLanguage":"fr","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"}}</script>
+</head>
+<body class="">
+<a class="skip" href="#contenu">Aller au contenu</a>
+<header class="site-head">
+  <div class="wrap">
+    <a class="logo" href="/" aria-label="Blackjack Play, accueil"><svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true"><rect x="3" y="5" width="18" height="24" rx="3" fill="#efe6d2" transform="rotate(-10 12 17)"/><rect x="11" y="3" width="18" height="24" rx="3" fill="#c9a24a"/><path d="M20 9c-3 3-5 5-5 7.5a2.5 2.5 0 0 0 4.4 1.6c-.2 1.2-.8 2.2-1.6 2.9h4.4c-.8-.7-1.4-1.7-1.6-2.9a2.5 2.5 0 0 0 4.4-1.6C25 14 23 12 20 9z" fill="#14100c"/></svg><span>Blackjack Play</span></a>
+    <nav class="nav" aria-label="Navigation principale"><a href="/">Accueil</a><a href="/game/">Jouer</a><a href="/telecharger">Télécharger</a><a href="/apprendre">Apprendre</a><a href="/statistiques">Statistiques</a></nav>
+    <div class="head-cta"><a class="btn btn-gold btn-sm" href="/game/"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="6 3 20 12 6 21 6 3" /></svg>Jouer</a></div>
+    <button class="menu-btn" aria-label="Menu" aria-expanded="false"><svg class="ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h.01" /> <path d="M3 18h.01" /> <path d="M3 6h.01" /> <path d="M8 12h13" /> <path d="M8 18h13" /> <path d="M8 6h13" /></svg></button>
+  </div>
+</header>
+<main id="contenu">
+<header class="page-head">
+  <div class="wrap">
+    <div class="crumbs"><a href="/">Accueil</a> › Simulateur</div>
+    <h1>Simulateur de blackjack</h1>
+    <p>Une question sur une règle, une stratégie ou un écart de mise ? Le simulateur joue des centaines de milliers de donnes en quelques secondes, en stratégie parfaite, et te donne la réponse chiffrée.</p>
+    <div class="hero-cta" style="margin-top:26px"><a class="btn btn-gold btn-lg" href="/game/?drill=sim"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v16a2 2 0 0 0 2 2h16" /> <path d="M18 17V9" /> <path d="M13 17V5" /> <path d="M8 17v-3" /></svg>Ouvrir le simulateur</a></div>
+  </div>
+</header>
+<div class="wrap doc">
+  <nav class="toc" aria-label="Sommaire"><p>Sur cette page</p><ol><li><a href="#quoi">Ce qu'il mesure</a></li><li><a href="#exemples">Questions typiques</a></li><li><a href="#resultats">Lire les résultats</a></li><li><a href="#fiabilite">Fiabilité</a></li></ol></nav>
+  <article class="prose">
+    <figure style="margin:0 0 24px"><img src="/assets/img/screens/simulateur-960.webp" alt="Simulateur de blackjack : avantage, écart-type, risque de ruine et courbe de la réserve" width="960" height="540" loading="lazy" style="border-radius:10px;border:1px solid var(--line)"></figure>
+    <h2 id="quoi">Ce que le simulateur mesure</h2>
+    <ul>
+      <li><strong>L'avantage du joueur</strong> (négatif = avantage du casino), avec sa marge d'erreur.</li>
+      <li><strong>Le gain moyen par donne et par heure</strong> (base : 100 donnes par heure).</li>
+      <li><strong>L'écart-type</strong>, qui mesure l'ampleur des hauts et des bas.</li>
+      <li><strong>Le risque de ruine</strong> : la probabilité de perdre toute la réserve de départ.</li>
+      <li><strong>La courbe de la réserve</strong> sur toute la simulation.</li>
+    </ul>
+    <h2 id="exemples">Questions auxquelles il répond</h2>
+    <ul>
+      <li>Combien coûte une table qui paie le blackjack 6:5 au lieu de 3:2 ?</li>
+      <li>Le croupier qui tire sur 17 souple, ça change vraiment quelque chose ?</li>
+      <li>Un compteur Hi-Lo avec un écart de 1 à 8 unités gagne-t-il de l'argent ? Avec quelle réserve ?</li>
+      <li>Que rapportent les déviations Illustrious 18 en plus de l'écart de mise ?</li>
+    </ul>
+    <h2 id="resultats">Lire les résultats</h2>
+    <p>Avec les règles par défaut (6 jeux, S17, doubler après séparation, abandon tardif) et une mise fixe, l'avantage mesuré tourne autour de <strong>−0,4 %</strong> : le casino gagne 40 centimes pour 100 € misés. En comptant avec un écart de 1 à 8, il passe légèrement au-dessus de zéro, mais l'écart-type montre que les pertes temporaires peuvent être très longues.</p>
+    <h2 id="fiabilite">Pourquoi on peut lui faire confiance</h2>
+    <p>Le moteur qui fait tourner la table est le même que celui du simulateur : mêmes règles, même sabot, même stratégie. Nous l'avons validé sur 2 millions de donnes, et les résultats correspondent aux valeurs de référence publiées. La marge d'erreur est affichée avec chaque résultat : plus il y a de donnes, plus elle est faible.</p>
+    <div class="try"><p>Essaie : règles par défaut, puis BJ 6:5. Compare.</p><a class="btn btn-gold" href="/game/?drill=sim"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v16a2 2 0 0 0 2 2h16" /> <path d="M18 17V9" /> <path d="M13 17V5" /> <path d="M8 17v-3" /></svg>Lancer une simulation</a></div>
+  </article>
+</div>
+
+</main>
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="logo" href="/"><svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true"><rect x="3" y="5" width="18" height="24" rx="3" fill="#efe6d2" transform="rotate(-10 12 17)"/><rect x="11" y="3" width="18" height="24" rx="3" fill="#c9a24a"/><path d="M20 9c-3 3-5 5-5 7.5a2.5 2.5 0 0 0 4.4 1.6c-.2 1.2-.8 2.2-1.6 2.9h4.4c-.8-.7-1.4-1.7-1.6-2.9a2.5 2.5 0 0 0 4.4-1.6C25 14 23 12 20 9z" fill="#14100c"/></svg><span>Blackjack Play</span></a>
+        <p style="margin:14px 0 14px;max-width:36ch">Entraîneur de blackjack gratuit, en 3D, dans le navigateur ou sur ordinateur.</p>
+        <span class="no-money">Jetons fictifs · aucun argent réel</span>
+      </div>
+      <div><h4>Jeu</h4><ul><li><a href="/jeu-blackjack-gratuit">Jeu de blackjack gratuit</a></li><li><a href="/game/">Jouer en ligne</a></li><li><a href="/telecharger">Windows, macOS, Linux</a></li><li><a href="/statistiques">Mes statistiques</a></li><li><a href="/game/?drill=flash">Exercice flash</a></li></ul></div>
+      <div><h4>Apprendre</h4><ul><li><a href="/regles-du-blackjack">Règles du blackjack</a></li><li><a href="/strategie-de-base-blackjack">Stratégie de base</a></li><li><a href="/compter-les-cartes-blackjack">Compter les cartes</a></li><li><a href="/simulateur-blackjack">Simulateur</a></li><li><a href="/apprendre">Guide complet</a></li></ul></div>
+      <div><h4>Infos</h4><ul><li><a href="/credits">Crédits et licences</a></li><li><a href="/credits#confidentialite">Confidentialité</a></li><li><a href="/credits#jeu-responsable">Jeu responsable</a></li></ul></div>
+    </div>
+    <div class="foot-legal">
+      <span>Blackjack Play est un outil d'entraînement. Aucun pari, aucune mise d'argent, aucun gain. Le blackjack réel reste un jeu de hasard où le casino garde l'avantage.</span>
+      <span>Version 1.1.0</span>
+    </div>
+  </div>
+</footer>
+<script src="/assets/js/site.js" defer></script>
+
+</body>
+</html>

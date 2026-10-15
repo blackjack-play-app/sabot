@@ -1,4 +1,4 @@
-/* Sabot — interface du jeu */
+/* Blackjack Play — interface du jeu */
 @font-face { font-family: 'Barlow'; src: url('../../assets/fonts/barlow-latin-400-normal.woff2') format('woff2'); font-weight: 400; font-display: swap; }
 @font-face { font-family: 'Barlow'; src: url('../../assets/fonts/barlow-latin-500-normal.woff2') format('woff2'); font-weight: 500; font-display: swap; }
 @font-face { font-family: 'Barlow'; src: url('../../assets/fonts/barlow-latin-600-normal.woff2') format('woff2'); font-weight: 600; font-display: swap; }
@@ -332,4 +332,56 @@ kbd { font-family: var(--cond); font-size: 11px; font-weight: 600; letter-spacin
   .tools .select-pill { display: none; }
   .drawer { width: 100%; }
   .drill-cards img { width: 86px; height: 120px; }
+}
+
+/* ---------- Écrans tactiles : pas de raccourcis clavier ---------- */
+@media (pointer: coarse) {
+  kbd { display: none; }
+  .icon-btn .tip { display: none; }
+  .btn.act { min-height: 48px; }
+}
+
+/* ---------- Téléphone vertical ---------- */
+@media (max-width: 860px) and (orientation: portrait) {
+  .myhands { top: 60px; bottom: auto; left: 8px; right: 8px; }
+  .mh { min-width: 132px; padding: 6px 8px; }
+  .mh-cards { min-height: 34px; margin: 4px 0; }
+  .mh-cards img { width: 24px; height: 34px; }
+  .mh-total { font-size: 19px; }
+  .countbox { top: auto; bottom: calc(var(--dock-h) + 16px); }
+  .coach { bottom: calc(var(--dock-h) + 14px); }
+}
+
+/* ---------- Écrans peu hauts (téléphone horizontal, petits portables) ---------- */
+@media (max-height: 560px) {
+  :root { --dock-h: 96px; }
+  .topbar { height: 46px; gap: 8px; }
+  .icon-btn { width: 34px; height: 34px; }
+  .modes { display: none; }
+  .select-pill { height: 34px; }
+  .bank { padding: 3px 10px; }
+  .bank strong { font-size: 18px; }
+  .myhands { display: none; }
+  .countbox { top: 52px; padding: 6px 10px; width: 150px; }
+  .cb-row b { font-size: 17px; }
+  .camctl { display: none; }
+  .dock { bottom: 6px; }
+  .dock > div { padding: 7px 10px; border-radius: 12px; }
+  .dock-bet { grid-template-columns: auto auto; }
+  .chip { width: 40px; height: 40px; }
+  .btn { height: 38px; }
+  .btn.deal { height: 40px; }
+  .btn.act { height: 42px; min-height: 0; min-width: 84px; font-size: 14.5px; flex: 0 1 auto; }
+  .play-for, .hint { display: none; }
+  .coach { bottom: calc(var(--dock-h) + 4px); padding: 7px 10px; width: min(520px, calc(100% - 20px)); }
+  .coach p { font-size: 12.5px; line-height: 1.35; }
+  .coach h4 { font-size: 13px; }
+  .lbl-total { font-size: 16px; padding: 2px 8px; }
+  .lbl-bet, .lbl-res { font-size: 12px; }
+  .toasts { top: 50px; }
+  .drawer { width: min(420px, 100%); }
+}
+@media (max-height: 420px) {
+  .dock-ins p { display: none; }
+  .seat-pill button { padding: 3px 7px; }
 }

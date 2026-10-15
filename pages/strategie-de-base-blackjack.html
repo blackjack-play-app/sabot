@@ -1,0 +1,77 @@
+<!--
+{
+  "path": "/strategie-de-base-blackjack",
+  "priority": 0.9,
+  "title": "Stratégie de base au blackjack : tableau complet et explications — Blackjack Play",
+  "ogTitle": "Tableau de stratégie de base du blackjack",
+  "description": "Le tableau complet de la stratégie de base du blackjack (mains dures, souples, paires) avec l'explication de chaque règle : quand tirer, rester, doubler, séparer ou abandonner. Exercice interactif gratuit.",
+  "jsonld": {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Stratégie de base au blackjack : tableau complet et explications",
+    "inLanguage": "fr",
+    "image": "{{domain}}/assets/img/screens/strategie.webp",
+    "datePublished": "{{releaseDate}}",
+    "author": { "@type": "Organization", "name": "Blackjack Play" },
+    "publisher": { "@type": "Organization", "name": "Blackjack Play", "logo": { "@type": "ImageObject", "url": "{{domain}}/assets/img/icon-512.png" } },
+    "mainEntityOfPage": "{{domain}}/strategie-de-base-blackjack"
+  }
+}
+-->
+<header class="page-head">
+  <div class="wrap">
+    <div class="crumbs"><a href="/">Accueil</a> › <a href="/apprendre">Apprendre</a> › Stratégie de base</div>
+    <h1>La stratégie de base au blackjack</h1>
+    <p>Pour chaque main et chaque carte du croupier, il existe un seul meilleur coup, calculé mathématiquement. Le voici en tableau, avec les raisons derrière chaque case.</p>
+  </div>
+</header>
+<div class="wrap doc">
+  <nav class="toc" aria-label="Sommaire"><p>Sur cette page</p><ol><li><a href="#principe">Le principe</a></li><li><a href="#tableau">Le tableau</a></li><li><a href="#dures">Mains dures</a></li><li><a href="#souples">Mains souples</a></li><li><a href="#paires">Paires</a></li><li><a href="#abandon">Abandon</a></li><li><a href="#assurance">Assurance</a></li><li><a href="#memoriser">Mémoriser</a></li></ol></nav>
+  <article class="prose">
+    <h2 id="principe">Le principe : regarder d'abord la carte du croupier</h2>
+    <p>Le croupier tire obligatoirement jusqu'à 17. Quand il montre <strong>2, 3, 4, 5 ou 6</strong>, il part d'une carte faible et saute souvent (jusqu'à 42 % du temps avec un 6). Quand il montre <strong>7 à as</strong>, il finira la plupart du temps à 17 ou plus.</p>
+    <p>D'où les deux grandes idées : contre une carte faible, prends peu de risques et double dès que possible ; contre une carte forte, améliore ta main même si c'est risqué. Appliquée sans erreur, la stratégie de base ramène l'avantage du casino à environ 0,5 %.</p>
+
+    <h2 id="tableau">Le tableau complet</h2>
+    <p>Règles : 4 à 8 jeux, croupier reste sur 17 souple, doubler après séparation, abandon tardif. Lignes : ta main. Colonnes : carte visible du croupier.</p>
+    <div class="legend"><span><i class="c-H"></i>H Carte</span><span><i class="c-S"></i>S Rester</span><span><i class="c-D"></i>D Doubler (sinon carte)</span><span><i class="c-Ds"></i>Ds Doubler (sinon rester)</span><span><i class="c-P"></i>P Séparer</span><span><i class="c-Rh"></i>Rh Abandonner (sinon carte)</span></div>
+    <h3 id="dures">Mains dures (sans as compté 11)</h3>
+    {{chart:hard}}
+    <ul>
+      <li><strong>12 à 16 contre 2 à 6 : reste</strong> (sauf 12 contre 2 et 3). Laisse le croupier prendre le risque.</li>
+      <li><strong>12 à 16 contre 7 à as : tire.</strong> En restant, tu perds environ 3 fois sur 4.</li>
+      <li><strong>11 : double</strong> contre tout sauf l'as. <strong>10 : double</strong> contre 2 à 9. <strong>9 : double</strong> contre 3 à 6.</li>
+    </ul>
+    <h3 id="souples">Mains souples (avec un as compté 11)</h3>
+    {{chart:soft}}
+    <ul>
+      <li>Une main souple ne peut pas sauter avec une carte : on peut se permettre de tirer ou de doubler.</li>
+      <li><strong>A,7 (18 souple)</strong> : double contre 3 à 6, reste contre 2, 7 et 8, <strong>tire contre 9, 10 et as</strong>.</li>
+      <li><strong>A,8 et A,9</strong> : reste toujours.</li>
+    </ul>
+    <h3 id="paires">Paires</h3>
+    {{chart:pairs}}
+    <ul>
+      <li><strong>Toujours séparer les as et les 8.</strong> Jamais les 10 ni les 5.</li>
+      <li><strong>9,9</strong> : sépare, sauf contre 7, 10 et as (reste).</li>
+      <li><strong>2,2 / 3,3 / 7,7</strong> : sépare contre 2 à 7. <strong>6,6</strong> : contre 2 à 6. <strong>4,4</strong> : seulement contre 5 et 6.</li>
+    </ul>
+
+    <h2 id="abandon">Quand abandonner</h2>
+    <p>Si la table autorise l'abandon tardif : abandonne <strong>16 contre 9, 10 et as</strong>, et <strong>15 contre 10</strong>. Récupérer la moitié de ta mise coûte moins cher que de jouer ces mains jusqu'au bout.</p>
+
+    <h2 id="assurance">Pourquoi refuser l'assurance</h2>
+    <p>L'assurance paie 2 contre 1 si le croupier a un 10 caché sous son as. Dans un sabot de 6 jeux, c'est le cas dans environ 31 % des cas ; il en faudrait 33,3 % pour être à l'équilibre. Elle fait donc perdre environ 7 % de la somme assurée. Exception : un compteur la prend à partir d'un compte réel Hi-Lo de +3 (voir <a href="/compter-les-cartes-blackjack">compter les cartes</a>).</p>
+
+    <h2 id="memoriser">Comment la mémoriser vite</h2>
+    <ol>
+      <li>Apprends les mains dures (les plus fréquentes, environ 75 % des situations).</li>
+      <li>Ajoute les paires : deux règles absolues (as et 8) et quelques cas.</li>
+      <li>Termine par les mains souples, les plus souvent mal jouées.</li>
+      <li>Entraîne-toi avec un exercice chronométré jusqu'à répondre sans hésiter.</li>
+    </ol>
+    <figure style="margin:24px 0"><img src="/assets/img/screens/flash-960.webp" alt="Exercice flash de stratégie de base au blackjack" width="960" height="540" loading="lazy" style="border-radius:10px;border:1px solid var(--line)"></figure>
+    <div class="try"><p>Exercice flash : une main, la carte du croupier, trouve le bon coup.</p><a class="btn btn-gold" href="/game/?drill=flash">{{ico:target}}Faire l'exercice</a></div>
+    <p>Les règles de ta table sont différentes (H17, un seul jeu, règle européenne) ? Le tableau intégré au jeu se recalcule automatiquement selon tes réglages.</p>
+  </article>
+</div>

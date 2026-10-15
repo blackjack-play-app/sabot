@@ -1,4 +1,4 @@
-// Sabot — contrôleur principal : relie moteur, scène 3D, son, aide, statistiques et interface.
+// Blackjack Play — contrôleur principal : relie moteur, scène 3D, son, aide, statistiques et interface.
 import * as THREE from 'three';
 import { TableScene, CAMERA_PRESETS, TABLE_Y } from './scene.js';
 import { BlackjackEngine } from './engine.js';
@@ -59,7 +59,7 @@ let scene;
 try {
   scene = new TableScene($('#stage'), { texRes: qProfile.dealer === 'hd' ? '2k' : '1k', skin: REAL_SKINS[settings.style.skin] ? settings.style.skin : 'gilet' });
 } catch (e) {
-  $('#loader').innerHTML = '<div class="loader-card"><div class="loader-title">Sabot</div><p>Ton navigateur ne peut pas afficher la 3D (WebGL indisponible). Active l\'accélération matérielle dans les paramètres du navigateur, ou essaie Chrome, Edge ou Firefox à jour.</p></div>';
+  $('#loader').innerHTML = '<div class="loader-card"><div class="loader-title">Blackjack Play</div><p>Ton navigateur ne peut pas afficher la 3D (WebGL indisponible). Active l\'accélération matérielle dans les paramètres du navigateur, ou essaie Chrome, Edge ou Firefox à jour.</p></div>';
   throw e;
 }
 scene.style.indices = settings.style.indices;
@@ -685,6 +685,7 @@ function buildIO() {
     botDelay: () => wait(0.42),
 
     onShuffle: async () => {
+      if (engine.rules.csm) { scene.setDiscard(0); updateCount(); return; }
       toast('Mélange du sabot');
       audio.say('Mélange des cartes.', 'essentiel');
       await scene.shuffleAnim();

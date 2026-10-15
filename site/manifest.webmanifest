@@ -1,6 +1,6 @@
 {
-  "name": "Sabot — Entraîneur de blackjack",
-  "short_name": "Sabot",
+  "name": "Blackjack Play — Entraîneur de blackjack",
+  "short_name": "Blackjack Play",
   "description": "Table de blackjack en 3D pour apprendre la stratégie de base et le comptage de cartes. Jetons fictifs uniquement.",
   "lang": "fr",
   "start_url": "/game/",

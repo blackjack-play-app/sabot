@@ -1,4 +1,4 @@
-// Sabot — application de bureau (Electron). Sert le site embarqué via le protocole app://
+// Blackjack Play — application de bureau (Electron). Sert le site embarqué via le protocole app://
 const { app, BrowserWindow, protocol, net, shell, Menu, screen } = require('electron');
 const path = require('node:path');
 const fs = require('node:fs');
@@ -33,7 +33,7 @@ function createWindow() {
     x: st?.x, y: st?.y,
     minWidth: 960, minHeight: 600,
     backgroundColor: '#0b0907',
-    title: 'Sabot',
+    title: 'Blackjack Play',
     icon: path.join(__dirname, 'build', process.platform === 'win32' ? 'icon.ico' : 'icon.png'),
     show: false,
     autoHideMenuBar: true,

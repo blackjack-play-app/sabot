@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Règles du blackjack expliquées simplement (avec exemples) — Blackjack Play</title>
+<meta name="description" content="Les règles du blackjack expliquées pas à pas : valeur des cartes, blackjack, tirer, rester, doubler, séparer, abandonner, assurance, et ce que fait le croupier. Avec exemples et une table pour essayer.">
+<link rel="canonical" href="https://blackjack-play.app/regles-du-blackjack">
+<meta name="theme-color" content="#0d0b09">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Blackjack Play">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:title" content="Les règles du blackjack, simplement">
+<meta property="og:description" content="Les règles du blackjack expliquées pas à pas : valeur des cartes, blackjack, tirer, rester, doubler, séparer, abandonner, assurance, et ce que fait le croupier. Avec exemples et une table pour essayer.">
+<meta property="og:url" content="https://blackjack-play.app/regles-du-blackjack">
+<meta property="og:image" content="https://blackjack-play.app/assets/img/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="preload" href="/assets/fonts/source-serif-4-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/site.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"Comment jouer au blackjack","description":"Les étapes d'une donne de blackjack, de la mise au paiement.","inLanguage":"fr","image":"https://blackjack-play.app/assets/img/screens/hero-clean.webp","step":[{"@type":"HowToStep","name":"Miser","text":"Pose ta mise dans le cercle devant toi avant la distribution."},{"@type":"HowToStep","name":"Recevoir ses cartes","text":"Tu reçois deux cartes visibles ; le croupier une visible et une cachée."},{"@type":"HowToStep","name":"Décider","text":"Tire une carte, reste, double, sépare une paire ou abandonne, pour approcher 21 sans le dépasser."},{"@type":"HowToStep","name":"Jeu du croupier","text":"Le croupier retourne sa carte cachée et tire jusqu'à 17."},{"@type":"HowToStep","name":"Paiement","text":"La main la plus proche de 21 gagne. Une victoire paie 1 contre 1, un blackjack 3 contre 2."}]}</script>
+</head>
+<body class="">
+<a class="skip" href="#contenu">Aller au contenu</a>
+<header class="site-head">
+  <div class="wrap">
+    <a class="logo" href="/" aria-label="Blackjack Play, accueil"><svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true"><rect x="3" y="5" width="18" height="24" rx="3" fill="#efe6d2" transform="rotate(-10 12 17)"/><rect x="11" y="3" width="18" height="24" rx="3" fill="#c9a24a"/><path d="M20 9c-3 3-5 5-5 7.5a2.5 2.5 0 0 0 4.4 1.6c-.2 1.2-.8 2.2-1.6 2.9h4.4c-.8-.7-1.4-1.7-1.6-2.9a2.5 2.5 0 0 0 4.4-1.6C25 14 23 12 20 9z" fill="#14100c"/></svg><span>Blackjack Play</span></a>
+    <nav class="nav" aria-label="Navigation principale"><a href="/">Accueil</a><a href="/game/">Jouer</a><a href="/telecharger">Télécharger</a><a href="/apprendre">Apprendre</a><a href="/statistiques">Statistiques</a></nav>
+    <div class="head-cta"><a class="btn btn-gold btn-sm" href="/game/"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="6 3 20 12 6 21 6 3" /></svg>Jouer</a></div>
+    <button class="menu-btn" aria-label="Menu" aria-expanded="false"><svg class="ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h.01" /> <path d="M3 18h.01" /> <path d="M3 6h.01" /> <path d="M8 12h13" /> <path d="M8 18h13" /> <path d="M8 6h13" /></svg></button>
+  </div>
+</header>
+<main id="contenu">
+<header class="page-head">
+  <div class="wrap">
+    <div class="crumbs"><a href="/">Accueil</a> › <a href="/apprendre">Apprendre</a> › Règles</div>
+    <h1>Les règles du blackjack</h1>
+    <p>Tout ce qu'il faut savoir pour s'asseoir à une table, en cinq minutes de lecture. Chaque règle peut être testée tout de suite dans le jeu, avec des jetons fictifs.</p>
+  </div>
+</header>
+<div class="wrap doc">
+  <nav class="toc" aria-label="Sommaire"><p>Sur cette page</p><ol><li><a href="#but">Le but</a></li><li><a href="#valeurs">Valeur des cartes</a></li><li><a href="#blackjack">Le blackjack</a></li><li><a href="#donne">Une donne</a></li><li><a href="#actions">Tes options</a></li><li><a href="#croupier">Le croupier</a></li><li><a href="#paiements">Les paiements</a></li><li><a href="#exemples">Exemples</a></li><li><a href="#variantes">Variantes</a></li></ol></nav>
+  <article class="prose">
+    <h2 id="but">Le but du jeu</h2>
+    <p>Battre le croupier : finir avec un total plus proche de 21 que le sien, <strong>sans dépasser 21</strong>. Les autres joueurs ne sont pas tes adversaires ; chacun joue contre la banque.</p>
+
+    <h2 id="valeurs">La valeur des cartes</h2>
+    <table class="tbl"><thead><tr><th>Carte</th><th>Valeur</th></tr></thead><tbody><tr><td>2 à 10</td><td>Leur chiffre</td></tr><tr><td>Valet, dame, roi</td><td>10</td></tr><tr><td>As</td><td>1 ou 11, au choix le plus avantageux</td></tr></tbody></table>
+    <p>Une main avec un as compté 11 est <strong>souple</strong> : as + 6 vaut 7 ou 17. Elle ne peut pas sauter si tu tires une carte. Sans as compté 11, la main est <strong>dure</strong>.</p>
+
+    <h2 id="blackjack">Le blackjack</h2>
+    <p>Un as et une carte de valeur 10 dès les deux premières cartes. C'est la meilleure main : elle bat tous les autres 21 et paie <strong>3 contre 2</strong> (15 jetons gagnés pour 10 misés). Si le croupier a aussi un blackjack, c'est une égalité. Attention : un 21 obtenu après une séparation ne compte pas comme un blackjack.</p>
+
+    <h2 id="donne">Le déroulement d'une donne</h2>
+    <ol>
+      <li>Tu poses ta mise dans ton cercle.</li>
+      <li>Le croupier distribue deux cartes visibles à chaque joueur, une carte visible pour lui et une carte cachée.</li>
+      <li>Si sa carte visible est un as ou un 10, il vérifie s'il a un blackjack. Si oui, la donne s'arrête : il gagne contre tout le monde sauf les blackjacks.</li>
+      <li>Chaque joueur joue sa main, à tour de rôle.</li>
+      <li>Le croupier joue la sienne selon une règle fixe, puis paie ou ramasse.</li>
+    </ol>
+
+    <h2 id="actions">Tes options pendant une main</h2>
+    <h3>Tirer (carte)</h3><p>Tu reçois une carte de plus. Tu peux tirer autant que tu veux, tant que tu ne dépasses pas 21.</p>
+    <h3>Rester</h3><p>Tu gardes ton total et passes la main.</p>
+    <h3>Doubler</h3><p>Sur tes deux premières cartes, tu doubles ta mise et reçois exactement une carte de plus. C'est le moment de gagner gros, typiquement avec 10 ou 11.</p>
+    <h3>Séparer</h3><p>Avec deux cartes de même valeur, tu en fais deux mains distinctes et tu poses une deuxième mise égale. Sépare toujours les as et les 8, jamais les 10.</p>
+    <h3>Abandonner</h3><p>Quand la table l'autorise, tu peux rendre ta main tout de suite et récupérer la moitié de ta mise. Utile dans les pires situations, comme 16 contre un 10.</p>
+    <h3>L'assurance</h3><p>Proposée quand le croupier montre un as : un pari annexe qui paie 2 contre 1 s'il a un blackjack. C'est un mauvais pari à long terme : <a href="/strategie-de-base-blackjack#assurance">voir pourquoi</a>.</p>
+
+    <h2 id="croupier">Ce que fait le croupier</h2>
+    <p>Le croupier n'a aucun choix. Il tire tant qu'il a 16 ou moins, et s'arrête à 17 ou plus. Sur certaines tables, il tire aussi sur un 17 souple (as + 6) : c'est écrit sur le tapis (« H17 »). S'il dépasse 21, il <strong>saute</strong> et paie tous les joueurs encore en jeu.</p>
+    <div class="callout"><p>L'avantage du casino vient d'une seule règle : si tu sautes, tu perds immédiatement, même si le croupier saute ensuite.</p></div>
+
+    <h2 id="paiements">Les paiements</h2>
+    <table class="tbl"><thead><tr><th>Résultat</th><th>Paiement pour 10 misés</th></tr></thead><tbody><tr><td>Victoire</td><td>+10</td></tr><tr><td>Blackjack (3:2)</td><td>+15</td></tr><tr><td>Égalité</td><td>0 (mise rendue)</td></tr><tr><td>Abandon</td><td>−5</td></tr><tr><td>Défaite</td><td>−10</td></tr><tr><td>Assurance gagnée</td><td>+10 pour 5 assurés</td></tr></tbody></table>
+
+    <h2 id="exemples">Trois exemples</h2>
+    <p><strong>Tu as 10 + 6 = 16, le croupier montre un 10.</strong> Main difficile : tu perds souvent quoi que tu fasses. Si l'abandon est permis, abandonne ; sinon, tire.</p>
+    <p><strong>Tu as as + 7 = 18 souple, le croupier montre un 9.</strong> 18 paraît bon, mais contre un 9 il faut tirer : ta main ne peut pas sauter avec une carte.</p>
+    <p><strong>Tu as 8 + 8, le croupier montre un 7.</strong> Sépare : deux mains qui partent de 8 valent bien mieux qu'un 16.</p>
+
+    <h2 id="variantes">Les variantes de règles</h2>
+    <p>Nombre de jeux, croupier qui tire ou non sur 17 souple, blackjack payé 3:2 ou 6:5, double après séparation, abandon, règle européenne sans carte cachée : ces détails changent l'avantage du casino. Le jeu permet de régler chacun d'eux et affiche leur effet en direct.</p>
+    <div class="try"><p>Le plus simple pour retenir : jouer quelques donnes avec le coach.</p><a class="btn btn-gold" href="/game/?mode=coach"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="6 3 20 12 6 21 6 3" /></svg>Jouer avec le coach</a></div>
+    <p>Pour la suite : <a href="/strategie-de-base-blackjack">la stratégie de base</a>, puis <a href="/compter-les-cartes-blackjack">le comptage des cartes</a>.</p>
+  </article>
+</div>
+
+</main>
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="logo" href="/"><svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true"><rect x="3" y="5" width="18" height="24" rx="3" fill="#efe6d2" transform="rotate(-10 12 17)"/><rect x="11" y="3" width="18" height="24" rx="3" fill="#c9a24a"/><path d="M20 9c-3 3-5 5-5 7.5a2.5 2.5 0 0 0 4.4 1.6c-.2 1.2-.8 2.2-1.6 2.9h4.4c-.8-.7-1.4-1.7-1.6-2.9a2.5 2.5 0 0 0 4.4-1.6C25 14 23 12 20 9z" fill="#14100c"/></svg><span>Blackjack Play</span></a>
+        <p style="margin:14px 0 14px;max-width:36ch">Entraîneur de blackjack gratuit, en 3D, dans le navigateur ou sur ordinateur.</p>
+        <span class="no-money">Jetons fictifs · aucun argent réel</span>
+      </div>
+      <div><h4>Jeu</h4><ul><li><a href="/jeu-blackjack-gratuit">Jeu de blackjack gratuit</a></li><li><a href="/game/">Jouer en ligne</a></li><li><a href="/telecharger">Windows, macOS, Linux</a></li><li><a href="/statistiques">Mes statistiques</a></li><li><a href="/game/?drill=flash">Exercice flash</a></li></ul></div>
+      <div><h4>Apprendre</h4><ul><li><a href="/regles-du-blackjack">Règles du blackjack</a></li><li><a href="/strategie-de-base-blackjack">Stratégie de base</a></li><li><a href="/compter-les-cartes-blackjack">Compter les cartes</a></li><li><a href="/simulateur-blackjack">Simulateur</a></li><li><a href="/apprendre">Guide complet</a></li></ul></div>
+      <div><h4>Infos</h4><ul><li><a href="/credits">Crédits et licences</a></li><li><a href="/credits#confidentialite">Confidentialité</a></li><li><a href="/credits#jeu-responsable">Jeu responsable</a></li></ul></div>
+    </div>
+    <div class="foot-legal">
+      <span>Blackjack Play est un outil d'entraînement. Aucun pari, aucune mise d'argent, aucun gain. Le blackjack réel reste un jeu de hasard où le casino garde l'avantage.</span>
+      <span>Version 1.1.0</span>
+    </div>
+  </div>
+</footer>
+<script src="/assets/js/site.js" defer></script>
+
+</body>
+</html>

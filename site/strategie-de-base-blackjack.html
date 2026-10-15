@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stratégie de base au blackjack : tableau complet et explications — Blackjack Play</title>
+<meta name="description" content="Le tableau complet de la stratégie de base du blackjack (mains dures, souples, paires) avec l'explication de chaque règle : quand tirer, rester, doubler, séparer ou abandonner. Exercice interactif gratuit.">
+<link rel="canonical" href="https://blackjack-play.app/strategie-de-base-blackjack">
+<meta name="theme-color" content="#0d0b09">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Blackjack Play">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:title" content="Tableau de stratégie de base du blackjack">
+<meta property="og:description" content="Le tableau complet de la stratégie de base du blackjack (mains dures, souples, paires) avec l'explication de chaque règle : quand tirer, rester, doubler, séparer ou abandonner. Exercice interactif gratuit.">
+<meta property="og:url" content="https://blackjack-play.app/strategie-de-base-blackjack">
+<meta property="og:image" content="https://blackjack-play.app/assets/img/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="preload" href="/assets/fonts/source-serif-4-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/site.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Stratégie de base au blackjack : tableau complet et explications","inLanguage":"fr","image":"https://blackjack-play.app/assets/img/screens/strategie.webp","datePublished":"2026-10-15","author":{"@type":"Organization","name":"Blackjack Play"},"publisher":{"@type":"Organization","name":"Blackjack Play","logo":{"@type":"ImageObject","url":"https://blackjack-play.app/assets/img/icon-512.png"}},"mainEntityOfPage":"https://blackjack-play.app/strategie-de-base-blackjack"}</script>
+</head>
+<body class="">
+<a class="skip" href="#contenu">Aller au contenu</a>
+<header class="site-head">
+  <div class="wrap">
+    <a class="logo" href="/" aria-label="Blackjack Play, accueil"><svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true"><rect x="3" y="5" width="18" height="24" rx="3" fill="#efe6d2" transform="rotate(-10 12 17)"/><rect x="11" y="3" width="18" height="24" rx="3" fill="#c9a24a"/><path d="M20 9c-3 3-5 5-5 7.5a2.5 2.5 0 0 0 4.4 1.6c-.2 1.2-.8 2.2-1.6 2.9h4.4c-.8-.7-1.4-1.7-1.6-2.9a2.5 2.5 0 0 0 4.4-1.6C25 14 23 12 20 9z" fill="#14100c"/></svg><span>Blackjack Play</span></a>
+    <nav class="nav" aria-label="Navigation principale"><a href="/">Accueil</a><a href="/game/">Jouer</a><a href="/telecharger">Télécharger</a><a href="/apprendre">Apprendre</a><a href="/statistiques">Statistiques</a></nav>
+    <div class="head-cta"><a class="btn btn-gold btn-sm" href="/game/"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="6 3 20 12 6 21 6 3" /></svg>Jouer</a></div>
+    <button class="menu-btn" aria-label="Menu" aria-expanded="false"><svg class="ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h.01" /> <path d="M3 18h.01" /> <path d="M3 6h.01" /> <path d="M8 12h13" /> <path d="M8 18h13" /> <path d="M8 6h13" /></svg></button>
+  </div>
+</header>
+<main id="contenu">
+<header class="page-head">
+  <div class="wrap">
+    <div class="crumbs"><a href="/">Accueil</a> › <a href="/apprendre">Apprendre</a> › Stratégie de base</div>
+    <h1>La stratégie de base au blackjack</h1>
+    <p>Pour chaque main et chaque carte du croupier, il existe un seul meilleur coup, calculé mathématiquement. Le voici en tableau, avec les raisons derrière chaque case.</p>
+  </div>
+</header>
+<div class="wrap doc">
+  <nav class="toc" aria-label="Sommaire"><p>Sur cette page</p><ol><li><a href="#principe">Le principe</a></li><li><a href="#tableau">Le tableau</a></li><li><a href="#dures">Mains dures</a></li><li><a href="#souples">Mains souples</a></li><li><a href="#paires">Paires</a></li><li><a href="#abandon">Abandon</a></li><li><a href="#assurance">Assurance</a></li><li><a href="#memoriser">Mémoriser</a></li></ol></nav>
+  <article class="prose">
+    <h2 id="principe">Le principe : regarder d'abord la carte du croupier</h2>
+    <p>Le croupier tire obligatoirement jusqu'à 17. Quand il montre <strong>2, 3, 4, 5 ou 6</strong>, il part d'une carte faible et saute souvent (jusqu'à 42 % du temps avec un 6). Quand il montre <strong>7 à as</strong>, il finira la plupart du temps à 17 ou plus.</p>
+    <p>D'où les deux grandes idées : contre une carte faible, prends peu de risques et double dès que possible ; contre une carte forte, améliore ta main même si c'est risqué. Appliquée sans erreur, la stratégie de base ramène l'avantage du casino à environ 0,5 %.</p>
+
+    <h2 id="tableau">Le tableau complet</h2>
+    <p>Règles : 4 à 8 jeux, croupier reste sur 17 souple, doubler après séparation, abandon tardif. Lignes : ta main. Colonnes : carte visible du croupier.</p>
+    <div class="legend"><span><i class="c-H"></i>H Carte</span><span><i class="c-S"></i>S Rester</span><span><i class="c-D"></i>D Doubler (sinon carte)</span><span><i class="c-Ds"></i>Ds Doubler (sinon rester)</span><span><i class="c-P"></i>P Séparer</span><span><i class="c-Rh"></i>Rh Abandonner (sinon carte)</span></div>
+    <h3 id="dures">Mains dures (sans as compté 11)</h3>
+    <table class="strat"><caption class="sr">Mains dures</caption><thead><tr><th scope="col">Main</th><th scope="col">2</th><th scope="col">3</th><th scope="col">4</th><th scope="col">5</th><th scope="col">6</th><th scope="col">7</th><th scope="col">8</th><th scope="col">9</th><th scope="col">10</th><th scope="col">A</th></tr></thead><tbody><tr><th scope="row">17+</th><td class="c-S">S</td><td class="c-S">S</td><td class="c-S">S</td><td class="c-S">S</td><td class="c-S">S</td><td class="c-S">S</td><td class="c-S">S</td><td class="c-S">S</td><td class="c-S">S</td><td class="c-S">S</td></tr><tr><th scope="row">16</th><td class="c-S">S</td><td class="c-S">S</td><td class="c-S">S</td><td class="c-S">S</td><td class="c-S">S</td><td class="c-H">H</td><td class="c-H">H</td><td class="c-Rh">Rh</td><td class="c-Rh">Rh</td><td class="c-Rh">Rh</td></tr><tr><th scope="row">15</th><td class="c-S">S</td><td class="c-S">S</td><td class="c-S">S</td><td class="c-S">S</td><td class="c-S">S</td><td class="c-H">H</td><td class="c-H">H</td><td class="c-H">H</td><td class="c-Rh">Rh</td><td class="c-H">H</td></tr><tr><th scope="row">14</th><td class="c-S">S</td><td class="c-S">S</td><td class="c-S">S</td><td class="c-S">S</td><td class="c-S">S</td><td class="c-H">H</td><td class="c-H">H</td><td class="c-H">H</td><td class="c-H">H</td><td class="c-H">H</td></tr><tr><th scope="row">13</th><td class="c-S">S</td><td class="c-S">S</td><td class="c-S">S</td><td class="c-S">S</td><td class="c-S">S</td><td class="c-H">H</td><td class="c-H">H</td><td class="c-H">H</td><td class="c-H">H</td><td class="c-H">H</td></tr><tr><th scope="row">12</th><td class="c-H">H</td><td class="c-H">H</td><td class="c-S">S</td><td class="c-S">S</td><td class="c-S">S</td><td class="c-H">H</td><td class="c-H">H</td><td class="c-H">H</td><td class="c-H">H</td><td class="c-H">H</td></tr><tr><th scope="row">11</th><td class="c-D">D</td><td class="c-D">D</td><td class="c-D">D</td><td class="c-D">D</td><td class="c-D">D</td><td class="c-D">D</td><td class="c-D">D</td><td class="c-D">D</td><td class="c-D">D</td><td class="c-H">H</td></tr><tr><th scope="row">10</th><td class="c-D">D</td><td class="c-D">D</td><td class="c-D">D</td><td class="c-D">D</td><td class="c-D">D</td><td class="c-D">D</td><td class="c-D">D</td><td class="c-D">D</td><td class="c-H">H</td><td class="c-H">H</td></tr><tr><th scope="row">9</th><td class="c-H">H</td><td class="c-D">D</td><td class="c-D">D</td><td class="c-D">D</td><td class="c-D">D</td><td class="c-H">H</td><td class="c-H">H</td><td class="c-H">H</td><td class="c-H">H</td><td class="c-H">H</td></tr><tr><th scope="row">8</th><td class="c-H">H</td><td class="c-H">H</td><td class="c-H">H</td><td class="c-H">H</td><td class="c-H">H</td><td class="c-H">H</td><td class="c-H">H</td><td class="c-H">H</td><td class="c-H">H</td><td class="c-H">H</td></tr><tr><th scope="row">7</th><td class="c-H">H</td><td class="c-H">H</td><td class="c-H">H</td><td class="c-H">H</td><td class="c-H">H</td><td class="c-H">H</td><td class="c-H">H</td><td class="c-H">H</td><td class="c-H">H</td><td class="c-H">H</td></tr><tr><th scope="row">6</th><td class="c-H">H</td><td class="c-H">H</td><td class="c-H">H</td><td class="c-H">H</td><td class="c-H">H</td><td class="c-H">H</td><td class="c-H">H</td><td class="c-H">H</td><td class="c-H">H</td><td class="c-H">H</td></tr><tr><th scope="row">5</th><td class="c-H">H</td><td class="c-H">H</td><td class="c-H">H</td><td class="c-H">H</td><td class="c-H">H</td><td class="c-H">H</td><td class="c-H">H</td><td class="c-H">H</td><td class="c-H">H</td><td class="c-H">H</td></tr></tbody></table>
+    <ul>
+      <li><strong>12 à 16 contre 2 à 6 : reste</strong> (sauf 12 contre 2 et 3). Laisse le croupier prendre le risque.</li>
+      <li><strong>12 à 16 contre 7 à as : tire.</strong> En restant, tu perds environ 3 fois sur 4.</li>
+      <li><strong>11 : double</strong> contre tout sauf l'as. <strong>10 : double</strong> contre 2 à 9. <strong>9 : double</strong> contre 3 à 6.</li>
+    </ul>
+    <h3 id="souples">Mains souples (avec un as compté 11)</h3>
+    <table class="strat"><caption class="sr">Mains souples</caption><thead><tr><th scope="col">Main</th><th scope="col">2</th><th scope="col">3</th><th scope="col">4</th><th scope="col">5</th><th scope="col">6</th><th scope="col">7</th><th scope="col">8</th><th scope="col">9</th><th scope="col">10</th><th scope="col">A</th></tr></thead><tbody><tr><th scope="row">A,9</th><td class="c-S">S</td><td class="c-S">S</td><td class="c-S">S</td><td class="c-S">S</td><td class="c-S">S</td><td class="c-S">S</td><td class="c-S">S</td><td class="c-S">S</td><td class="c-S">S</td><td class="c-S">S</td></tr><tr><th scope="row">A,8</th><td class="c-S">S</td><td class="c-S">S</td><td class="c-S">S</td><td class="c-S">S</td><td class="c-S">S</td><td class="c-S">S</td><td class="c-S">S</td><td class="c-S">S</td><td class="c-S">S</td><td class="c-S">S</td></tr><tr><th scope="row">A,7</th><td class="c-S">S</td><td class="c-Ds">Ds</td><td class="c-Ds">Ds</td><td class="c-Ds">Ds</td><td class="c-Ds">Ds</td><td class="c-S">S</td><td class="c-S">S</td><td class="c-H">H</td><td class="c-H">H</td><td class="c-H">H</td></tr><tr><th scope="row">A,6</th><td class="c-H">H</td><td class="c-D">D</td><td class="c-D">D</td><td class="c-D">D</td><td class="c-D">D</td><td class="c-H">H</td><td class="c-H">H</td><td class="c-H">H</td><td class="c-H">H</td><td class="c-H">H</td></tr><tr><th scope="row">A,5</th><td class="c-H">H</td><td class="c-H">H</td><td class="c-D">D</td><td class="c-D">D</td><td class="c-D">D</td><td class="c-H">H</td><td class="c-H">H</td><td class="c-H">H</td><td class="c-H">H</td><td class="c-H">H</td></tr><tr><th scope="row">A,4</th><td class="c-H">H</td><td class="c-H">H</td><td class="c-D">D</td><td class="c-D">D</td><td class="c-D">D</td><td class="c-H">H</td><td class="c-H">H</td><td class="c-H">H</td><td class="c-H">H</td><td class="c-H">H</td></tr><tr><th scope="row">A,3</th><td class="c-H">H</td><td class="c-H">H</td><td class="c-H">H</td><td class="c-D">D</td><td class="c-D">D</td><td class="c-H">H</td><td class="c-H">H</td><td class="c-H">H</td><td class="c-H">H</td><td class="c-H">H</td></tr><tr><th scope="row">A,2</th><td class="c-H">H</td><td class="c-H">H</td><td class="c-H">H</td><td class="c-D">D</td><td class="c-D">D</td><td class="c-H">H</td><td class="c-H">H</td><td class="c-H">H</td><td class="c-H">H</td><td class="c-H">H</td></tr></tbody></table>
+    <ul>
+      <li>Une main souple ne peut pas sauter avec une carte : on peut se permettre de tirer ou de doubler.</li>
+      <li><strong>A,7 (18 souple)</strong> : double contre 3 à 6, reste contre 2, 7 et 8, <strong>tire contre 9, 10 et as</strong>.</li>
+      <li><strong>A,8 et A,9</strong> : reste toujours.</li>
+    </ul>
+    <h3 id="paires">Paires</h3>
+    <table class="strat"><caption class="sr">Paires</caption><thead><tr><th scope="col">Main</th><th scope="col">2</th><th scope="col">3</th><th scope="col">4</th><th scope="col">5</th><th scope="col">6</th><th scope="col">7</th><th scope="col">8</th><th scope="col">9</th><th scope="col">10</th><th scope="col">A</th></tr></thead><tbody><tr><th scope="row">A,A</th><td class="c-P">P</td><td class="c-P">P</td><td class="c-P">P</td><td class="c-P">P</td><td class="c-P">P</td><td class="c-P">P</td><td class="c-P">P</td><td class="c-P">P</td><td class="c-P">P</td><td class="c-P">P</td></tr><tr><th scope="row">10,10</th><td class="c-S">S</td><td class="c-S">S</td><td class="c-S">S</td><td class="c-S">S</td><td class="c-S">S</td><td class="c-S">S</td><td class="c-S">S</td><td class="c-S">S</td><td class="c-S">S</td><td class="c-S">S</td></tr><tr><th scope="row">9,9</th><td class="c-P">P</td><td class="c-P">P</td><td class="c-P">P</td><td class="c-P">P</td><td class="c-P">P</td><td class="c-S">S</td><td class="c-P">P</td><td class="c-P">P</td><td class="c-S">S</td><td class="c-S">S</td></tr><tr><th scope="row">8,8</th><td class="c-P">P</td><td class="c-P">P</td><td class="c-P">P</td><td class="c-P">P</td><td class="c-P">P</td><td class="c-P">P</td><td class="c-P">P</td><td class="c-P">P</td><td class="c-P">P</td><td class="c-P">P</td></tr><tr><th scope="row">7,7</th><td class="c-P">P</td><td class="c-P">P</td><td class="c-P">P</td><td class="c-P">P</td><td class="c-P">P</td><td class="c-P">P</td><td class="c-H">H</td><td class="c-H">H</td><td class="c-H">H</td><td class="c-H">H</td></tr><tr><th scope="row">6,6</th><td class="c-P">P</td><td class="c-P">P</td><td class="c-P">P</td><td class="c-P">P</td><td class="c-P">P</td><td class="c-H">H</td><td class="c-H">H</td><td class="c-H">H</td><td class="c-H">H</td><td class="c-H">H</td></tr><tr><th scope="row">5,5</th><td class="c-D">D</td><td class="c-D">D</td><td class="c-D">D</td><td class="c-D">D</td><td class="c-D">D</td><td class="c-D">D</td><td class="c-D">D</td><td class="c-D">D</td><td class="c-H">H</td><td class="c-H">H</td></tr><tr><th scope="row">4,4</th><td class="c-H">H</td><td class="c-H">H</td><td class="c-H">H</td><td class="c-P">P</td><td class="c-P">P</td><td class="c-H">H</td><td class="c-H">H</td><td class="c-H">H</td><td class="c-H">H</td><td class="c-H">H</td></tr><tr><th scope="row">3,3</th><td class="c-P">P</td><td class="c-P">P</td><td class="c-P">P</td><td class="c-P">P</td><td class="c-P">P</td><td class="c-P">P</td><td class="c-H">H</td><td class="c-H">H</td><td class="c-H">H</td><td class="c-H">H</td></tr><tr><th scope="row">2,2</th><td class="c-P">P</td><td class="c-P">P</td><td class="c-P">P</td><td class="c-P">P</td><td class="c-P">P</td><td class="c-P">P</td><td class="c-H">H</td><td class="c-H">H</td><td class="c-H">H</td><td class="c-H">H</td></tr></tbody></table>
+    <ul>
+      <li><strong>Toujours séparer les as et les 8.</strong> Jamais les 10 ni les 5.</li>
+      <li><strong>9,9</strong> : sépare, sauf contre 7, 10 et as (reste).</li>
+      <li><strong>2,2 / 3,3 / 7,7</strong> : sépare contre 2 à 7. <strong>6,6</strong> : contre 2 à 6. <strong>4,4</strong> : seulement contre 5 et 6.</li>
+    </ul>
+
+    <h2 id="abandon">Quand abandonner</h2>
+    <p>Si la table autorise l'abandon tardif : abandonne <strong>16 contre 9, 10 et as</strong>, et <strong>15 contre 10</strong>. Récupérer la moitié de ta mise coûte moins cher que de jouer ces mains jusqu'au bout.</p>
+
+    <h2 id="assurance">Pourquoi refuser l'assurance</h2>
+    <p>L'assurance paie 2 contre 1 si le croupier a un 10 caché sous son as. Dans un sabot de 6 jeux, c'est le cas dans environ 31 % des cas ; il en faudrait 33,3 % pour être à l'équilibre. Elle fait donc perdre environ 7 % de la somme assurée. Exception : un compteur la prend à partir d'un compte réel Hi-Lo de +3 (voir <a href="/compter-les-cartes-blackjack">compter les cartes</a>).</p>
+
+    <h2 id="memoriser">Comment la mémoriser vite</h2>
+    <ol>
+      <li>Apprends les mains dures (les plus fréquentes, environ 75 % des situations).</li>
+      <li>Ajoute les paires : deux règles absolues (as et 8) et quelques cas.</li>
+      <li>Termine par les mains souples, les plus souvent mal jouées.</li>
+      <li>Entraîne-toi avec un exercice chronométré jusqu'à répondre sans hésiter.</li>
+    </ol>
+    <figure style="margin:24px 0"><img src="/assets/img/screens/flash-960.webp" alt="Exercice flash de stratégie de base au blackjack" width="960" height="540" loading="lazy" style="border-radius:10px;border:1px solid var(--line)"></figure>
+    <div class="try"><p>Exercice flash : une main, la carte du croupier, trouve le bon coup.</p><a class="btn btn-gold" href="/game/?drill=flash"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /> <circle cx="12" cy="12" r="6" /> <circle cx="12" cy="12" r="2" /></svg>Faire l'exercice</a></div>
+    <p>Les règles de ta table sont différentes (H17, un seul jeu, règle européenne) ? Le tableau intégré au jeu se recalcule automatiquement selon tes réglages.</p>
+  </article>
+</div>
+
+</main>
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="logo" href="/"><svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true"><rect x="3" y="5" width="18" height="24" rx="3" fill="#efe6d2" transform="rotate(-10 12 17)"/><rect x="11" y="3" width="18" height="24" rx="3" fill="#c9a24a"/><path d="M20 9c-3 3-5 5-5 7.5a2.5 2.5 0 0 0 4.4 1.6c-.2 1.2-.8 2.2-1.6 2.9h4.4c-.8-.7-1.4-1.7-1.6-2.9a2.5 2.5 0 0 0 4.4-1.6C25 14 23 12 20 9z" fill="#14100c"/></svg><span>Blackjack Play</span></a>
+        <p style="margin:14px 0 14px;max-width:36ch">Entraîneur de blackjack gratuit, en 3D, dans le navigateur ou sur ordinateur.</p>
+        <span class="no-money">Jetons fictifs · aucun argent réel</span>
+      </div>
+      <div><h4>Jeu</h4><ul><li><a href="/jeu-blackjack-gratuit">Jeu de blackjack gratuit</a></li><li><a href="/game/">Jouer en ligne</a></li><li><a href="/telecharger">Windows, macOS, Linux</a></li><li><a href="/statistiques">Mes statistiques</a></li><li><a href="/game/?drill=flash">Exercice flash</a></li></ul></div>
+      <div><h4>Apprendre</h4><ul><li><a href="/regles-du-blackjack">Règles du blackjack</a></li><li><a href="/strategie-de-base-blackjack">Stratégie de base</a></li><li><a href="/compter-les-cartes-blackjack">Compter les cartes</a></li><li><a href="/simulateur-blackjack">Simulateur</a></li><li><a href="/apprendre">Guide complet</a></li></ul></div>
+      <div><h4>Infos</h4><ul><li><a href="/credits">Crédits et licences</a></li><li><a href="/credits#confidentialite">Confidentialité</a></li><li><a href="/credits#jeu-responsable">Jeu responsable</a></li></ul></div>
+    </div>
+    <div class="foot-legal">
+      <span>Blackjack Play est un outil d'entraînement. Aucun pari, aucune mise d'argent, aucun gain. Le blackjack réel reste un jeu de hasard où le casino garde l'avantage.</span>
+      <span>Version 1.1.0</span>
+    </div>
+  </div>
+</footer>
+<script src="/assets/js/site.js" defer></script>
+
+</body>
+</html>

@@ -149,7 +149,7 @@ export class Panels {
     if (tab === 'graphismes') {
       const cur = a.currentQualityKey();
       body.append(field('Qualité', seg([['auto', 'Auto'], ['basse', 'Basse'], ['moyenne', 'Moyenne'], ['haute', 'Haute'], ['ultra', 'Ultra']], s.quality, (v) => { a.applyQuality(v); this.settings(tab); }),
-        `En automatique, Sabot détecte ta carte graphique et baisse la qualité si le jeu ralentit. Actuellement : ${a.quality[cur].label}.`));
+        `En automatique, Blackjack Play détecte ta carte graphique et baisse la qualité si le jeu ralentit. Actuellement : ${a.quality[cur].label}.`));
       const g = a.scene.renderer.getContext();
       let gpu = '';
       try { const ext = g.getExtension('WEBGL_debug_renderer_info'); gpu = ext ? g.getParameter(ext.UNMASKED_RENDERER_WEBGL) : ''; } catch { /* inconnu */ }
@@ -171,7 +171,7 @@ export class Panels {
         h('button', { class: 'btn', onclick: () => this.confirm('Effacer toutes les statistiques ?', () => { a.stats = store.emptyStats(); a.saveStats(); toast('Statistiques effacées'); }) }, icon('trash-2', 16), 'Effacer les stats'),
         h('button', { class: 'btn', onclick: () => this.confirm('Remettre tous les réglages par défaut ?', () => { localStorage.removeItem(store.KEYS.settings); location.reload(); }) }, icon('rotate-ccw', 16), 'Réglages par défaut')));
       body.append(h('div', { class: 'section-title' }, 'À propos'));
-      body.append(h('p', { style: { fontSize: '13px', color: 'var(--ink-3)' } }, 'Sabot 1.0 — entraîneur de blackjack. Jetons fictifs uniquement : aucun argent réel, aucun pari, aucun gain.'));
+      body.append(h('p', { style: { fontSize: '13px', color: 'var(--ink-3)' } }, 'Blackjack Play 1.1 — entraîneur de blackjack. Jetons fictifs uniquement : aucun argent réel, aucun pari, aucun gain.'));
       body.append(h('button', { class: 'btn', onclick: () => this.credits() }, icon('scroll-text', 16), 'Crédits et licences'));
     }
 
@@ -321,7 +321,7 @@ export class Panels {
       h('h3', {}, 'Les trois niveaux d\'aide'),
       h('ul', {},
         h('li', {}, h('b', {}, 'Avant chaque coup : '), 'le bon choix est surligné et expliqué.'),
-        h('li', {}, h('b', {}, 'Correction après : '), 'tu joues seul, Sabot te corrige si tu te trompes.'),
+        h('li', {}, h('b', {}, 'Correction après : '), 'tu joues seul, Blackjack Play te corrige si tu te trompes.'),
         h('li', {}, h('b', {}, 'Aucune : '), 'comme au casino. Tes erreurs restent enregistrées dans les statistiques.')),
       h('h3', {}, 'Raccourcis clavier'),
       h('div', { class: 'keys' }, ...keys.flatMap(([k, d]) => [h('kbd', {}, k), h('span', {}, d)])),
@@ -335,7 +335,7 @@ export class Panels {
     const L = (t, href) => h('a', { href, target: '_blank', rel: 'noopener' }, t);
     const box = h('div', { class: 'credits' },
       h('h2', {}, 'Crédits'),
-      h('p', { class: 'lead' }, 'Sabot est un entraîneur gratuit. Jetons fictifs uniquement : aucun argent réel, aucun gain possible.'),
+      h('p', { class: 'lead' }, 'Blackjack Play est un entraîneur gratuit. Jetons fictifs uniquement : aucun argent réel, aucun gain possible.'),
       h('h3', {}, 'Ressources utilisées'),
       h('ul', {},
         h('li', {}, h('b', {}, 'Croupiers 3D : '), 'Microsoft Rocketbox Avatar Library — licence MIT. ', L('github.com/microsoft/Microsoft-Rocketbox', 'https://github.com/microsoft/Microsoft-Rocketbox')),
@@ -344,7 +344,7 @@ export class Panels {
         h('li', {}, h('b', {}, 'Moteur 3D : '), 'three.js — licence MIT. ', L('threejs.org', 'https://threejs.org')),
         h('li', {}, h('b', {}, 'Polices : '), 'Barlow, Barlow Condensed (Jeremy Tribby) et Source Serif 4 (Adobe) — SIL Open Font License.'),
         h('li', {}, h('b', {}, 'Icônes : '), 'Lucide — licence ISC. ', L('lucide.dev', 'https://lucide.dev')),
-        h('li', {}, h('b', {}, 'Cartes, tapis et jetons : '), 'dessinés par le programme (Sabot).'),
+        h('li', {}, h('b', {}, 'Cartes, tapis et jetons : '), 'dessinés par le programme (Blackjack Play).'),
         h('li', {}, h('b', {}, 'Stratégie : '), 'stratégie de base calculée selon les règles ; déviations Illustrious 18 et Fab 4 (Don Schlesinger).')),
       h('h3', {}, 'Jeu responsable'),
       h('p', {}, 'Le blackjack réel reste un jeu de hasard où le casino a l\'avantage. Si le jeu d\'argent devient un problème : Joueurs Info Service, 09 74 75 13 13 (appel non surtaxé).'));
@@ -365,10 +365,10 @@ export class Panels {
     const opt = (ico, title, text, fn) => h('button', { class: 'drill-card', onclick: fn, html: icon(ico, 22) + `<div><b>${title}</b><span>${text}</span></div>` });
     const box = h('div', {},
       h('h2', {}, 'Bienvenue à la table'),
-      h('p', { class: 'lead' }, 'Sabot est un entraîneur de blackjack. Tout se joue avec des jetons fictifs : rien n\'est réel, rien ne se gagne ni ne se perd. Quel est ton niveau ?'),
+      h('p', { class: 'lead' }, 'Blackjack Play est un entraîneur de blackjack. Tout se joue avec des jetons fictifs : rien n\'est réel, rien ne se gagne ni ne se perd. Quel est ton niveau ?'),
       h('div', { class: 'drill-grid' },
         opt('graduation-cap', 'Je débute', 'Le bon coup est surligné et expliqué avant chaque décision.', () => choose('coach', 'before')),
-        opt('table-2', 'Je connais les règles', 'Tu joues seul, Sabot te corrige après chaque erreur.', () => choose('libre', 'after')),
+        opt('table-2', 'Je connais les règles', 'Tu joues seul, Blackjack Play te corrige après chaque erreur.', () => choose('libre', 'after')),
         opt('brain', 'Je veux compter les cartes', 'Table pleine de joueurs IA, quiz du compte, mises conseillées.', () => choose('comptage', 'after')),
         opt('flame', 'Comme au casino', 'Aucune aide. Tes erreurs sont tout de même notées dans les statistiques.', () => choose('libre', 'off'))));
     openModal(box, { closable: false });

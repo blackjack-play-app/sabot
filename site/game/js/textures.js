@@ -132,7 +132,7 @@ export function drawCardFace(rank, suit, indices = 'fr', scale = 1) {
     if (suit === 's') {
       ctx.fillStyle = '#fbf9f3';
       ctx.font = '700 20px Georgia, serif';
-      ctx.fillText('SABOT', CW / 2, CH / 2 + 8);
+      ctx.fillText('PLAY', CW / 2, CH / 2 + 8);
     }
   } else if (PIPS[rank]) {
     for (const [px, py] of PIPS[rank]) {
@@ -234,7 +234,7 @@ export function drawCardBack(style = 'bordeaux') {
   ctx.fillStyle = b.ink;
   ctx.font = '700 64px Georgia, serif';
   ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-  ctx.fillText('S', CW / 2, CH / 2 + 4);
+  ctx.fillText('B', CW / 2, CH / 2 + 4);
   return c;
 }
 
@@ -343,8 +343,8 @@ export function drawFelt(geo, rules, feltKey = 'vert') {
   // Logo
   ctx.globalAlpha = 0.85;
   ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-  ctx.font = '700 64px Georgia, serif';
-  ctx.fillText('SABOT', px(0), py(0.12));
+  ctx.font = '700 58px Georgia, serif';
+  ctx.fillText('BLACKJACK PLAY', px(0), py(0.12));
   ctx.font = '500 18px Georgia, serif';
   ctx.fillText('JETONS FICTIFS · AUCUNE VALEUR', px(0), py(0.19));
   ctx.globalAlpha = 1;

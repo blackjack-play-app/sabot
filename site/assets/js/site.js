@@ -1,4 +1,4 @@
-// Sabot — scripts communs du site : menu, galerie, détection du système, sommaire.
+// Blackjack Play — scripts communs du site : menu, galerie, détection du système, sommaire.
 (function () {
   // Menu mobile
   const head = document.querySelector('.site-head');

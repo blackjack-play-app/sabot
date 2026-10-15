@@ -2,12 +2,12 @@
 {
   "path": "/telecharger",
   "priority": 0.8,
-  "title": "Télécharger Sabot — jeu de blackjack pour Windows, macOS et Linux",
-  "description": "Télécharge Sabot, l'entraîneur de blackjack 3D gratuit, pour Windows 10/11, macOS (Intel et Apple Silicon) et Linux. Fonctionne hors ligne. Jetons fictifs uniquement.",
+  "title": "Télécharger Blackjack Play — jeu de blackjack pour Windows, macOS et Linux",
+  "description": "Télécharge Blackjack Play, l'entraîneur de blackjack 3D gratuit, pour Windows 10/11, macOS (Intel et Apple Silicon) et Linux. Fonctionne hors ligne. Jetons fictifs uniquement.",
   "jsonld": {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    "name": "Sabot",
+    "name": "Blackjack Play",
     "operatingSystem": "Windows 10, Windows 11, macOS 11+, Linux",
     "applicationCategory": "GameApplication",
     "softwareVersion": "{{version}}",
@@ -19,7 +19,7 @@
 <header class="page-head">
   <div class="wrap">
     <div class="crumbs"><a href="/">Accueil</a> › Télécharger</div>
-    <h1>Télécharger Sabot</h1>
+    <h1>Télécharger Blackjack Play</h1>
     <p>Version {{version}}. L'application installée est identique à la version en ligne : elle fonctionne hors ligne, en plein écran, et garde tes statistiques sur ton ordinateur.</p>
   </div>
 </header>
@@ -44,11 +44,12 @@
         <h3>{{os:linux}}Linux</h3>
         <p class="meta">x86-64 · {{dl:linuxAppImage:size}}</p>
         <a class="btn btn-gold" href="{{dl:linuxAppImage:url}}" data-dl="linuxAppImage">{{ico:download}}AppImage</a>
-        <a class="btn" href="{{dl:linuxDeb:url}}" data-dl="linuxDeb">Paquet .deb</a>
+        <a class="btn" href="{{dl:linuxDeb:url}}" data-dl="linuxDeb">Paquet .deb (Ubuntu, Debian)</a>
+        <a class="btn" href="{{dl:linuxRpm:url}}" data-dl="linuxRpm">Paquet .rpm (Fedora, openSUSE)</a>
       </div>
     </div>
     <div class="browser-strip">
-      <p><b>Sur téléphone, tablette ou Chromebook ?</b>Joue dans le navigateur. Dans Chrome ou Edge, le menu « Installer l'application » ajoute Sabot à ton écran d'accueil.</p>
+      <p><b>Sur téléphone, tablette ou Chromebook ?</b>Joue dans le navigateur. Dans Chrome ou Edge, le menu « Installer l'application » ajoute Blackjack Play à ton écran d'accueil.</p>
       <a class="btn btn-gold" href="/game/">{{ico:play}}Jouer en ligne</a>
     </div>
   </div>
@@ -63,6 +64,7 @@
           <li><a href="#installer-windows">Windows</a></li>
           <li><a href="#installer-mac">macOS</a></li>
           <li><a href="#installer-linux">Linux</a></li>
+          <li><a href="#toutes">Toutes les versions</a></li>
           <li><a href="#transferer">Transférer ses statistiques</a></li>
           <li><a href="#desinstaller">Désinstaller</a></li>
         </ol>
@@ -72,15 +74,15 @@
         <ol>
           <li>Ouvre le fichier <strong>{{dl:win:file}}</strong> que tu viens de télécharger.</li>
           <li>Si Windows affiche « Windows a protégé votre ordinateur », clique sur <strong>Informations complémentaires</strong>, puis sur <strong>Exécuter quand même</strong>. Ce message apparaît pour les applications récentes qui n'ont pas encore de certificat de signature payant.</li>
-          <li>Choisis le dossier d'installation, puis lance Sabot depuis le raccourci du bureau ou le menu Démarrer.</li>
+          <li>Choisis le dossier d'installation, puis lance Blackjack Play depuis le raccourci du bureau ou le menu Démarrer.</li>
         </ol>
         <div class="callout"><p><strong>F11</strong> passe en plein écran. La qualité graphique se règle seule. Tu peux la changer dans Réglages → Graphismes.</p></div>
 
         <h2 id="installer-mac">Installer sur macOS</h2>
         <ol>
-          <li>Ouvre <strong>{{dl:mac:file}}</strong> et glisse Sabot dans le dossier Applications.</li>
-          <li>La première fois, fais un <strong>clic droit sur Sabot → Ouvrir</strong>, puis confirme. macOS demande cette confirmation pour les applications qui ne viennent pas de l'App Store.</li>
-          <li>Si le message « Sabot est endommagé » apparaît, ouvre le Terminal et tape <code>xattr -cr /Applications/Sabot.app</code>, puis relance.</li>
+          <li>Ouvre <strong>{{dl:mac:file}}</strong> et glisse Blackjack Play dans le dossier Applications.</li>
+          <li>La première fois, fais un <strong>clic droit sur Blackjack Play → Ouvrir</strong>, puis confirme. macOS demande cette confirmation pour les applications qui ne viennent pas de l'App Store.</li>
+          <li>Si le message « Blackjack Play est endommagé » apparaît, ouvre le Terminal et tape <code>xattr -cr /Applications/Blackjack Play.app</code>, puis relance.</li>
         </ol>
 
         <h2 id="installer-linux">Installer sur Linux</h2>
@@ -91,12 +93,33 @@
         </ol>
         <h3>Paquet .deb (Ubuntu, Debian, Mint)</h3>
         <p><code>sudo apt install ./{{dl:linuxDeb:file}}</code></p>
+        <h3>Paquet .rpm (Fedora, openSUSE, RHEL)</h3>
+        <p><code>sudo dnf install ./{{dl:linuxRpm:file}}</code> ou <code>sudo zypper install ./{{dl:linuxRpm:file}}</code></p>
+        <h3>Raspberry Pi 4 et 5</h3>
+        <p>Prends la version ARM64 (.deb ou AppImage). Choisis la qualité « Basse » dans Réglages → Graphismes pour un jeu fluide.</p>
 
+
+        <h2 id="toutes">Toutes les versions</h2>
+        <table class="tbl"><thead><tr><th>Système</th><th>Fichier</th><th>Taille</th></tr></thead><tbody>
+          <tr><td>Windows 10/11 (Intel, AMD)</td><td><a href="{{dl:win:url}}" data-dl="win">{{dl:win:file}}</a></td><td>{{dl:win:size}}</td></tr>
+          <tr><td>Windows sur ARM (Snapdragon, Surface Pro X)</td><td><a href="{{dl:winArm:url}}" data-dl="winArm">{{dl:winArm:file}}</a></td><td>{{dl:winArm:size}}</td></tr>
+          <tr><td>Windows portable</td><td><a href="{{dl:winPortable:url}}" data-dl="winPortable">{{dl:winPortable:file}}</a></td><td>{{dl:winPortable:size}}</td></tr>
+          <tr><td>macOS 11+ (Intel et Apple Silicon)</td><td><a href="{{dl:mac:url}}" data-dl="mac">{{dl:mac:file}}</a></td><td>{{dl:mac:size}}</td></tr>
+          <tr><td>macOS, archive .zip</td><td><a href="{{dl:macZip:url}}" data-dl="macZip">{{dl:macZip:file}}</a></td><td>{{dl:macZip:size}}</td></tr>
+          <tr><td>Linux x86-64, AppImage</td><td><a href="{{dl:linuxAppImage:url}}" data-dl="linuxAppImage">{{dl:linuxAppImage:file}}</a></td><td>{{dl:linuxAppImage:size}}</td></tr>
+          <tr><td>Linux x86-64, Ubuntu / Debian / Mint (.deb)</td><td><a href="{{dl:linuxDeb:url}}" data-dl="linuxDeb">{{dl:linuxDeb:file}}</a></td><td>{{dl:linuxDeb:size}}</td></tr>
+          <tr><td>Linux x86-64, Fedora / openSUSE / RHEL (.rpm)</td><td><a href="{{dl:linuxRpm:url}}" data-dl="linuxRpm">{{dl:linuxRpm:file}}</a></td><td>{{dl:linuxRpm:size}}</td></tr>
+          <tr><td>Linux x86-64, archive .tar.gz</td><td><a href="{{dl:linuxTar:url}}" data-dl="linuxTar">{{dl:linuxTar:file}}</a></td><td>{{dl:linuxTar:size}}</td></tr>
+          <tr><td>Linux ARM64, AppImage (Raspberry Pi 4/5)</td><td><a href="{{dl:linuxAppImageArm:url}}" data-dl="linuxAppImageArm">{{dl:linuxAppImageArm:file}}</a></td><td>{{dl:linuxAppImageArm:size}}</td></tr>
+          <tr><td>Linux ARM64, Raspberry Pi OS / Debian (.deb)</td><td><a href="{{dl:linuxDebArm:url}}" data-dl="linuxDebArm">{{dl:linuxDebArm:file}}</a></td><td>{{dl:linuxDebArm:size}}</td></tr>
+          <tr><td>Linux ARM64, .rpm</td><td><a href="{{dl:linuxRpmArm:url}}" data-dl="linuxRpmArm">{{dl:linuxRpmArm:file}}</a></td><td>{{dl:linuxRpmArm:size}}</td></tr>
+        </tbody></table>
+        <p>Les sources et l'historique des versions sont sur <a href="https://github.com/blackjack-play-app/sabot/releases" rel="noopener">GitHub</a>.</p>
         <h2 id="transferer">Transférer ses statistiques</h2>
         <p>Le site et l'application gardent chacun leurs données sur l'appareil. Pour les retrouver ailleurs : <strong>Réglages → Données → Exporter</strong> sur l'ancien appareil, puis <strong>Importer</strong> sur le nouveau.</p>
 
         <h2 id="desinstaller">Désinstaller</h2>
-        <p>Windows : Paramètres → Applications → Sabot → Désinstaller. macOS : mets Sabot à la corbeille. Linux : supprime l'AppImage, ou <code>sudo apt remove sabot</code>.</p>
+        <p>Windows : Paramètres → Applications → Blackjack Play → Désinstaller. macOS : mets Blackjack Play à la corbeille. Linux : supprime l'AppImage, ou <code>sudo apt remove sabot</code>.</p>
         <div class="try"><p>Tu préfères essayer avant d'installer ?</p><a class="btn btn-gold" href="/game/">{{ico:play}}Jouer en ligne</a></div>
       </div>
     </div>

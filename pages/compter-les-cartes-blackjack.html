@@ -1,0 +1,82 @@
+<!--
+{
+  "path": "/compter-les-cartes-blackjack",
+  "priority": 0.9,
+  "title": "Compter les cartes au blackjack : méthode Hi-Lo pas à pas — Blackjack Play",
+  "ogTitle": "Apprendre à compter les cartes au blackjack",
+  "description": "Apprends à compter les cartes au blackjack avec la méthode Hi-Lo : valeurs des cartes, compte courant, compte réel, adaptation des mises et déviations. Avec un entraîneur gratuit en 3D.",
+  "jsonld": {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Compter les cartes au blackjack : la méthode Hi-Lo pas à pas",
+    "inLanguage": "fr",
+    "image": "{{domain}}/assets/img/screens/comptage.webp",
+    "datePublished": "{{releaseDate}}",
+    "author": { "@type": "Organization", "name": "Blackjack Play" },
+    "publisher": { "@type": "Organization", "name": "Blackjack Play", "logo": { "@type": "ImageObject", "url": "{{domain}}/assets/img/icon-512.png" } },
+    "mainEntityOfPage": "{{domain}}/compter-les-cartes-blackjack"
+  }
+}
+-->
+<header class="page-head">
+  <div class="wrap">
+    <div class="crumbs"><a href="/">Accueil</a> › <a href="/apprendre">Apprendre</a> › Compter les cartes</div>
+    <h1>Compter les cartes au blackjack</h1>
+    <p>Pas besoin d'être un génie des maths : compter, c'est ajouter ou retirer 1. Voici la méthode Hi-Lo, la plus utilisée au monde, en cinq étapes.</p>
+  </div>
+</header>
+<div class="wrap doc">
+  <nav class="toc" aria-label="Sommaire"><p>Sur cette page</p><ol><li><a href="#pourquoi">Pourquoi ça marche</a></li><li><a href="#hilo">Étape 1 : Hi-Lo</a></li><li><a href="#courant">Étape 2 : compte courant</a></li><li><a href="#reel">Étape 3 : compte réel</a></li><li><a href="#mises">Étape 4 : les mises</a></li><li><a href="#deviations">Étape 5 : déviations</a></li><li><a href="#systemes">Autres systèmes</a></li><li><a href="#legal">Est-ce légal ?</a></li><li><a href="#entrainement">S'entraîner</a></li></ol></nav>
+  <article class="prose">
+    <h2 id="pourquoi">Pourquoi compter les cartes fonctionne</h2>
+    <p>Au blackjack, les cartes sorties ne reviennent pas dans le sabot avant le mélange. Quand beaucoup de petites cartes sont déjà parties, il reste proportionnellement plus de 10 et d'as. Cela avantage le joueur : plus de blackjacks payés 3:2, des doubles plus souvent gagnants, un croupier qui saute davantage. Le comptage sert à repérer ces moments pour miser plus.</p>
+
+    <h2 id="hilo">Étape 1 : la valeur de chaque carte (Hi-Lo)</h2>
+    <div class="tags">
+      <div class="h">2</div><div class="h">3</div><div class="h">4</div><div class="h">5</div><div class="h">6</div><div class="h">7</div><div class="h">8</div><div class="h">9</div><div class="h">10</div><div class="h">A</div>
+      <div class="p">+1</div><div class="p">+1</div><div class="p">+1</div><div class="p">+1</div><div class="p">+1</div><div>0</div><div>0</div><div>0</div><div class="n">−1</div><div class="n">−1</div>
+    </div>
+    <p>Petites cartes : +1. Cartes moyennes : 0. Grosses cartes : −1. Un paquet complet totalise exactement 0 : c'est un système « équilibré ».</p>
+
+    <h2 id="courant">Étape 2 : le compte courant</h2>
+    <p>Pars de 0 au mélange et additionne la valeur de chaque carte visible. Exemple : 5, roi, 3, 2, as, 6 donnent +1 −1 +1 +1 −1 +1 = <strong>+2</strong>.</p>
+    <div class="callout"><p><strong>Astuce de pro :</strong> compte les cartes par paires. Un 10 et un 4 s'annulent (0) : tu les ignores d'un coup d'œil. Objectif : compter un paquet entier en moins de 25 secondes.</p></div>
+
+    <h2 id="reel">Étape 3 : le compte réel</h2>
+    <p>Un +6 au début d'un sabot de 6 jeux est dilué dans beaucoup de cartes ; en fin de sabot, il pèse lourd. On divise donc le compte courant par le nombre de jeux restant à distribuer.</p>
+    <table class="tbl"><thead><tr><th>Compte courant</th><th>Jeux restants</th><th>Compte réel</th></tr></thead><tbody><tr><td>+6</td><td>5</td><td>+1</td></tr><tr><td>+6</td><td>3</td><td>+2</td></tr><tr><td>+6</td><td>1,5</td><td>+4</td></tr><tr><td>−4</td><td>2</td><td>−2</td></tr></tbody></table>
+    <p>Pour estimer les jeux restants, on regarde la hauteur de la défausse. Dans le jeu, la défausse se remplit à l'échelle réelle pour t'y habituer.</p>
+
+    <h2 id="mises">Étape 4 : adapter ses mises</h2>
+    <p>Chaque point de compte réel apporte environ 0,5 % d'avantage. Le joueur passe devant le casino vers +1. Un écart classique, de 1 à 8 unités :</p>
+    <table class="tbl"><thead><tr><th>Compte réel</th><th>≤ 0</th><th>+1</th><th>+2</th><th>+3</th><th>+4 et plus</th></tr></thead><tbody><tr><td>Mise</td><td>1</td><td>2</td><td>4</td><td>6</td><td>8</td></tr></tbody></table>
+    <p>L'avantage obtenu reste faible (de l'ordre de 0,5 à 1 %) et les écarts de résultats sont énormes : le simulateur du jeu montre bien qu'il faut des dizaines de milliers de mains pour que l'avantage se voie.</p>
+
+    <h2 id="deviations">Étape 5 : les déviations</h2>
+    <p>Certaines décisions changent selon le compte réel. Les plus rentables : prendre l'assurance à +3, rester sur 16 contre 10 à 0 ou plus, rester sur 15 contre 10 à +4, doubler 11 contre as à +1, séparer les 10 contre 6 à +4 et contre 5 à +5. La liste complète (Illustrious 18 et Fab 4) est dans <a href="/apprendre#deviations">le guide</a>.</p>
+
+    <h2 id="systemes">Les autres systèmes de comptage</h2>
+    <table class="tbl"><thead><tr><th>Système</th><th>Niveau</th><th>Particularité</th></tr></thead><tbody>
+      <tr><td>Hi-Lo</td><td>1</td><td>Le standard, recommandé pour commencer</td></tr>
+      <tr><td>KO (Knock-Out)</td><td>1</td><td>Non équilibré : pas de conversion en compte réel</td></tr>
+      <tr><td>Hi-Opt I</td><td>1</td><td>As neutre, souvent avec un compte d'as séparé</td></tr>
+      <tr><td>Hi-Opt II, Omega II, Zen</td><td>2</td><td>Plus précis, plus difficiles</td></tr>
+      <tr><td>Wong Halves</td><td>3</td><td>Demi-points, pour experts</td></tr>
+      <tr><td>Red Seven</td><td>1</td><td>Hi-Lo + 7 rouges, non équilibré</td></tr>
+    </tbody></table>
+    <p>Tous sont disponibles dans le jeu (Réglages → Comptage).</p>
+
+    <h2 id="legal">Compter les cartes, est-ce légal ?</h2>
+    <p>Compter de tête n'est pas un délit : c'est simplement bien suivre le jeu. En revanche, un casino peut refuser l'accès à un joueur qu'il soupçonne de compter, et tout appareil d'aide à la table est interdit. Ici, on s'entraîne avec des jetons fictifs : le but est de comprendre le jeu, pas de gagner de l'argent.</p>
+
+    <h2 id="entrainement">S'entraîner, dans l'ordre</h2>
+    <ol>
+      <li><a href="/game/?drill=countdown">Décompte d'un paquet</a> : vitesse et précision.</li>
+      <li><a href="/game/?drill=truecount">Conversion en compte réel</a> à partir de la défausse.</li>
+      <li><a href="/game/?mode=comptage">Table de comptage</a> : joueurs IA, quiz du croupier, mises conseillées.</li>
+      <li><a href="/game/?drill=deviations">Exercice des déviations</a>.</li>
+    </ol>
+    <figure style="margin:24px 0"><img src="/assets/img/screens/comptage-960.webp" alt="Entraînement au comptage des cartes au blackjack avec compte courant et compte réel affichés" width="960" height="540" loading="lazy" style="border-radius:10px;border:1px solid var(--line)"></figure>
+    <div class="try"><p>Prêt à compter pour de vrai, avec une table pleine ?</p><a class="btn btn-gold" href="/game/?mode=comptage">{{ico:brain}}Table de comptage</a></div>
+  </article>
+</div>

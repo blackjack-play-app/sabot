@@ -22,4 +22,4 @@ http.createServer((req, res) => {
   if (!fs.existsSync(file)) { res.writeHead(404, { 'Content-Type': 'text/html; charset=utf-8' }); return fs.createReadStream(path.join(root, '404.html')).on('error', () => res.end('404')).pipe(res); }
   res.writeHead(200, { 'Content-Type': TYPES[path.extname(file).toLowerCase()] || 'application/octet-stream', 'Cache-Control': 'no-cache' });
   fs.createReadStream(file).pipe(res);
-}).listen(port, () => console.log(`Sabot : http://localhost:${port}`));
+}).listen(port, () => console.log(`Blackjack Play : http://localhost:${port}`));

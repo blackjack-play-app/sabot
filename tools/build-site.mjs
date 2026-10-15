@@ -10,6 +10,7 @@ const SITE = path.join(ROOT, 'site');
 const PAGES = path.join(ROOT, 'pages');
 const cfg = JSON.parse(fs.readFileSync(path.join(ROOT, 'site.config.json'), 'utf8'));
 const DOMAIN = cfg.domain.replace(/\/$/, '');
+cfg.downloadBase = cfg.downloadBase.replace('{dlv}', cfg.downloadsVersion || cfg.version);
 
 const ICON = (name, size = 18) => {
   const p = path.join(ROOT, 'node_modules', 'lucide-static', 'icons', name + '.svg');

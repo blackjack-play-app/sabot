@@ -637,11 +637,18 @@ function showCoach(kind, title, text, actions = []) {
   const c = $('#coach');
   c.className = 'coach ' + kind;
   c.innerHTML = '';
+  delete c.dataset.mistake;
   c.append(h('h4', { html: icon(kind === 'bad' ? 'x' : kind === 'good' ? 'check' : 'lightbulb', 16) + title }), h('p', {}, text));
   if (actions.length) c.append(h('div', { class: 'coach-actions' }, actions));
   c.hidden = false;
   clearTimeout(showCoach.t);
 }
+// Les erreurs restent affichées jusqu'à « Compris » (ou la donne suivante)
+function showMistake(title, text) {
+  showCoach('bad', title, text, [h('button', { class: 'btn', onclick: () => hideCoach() }, 'Compris')]);
+  $('#coach').dataset.mistake = '1';
+}
+function coachIsMistake() { return !$('#coach').hidden && $('#coach').dataset.mistake === '1'; }
 function hideCoach(delay = 0) {
   clearTimeout(showCoach.t);
   if (delay) showCoach.t = setTimeout(() => { $('#coach').hidden = true; }, delay);
@@ -656,7 +663,7 @@ function refreshAdvice() {
     const btn = $(`#actions [data-act="${sit.adv.action}"]`);
     if (btn) btn.classList.add('rec');
     showCoach('', `Conseil : ${ACTION_LABEL[sit.adv.action]}`, sit.adv.reason);
-  } else hideCoach();
+  } else if (!coachIsMistake()) hideCoach();
 }
 
 function giveHint() {
@@ -726,11 +733,11 @@ function recordDecision(sit, did) {
   }
   saveStats();
   if (settings.adviceMode === 'after') {
-    if (ok) { audio.play('good', 0.6); toast(`Bon coup : ${ACTION_LABEL[did]}`, 'good', 1100); hideCoach(); }
+    if (ok) { audio.play('good', 0.6); toast(`Bon coup : ${ACTION_LABEL[did]}`, 'good', 1100); if (!coachIsMistake()) hideCoach(); }
     else {
       audio.play('bad', 0.8);
-      showCoach('bad', `Erreur : il fallait ${ACTION_LABEL[adv.action].toLowerCase()}`, adv.reason);
-      hideCoach(6000);
+      const where = playerHands().length > 1 ? ` (place ${hand.seat + 1})` : '';
+      showMistake(`Erreur${where} : il fallait ${ACTION_LABEL[adv.action].toLowerCase()}`, `Tu as choisi « ${ACTION_LABEL[did]} » avec ${adv.soft ? adv.total + ' souple' : adv.total} contre ${up === 11 ? 'un as' : up}. ${adv.reason}`);
     }
   } else if (settings.adviceMode === 'before') hideCoach();
 }
@@ -825,8 +832,8 @@ function buildIO() {
         if (ok) stats.decisions.insurance.ok++;
         else stats.mistakes.push({ t: Date.now(), cards: hd.cards.map((c) => c.rank + c.suit), up: 11, did: take ? 'I' : 'NI', should: sit.adv ? 'I' : 'NI', kind: 'insurance' });
         saveStats();
-        if (settings.adviceMode === 'after' && !ok) { showCoach('bad', take ? 'Erreur : l\'assurance ne vaut pas le coup ici' : 'Erreur : l\'assurance était rentable', take ? 'L\'assurance paie 2 contre 1 mais le croupier n\'a un 10 caché qu\'environ 31 % du temps. À éviter sauf compte réel ≥ +3.' : `Avec un compte réel de ${engine.trueCount.toFixed(1)}, l'assurance rapporte en moyenne.`); hideCoach(6000); }
-        else hideCoach();
+        if (settings.adviceMode === 'after' && !ok) showMistake(take ? 'Erreur : l\'assurance ne vaut pas le coup ici' : 'Erreur : l\'assurance était rentable', take ? 'L\'assurance paie 2 contre 1 mais le croupier n\'a un 10 caché qu\'environ 31 % du temps. À éviter sauf compte réel ≥ +3.' : `Avec un compte réel de ${engine.trueCount.toFixed(1)}, l'assurance rapporte en moyenne.`);
+        else if (!coachIsMistake()) hideCoach();
         showDock('wait');
         resolve(take);
       };
@@ -903,7 +910,7 @@ function buildIO() {
     onDealerTurn: async () => {
       S.activeHand = null;
       scene.setActive(null);
-      hideCoach();
+      if (!coachIsMistake()) hideCoach();
       $('#waitText').textContent = 'Le croupier joue';
       showDock('wait');
       if (settings.followCam && !settings.fixedView) scene.setView('joueur');
@@ -1039,6 +1046,7 @@ async function deal() {
   }
 
   S.lastBets = S.bets.slice();
+  hideCoach();
   S.phase = 'playing';
   askInsurance.said = false;
   closeDrawer();

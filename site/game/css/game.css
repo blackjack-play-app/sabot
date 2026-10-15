@@ -385,3 +385,10 @@ kbd { font-family: var(--cond); font-size: 11px; font-weight: 600; letter-spacin
   .dock-ins p { display: none; }
   .seat-pill button { padding: 3px 7px; }
 }
+
+/* ---------- Succès ---------- */
+.achs { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin: 8px 0; }
+.ach { display: grid; grid-template-columns: 22px 1fr; gap: 0 8px; align-items: start; background: #1d1813; border: 1px solid var(--line-2); border-radius: 8px; padding: 7px 9px; opacity: .55; }
+.ach .ico { grid-row: span 2; margin-top: 2px; color: var(--ink-3); }
+.ach b { font-size: 13px; } .ach span { font-size: 11.5px; color: var(--ink-3); line-height: 1.3; }
+.ach.got { opacity: 1; border-color: var(--line); } .ach.got .ico { color: var(--gold-2); }

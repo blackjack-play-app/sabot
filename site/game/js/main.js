@@ -11,10 +11,12 @@ import { QUALITY, detectQuality, FpsWatch } from './quality.js';
 import { REAL_SKINS } from './dealer3d.js';
 import {
   $, $$, h, fmt, fmtSigned, toast, openModal, closeModal, modalOpen, openDrawer, closeDrawer, drawerIs,
-  iconBtn, icon, cardImg, chipUrl,
+  iconBtn, icon, cardImg, chipUrl, clearCardImgCache,
 } from './ui.js';
 import { Panels } from './panels.js';
 import { Drills } from './drills.js';
+import { checkAchievements } from './achievements.js';
+import { setDeckColors } from './textures.js';
 
 // ------------------------------------------------------------------ État
 const settings = store.loadSettings();
@@ -65,6 +67,7 @@ try {
 scene.style.indices = settings.style.indices;
 scene.style.back = settings.style.back;
 scene.style.felt = settings.style.felt;
+setDeckColors(settings.style.fourColor ? 4 : 2);
 scene.speed = SPEEDS[settings.speed] ?? 1;
 scene.applyQuality(qProfile);
 scene.applyStyle(settings.rules);
@@ -104,7 +107,13 @@ const fps = new FpsWatch((f) => {
 // ------------------------------------------------------------------ Utilitaires
 function saveSettings() { store.save(store.KEYS.settings, settings); }
 function saveBank() { store.save(store.KEYS.bank, Math.round(bank * 100) / 100); }
-function saveStats() { store.saveStats(stats); }
+function saveStats(ctx) {
+  for (const a of checkAchievements(stats, ctx)) {
+    toast(`Succès débloqué : ${a.title} — ${a.desc}`, 'good', 4200);
+    audio.play('win', 0.6);
+  }
+  store.saveStats(stats);
+}
 const wait = (s) => scene.wait(s);
 const seatHands = (seat) => engine.hands.filter((x) => x.seat === seat);
 const nInSeat = (seat) => Math.max(1, seatHands(seat).length);
@@ -632,6 +641,8 @@ function recordDecision(sit, did) {
   const cellKey = `${rowKey}:${up}`;
   const cell = stats.cells[cellKey] || (stats.cells[cellKey] = { ok: 0, n: 0 });
   cell.n++; if (ok) cell.ok++;
+  stats.decisionStreak = ok ? (stats.decisionStreak || 0) + 1 : 0;
+  stats.bestDecisionStreak = Math.max(stats.bestDecisionStreak || 0, stats.decisionStreak);
   if (!ok) {
     stats.mistakes.push({ t: Date.now(), cards: hand.cards.map((c) => c.rank + c.suit), up, did, should: adv.action, kind, total: adv.total, soft: adv.soft });
   }
@@ -888,7 +899,18 @@ async function settle(sum) {
     stats.bestStreak = Math.max(stats.bestStreak, stats.streak);
     stats.worstStreak = Math.min(stats.worstStreak, stats.streak);
     stats.bankHistory.push({ t: Date.now(), v: Math.round(bank) });
-    saveStats();
+    // Historique des donnes (consultable dans les statistiques)
+    const mine = sum.hands.filter((x) => x.owner === 'player');
+    stats.history = stats.history || [];
+    stats.history.push({
+      t: Date.now(), dealer: engine.dealer.cards.map((c) => c.rank + c.suit), dt: sum.dealerTotal,
+      hands: mine.map((x) => ({ seat: x.seat, cards: x.cards.map((c) => c.rank + c.suit), r: x.result, net: x.net, bet: x.bet })),
+    });
+    if (stats.history.length > 60) stats.history = stats.history.slice(-60);
+    const seatsUsed = new Set(mine.map((x) => x.seat)).size;
+    const splitWins = [...new Set(mine.filter((x) => x.fromSplit).map((x) => x.seat))]
+      .some((seat) => mine.filter((x) => x.seat === seat).every((x) => x.result === 'win' || x.result === 'blackjack'));
+    saveStats({ playerHands: seatsUsed, splitWins });
     flashDelta(playerNet);
     if (playerNet > 0) audio.play('win', 0.5);
   }
@@ -1093,6 +1115,7 @@ const app = {
   },
   applyStyle(patch) {
     Object.assign(settings.style, patch);
+    if ('fourColor' in patch) { setDeckColors(patch.fourColor ? 4 : 2); clearCardImgCache(); }
     saveSettings();
     scene.setStyle(patch);
     if (patch.skin) audio.setDealerGender(!!REAL_SKINS[patch.skin]?.female);

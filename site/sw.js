@@ -1,5 +1,5 @@
 // Service worker : jeu disponible hors ligne après la première visite (fichier généré par tools/build-sw.py).
-const VERSION = 'sabot-v1.1.0';
+const VERSION = 'sabot-vd30efd33a1';
 const CORE = [
 "/assets/fonts/barlow-condensed-latin-500-normal.woff2",
 "/assets/fonts/barlow-condensed-latin-600-normal.woff2",
@@ -16,6 +16,7 @@ const CORE = [
 "/game/",
 "/game/css/game.css",
 "/game/index.html",
+"/game/js/achievements.js",
 "/game/js/audio.js",
 "/game/js/cards.js",
 "/game/js/dealer.js",
@@ -84,14 +85,15 @@ self.addEventListener('activate', (e) => {
   e.waitUntil(caches.keys().then((keys) => Promise.all(keys.filter((k) => k !== VERSION).map((k) => caches.delete(k)))).then(() => self.clients.claim()));
 });
 
-// Pages HTML : réseau d'abord (contenu à jour), cache en secours. Le reste : cache d'abord.
+// Gros fichiers fixes (modèles, textures, sons, polices, bibliothèques) : cache d'abord.
+// Tout le reste (pages, styles, scripts) : réseau d'abord pour voir les mises à jour tout de suite.
 self.addEventListener('fetch', (e) => {
   const req = e.request;
   if (req.method !== 'GET' || new URL(req.url).origin !== location.origin) return;
-  const isPage = req.mode === 'navigate' || (req.headers.get('accept') || '').includes('text/html');
-  if (isPage) {
+  const heavy = /\/(models|tex|sfx|vendor|fonts)\//.test(new URL(req.url).pathname);
+  if (!heavy) {
     e.respondWith(fetch(req).then((res) => { const copy = res.clone(); caches.open(VERSION).then((c) => c.put(req, copy)); return res; })
-      .catch(() => caches.match(req).then((r) => r || caches.match('/game/'))));
+      .catch(() => caches.match(req).then((r) => r || (req.mode === 'navigate' ? caches.match('/game/') : undefined))));
     return;
   }
   e.respondWith(caches.match(req).then((hit) => hit || fetch(req).then((res) => {

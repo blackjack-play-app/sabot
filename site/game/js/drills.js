@@ -394,6 +394,8 @@ export class Drills {
         runBtn.disabled = false;
         progress.firstChild.style.width = '100%';
         this.renderSim(out, res, cfg, performance.now() - t0);
+        this.app.stats.simRuns = (this.app.stats.simRuns || 0) + 1;
+        this.app.saveStats();
       };
       try {
         this.worker = new Worker(new URL('./simworker.js', import.meta.url), { type: 'module' });

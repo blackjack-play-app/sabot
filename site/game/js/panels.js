@@ -4,6 +4,7 @@ import { buildChart, ACTION_LABEL } from './strategy.js';
 import { COUNT_SYSTEMS } from './cards.js';
 import { FELTS, BACKS } from './textures.js';
 import { REAL_SKINS } from './dealer3d.js';
+import { ACHIEVEMENTS } from './achievements.js';
 import * as store from './store.js';
 import {
   $, h, fmt, fmtSigned, pct, openDrawer, closeDrawer, openModal, closeModal, field, toggle, select, seg, range,
@@ -128,6 +129,7 @@ export class Panels {
       const backs = h('div', { class: 'swatches' });
       for (const [k, b] of Object.entries(BACKS)) backs.append(h('button', { class: 'swatch', title: b.label, 'aria-pressed': String(s.style.back === k), style: { background: `repeating-linear-gradient(45deg, ${b.base} 0 5px, ${b.line} 5px 6px)` }, onclick: () => { a.applyStyle({ back: k }); this.settings(tab); } }));
       body.append(backs);
+      body.append(field('Jeu 4 couleurs', toggle(s.style.fourColor, (v) => { a.applyStyle({ fourColor: v }); }), 'Cœur rouge, carreau bleu, trèfle vert, pique noir : plus rapide à lire et adapté aux daltoniens.'));
       body.append(field('Indices des figures', seg([['fr', 'R D V (français)'], ['en', 'K Q J (anglais)']], s.style.indices, (v) => { a.applyStyle({ indices: v }); })));
     }
 
@@ -250,6 +252,31 @@ export class Panels {
       for (const m of recent) {
         const cards = (m.cards || []).map((c) => c.replace(/[shdc]$/, '')).join(' ');
         ul.append(h('li', {}, `${cards} contre ${m.up === 11 ? 'A' : m.up}`, h('span', {}, `${lab(m.did)} → ${lab(m.should)}`)));
+      }
+      body.append(ul);
+    }
+    body.append(h('div', { class: 'section-title' }, `Succès (${Object.keys(st.achievements || {}).length}/${ACHIEVEMENTS.length})`));
+    const ach = h('div', { class: 'achs' });
+    for (const x of ACHIEVEMENTS) {
+      const got = st.achievements && st.achievements[x.id];
+      ach.append(h('div', { class: 'ach' + (got ? ' got' : ''), title: x.desc, html: icon(got ? 'award' : 'target', 18) + `<b>${x.title}</b><span>${x.desc}</span>` }));
+    }
+    body.append(ach);
+    body.append(h('div', { class: 'section-title' }, 'Dernières donnes'));
+    const hist = (st.history || []).slice(-8).reverse();
+    if (!hist.length) body.append(h('p', { style: { fontSize: '13.5px', color: 'var(--ink-3)' } }, 'Aucune donne enregistrée.'));
+    else {
+      const ul = h('ul', { class: 'mistakes' });
+      const rl = (c) => c.replace(/[shdc]$/, '');
+      const RES = { win: 'gagné', blackjack: 'blackjack', lose: 'perdu', bust: 'sauté', push: 'égalité', surrender: 'abandon' };
+      for (const r of hist) {
+        ul.append(h('li', { style: { flexDirection: 'column', alignItems: 'stretch', gap: '3px' } },
+          h('div', { style: { display: 'flex', justifyContent: 'space-between' } },
+            h('span', { style: { color: 'var(--ink-2)' } }, `Croupier : ${r.dealer.map(rl).join(' ')} (${r.dt > 21 ? 'sauté' : r.dt})`),
+            h('span', {}, new Date(r.t).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' }))),
+          ...r.hands.map((x) => h('div', { style: { display: 'flex', justifyContent: 'space-between' } },
+            `Place ${x.seat + 1} : ${x.cards.map(rl).join(' ')}`,
+            h('b', { style: { color: x.net > 0 ? 'var(--green)' : x.net < 0 ? 'var(--red)' : 'var(--ink-2)', fontFamily: 'var(--cond)' } }, `${RES[x.r] || x.r} ${x.net ? fmtSigned(x.net) : ''}`)))));
       }
       body.append(ul);
     }

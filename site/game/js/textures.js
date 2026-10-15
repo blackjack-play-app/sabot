@@ -82,6 +82,10 @@ const PIPS = {
 };
 
 const INDEX_FR = { J: 'V', Q: 'D', K: 'R' };
+// Jeu « 4 couleurs » : chaque enseigne a sa couleur (plus rapide à lire, utile aux daltoniens)
+let DECK_COLORS = 2;
+export function setDeckColors(n) { DECK_COLORS = n; }
+const FOUR = { s: '#16181d', h: '#b3202c', d: '#1f5fbf', c: '#1d7a3a' };
 const FACE_COLORS = {
   J: { a: '#2f5d8a', b: '#c9a24a' },
   Q: { a: '#8a2f3c', b: '#c9a24a' },
@@ -100,7 +104,7 @@ export function drawCardFace(rank, suit, indices = 'fr', scale = 1) {
   const ctx = c.getContext('2d');
   ctx.scale(scale, scale);
   const red = RED[suit];
-  const ink = red ? '#b3202c' : '#16181d';
+  const ink = DECK_COLORS === 4 ? FOUR[suit] : red ? '#b3202c' : '#16181d';
 
   rr(ctx, 2, 2, CW - 4, CH - 4, 26);
   ctx.fillStyle = '#fbf9f3';

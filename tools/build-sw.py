@@ -1,8 +1,13 @@
 # Génère site/sw.js avec la liste des fichiers à mettre en cache (à relancer après chaque modification).
-import json, pathlib, sys
+import json, pathlib, sys, hashlib
 
 root = pathlib.Path(__file__).resolve().parent.parent / 'site'
-version = sys.argv[1] if len(sys.argv) > 1 else '1.0.0'
+# Version du cache = empreinte du contenu : chaque mise à jour du site invalide l'ancien cache.
+h = hashlib.sha1()
+for f in sorted(root.rglob('*')):
+    if f.is_file() and f.name != 'sw.js' and 'downloads' not in f.parts:
+        h.update(f.read_bytes())
+version = h.hexdigest()[:10]
 files = []
 for p in sorted((root / 'game').rglob('*')):
     if not p.is_file():
@@ -26,14 +31,15 @@ self.addEventListener('activate', (e) => {{
   e.waitUntil(caches.keys().then((keys) => Promise.all(keys.filter((k) => k !== VERSION).map((k) => caches.delete(k)))).then(() => self.clients.claim()));
 }});
 
-// Pages HTML : réseau d'abord (contenu à jour), cache en secours. Le reste : cache d'abord.
+// Gros fichiers fixes (modèles, textures, sons, polices, bibliothèques) : cache d'abord.
+// Tout le reste (pages, styles, scripts) : réseau d'abord pour voir les mises à jour tout de suite.
 self.addEventListener('fetch', (e) => {{
   const req = e.request;
   if (req.method !== 'GET' || new URL(req.url).origin !== location.origin) return;
-  const isPage = req.mode === 'navigate' || (req.headers.get('accept') || '').includes('text/html');
-  if (isPage) {{
+  const heavy = /\/(models|tex|sfx|vendor|fonts)\//.test(new URL(req.url).pathname);
+  if (!heavy) {{
     e.respondWith(fetch(req).then((res) => {{ const copy = res.clone(); caches.open(VERSION).then((c) => c.put(req, copy)); return res; }})
-      .catch(() => caches.match(req).then((r) => r || caches.match('/game/'))));
+      .catch(() => caches.match(req).then((r) => r || (req.mode === 'navigate' ? caches.match('/game/') : undefined))));
     return;
   }}
   e.respondWith(caches.match(req).then((hit) => hit || fetch(req).then((res) => {{

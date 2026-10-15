@@ -1,0 +1,104 @@
+<!--
+{
+  "path": "/telecharger",
+  "priority": 0.8,
+  "title": "Télécharger Sabot — jeu de blackjack pour Windows, macOS et Linux",
+  "description": "Télécharge Sabot, l'entraîneur de blackjack 3D gratuit, pour Windows 10/11, macOS (Intel et Apple Silicon) et Linux. Fonctionne hors ligne. Jetons fictifs uniquement.",
+  "jsonld": {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Sabot",
+    "operatingSystem": "Windows 10, Windows 11, macOS 11+, Linux",
+    "applicationCategory": "GameApplication",
+    "softwareVersion": "{{version}}",
+    "downloadUrl": "{{domain}}/telecharger",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" }
+  }
+}
+-->
+<header class="page-head">
+  <div class="wrap">
+    <div class="crumbs"><a href="/">Accueil</a> › Télécharger</div>
+    <h1>Télécharger Sabot</h1>
+    <p>Version {{version}}. L'application installée est identique à la version en ligne : elle fonctionne hors ligne, en plein écran, et garde tes statistiques sur ton ordinateur.</p>
+  </div>
+</header>
+
+<section class="block" style="border-bottom:0;padding-top:56px">
+  <div class="wrap">
+    <div class="dl-grid">
+      <div class="dl-card" data-os="windows" id="windows">
+        <h3>{{os:windows}}Windows</h3>
+        <p class="meta">Windows 10 et 11 · 64 bits · {{dl:win:size}}</p>
+        <a class="btn btn-gold" href="{{dl:win:url}}" data-dl="win">{{ico:download}}Installateur (.exe)</a>
+        <a class="btn" href="{{dl:winPortable:url}}" data-dl="winPortable">Version portable</a>
+        <div class="alt"><span>La version portable se lance sans installation, depuis une clé USB par exemple.</span></div>
+      </div>
+      <div class="dl-card" data-os="mac" id="mac">
+        <h3>{{os:mac}}macOS</h3>
+        <p class="meta">macOS 11 ou plus · Intel et Apple Silicon · {{dl:mac:size}}</p>
+        <a class="btn btn-gold" href="{{dl:mac:url}}" data-dl="mac">{{ico:download}}Image disque (.dmg)</a>
+        <div class="alt"><a href="#installer-mac">Ouvrir l'application la première fois</a></div>
+      </div>
+      <div class="dl-card" data-os="linux" id="linux">
+        <h3>{{os:linux}}Linux</h3>
+        <p class="meta">x86-64 · {{dl:linuxAppImage:size}}</p>
+        <a class="btn btn-gold" href="{{dl:linuxAppImage:url}}" data-dl="linuxAppImage">{{ico:download}}AppImage</a>
+        <a class="btn" href="{{dl:linuxDeb:url}}" data-dl="linuxDeb">Paquet .deb</a>
+      </div>
+    </div>
+    <div class="browser-strip">
+      <p><b>Sur téléphone, tablette ou Chromebook ?</b>Joue dans le navigateur. Dans Chrome ou Edge, le menu « Installer l'application » ajoute Sabot à ton écran d'accueil.</p>
+      <a class="btn btn-gold" href="/game/">{{ico:play}}Jouer en ligne</a>
+    </div>
+  </div>
+</section>
+
+<section class="block" style="padding-top:20px">
+  <div class="wrap">
+    <div class="doc" style="padding:0">
+      <nav class="toc" aria-label="Sommaire">
+        <p>Installation</p>
+        <ol>
+          <li><a href="#installer-windows">Windows</a></li>
+          <li><a href="#installer-mac">macOS</a></li>
+          <li><a href="#installer-linux">Linux</a></li>
+          <li><a href="#transferer">Transférer ses statistiques</a></li>
+          <li><a href="#desinstaller">Désinstaller</a></li>
+        </ol>
+      </nav>
+      <div class="prose">
+        <h2 id="installer-windows">Installer sur Windows</h2>
+        <ol>
+          <li>Ouvre le fichier <strong>{{dl:win:file}}</strong> que tu viens de télécharger.</li>
+          <li>Si Windows affiche « Windows a protégé votre ordinateur », clique sur <strong>Informations complémentaires</strong>, puis sur <strong>Exécuter quand même</strong>. Ce message apparaît pour les applications récentes qui n'ont pas encore de certificat de signature payant.</li>
+          <li>Choisis le dossier d'installation, puis lance Sabot depuis le raccourci du bureau ou le menu Démarrer.</li>
+        </ol>
+        <div class="callout"><p><strong>F11</strong> passe en plein écran. La qualité graphique se règle seule. Tu peux la changer dans Réglages → Graphismes.</p></div>
+
+        <h2 id="installer-mac">Installer sur macOS</h2>
+        <ol>
+          <li>Ouvre <strong>{{dl:mac:file}}</strong> et glisse Sabot dans le dossier Applications.</li>
+          <li>La première fois, fais un <strong>clic droit sur Sabot → Ouvrir</strong>, puis confirme. macOS demande cette confirmation pour les applications qui ne viennent pas de l'App Store.</li>
+          <li>Si le message « Sabot est endommagé » apparaît, ouvre le Terminal et tape <code>xattr -cr /Applications/Sabot.app</code>, puis relance.</li>
+        </ol>
+
+        <h2 id="installer-linux">Installer sur Linux</h2>
+        <h3>AppImage (toutes distributions)</h3>
+        <ol>
+          <li>Rends le fichier exécutable : <code>chmod +x {{dl:linuxAppImage:file}}</code></li>
+          <li>Lance-le : <code>./{{dl:linuxAppImage:file}}</code></li>
+        </ol>
+        <h3>Paquet .deb (Ubuntu, Debian, Mint)</h3>
+        <p><code>sudo apt install ./{{dl:linuxDeb:file}}</code></p>
+
+        <h2 id="transferer">Transférer ses statistiques</h2>
+        <p>Le site et l'application gardent chacun leurs données sur l'appareil. Pour les retrouver ailleurs : <strong>Réglages → Données → Exporter</strong> sur l'ancien appareil, puis <strong>Importer</strong> sur le nouveau.</p>
+
+        <h2 id="desinstaller">Désinstaller</h2>
+        <p>Windows : Paramètres → Applications → Sabot → Désinstaller. macOS : mets Sabot à la corbeille. Linux : supprime l'AppImage, ou <code>sudo apt remove sabot</code>.</p>
+        <div class="try"><p>Tu préfères essayer avant d'installer ?</p><a class="btn btn-gold" href="/game/">{{ico:play}}Jouer en ligne</a></div>
+      </div>
+    </div>
+  </div>
+</section>

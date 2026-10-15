@@ -1,0 +1,68 @@
+# Construit Sabot pour Windows, macOS et Linux et publie une release GitHub quand on pousse un tag vX.Y.Z
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-latest
+            target: --win nsis portable --x64
+          - os: macos-latest
+            target: --mac dmg zip --universal
+          - os: ubuntu-latest
+            target: --linux AppImage deb tar.gz --x64
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Dépendances
+        working-directory: desktop
+        run: npm ci || npm install
+      - name: Construction
+        working-directory: desktop
+        env:
+          CSC_IDENTITY_AUTO_DISCOVERY: 'false'
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npx electron-builder ${{ matrix.target }} --publish never
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sabot-${{ matrix.os }}
+          path: |
+            desktop/dist/*.exe
+            desktop/dist/*.dmg
+            desktop/dist/*.zip
+            desktop/dist/*.AppImage
+            desktop/dist/*.deb
+            desktop/dist/*.tar.gz
+          if-no-files-found: ignore
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/')
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: out
+          merge-multiple: true
+      - uses: softprops/action-gh-release@v2
+        with:
+          name: Sabot ${{ github.ref_name }}
+          body: |
+            Entraîneur de blackjack en 3D — jetons fictifs uniquement.
+            Windows : Sabot-Setup-*.exe (installateur) ou *-Portable.exe.
+            macOS : *.dmg (Intel et Apple Silicon). Première ouverture : clic droit → Ouvrir.
+            Linux : *.AppImage (chmod +x) ou *.deb.
+          files: out/*

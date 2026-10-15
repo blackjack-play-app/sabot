@@ -1,0 +1,104 @@
+{
+  "name": "sabot",
+  "productName": "Sabot",
+  "version": "1.0.0",
+  "description": "Sabot — entraîneur de blackjack en 3D (jetons fictifs uniquement)",
+  "author": {
+    "name": "Sabot",
+    "email": "contact@blackjack-play.app"
+  },
+  "license": "MIT",
+  "main": "main.js",
+  "homepage": "https://blackjack-play.app",
+  "scripts": {
+    "start": "electron .",
+    "dist:win": "electron-builder --win nsis portable --x64",
+    "dist:mac": "electron-builder --mac dmg zip",
+    "dist:linux": "electron-builder --linux AppImage deb tar.gz"
+  },
+  "build": {
+    "appId": "app.blackjack-play.sabot",
+    "productName": "Sabot",
+    "copyright": "Sabot — jetons fictifs, aucun argent réel",
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "../site",
+        "to": "site",
+        "filter": [
+          "**/*",
+          "!downloads/**"
+        ]
+      }
+    ],
+    "win": {
+      "icon": "build/icon.ico",
+      "artifactName": "Sabot-${version}-Windows-${arch}-${target}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Sabot",
+      "artifactName": "Sabot-Setup-${version}.${ext}",
+      "language": "1036",
+      "installerLanguages": [
+        "fr_FR"
+      ],
+      "license": "build/license.txt"
+    },
+    "portable": {
+      "artifactName": "Sabot-${version}-Portable.${ext}"
+    },
+    "mac": {
+      "icon": "build/icon.png",
+      "category": "public.app-category.card-games",
+      "artifactName": "Sabot-${version}-macOS-${arch}.${ext}",
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "universal"
+          ]
+        },
+        {
+          "target": "zip",
+          "arch": [
+            "universal"
+          ]
+        }
+      ],
+      "identity": "-",
+      "hardenedRuntime": false,
+      "gatekeeperAssess": false
+    },
+    "linux": {
+      "icon": "build/icon.png",
+      "category": "Game",
+      "artifactName": "Sabot-${version}-Linux-${arch}.${ext}",
+      "synopsis": "Entraîneur de blackjack en 3D",
+      "maintainer": "Sabot",
+      "target": [
+        "AppImage",
+        "deb",
+        "tar.gz"
+      ]
+    },
+    "deb": {
+      "artifactName": "Sabot-${version}-Linux-${arch}.${ext}"
+    }
+  },
+  "devDependencies": {
+    "electron": "^33.2.1",
+    "electron-builder": "^25.1.8"
+  }
+}

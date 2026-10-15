@@ -1,0 +1,16 @@
+SABOT — entraîneur de blackjack
+
+Sabot est un logiciel gratuit d'entraînement au blackjack.
+Il fonctionne UNIQUEMENT avec des jetons fictifs : aucun argent réel ne peut être misé, gagné ou perdu.
+
+Ressources tierces :
+- Avatars Microsoft Rocketbox — licence MIT (c) 2020 Microsoft
+- Sons « Casino Audio » de Kenney — CC0
+- Matières et HDRI de Poly Haven — CC0
+- three.js — licence MIT
+- Polices Barlow et Source Serif 4 — SIL Open Font License 1.1
+- Icônes Lucide — licence ISC
+
+LE LOGICIEL EST FOURNI « EN L'ÉTAT », SANS GARANTIE D'AUCUNE SORTE.
+
+Jeu responsable : Joueurs Info Service, 09 74 75 13 13 (appel non surtaxé).

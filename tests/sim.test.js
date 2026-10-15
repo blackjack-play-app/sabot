@@ -1,0 +1,12 @@
+import { runSimulation } from '../site/game/js/sim.js';
+import { DEFAULT_RULES } from '../site/game/js/rules.js';
+import { buildChart } from '../site/game/js/strategy.js';
+const t0 = Date.now();
+const r = await runSimulation({ rules: DEFAULT_RULES, rounds: 300000, seed: 42 });
+console.log('6D S17 DAS LS edge%', r.edgePct.toFixed(3), 'sd', r.sdPerRound.toFixed(2), 'ms', Date.now()-t0, r.results);
+const r2 = await runSimulation({ rules: {...DEFAULT_RULES, blackjackPays:1.2}, rounds: 200000, seed: 7 });
+console.log('6:5 edge%', r2.edgePct.toFixed(3));
+const r3 = await runSimulation({ rules: DEFAULT_RULES, rounds: 300000, seed: 9, deviations: true, spread:[{tc:-99,units:1},{tc:1,units:2},{tc:2,units:4},{tc:3,units:8},{tc:4,units:12}] });
+console.log('counter 1-12 edge%', r3.edgePct.toFixed(3), 'ev/round', r3.evPerRound.toFixed(3));
+const c = buildChart(DEFAULT_RULES);
+for (const row of [...c.hard, ...c.soft, ...c.pairs]) console.log(row.label.padStart(5), row.cells.map(x=>x.padEnd(2)).join(' '));

@@ -1,0 +1,11 @@
+node_modules/
+desktop/node_modules/
+desktop/dist/
+tools/_screens/
+tools/_sheet.jpg
+tools/*.log
+site/downloads/
+.env
+.env.*
+*.env
+.wrangler/

@@ -1,0 +1,31 @@
+{
+  "version": "1.0.0",
+  "base": "https://github.com/blackjack-play-app/sabot/releases/latest/download/",
+  "files": {
+    "win": {
+      "file": "Sabot-Setup-1.0.0.exe",
+      "size": "≈ 95 Mo",
+      "label": "Installateur Windows"
+    },
+    "winPortable": {
+      "file": "Sabot-1.0.0-Portable.exe",
+      "size": "≈ 95 Mo",
+      "label": "Version portable"
+    },
+    "mac": {
+      "file": "Sabot-1.0.0-macOS-universal.dmg",
+      "size": "≈ 190 Mo",
+      "label": "macOS (Intel et Apple Silicon)"
+    },
+    "linuxAppImage": {
+      "file": "Sabot-1.0.0-Linux-x86_64.AppImage",
+      "size": "≈ 110 Mo",
+      "label": "AppImage"
+    },
+    "linuxDeb": {
+      "file": "Sabot-1.0.0-Linux-amd64.deb",
+      "size": "≈ 80 Mo",
+      "label": "Paquet .deb (Ubuntu, Debian)"
+    }
+  }
+}

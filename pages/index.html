@@ -1,0 +1,248 @@
+<!--
+{
+  "path": "/",
+  "priority": 1.0,
+  "title": "Sabot — Jeu de blackjack 3D gratuit pour s'entraîner (stratégie et comptage)",
+  "ogTitle": "Sabot — entraîneur de blackjack en 3D",
+  "description": "Entraîne-toi au blackjack sur une table 3D avec un vrai croupier : jusqu'à 5 mains, coach de stratégie de base, comptage de cartes, exercices et simulateur. Gratuit, jetons fictifs, en ligne ou sur Windows, macOS et Linux.",
+  "bodyClass": "home",
+  "jsonld": {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": ["VideoGame", "SoftwareApplication"],
+        "name": "Sabot",
+        "alternateName": "Sabot — entraîneur de blackjack",
+        "description": "Simulateur et entraîneur de blackjack en 3D : stratégie de base, comptage de cartes (Hi-Lo, KO, Omega II…), exercices et statistiques. Jetons fictifs uniquement.",
+        "url": "{{domain}}/",
+        "image": "{{domain}}/assets/img/og-image.jpg",
+        "screenshot": ["{{domain}}/assets/img/screens/hero.webp", "{{domain}}/assets/img/screens/comptage.webp", "{{domain}}/assets/img/screens/cinq-mains.webp"],
+        "genre": ["Jeu de cartes", "Blackjack", "Jeu éducatif"],
+        "gamePlatform": ["Navigateur web", "Windows", "macOS", "Linux"],
+        "operatingSystem": "Windows 10, Windows 11, macOS 11+, Linux, navigateur web",
+        "applicationCategory": "GameApplication",
+        "inLanguage": "fr",
+        "playMode": "SinglePlayer",
+        "softwareVersion": "{{version}}",
+        "datePublished": "{{releaseDate}}",
+        "isAccessibleForFree": true,
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Peut-on gagner ou perdre de l'argent sur Sabot ?", "acceptedAnswer": { "@type": "Answer", "text": "Non. Sabot n'utilise que des jetons fictifs, sans aucune valeur. Il est impossible d'acheter, de miser ou de retirer de l'argent." } },
+          { "@type": "Question", "name": "Sabot est-il gratuit ?", "acceptedAnswer": { "@type": "Answer", "text": "Oui, entièrement : pas d'abonnement, pas de publicité, pas de compte à créer." } },
+          { "@type": "Question", "name": "Peut-on apprendre à compter les cartes avec Sabot ?", "acceptedAnswer": { "@type": "Answer", "text": "Oui. Le mode Comptage remplit la table de joueurs IA, propose 8 systèmes (Hi-Lo, KO, Hi-Opt I et II, Omega II, Zen, Wong Halves, Red Seven), des quiz du compte et des exercices de compte réel." } },
+          { "@type": "Question", "name": "Sabot fonctionne-t-il sans connexion ?", "acceptedAnswer": { "@type": "Answer", "text": "Oui. La version à télécharger fonctionne entièrement hors ligne, et la version navigateur reste disponible hors ligne après une première visite." } }
+        ]
+      }
+    ]
+  }
+}
+-->
+<section class="hero">
+  <div class="hero-media">
+    <picture>
+      <source media="(max-width: 960px)" srcset="/assets/img/screens/hero-clean-960.webp">
+      <img src="/assets/img/screens/hero-clean.webp" alt="Table de blackjack 3D de Sabot : le croupier face à trois mains en jeu" width="1920" height="1080" fetchpriority="high">
+    </picture>
+  </div>
+  <div class="wrap hero-body">
+    <div class="tagline">Entraîneur de blackjack · gratuit</div>
+    <h1>Apprends le blackjack à une vraie table.</h1>
+    <p class="lede">Un croupier en 3D, jusqu'à cinq mains en même temps, un coach qui explique chaque coup et un mode pour apprendre à compter les cartes. Tout se joue avec des jetons fictifs.</p>
+    <div class="hero-cta">
+      <a class="btn btn-gold btn-lg" href="/game/">{{ico:play}}Jouer dans le navigateur</a>
+      <a class="btn btn-lg" href="/telecharger" data-os-btn>{{ico:download}}<span data-os-label>Télécharger</span></a>
+    </div>
+    <p class="hero-note">Aussi pour <a href="/telecharger#mac">macOS</a> et <a href="/telecharger#linux">Linux</a> · sans inscription · fonctionne hors ligne</p>
+  </div>
+</section>
+
+<div class="facts">
+  <ul class="wrap">
+    <li><b>5 mains</b><span>jouées en même temps</span></li>
+    <li><b>6 croupiers</b><span>modélisés en 3D</span></li>
+    <li><b>8 systèmes</b><span>de comptage de cartes</span></li>
+    <li><b>16 règles</b><span>de casino réglables</span></li>
+    <li><b>0 €</b><span>jetons fictifs uniquement</span></li>
+  </ul>
+</div>
+
+<section class="block" id="images">
+  <div class="wrap">
+    <p class="kicker">Images du jeu</p>
+    <h2 class="title">Ce que tu verras à la table</h2>
+    <p class="intro">Toutes les images viennent directement du jeu, sans retouche.</p>
+    <div class="gallery" data-gallery>
+      <a href="/assets/img/screens/cinq-mains.webp"><figure style="margin:0;height:100%"><img src="/assets/img/screens/cinq-mains-960.webp" alt="Cinq mains jouées en même temps avec les résultats de la donne" loading="lazy" width="960" height="540"><figcaption>Cinq mains, une séparation, résultats de la donne</figcaption></figure></a>
+      <a href="/assets/img/screens/comptage.webp"><figure style="margin:0;height:100%"><img src="/assets/img/screens/comptage-960.webp" alt="Mode comptage avec la croupière, joueurs IA et compte affiché" loading="lazy" width="960" height="540"><figcaption>Mode comptage, tapis bleu</figcaption></figure></a>
+      <a href="/assets/img/screens/premiere-base.webp"><figure style="margin:0;height:100%"><img src="/assets/img/screens/premiere-base-960.webp" alt="Vue depuis la première base, tapis rouge" loading="lazy" width="960" height="540"><figcaption>Vue de la première base</figcaption></figure></a>
+      <a href="/assets/img/screens/strategie.webp"><figure style="margin:0;height:100%"><img src="/assets/img/screens/strategie-960.webp" alt="Tableau de stratégie de base avec la situation en cours encadrée" loading="lazy" width="960" height="540"><figcaption>Tableau de stratégie en direct</figcaption></figure></a>
+      <a href="/assets/img/screens/simulateur.webp"><figure style="margin:0;height:100%"><img src="/assets/img/screens/simulateur-960.webp" alt="Résultats du simulateur sur 100 000 donnes" loading="lazy" width="960" height="540"><figcaption>Simulateur</figcaption></figure></a>
+      <a href="/assets/img/screens/stats.webp" class="hide-sm"><figure style="margin:0;height:100%"><img src="/assets/img/screens/stats-960.webp" alt="Panneau de statistiques et points faibles" loading="lazy" width="960" height="540"><figcaption>Statistiques et points faibles</figcaption></figure></a>
+      <a href="/assets/img/screens/flash.webp"><figure style="margin:0;height:100%"><img src="/assets/img/screens/flash-960.webp" alt="Exercice flash stratégie" loading="lazy" width="960" height="540"><figcaption>Exercice flash stratégie</figcaption></figure></a>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="fonctionnalites">
+  <div class="wrap">
+    <p class="kicker">Dans le jeu</p>
+    <h2 class="title">Pensé pour progresser, pas pour te faire miser</h2>
+
+    <div class="feature">
+      <div class="f-media"><img src="/assets/img/screens/cinq-mains-960.webp" alt="Table avec cinq mains et le panneau Mes mains" loading="lazy" width="960" height="540"></div>
+      <div class="f-text">
+        <h3>Une table qui ressemble à une table</h3>
+        <p>Le croupier tire les cartes du sabot, regarde la main qui joue, vérifie sa carte cachée et ramasse les mises perdues. Les cartes usées s'empilent dans la défausse, comme au casino.</p>
+        <ul>
+          <li><b>Jusqu'à 5 mains</b> à toi, avec un récapitulatif lisible de chacune</li>
+          <li><b>Zoom et 5 vues</b> : joueur, dessus, croupier, première base, cinéma</li>
+          <li><b>Sons enregistrés</b> de vraies cartes et de vrais jetons, voix du croupier réglable</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="feature rev">
+      <div class="f-media"><img src="/assets/img/screens/hero-960.webp" alt="Le coach conseille de rester et explique pourquoi" loading="lazy" width="960" height="540"></div>
+      <div class="f-text">
+        <h3>Un coach qui explique, pas seulement qui corrige</h3>
+        <p>Chaque conseil vient avec sa raison, en français clair : « Le croupier montre un 6, il doit tirer et risque de sauter. Ne prends aucun risque. »</p>
+        <ul>
+          <li><b>3 niveaux d'aide</b> : avant chaque coup, correction après, ou aucune</li>
+          <li><b>Stratégie calculée</b> selon les règles de ta table (nombre de jeux, H17, abandon…)</li>
+          <li><b>Tes erreurs sont notées</b> et regroupées par situation pour cibler tes points faibles</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="feature">
+      <div class="f-media"><img src="/assets/img/screens/comptage-960.webp" alt="Compte courant, compte réel et mise conseillée affichés" loading="lazy" width="960" height="540"></div>
+      <div class="f-text">
+        <h3>Compter les cartes, pour de vrai</h3>
+        <p>Des joueurs IA remplissent la table pour que les cartes défilent à un rythme réaliste. Le croupier s'arrête de temps en temps pour te demander le compte.</p>
+        <ul>
+          <li><b>8 systèmes</b> : Hi-Lo, KO, Hi-Opt I et II, Omega II, Zen, Wong Halves, Red Seven</li>
+          <li><b>Compte réel</b> calculé sur les jeux restants, mise conseillée de 1 à 8 unités</li>
+          <li><b>Déviations</b> Illustrious 18 et Fab 4 intégrées aux conseils</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="feature rev">
+      <div class="f-media"><img src="/assets/img/screens/simulateur-960.webp" alt="Simulateur avec la courbe de la réserve" loading="lazy" width="960" height="540"></div>
+      <div class="f-text">
+        <h3>Exercices courts et simulateur</h3>
+        <p>Quand tu as dix minutes : un exercice ciblé. Quand tu te demandes si une règle change vraiment quelque chose : le simulateur joue 100 000 donnes en quelques secondes.</p>
+        <ul>
+          <li><b>Flash stratégie</b> chronométré, par type de main</li>
+          <li><b>Décompte d'un paquet</b> et conversion en compte réel</li>
+          <li><b>Simulateur</b> : avantage, écart-type, risque de ruine, courbe de la réserve</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="modes">
+  <div class="wrap">
+    <p class="kicker">Trois façons de jouer</p>
+    <h2 class="title">Choisis ton niveau en arrivant</h2>
+    <p class="intro">Tu peux changer de mode à tout moment, en haut de l'écran.</p>
+    <div class="modes-grid">
+      <article class="mode-card">{{ico:graduation-cap}}<h3>Coach</h3><span class="tag">Débutant</span><p>Le bon coup est surligné avant chaque décision. Si tu choisis autre chose, Sabot te demande si tu es sûr.</p></article>
+      <article class="mode-card">{{ico:table-2}}<h3>Partie libre</h3><span class="tag">Intermédiaire</span><p>Tu joues seul. Une erreur ? Le jeu te l'explique juste après, sans bloquer la partie.</p></article>
+      <article class="mode-card">{{ico:brain}}<h3>Comptage</h3><span class="tag">Avancé</span><p>Table pleine, compte masqué, quiz réguliers, mises conseillées selon le compte réel.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="telecharger">
+  <div class="wrap">
+    <p class="kicker">Version {{version}}</p>
+    <h2 class="title">Jouer en ligne ou installer le jeu</h2>
+    <p class="intro">La version navigateur et la version installée sont identiques. L'application installée tourne hors ligne et en plein écran.</p>
+    <div class="dl-grid">
+      <div class="dl-card" data-os="windows" id="windows">
+        <h3>{{os:windows}}Windows</h3>
+        <p class="meta">Windows 10 et 11 · 64 bits · {{dl:win:size}}</p>
+        <a class="btn btn-gold" href="{{dl:win:url}}" data-dl="win">{{ico:download}}Télécharger l'installateur</a>
+        <div class="alt"><a href="{{dl:winPortable:url}}" data-dl="winPortable">Version portable (sans installation)</a></div>
+      </div>
+      <div class="dl-card" data-os="mac" id="mac">
+        <h3>{{os:mac}}macOS</h3>
+        <p class="meta">macOS 11 ou plus · Intel et Apple Silicon · {{dl:mac:size}}</p>
+        <a class="btn btn-gold" href="{{dl:mac:url}}" data-dl="mac">{{ico:download}}Télécharger le .dmg</a>
+        <div class="alt"><a href="/telecharger#installer-mac">Comment l'ouvrir la première fois</a></div>
+      </div>
+      <div class="dl-card" data-os="linux" id="linux">
+        <h3>{{os:linux}}Linux</h3>
+        <p class="meta">x86-64 · {{dl:linuxAppImage:size}}</p>
+        <a class="btn btn-gold" href="{{dl:linuxAppImage:url}}" data-dl="linuxAppImage">{{ico:download}}Télécharger l'AppImage</a>
+        <div class="alt"><a href="{{dl:linuxDeb:url}}" data-dl="linuxDeb">Paquet .deb (Ubuntu, Debian, Mint)</a></div>
+      </div>
+    </div>
+    <div class="browser-strip">
+      <p><b>Pas envie d'installer quoi que ce soit ?</b>Le jeu complet tourne dans Chrome, Edge, Firefox et Safari.</p>
+      <a class="btn btn-gold" href="/game/">{{ico:play}}Jouer maintenant</a>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="configuration">
+  <div class="wrap">
+    <p class="kicker">Configuration</p>
+    <h2 class="title">Ce qu'il faut pour jouer</h2>
+    <p class="intro">La qualité graphique s'adapte toute seule à ta machine. Elle baisse si le jeu ralentit, et tu peux la régler toi-même.</p>
+    <div class="reqs">
+      <div>
+        <h3>Minimum</h3>
+        <table>
+          <tr><th>Navigateur</th><td>Chrome, Edge, Firefox ou Safari récent, avec WebGL</td></tr>
+          <tr><th>Système</th><td>Windows 10, macOS 11, Linux 64 bits, Android, iPadOS</td></tr>
+          <tr><th>Processeur</th><td>2 cœurs</td></tr>
+          <tr><th>Mémoire</th><td>4 Go</td></tr>
+          <tr><th>Graphismes</th><td>Puce intégrée (Intel HD 4000 ou équivalent)</td></tr>
+          <tr><th>Espace</th><td>300 Mo (version installée)</td></tr>
+        </table>
+      </div>
+      <div>
+        <h3>Recommandé</h3>
+        <table>
+          <tr><th>Navigateur</th><td>Chrome ou Edge à jour</td></tr>
+          <tr><th>Système</th><td>Windows 11, macOS 13 ou plus</td></tr>
+          <tr><th>Processeur</th><td>4 cœurs</td></tr>
+          <tr><th>Mémoire</th><td>8 Go</td></tr>
+          <tr><th>Graphismes</th><td>Carte dédiée ou Intel Iris Xe, Apple M1 et plus</td></tr>
+          <tr><th>Écran</th><td>1920 × 1080, clavier et souris</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="questions">
+  <div class="wrap">
+    <p class="kicker">Questions</p>
+    <h2 class="title">Questions fréquentes</h2>
+    <div class="faq">
+      <details><summary>Peut-on gagner ou perdre de l'argent ?</summary><p>Non. Sabot n'utilise que des jetons fictifs, sans aucune valeur. Il n'y a rien à acheter, rien à miser et rien à retirer. Si ta réserve tombe à zéro, tu la recharges gratuitement.</p></details>
+      <details><summary>C'est vraiment gratuit ?</summary><p>Oui. Pas d'abonnement, pas de publicité, pas de compte à créer.</p></details>
+      <details><summary>Est-ce que ça marche sur téléphone ?</summary><p>Oui, dans le navigateur, téléphone tenu à l'horizontale. Le jeu reste plus confortable sur ordinateur, avec un clavier pour les raccourcis (H pour carte, S pour rester…).</p></details>
+      <details><summary>Où sont enregistrées mes statistiques ?</summary><p>Uniquement sur ton appareil. Rien n'est envoyé sur un serveur. Tu peux les exporter dans un fichier pour les retrouver sur un autre ordinateur (Réglages → Données).</p></details>
+      <details><summary>Compter les cartes, c'est légal ?</summary><p>Compter de tête n'est pas un délit. En revanche, un casino peut refuser un joueur qu'il soupçonne de compter, et utiliser un appareil électronique à la table est interdit. Sabot sert à comprendre le jeu et à s'entraîner, pas à jouer de l'argent.</p></details>
+      <details><summary>Windows affiche « Windows a protégé votre ordinateur ». Que faire ?</summary><p>Ce message apparaît pour les applications récentes qui n'ont pas encore de certificat de signature payant. Clique sur « Informations complémentaires », puis sur « Exécuter quand même ». Tu peux aussi jouer directement dans le navigateur, sans rien installer.</p></details>
+      <details><summary>Quelles règles sont utilisées ?</summary><p>Par défaut : 6 jeux, le croupier reste sur 17 souple, le blackjack paie 3 contre 2, doubler après séparation autorisé, abandon tardif. Six préréglages (Las Vegas, Atlantic City, casino français…) et 16 règles sont modifiables. La stratégie conseillée s'adapte automatiquement.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="final">
+  <div class="wrap">
+    <h2>La table est ouverte.</h2>
+    <p>Le jeu se lance en quelques secondes dans le navigateur. Tes réglages et tes statistiques restent enregistrés pour la prochaine fois.</p>
+    <a class="btn btn-gold btn-lg" href="/game/">{{ico:play}}Jouer maintenant</a>
+  </div>
+</section>

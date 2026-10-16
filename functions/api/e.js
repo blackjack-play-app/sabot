@@ -3,7 +3,7 @@
 // Pour la carte du tableau de bord : ville approximative fournie par Cloudflare, coordonnées arrondies (~10 km).
 
 const ALLOWED = {
-  start: /^(web|desktop|pwa)$/,                 // lancement du jeu
+  start: /^(web|desktop|pwa|itch)$/,                 // lancement du jeu
   round: /^(libre|coach|comptage)$/,            // donne jouée (mode)
   hands: /^[1-5]$/,                             // nombre de mains dans la donne
   drill: /^(flash|countdown|truecount|deviations|sim)$/,
@@ -31,7 +31,7 @@ export async function onRequestPost({ request, env }) {
     if (text.length > 2000) return new Response(null, { status: 413, headers: CORS });
     const body = JSON.parse(text || '{}');
     const list = Array.isArray(body.events) ? body.events.slice(0, 20) : [body];
-    const src = /^(web|desktop|pwa)$/.test(body.src) ? body.src : 'web';
+    const src = /^(web|desktop|pwa|itch)$/.test(body.src) ? body.src : 'web';
     const cf = request.cf || {};
     const country = cf.country || '';
     const city = String(cf.city || '').slice(0, 60);

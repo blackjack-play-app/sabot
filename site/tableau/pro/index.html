@@ -272,7 +272,7 @@
       <div class="kpis">
         <div class="kpi"><span>Visiteurs</span><b>${fmt(visits)}</b><small>${since && d.periode && new Date(d.periode.debut) >= new Date(d.reset.date) ? 'depuis le ' + since : days === 1 ? 'aujourd\'hui' : days + ' derniers jours'}</small></div>
         <div class="kpi"><span>Pages vues</span><b>${fmt(views)}</b><small>${visits ? (views / visits).toFixed(1) : '0'} par visite</small></div>
-        <div class="kpi gold"><span>Parties lancées</span><b>${fmt(starts)}</b><small>dont appli PC : ${fmt(tot('start', 'desktop'))}</small></div>
+        <div class="kpi gold"><span>Parties lancées</span><b>${fmt(starts)}</b><small>appli PC : ${fmt(tot('start', 'desktop'))} · itch.io : ${fmt(tot('start', 'itch'))}</small></div>
         <div class="kpi gold"><span>Donnes jouées</span><b>${fmt(rounds)}</b><small>${starts ? (rounds / starts).toFixed(1) : '0'} par partie</small></div>
         <div class="kpi"><span>Visiteur → joueur</span><b>${pct(starts, visits)}</b><small>lancent le jeu</small></div>
         <div class="kpi"><span>Clics Télécharger</span><b>${fmt(dlClicks)}</b><small>sur le site</small></div>

@@ -107,8 +107,10 @@ const fps = new FpsWatch((f) => {
 });
 
 // ------------------------------------------------------------------ Compteurs anonymes (totaux par jour, aucune donnée personnelle)
-const TRACK_SRC = window.sabotDesktop ? 'desktop' : (matchMedia('(display-mode: standalone), (display-mode: fullscreen)').matches ? 'pwa' : 'web');
-const TRACK_URL = window.sabotDesktop ? 'https://blackjack-play.app/api/e' : '/api/e';
+// Version jouable sur itch.io (iframe hébergée par itch) : comptée à part, envoyée au domaine du site
+const ON_ITCH = /(^|\.)(itch\.io|itch\.zone|hwcdn\.net)$/.test(location.hostname);
+const TRACK_SRC = window.sabotDesktop ? 'desktop' : ON_ITCH ? 'itch' : (matchMedia('(display-mode: standalone), (display-mode: fullscreen)').matches ? 'pwa' : 'web');
+const TRACK_URL = window.sabotDesktop || ON_ITCH ? 'https://blackjack-play.app/api/e' : '/api/e';
 // Appareils du créateur (?notrack=1, tableau de bord ou Ctrl+Alt+Maj+T) et navigateurs pilotés par un robot : rien n'est compté
 const noTrack = () => { try { return navigator.webdriver || localStorage.getItem('bp.notrack') === '1'; } catch { return !!navigator.webdriver; } };
 try {
@@ -123,7 +125,7 @@ window.addEventListener('keydown', (e) => {
     toast(noTrack() ? 'Mode test : tes parties ne sont plus comptées' : 'Mode test désactivé : tes parties sont comptées');
   } catch { /* stockage indisponible */ }
 });
-const TRACK_ON = window.sabotDesktop || /(^|\.)blackjack-play\.app$|pages\.dev$/.test(location.hostname);
+const TRACK_ON = window.sabotDesktop || ON_ITCH || /(^|\.)blackjack-play\.app$|pages\.dev$/.test(location.hostname);
 let trackQueue = [];
 function track(e, p, n = 1) {
   if (!TRACK_ON || noTrack()) return;
@@ -321,8 +323,13 @@ function buildCamCtl() {
 function focusHand(hand) {
   if (!settings.followCam || !hand || settings.fixedView) return;
   const f = scene.handFrame(hand.seat, hand.splitIndex, nInSeat(hand.seat));
-  const target = f.base.clone().add(f.toCenter.clone().multiplyScalar(0.05));
-  const pos = f.base.clone().add(f.radial.clone().multiplyScalar(0.75)).setY(TABLE_Y + 0.55);
+  let target = f.base.clone().add(f.toCenter.clone().multiplyScalar(0.05));
+  let pos = f.base.clone().add(f.radial.clone().multiplyScalar(0.75)).setY(TABLE_Y + 0.55);
+  // Tournage : vue « joueur », basse derrière les cartes, regard vers le croupier
+  if (document.documentElement.classList.contains('promo-clean')) {
+    pos = f.base.clone().add(f.radial.clone().multiplyScalar(0.5)).setY(TABLE_Y + 0.34);
+    target = new THREE.Vector3(0, TABLE_Y + 0.12, -0.3).lerp(f.base, 0.42);
+  }
   const fromP = scene.camera.position.clone(), fromT = scene.controls.target.clone();
   const sp = scene.speed; scene.speed = 1;
   scene.tween(0.6, (k) => { scene.camera.position.lerpVectors(fromP, pos, k); scene.controls.target.lerpVectors(fromT, target, k); });
@@ -1279,7 +1286,16 @@ start();
 
 // Mode tournage des vidéos promo (?promo) : positions écran des cercles de mise des places du joueur
 if (new URLSearchParams(location.search).has('promo')) {
+  // ?promo=clean : écran épuré (table, cartes, croupier) et caméra qui suit la main en cours
+  if (new URLSearchParams(location.search).get('promo') === 'clean') { document.documentElement.classList.add('promo-clean'); settings.followCam = true; }
+  window.__cap = (txt, kind = '') => {
+    let el = document.getElementById('promoCap');
+    if (!el) { el = document.createElement('div'); el.id = 'promoCap'; document.body.append(el); }
+    el.className = kind; el.innerHTML = txt ? txt.split('\n').map((l) => `<span>${l}</span>`).join('<br>') : '';
+    el.style.opacity = txt ? 1 : 0;
+  };
   window.__rec = () => currentSituation()?.adv?.action || null;
+  window.__sit = () => { const x = currentSituation(); return x ? { action: x.adv.action, total: x.adv.total, soft: x.adv.soft, kind: x.adv.kind, n: x.hand.cards.length, c0: x.hand.cards[0].value, up: x.up, reason: x.adv.reason } : null; };
   window.__view = (n) => scene.setView(n);
   window.__bet = () => settings.seats.forEach((o, i) => { if (o === 'player') placeChip(i, 'add'); });
   window.__spots = () => scene.geo.spots.map((sp, i) => (settings.seats[i] === 'player' ? scene.project(new THREE.Vector3(sp.x, TABLE_Y, sp.z)) : null)).filter(Boolean).map((q) => [q.x, q.y]);

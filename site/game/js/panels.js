@@ -357,7 +357,7 @@ export class Panels {
       h('div', { class: 'keys' }, ...keys.flatMap(([k, d]) => [h('kbd', {}, k), h('span', {}, d)])),
       h('div', { class: 'coach-actions', style: { marginTop: '18px' } },
         h('button', { class: 'btn', onclick: () => this.credits() }, icon('scroll-text', 16), 'Crédits et licences'),
-        h('a', { class: 'btn', href: '../apprendre.html', target: '_blank' }, icon('graduation-cap', 16), 'Guide complet')));
+        h('a', { class: 'btn', href: 'https://blackjack-play.app/apprendre', target: '_blank', rel: 'noopener' }, icon('graduation-cap', 16), 'Guide complet')));
     openModal(box);
   }
 

@@ -20,7 +20,7 @@ await p.evaluateOnNewDocument((seats, scenario, SLOW) => {
   localStorage.setItem('bp.notrack', '1');
   localStorage.setItem('sabot.settings.v1', JSON.stringify({
     welcomed: true, mode: scenario === 'cinq' ? 'libre' : 'coach', adviceMode: scenario === 'coach' ? 'after' : 'off',
-    confirmMistakes: false, seats, speed: 'normal', audio: { muted: true, music: false, voiceLevel: 'off' },
+    confirmMistakes: false, deviations: false, seats, speed: scenario === 'speed' ? 'rapide' : 'normal', audio: { muted: true, music: false, voiceLevel: 'off' },
   }));
   // Horloge ralentie : tout le jeu (animations, minuteries) avance SLOW fois moins vite
   const realPerf = () => Performance.prototype.now.call(performance);
@@ -74,6 +74,58 @@ const state = () => p.evaluate(() => ({
 }));
 
 await mark('debut');
+const LABEL = { H: 'CARTE', S: 'RESTER', D: 'DOUBLER', P: 'SÉPARER', R: 'ABANDONNER' };
+const cap = (t, k = '') => p.evaluate((t, k) => window.__cap(t, k), t, k);
+if (scenario === 'speed') {
+  // Intro cinéma, puis décisions en rafale : question figée, réponse du coach, action
+  await p.evaluate(() => window.__view('cinema'));
+  await cap('Tu joues aussi bien\nque le coach ?', 'big');
+  await sleep(2600);
+  await cap('');
+  let decisions = 0;
+  for (let r = 0; r < 16 && decisions < 4; r++) {
+    let s = await state();
+    while (!s.betting) { await sleep(250); s = await state(); }
+    if (r === 0) { for (let k = 0; k < 2; k++) { await p.evaluate(() => window.__bet()); await sleep(300); } }
+    else await p.keyboard.press('r');
+    await sleep(400);
+    await p.keyboard.press('Space');
+    for (let guard = 0; guard < 120; guard++) {
+      await sleep(250);
+      s = await state();
+      if (s.betting) break;
+      if (s.ins) { await sleep(400); await p.keyboard.press('n'); continue; }
+      if (!s.acting || !s.rec) continue;
+      const x = await p.evaluate(() => window.__sit());
+      if (!x) continue;
+      const tricky = ['D', 'P', 'R'].includes(x.action) || (!x.soft && x.total >= 12 && x.total <= 16) || (x.soft && x.n === 2 && x.total < 20);
+      if (!tricky) { await sleep(250); await p.keyboard.press({ H: 'h', S: 's', D: 'd', P: 'p', R: 'r' }[x.action] || 's'); continue; }
+      await sleep(500);
+      const upTxt = x.up === 11 ? 'un As' : 'un ' + x.up;
+      const cardTxt = (v) => (v === 11 ? 'As' : v === 10 ? '10' : String(v));
+      const q = x.kind === 'pair' ? `Paire ${x.c0 === 11 ? "d'As" : 'de ' + cardTxt(x.c0)} contre ${upTxt}`
+        : x.soft && x.n === 2 ? `As + ${x.total - 11} contre ${upTxt}`
+        : `${x.total} contre ${upTxt}`;
+      s.rec = x.action;
+      decisions++;
+      await mark('question:' + q);
+      await cap(`${decisions}/4  ·  ${q}\nTu fais quoi ?`);
+      await sleep(2300);
+      await cap(`${decisions}/4  ·  ${q}\n→ ${LABEL[s.rec] || s.rec}`, 'gold');
+      await mark('reponse:' + s.rec);
+      await sleep(1300);
+      await p.keyboard.press({ H: 'h', S: 's', D: 'd', P: 'p', R: 'r' }[s.rec] || 's');
+      await sleep(400);
+      await cap('');
+      if (decisions >= 4) break;
+    }
+    await sleep(900);
+  }
+  await sleep(1500);
+  await cap('Combien tu en avais\nde bonnes ?', 'big');
+  await sleep(2600);
+} else {
+
 await sleep(900);
 const rounds = 3;
 let quizDone = false, mistakeDone = false;
@@ -115,6 +167,7 @@ for (let r = 0; r < rounds && !(scenario === 'quiz' && quizDone); r++) {
   }
   await mark('fin-donne');
   await sleep(1000);
+}
 }
 await sleep(600);
 await mark('fin');

@@ -167,6 +167,8 @@ export class TableScene {
     const bet = document.getElementById('dockBet');
     if (bet && bet.offsetHeight && !bet.hidden) this.dockTop = bet.getBoundingClientRect().top - this.container.getBoundingClientRect().top;
     const dockTop = this.dockTop || h;
+    // Téléphone/tablette en portrait : la mise se fait en touchant les jetons, on garde le cadrage d'origine
+    if (w / h < 1) { this.frame = { s: 1, d: 0 }; this.camera.updateProjectionMatrix(); return; }
     // Projection avec la caméra « joueur » non recadrée
     const cam = new THREE.PerspectiveCamera(this.camera.fov, w / h, 0.02, 60);
     const p = this.fixedView ? this.fixedPose() : CAMERA_PRESETS.joueur;

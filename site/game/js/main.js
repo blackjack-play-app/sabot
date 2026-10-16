@@ -477,7 +477,9 @@ function refreshSeats() {
     e.append(pill);
     if (owner === 'player') {
       const chosen = TOUCH && i === currentBetSeat();
-      const tag = h('button', { class: 'seat-bet' + (chosen ? ' chosen' : ''), onclick: (ev) => { ev.stopPropagation(); S.selectedSeat = i; refreshSeats(); updateBetButtons(); } }, S.bets[i] ? fmt(S.bets[i]) : 'Mise ?');
+      // Sur ordinateur, l'étiquette recouvre le cercle : un clic dessus mise comme un clic sur le cercle (clic droit : retirer)
+      const tag = h('button', { class: 'seat-bet' + (chosen ? ' chosen' : ''), onclick: (ev) => { ev.stopPropagation(); if (TOUCH) { S.selectedSeat = i; refreshSeats(); updateBetButtons(); } else placeChip(i, ev.shiftKey ? 'remove' : 'add'); } }, S.bets[i] ? fmt(S.bets[i]) : 'Mise ?');
+      tag.addEventListener('contextmenu', (ev) => { ev.preventDefault(); ev.stopPropagation(); if (!TOUCH) placeChip(i, 'remove'); });
       e.append(tag);
     }
     else if (owner === 'bot') e.append(h('div', { class: 'seat-bet', style: { color: 'var(--ink-3)', fontSize: '13px' } }, 'Joueur IA'));
@@ -1274,6 +1276,14 @@ async function start() {
   if (q.get('mode') && MODES[q.get('mode')]) setMode(q.get('mode'));
 }
 start();
+
+// Mode tournage des vidéos promo (?promo) : positions écran des cercles de mise des places du joueur
+if (new URLSearchParams(location.search).has('promo')) {
+  window.__rec = () => currentSituation()?.adv?.action || null;
+  window.__view = (n) => scene.setView(n);
+  window.__bet = () => settings.seats.forEach((o, i) => { if (o === 'player') placeChip(i, 'add'); });
+  window.__spots = () => scene.geo.spots.map((sp, i) => (settings.seats[i] === 'player' ? scene.project(new THREE.Vector3(sp.x, TABLE_Y, sp.z)) : null)).filter(Boolean).map((q) => [q.x, q.y]);
+}
 
 // Application installable / hors ligne (pas dans l'appli de bureau)
 if ('serviceWorker' in navigator && location.protocol === 'https:' && !window.sabotDesktop) {

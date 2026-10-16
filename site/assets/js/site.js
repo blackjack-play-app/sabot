@@ -122,6 +122,7 @@
   // Compteurs anonymes : clics de téléchargement et liens de partage ?ref=
   const send = (events) => {
     if (!/(^|\.)blackjack-play\.app$|pages\.dev$/.test(location.hostname)) return;
+    try { if (navigator.webdriver || localStorage.getItem('bp.notrack') === '1') return; } catch { /* ignoré */ }
     const body = JSON.stringify({ src: 'web', events });
     try { navigator.sendBeacon('/api/e', new Blob([body], { type: 'text/plain' })); } catch { /* ignoré */ }
   };

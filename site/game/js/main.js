@@ -109,10 +109,24 @@ const fps = new FpsWatch((f) => {
 // ------------------------------------------------------------------ Compteurs anonymes (totaux par jour, aucune donnée personnelle)
 const TRACK_SRC = window.sabotDesktop ? 'desktop' : (matchMedia('(display-mode: standalone), (display-mode: fullscreen)').matches ? 'pwa' : 'web');
 const TRACK_URL = window.sabotDesktop ? 'https://blackjack-play.app/api/e' : '/api/e';
+// Appareils du créateur (?notrack=1, tableau de bord ou Ctrl+Alt+Maj+T) et navigateurs pilotés par un robot : rien n'est compté
+const noTrack = () => { try { return navigator.webdriver || localStorage.getItem('bp.notrack') === '1'; } catch { return !!navigator.webdriver; } };
+try {
+  const nt = new URLSearchParams(location.search).get('notrack');
+  if (nt === '1') localStorage.setItem('bp.notrack', '1');
+  if (nt === '0') localStorage.removeItem('bp.notrack');
+} catch { /* stockage indisponible */ }
+window.addEventListener('keydown', (e) => {
+  if (!(e.ctrlKey && e.altKey && e.shiftKey && e.code === 'KeyT')) return;
+  try {
+    if (noTrack()) localStorage.removeItem('bp.notrack'); else localStorage.setItem('bp.notrack', '1');
+    toast(noTrack() ? 'Mode test : tes parties ne sont plus comptées' : 'Mode test désactivé : tes parties sont comptées');
+  } catch { /* stockage indisponible */ }
+});
 const TRACK_ON = window.sabotDesktop || /(^|\.)blackjack-play\.app$|pages\.dev$/.test(location.hostname);
 let trackQueue = [];
 function track(e, p, n = 1) {
-  if (!TRACK_ON) return;
+  if (!TRACK_ON || noTrack()) return;
   const same = trackQueue.find((x) => x.e === e && x.p === p);
   if (same) same.n += n; else trackQueue.push({ e, p: String(p), n });
   clearTimeout(track.t);

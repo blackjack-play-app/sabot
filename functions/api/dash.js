@@ -28,8 +28,15 @@ export async function onRequestGet({ request, env }) {
   const url = new URL(request.url);
   const days = Math.max(1, Math.min(90, Number(url.searchParams.get('jours')) || 30));
   const end = new Date();
-  const start = new Date(end.getTime() - days * 864e5);
-  const out = { periode: { jours: days, debut: start.toISOString(), fin: end.toISOString() } };
+  let start = new Date(end.getTime() - days * 864e5);
+  // Remise à zéro : rien n'est compté avant cette date, et les téléchargements GitHub déjà faits sont soustraits
+  let reset = null;
+  try {
+    const row = await env.DB.prepare("SELECT v FROM meta WHERE k = 'reset'").first();
+    if (row) reset = JSON.parse(row.v);
+  } catch { /* table absente : pas de remise à zéro */ }
+  if (reset && new Date(reset.date) > start) start = new Date(reset.date);
+  const out = { periode: { jours: days, debut: start.toISOString(), fin: end.toISOString() }, reset };
 
   // 1. Visites (Cloudflare Web Analytics) — l'API limite chaque requête à 7 jours : on découpe et on additionne
   try {

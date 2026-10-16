@@ -53,6 +53,8 @@
     const m = location.hash.match(/cle=([\w-]+)/);
     if (m) { key = m[1]; localStorage.setItem('bp.dashkey', key); history.replaceState(null, '', location.pathname); }
     else key = localStorage.getItem('bp.dashkey') || '';
+    // Cet appareil est celui du créateur : ses visites et ses parties ne sont plus comptées
+    if (key) localStorage.setItem('bp.notrack', '1');
   } catch { /* stockage indisponible */ }
   let days = 30;
 
@@ -104,7 +106,10 @@
     const sum = (arr, f) => (arr || []).reduce((a, x) => a + (f(x) || 0), 0);
     const tot = (e, p) => sum((jeu.totaux || []).filter((x) => x.e === e && (p === undefined || x.p === p)), (x) => x.n);
     const visits = sum(web.jours, (x) => x.visites), views = sum(web.jours, (x) => x.pages);
-    const allFiles = dls.flatMap((r) => r.fichiers);
+    const base = (d.reset && d.reset.dl) || {};
+    const allFiles = dls.flatMap((r) => r.fichiers).map((f) => ({ ...f, n: Math.max(0, f.n - (base[f.nom] || 0)) })).filter((f) => f.n > 0);
+    const since = d.reset ? new Date(d.reset.date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long' }) : '';
+    const clipped = d.reset && new Date(d.reset.date) > new Date(Date.now() - days * 864e5);
     const dlTotal = sum(allFiles, (x) => x.n);
     const byOs = {}; for (const f of allFiles) byOs[OSOF(f.nom)] = (byOs[OSOF(f.nom)] || 0) + f.n;
     const group = (e, names) => (jeu.totaux || []).filter((x) => x.e === e).reduce((m, x) => { const k = names ? (names[x.p] || x.p) : x.p; m[k] = (m[k] || 0) + x.n; return m; }, {});
@@ -119,12 +124,12 @@
         <div class="seg">${[7, 30, 90].map((n) => `<button data-d="${n}" aria-pressed="${n === days}">${n} jours</button>`).join('')}</div>
       </div>
       <div class="kpis6">
-        <div class="stat"><span>Visiteurs</span><b>${fmt(visits)}</b><small>${days} derniers jours</small></div>
+        <div class="stat"><span>Visiteurs</span><b>${fmt(visits)}</b><small>${clipped ? 'depuis le ' + since : days + ' derniers jours'}</small></div>
         <div class="stat"><span>Pages vues</span><b>${fmt(views)}</b><small>${visits ? (views / visits).toFixed(1) : '0'} par visite</small></div>
         <div class="stat"><span>Parties lancées</span><b>${fmt(tot('start'))}</b><small>dont appli PC : ${fmt(sum((jeu.totaux || []).filter((x) => x.e === 'start' && x.p === 'desktop'), (x) => x.n))}</small></div>
         <div class="stat"><span>Donnes jouées</span><b>${fmt(tot('round'))}</b><small>toutes plateformes</small></div>
         <div class="stat"><span>Clics « Télécharger »</span><b>${fmt(tot('dl'))}</b><small>sur le site</small></div>
-        <div class="stat"><span>Téléchargements</span><b>${fmt(dlTotal)}</b><small>depuis le début (GitHub)</small></div>
+        <div class="stat"><span>Téléchargements</span><b>${fmt(dlTotal)}</b><small>${since ? 'depuis le ' + since : 'depuis le début'} (GitHub)</small></div>
       </div>
       <div class="panel"><h2>Évolution</h2><div class="legend2"><span><i style="background:#c9a24a"></i>Visiteurs</span><span><i style="background:#55b57f"></i>Donnes jouées</span></div><canvas class="chart" id="c1"></canvas></div>
       <div class="grid2">

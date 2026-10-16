@@ -8,3 +8,9 @@ CREATE TABLE IF NOT EXISTS events (
   n INTEGER NOT NULL DEFAULT 0,
   PRIMARY KEY (day, e, p, src, country)
 );
+
+-- Réglages du tableau de bord (ex. k = 'reset' : date de remise à zéro + téléchargements GitHub déjà comptés)
+CREATE TABLE IF NOT EXISTS meta (
+  k TEXT PRIMARY KEY,
+  v TEXT NOT NULL
+);

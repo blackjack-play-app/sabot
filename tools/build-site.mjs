@@ -108,6 +108,7 @@ ${alternates}
 <link rel="manifest" href="/manifest.webmanifest">
 <link rel="preload" href="/assets/fonts/source-serif-4-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/css/site.css">
+<script src="/assets/js/beacon.js"></script>
 ${meta.head || ''}${ld}
 </head>
 <body class="${meta.bodyClass || ''}" data-lang="${lang}" data-alt="${lang === 'fr' ? enPath : frPath}">

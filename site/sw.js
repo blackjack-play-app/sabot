@@ -1,5 +1,5 @@
 // Service worker : jeu disponible hors ligne après la première visite (fichier généré par tools/build-sw.py).
-const VERSION = 'sabot-va752a98024';
+const VERSION = 'sabot-vc1e216e86c';
 const CORE = [
 "/assets/fonts/barlow-condensed-latin-500-normal.woff2",
 "/assets/fonts/barlow-condensed-latin-600-normal.woff2",

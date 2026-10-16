@@ -764,6 +764,7 @@ function showDock(which) {
   requestAnimationFrame(() => {
     const d = $('#dock');
     document.documentElement.style.setProperty('--dock-h', d.offsetHeight + 'px');
+    if (which === 'bet') scene.updateFrame();
   });
 }
 

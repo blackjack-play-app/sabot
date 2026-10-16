@@ -80,7 +80,25 @@ export async function onRequestGet({ request, env }) {
     out.jeu = { totaux: totals.results, parJour: perDay.results, pays: countries.results };
   } catch (e) { out.jeu = { erreur: String(e) }; }
 
-  // 3. Les téléchargements (GitHub) sont lus directement par le navigateur du tableau de bord.
+  // 3. Carte, direct et heures d'affluence (table hits, tranches de 10 minutes)
+  if (url.searchParams.get('pro')) {
+    try {
+      const sinceSlot = start.toISOString().slice(0, 15) + '0';
+      const liveSince = new Date(end.getTime() - 3 * 3600e3).toISOString().slice(0, 15) + '0';
+      const [geo, live, feed, heat, views] = await env.DB.batch([
+        env.DB.prepare('SELECT city, country, lat, lon, e, SUM(n) AS n FROM hits WHERE slot >= ?1 GROUP BY city, country, e').bind(sinceSlot),
+        env.DB.prepare('SELECT slot, e, SUM(n) AS n FROM hits WHERE slot >= ?1 GROUP BY slot, e ORDER BY slot').bind(liveSince),
+        env.DB.prepare('SELECT slot, e, p, src, country, city, n FROM hits ORDER BY slot DESC LIMIT 40'),
+        env.DB.prepare("SELECT substr(slot, 1, 13) AS h, e, SUM(n) AS n FROM hits WHERE slot >= ?1 AND e IN ('view', 'round') GROUP BY h, e").bind(sinceSlot),
+        env.DB.prepare("SELECT p, SUM(n) AS n FROM hits WHERE slot >= ?1 AND e = 'view' GROUP BY p ORDER BY n DESC LIMIT 15").bind(sinceSlot),
+      ]);
+      out.pro = { geo: geo.results, live: live.results, feed: feed.results, heat: heat.results, pages: views.results, maintenant: end.toISOString() };
+      // Ménage : on ne garde que 120 jours de détail
+      if (Math.random() < 0.05) await env.DB.prepare('DELETE FROM hits WHERE slot < ?1').bind(new Date(end.getTime() - 120 * 864e5).toISOString().slice(0, 15) + '0').run();
+    } catch (e) { out.pro = { erreur: String(e) }; }
+  }
+
+  // 4. Les téléchargements (GitHub) sont lus directement par le navigateur du tableau de bord.
 
   return json(out);
 }

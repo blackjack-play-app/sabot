@@ -1,5 +1,5 @@
 // Service worker : jeu disponible hors ligne après la première visite (fichier généré par tools/build-sw.py).
-const VERSION = 'sabot-vc1e216e86c';
+const VERSION = 'sabot-v89c53d5063';
 const CORE = [
 "/assets/fonts/barlow-condensed-latin-500-normal.woff2",
 "/assets/fonts/barlow-condensed-latin-600-normal.woff2",
@@ -14,8 +14,11 @@ const CORE = [
 "/assets/img/favicon.svg",
 "/assets/img/icon-192.png",
 "/game/",
+"/game/_ikt.html",
+"/game/_mus.html",
 "/game/css/game.css",
 "/game/index.html",
+"/game/js/_d3old.js",
 "/game/js/achievements.js",
 "/game/js/audio.js",
 "/game/js/cards.js",
@@ -25,6 +28,7 @@ const CORE = [
 "/game/js/engine.js",
 "/game/js/icons.js",
 "/game/js/main.js",
+"/game/js/music.js",
 "/game/js/panels.js",
 "/game/js/quality.js",
 "/game/js/rules.js",

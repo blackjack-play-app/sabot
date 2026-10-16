@@ -1,4 +1,5 @@
-// Sons (échantillons CC0 Kenney) + voix du croupier (synthèse vocale du système).
+// Sons (échantillons CC0 Kenney) + voix du croupier (synthèse vocale du système) + musique générée.
+import { Music } from './music.js';
 
 const SAMPLES = {
   slide: ['card-slide-1', 'card-slide-2', 'card-slide-3', 'card-slide-5'],
@@ -16,7 +17,7 @@ export class AudioManager {
     this.base = base;
     this.ctx = null;
     this.buffers = new Map();
-    this.settings = { master: 0.8, sfx: 0.8, voice: 0.9, voiceLevel: 'essentiel', ambience: false, ambienceVol: 0.35, muted: false };
+    this.settings = { master: 0.8, sfx: 0.8, voice: 0.9, voiceLevel: 'essentiel', ambience: false, ambienceVol: 0.35, music: true, musicVol: 0.35, musicStyle: 'jazz', muted: false };
     this.voice = null;
     this.onSpeak = null;
     this.lastSpoken = 0;
@@ -32,6 +33,7 @@ export class AudioManager {
     if (this.master) this.master.gain.value = this.settings.muted ? 0 : this.settings.master;
     if (this.sfxGain) this.sfxGain.gain.value = this.settings.sfx;
     this.updateAmbience();
+    this.updateMusic();
     this.pickVoice();
   }
 
@@ -49,6 +51,25 @@ export class AudioManager {
     this.sfxGain.connect(this.master);
     this.loadAll();
     this.updateAmbience();
+    this.updateMusic();
+  }
+
+  // Musique d'ambiance : démarre après la première interaction, fondu à l'arrêt
+  updateMusic() {
+    if (!this.ctx) return;
+    const s = this.settings;
+    const on = s.music && !s.muted && s.musicVol > 0;
+    if (!this.music) this.music = new Music(this.ctx, this.master);
+    const m = this.music;
+    if (on) {
+      if (m.playing && m.style !== s.musicStyle) { m.stop(); }
+      m.start(s.musicStyle);
+      m.setVolume(s.musicVol);
+    } else if (m.playing) {
+      m.setVolume(0, 0.8);
+      clearTimeout(this.musicStop);
+      this.musicStop = setTimeout(() => { if (!(this.settings.music && !this.settings.muted)) m.stop(); }, 900);
+    }
   }
 
   async loadAll() {

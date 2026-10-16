@@ -95,6 +95,17 @@ export class TableScene {
     this.scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
     this.scene.environmentIntensity = 0.28;
     this.camera = new THREE.PerspectiveCamera(42, 1, 0.02, 60);
+    // Cadrage « utile » : l'image est réduite et remontée pour que la table reste entre la barre du haut et le dock des mises
+    this.frame = { s: 1, d: 0 };
+    const baseUpdate = this.camera.updateProjectionMatrix.bind(this.camera);
+    this.camera.updateProjectionMatrix = () => {
+      baseUpdate();
+      const { s, d } = this.frame || { s: 1, d: 0 };
+      if (s === 1 && d === 0) return;
+      const e = this.camera.projectionMatrix.elements;
+      e[0] *= s; e[8] *= s; e[5] *= s; e[9] = e[9] * s - d;
+      this.camera.projectionMatrixInverse.copy(this.camera.projectionMatrix).invert();
+    };
     this.controls = new OrbitControls(this.camera, r.domElement);
     this.controls.enableDamping = true;
     this.controls.dampingFactor = 0.08;
@@ -146,8 +157,38 @@ export class TableScene {
     this.camera.aspect = w / h;
     // Sur écran étroit (téléphone vertical), on élargit le champ de vision.
     this.camera.fov = w / h < 0.9 ? 62 : w / h < 1.3 ? 50 : 42;
-    this.camera.updateProjectionMatrix();
+    this.updateFrame();
     if (this.fixedView) this.applyFixed(false);
+  }
+
+  // Calcule la réduction/remontée de l'image pour que les cercles de mise ne passent pas sous le dock (petits écrans)
+  updateFrame() {
+    const w = this.container.clientWidth || 1, h = this.container.clientHeight || 1;
+    const bet = document.getElementById('dockBet');
+    if (bet && bet.offsetHeight && !bet.hidden) this.dockTop = bet.getBoundingClientRect().top - this.container.getBoundingClientRect().top;
+    const dockTop = this.dockTop || h;
+    // Projection avec la caméra « joueur » non recadrée
+    const cam = new THREE.PerspectiveCamera(this.camera.fov, w / h, 0.02, 60);
+    const p = this.fixedView ? this.fixedPose() : CAMERA_PRESETS.joueur;
+    cam.position.set(...p.pos);
+    if (!this.fixedView && w / h < 0.9) cam.position.set(0, TABLE_Y + 1.3, 1.9);
+    cam.lookAt(new THREE.Vector3(...p.target));
+    cam.updateMatrixWorld(true);
+    const py = (v) => (1 - v.project(cam).y) * h / 2;
+    const top = py(new THREE.Vector3(0, 1.84, -0.74));
+    let bottom = 0;
+    for (const sp of this.geo.spots) bottom = Math.max(bottom, py(new THREE.Vector3(sp.x, TABLE_Y, sp.z + SPOT_R * 1.3)));
+    const limTop = Math.min(top, 46), limBot = dockTop - 14;
+    let s = 1, shift = 0;
+    if (bottom > limBot) {
+      shift = bottom - limBot;
+      if (top - shift < limTop) {
+        s = Math.max(0.7, (limBot - limTop) / (bottom - top));
+        shift = (h / 2 + s * (top - h / 2)) - limTop;
+      }
+    }
+    this.frame = { s, d: (2 * shift) / h };
+    this.camera.updateProjectionMatrix();
   }
 
   applyQuality(p, reload = false) {

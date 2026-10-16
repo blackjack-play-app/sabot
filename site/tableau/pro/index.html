@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Centre de contrôle — Blackjack Play</title>
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/site.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<style>
+  :root { --c1: #e5c677; --c2: #55b57f; --c3: #6aa8ff; --c4: #e0795f; --card: #120f0c; }
+  body { background: radial-gradient(1200px 600px at 70% -10%, #2a1f12 0%, transparent 60%), #0a0806; min-height: 100vh; }
+  .pro { width: min(1500px, calc(100% - 32px)); margin: 0 auto; padding: 22px 0 70px; }
+  .top { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 18px; }
+  .top h1 { font-family: var(--serif); font-size: 28px; margin: 0; letter-spacing: -.01em; }
+  .top .sub { color: var(--ink-3); font-size: 13px; font-family: var(--cond); letter-spacing: .08em; text-transform: uppercase; }
+  .live-pill { display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 999px; background: rgba(85,181,127,.12); border: 1px solid rgba(85,181,127,.35); color: #9fe0bb; font-family: var(--cond); font-size: 15px; letter-spacing: .04em; }
+  .live-pill i { width: 9px; height: 9px; border-radius: 50%; background: #55b57f; box-shadow: 0 0 0 0 rgba(85,181,127,.7); animation: pulse 1.8s infinite; }
+  @keyframes pulse { 70% { box-shadow: 0 0 0 10px rgba(85,181,127,0); } 100% { box-shadow: 0 0 0 0 rgba(85,181,127,0); } }
+  .seg { margin-left: auto; display: flex; gap: 4px; background: var(--bg-2); border: 1px solid var(--line); border-radius: 10px; padding: 3px; }
+  .seg button { border: 0; background: none; color: var(--ink-2); padding: 7px 12px; border-radius: 8px; font: inherit; font-size: 14px; cursor: pointer; }
+  .seg button[aria-pressed="true"] { background: var(--ink); color: #15110d; }
+  .ghost { color: var(--ink-2); font-size: 14px; text-decoration: none; border: 1px solid var(--line); padding: 7px 12px; border-radius: 9px; }
+  .ghost:hover { color: var(--ink); border-color: var(--line-2); }
+  .kpis { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 10px; margin-bottom: 14px; }
+  .kpi { background: linear-gradient(180deg, #17120d, #110d0a); border: 1px solid var(--line); border-radius: 14px; padding: 13px 14px 12px; position: relative; overflow: hidden; }
+  .kpi span { display: block; color: var(--ink-3); font-family: var(--cond); text-transform: uppercase; letter-spacing: .08em; font-size: 12.5px; }
+  .kpi b { display: block; font-family: var(--cond); font-size: 32px; line-height: 1.15; color: var(--ink); font-weight: 600; }
+  .kpi small { color: var(--ink-3); font-size: 12.5px; }
+  .kpi.gold b { color: var(--gold-2); }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 16px 18px; min-width: 0; }
+  .card h2 { font-family: var(--cond); text-transform: uppercase; letter-spacing: .09em; font-size: 14px; color: var(--ink-2); margin: 0 0 12px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+  .card h2 em { margin-left: auto; font-style: normal; color: var(--ink-3); font-weight: 400; letter-spacing: .04em; text-transform: none; font-family: var(--ui); font-size: 12.5px; }
+  .g-map { display: grid; grid-template-columns: minmax(0, 2.1fr) minmax(300px, 1fr); gap: 14px; margin-bottom: 14px; }
+  #map { height: 470px; border-radius: 12px; background: #0b0d10; }
+  .leaflet-container { font-family: var(--ui); background: #0b0d10; }
+  .dark-tiles { filter: invert(1) hue-rotate(185deg) brightness(.78) contrast(.92) saturate(.35); }
+  .fl { width: 18px; height: 13px; border-radius: 2px; vertical-align: -2px; object-fit: cover; }
+  .leaflet-popup-content-wrapper, .leaflet-popup-tip { background: #18130e; color: var(--ink); border: 1px solid var(--line-2); }
+  .leaflet-control-attribution { background: rgba(10,8,6,.7) !important; color: #7a6f60 !important; font-size: 10px; }
+  .leaflet-control-attribution a { color: #9a8d7a !important; }
+  .maplegend { display: flex; gap: 14px; font-size: 12.5px; color: var(--ink-2); margin-top: 10px; flex-wrap: wrap; }
+  .maplegend i { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: -1px; }
+  .side { display: grid; gap: 14px; grid-template-rows: auto 1fr; min-width: 0; }
+  .bignum { font-family: var(--cond); font-size: 54px; line-height: 1; color: #9fe0bb; }
+  .feed { list-style: none; margin: 0; padding: 0; max-height: 300px; overflow: auto; }
+  .feed li { display: grid; grid-template-columns: 46px 22px minmax(0, 1fr); gap: 8px; align-items: center; padding: 7px 0; border-top: 1px solid var(--line); font-size: 13.5px; }
+  .feed time { color: var(--ink-3); font-family: var(--cond); font-size: 14px; }
+  .feed span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--ink-2); }
+  .feed span b { color: var(--ink); font-weight: 500; }
+  .g2 { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 14px; margin-bottom: 14px; }
+  .g3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-bottom: 14px; }
+  .g4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin-bottom: 14px; }
+  canvas.chart { width: 100%; height: 240px; display: block; }
+  .legend { display: flex; gap: 16px; font-size: 12.5px; color: var(--ink-2); margin-bottom: 8px; }
+  .legend i { display: inline-block; width: 12px; height: 3px; border-radius: 2px; margin-right: 6px; vertical-align: middle; }
+  .rows { list-style: none; margin: 0; padding: 0; }
+  .rows li { display: grid; grid-template-columns: minmax(0, 1fr) 34% 48px; gap: 10px; align-items: center; padding: 6px 0; border-top: 1px solid var(--line); font-size: 14px; }
+  .rows li span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--ink-2); }
+  .rows li b { text-align: right; font-family: var(--cond); font-size: 17px; font-weight: 600; }
+  .bar { height: 6px; background: rgba(255,255,255,.05); border-radius: 4px; overflow: hidden; }
+  .bar i { display: block; height: 100%; background: linear-gradient(90deg, #b88d34, #e5c677); border-radius: 4px; }
+  .funnel { display: grid; gap: 8px; }
+  .funnel div { display: grid; grid-template-columns: 170px minmax(0, 1fr) 70px; gap: 12px; align-items: center; font-size: 14px; color: var(--ink-2); }
+  .funnel .fb { height: 26px; border-radius: 6px; background: linear-gradient(90deg, rgba(229,198,119,.85), rgba(229,198,119,.35)); min-width: 4px; }
+  .funnel b { font-family: var(--cond); font-size: 18px; color: var(--ink); text-align: right; }
+  .heat { display: grid; grid-template-columns: 34px repeat(24, minmax(0, 1fr)); gap: 3px; font-size: 10.5px; color: var(--ink-3); font-family: var(--cond); }
+  .heat i { aspect-ratio: 1; border-radius: 3px; background: rgba(229,198,119,.05); }
+  .donut { display: flex; align-items: center; gap: 18px; }
+  .donut ul { list-style: none; margin: 0; padding: 0; font-size: 14px; color: var(--ink-2); display: grid; gap: 6px; }
+  .donut li i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 8px; vertical-align: -1px; }
+  .tips { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+  .tips li { display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: 10px; font-size: 14.5px; color: var(--ink-2); line-height: 1.5; }
+  .tips li b { color: var(--ink); font-weight: 600; }
+  .tips .ic { width: 28px; height: 28px; border-radius: 8px; display: grid; place-items: center; font-size: 15px; background: rgba(229,198,119,.1); }
+  .tips .ok { background: rgba(85,181,127,.12); } .tips .warn { background: rgba(224,121,95,.12); }
+  .share { display: flex; gap: 8px; flex-wrap: wrap; }
+  .share input { flex: 1; min-width: 140px; height: 40px; border-radius: 9px; border: 1px solid var(--line); background: var(--bg-3); color: var(--ink); padding: 0 12px; font: inherit; font-size: 14px; }
+  .share code { display: block; width: 100%; margin-top: 8px; padding: 9px 12px; background: var(--bg-3); border-radius: 8px; color: var(--gold-2); word-break: break-all; font-size: 13.5px; cursor: copy; }
+  .links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+  .muted { color: var(--ink-3); font-size: 13.5px; }
+  .gate { max-width: 420px; margin: 14vh auto; text-align: center; }
+  .gate input { width: 100%; height: 48px; border-radius: 10px; border: 1px solid var(--line-2); background: var(--bg-2); color: var(--ink); padding: 0 14px; font: inherit; margin: 14px 0; }
+  .upd { color: var(--ink-3); font-size: 12.5px; }
+  @media (max-width: 1250px) { .kpis { grid-template-columns: repeat(4, minmax(0, 1fr)); } .g4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 980px) { .g-map, .g2, .g3 { grid-template-columns: 1fr; } #map { height: 380px; } }
+  @media (max-width: 560px) { .pro { width: calc(100% - 32px); } .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); } .g4 { grid-template-columns: 1fr; } .seg { margin-left: 0; } .funnel div { grid-template-columns: 110px minmax(0, 1fr) 54px; } .kpi b { font-size: 27px; } }
+</style>
+</head>
+<body>
+<main class="pro" id="root"><div class="gate"><h1 style="font-family:var(--serif)">Centre de contrôle</h1><p class="muted">Chargement…</p></div></main>
+<script>
+(() => {
+  const root = document.getElementById('root');
+  const nf = new Intl.NumberFormat('fr-FR');
+  const fmt = (n) => nf.format(Math.round(n || 0));
+  const pct = (a, b) => (b ? Math.round((a / b) * 100) : 0) + ' %';
+  const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+  let key = '';
+  try {
+    const m = location.hash.match(/cle=([\w-]+)/);
+    if (m) { key = m[1]; localStorage.setItem('bp.dashkey', key); history.replaceState(null, '', location.pathname); }
+    else key = localStorage.getItem('bp.dashkey') || '';
+    if (key) localStorage.setItem('bp.notrack', '1');
+  } catch { /* stockage indisponible */ }
+  let days = 30, map = null, layer = null, timer = null, firstFit = true;
+
+  let regionNames = null;
+  try { regionNames = new Intl.DisplayNames(['fr'], { type: 'region' }); } catch { /* ancien navigateur */ }
+  const cname = (c) => { try { return regionNames && /^[A-Z]{2}$/.test(c) ? regionNames.of(c) : (c || 'Inconnu'); } catch { return c; } };
+  const flag = (c) => /^[A-Z]{2}$/.test(c || '') ? `<img class="fl" src="https://flagcdn.com/36x27/${c.toLowerCase()}.png" alt="${c}" loading="lazy">` : '🌐';
+  const SRC = { 'www.google.com': 'Google', 'google.com': 'Google', 'www.google.fr': 'Google', 'www.bing.com': 'Bing', 'duckduckgo.com': 'DuckDuckGo', 'l.facebook.com': 'Facebook', 'lm.facebook.com': 'Facebook', 't.co': 'X (Twitter)', 'www.reddit.com': 'Reddit', 'out.reddit.com': 'Reddit', 'discord.com': 'Discord', 'web.whatsapp.com': 'WhatsApp', 'www.youtube.com': 'YouTube', 'l.instagram.com': 'Instagram', 'www.instagram.com': 'Instagram', 'www.tiktok.com': 'TikTok', 'itch.io': 'itch.io', 'www.producthunt.com': 'Product Hunt' };
+  const srcLabel = (k) => (!k || k === '(direct)' ? 'Direct / message privé' : (SRC[k] || k));
+  const DEV = { desktop: 'Ordinateur', mobile: 'Téléphone', tablet: 'Tablette' };
+  const MODES = { libre: 'Partie libre', coach: 'Coach', comptage: 'Comptage' };
+  const LEVELS = { coach: 'Je débute', libre: 'Je connais les règles', comptage: 'Je compte les cartes', casino: 'Comme au casino' };
+  const DRILLS = { flash: 'Flash stratégie', countdown: 'Décompte d\'un paquet', truecount: 'Compte réel', deviations: 'Déviations', sim: 'Simulateur' };
+  const EV = { view: ['👁', 'a ouvert'], start: ['🃏', 'a lancé le jeu'], round: ['♠', 'a joué une donne'], dl: ['⬇', 'a cliqué Télécharger'] };
+  const COLORS = { view: '#6aa8ff', start: '#e5c677', round: '#55b57f', dl: '#e0795f' };
+  const PAL = ['#e5c677', '#55b57f', '#6aa8ff', '#e0795f', '#b48cf0', '#7fd1d1'];
+  const OSOF = (n) => /Windows|Setup|Portable|\.exe/.test(n) ? 'Windows' : /macOS|\.dmg/.test(n) ? 'macOS' : 'Linux';
+  const PAGES = { '/': 'Accueil', '/en/': 'Accueil (EN)', '/game/': 'Le jeu', '/telecharger': 'Télécharger', '/en/download': 'Download (EN)', '/apprendre': 'Apprendre', '/en/learn': 'Learn (EN)', '/regles-du-blackjack': 'Règles', '/strategie-de-base-blackjack': 'Stratégie de base', '/compter-les-cartes-blackjack': 'Comptage', '/simulateur-blackjack': 'Simulateur', '/jeu-blackjack-gratuit': 'Jeu gratuit', '/statistiques': 'Statistiques', '/credits': 'Crédits', '/merci': 'Merci' };
+  const page = (p) => PAGES[p] || p;
+
+  function gate(msg) {
+    root.innerHTML = `<div class="gate"><h1 style="font-family:var(--serif)">Centre de contrôle</h1><p class="muted">${msg}</p>
+      <input id="k" type="password" placeholder="Clé secrète" autocomplete="off"><button class="btn btn-gold" id="go" style="width:100%">Ouvrir</button></div>`;
+    const go = () => { key = document.getElementById('k').value.trim(); try { localStorage.setItem('bp.dashkey', key); localStorage.setItem('bp.notrack', '1'); } catch {} load(); };
+    document.getElementById('go').onclick = go;
+    document.getElementById('k').onkeydown = (e) => { if (e.key === 'Enter') go(); };
+  }
+
+  const rows = (list, max = 8, label = (x) => x.k, val = (x) => x.n) => {
+    if (!list || !list.length) return '<p class="muted">Pas encore de données.</p>';
+    const top = Math.max(...list.map(val), 1);
+    return '<ul class="rows">' + list.slice(0, max).map((x) => `<li><span title="${esc(String(label(x)).replace(/<[^>]+>/g, '').trim())}">${label(x)}</span><div class="bar"><i style="width:${(val(x) / top) * 100}%"></i></div><b>${fmt(val(x))}</b></li>`).join('') + '</ul>';
+  };
+  const toList = (obj) => Object.entries(obj).map(([k, n]) => ({ k, n })).sort((a, b) => b.n - a.n);
+  const ago = (iso) => { const m = Math.round((Date.now() - new Date(iso)) / 60000); return m < 1 ? 'à l\'instant' : m < 60 ? `il y a ${m} min` : `il y a ${Math.round(m / 60)} h`; };
+  const slotDate = (s) => new Date(s + ':00Z');
+
+  function donut(items) {
+    const tot = items.reduce((a, x) => a + x.n, 0);
+    if (!tot) return '<p class="muted">Pas encore de données.</p>';
+    let a0 = -Math.PI / 2;
+    const arcs = items.map((x, i) => {
+      const a1 = a0 + (x.n / tot) * Math.PI * 2, large = a1 - a0 > Math.PI ? 1 : 0;
+      const p = (a) => `${50 + 40 * Math.cos(a)} ${50 + 40 * Math.sin(a)}`;
+      const d = items.length === 1 ? 'M 50 10 A 40 40 0 1 1 49.99 10' : `M ${p(a0)} A 40 40 0 ${large} 1 ${p(a1)}`;
+      a0 = a1;
+      return `<path d="${d}" fill="none" stroke="${PAL[i % PAL.length]}" stroke-width="16"/>`;
+    }).join('');
+    return `<div class="donut"><svg viewBox="0 0 100 100" width="118" height="118">${arcs}<text x="50" y="55" text-anchor="middle" fill="#efe6d2" font-size="17" font-family="Barlow Condensed">${fmt(tot)}</text></svg>
+      <ul>${items.map((x, i) => `<li><i style="background:${PAL[i % PAL.length]}"></i>${esc(x.k)} <b style="color:var(--ink)">${pct(x.n, tot)}</b></li>`).join('')}</ul></div>`;
+  }
+
+  function area(canvas, series, labels) {
+    const dpr = window.devicePixelRatio || 1, w = canvas.clientWidth, h = canvas.clientHeight;
+    canvas.width = w * dpr; canvas.height = h * dpr;
+    const ctx = canvas.getContext('2d'); ctx.scale(dpr, dpr);
+    const n = labels.length;
+    if (n < 2) { ctx.fillStyle = '#887c6c'; ctx.font = '14px Barlow'; ctx.textAlign = 'center'; ctx.fillText('Les courbes apparaissent à partir de 2 jours de données', w / 2, h / 2); return; }
+    const max = Math.max(1, ...series.flatMap((s) => s.values));
+    const X = (i) => 40 + (i / (n - 1)) * (w - 52), Y = (v) => 12 + (1 - v / max) * (h - 38);
+    ctx.font = '12px "Barlow Condensed"'; ctx.fillStyle = '#887c6c';
+    for (let k = 0; k <= 4; k++) { const y = 12 + k * (h - 38) / 4; ctx.strokeStyle = 'rgba(255,255,255,.06)'; ctx.beginPath(); ctx.moveTo(40, y); ctx.lineTo(w - 12, y); ctx.stroke(); ctx.fillText(fmt(max * (1 - k / 4)), 4, y + 4); }
+    for (const s of series) {
+      const g = ctx.createLinearGradient(0, 12, 0, h - 26); g.addColorStop(0, s.color + '55'); g.addColorStop(1, s.color + '00');
+      ctx.beginPath(); s.values.forEach((v, i) => (i ? ctx.lineTo(X(i), Y(v)) : ctx.moveTo(X(i), Y(v))));
+      ctx.lineTo(X(n - 1), h - 26); ctx.lineTo(X(0), h - 26); ctx.closePath(); ctx.fillStyle = g; ctx.fill();
+      ctx.beginPath(); s.values.forEach((v, i) => (i ? ctx.lineTo(X(i), Y(v)) : ctx.moveTo(X(i), Y(v))));
+      ctx.strokeStyle = s.color; ctx.lineWidth = 2.2; ctx.stroke();
+    }
+    ctx.fillStyle = '#887c6c';
+    const step = Math.max(1, Math.ceil(n / 7));
+    for (let i = 0; i < n; i += step) { ctx.textAlign = i === 0 ? 'left' : 'center'; ctx.fillText(new Date(labels[i]).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' }), X(i), h - 7); }
+  }
+
+  function bars(canvas, values, color) {
+    const dpr = window.devicePixelRatio || 1, w = canvas.clientWidth, h = canvas.clientHeight;
+    canvas.width = w * dpr; canvas.height = h * dpr;
+    const ctx = canvas.getContext('2d'); ctx.scale(dpr, dpr);
+    const max = Math.max(1, ...values), bw = w / values.length;
+    values.forEach((v, i) => { const bh = (v / max) * (h - 4); ctx.fillStyle = i === values.length - 1 ? '#9fe0bb' : color; ctx.globalAlpha = v ? 1 : 0.25; ctx.fillRect(i * bw + 1, h - Math.max(2, bh), bw - 2, Math.max(2, bh)); });
+    ctx.globalAlpha = 1;
+  }
+
+  function drawMap(geo) {
+    if (!window.L) { document.getElementById('map').innerHTML = '<p class="muted" style="padding:20px">Carte indisponible (bibliothèque non chargée).</p>'; return; }
+    if (!map) {
+      map = L.map('map', { worldCopyJump: true, zoomControl: true, attributionControl: true, minZoom: 1 }).setView([30, 5], 2);
+      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>', maxZoom: 12, className: 'dark-tiles' }).addTo(map);
+    }
+    if (layer) layer.remove();
+    layer = L.layerGroup().addTo(map);
+    const by = new Map();
+    for (const g of geo) {
+      if (g.lat == null || g.lon == null) continue;
+      const k = g.lat + ',' + g.lon;
+      const o = by.get(k) || { lat: g.lat, lon: g.lon, city: g.city, country: g.country, view: 0, start: 0, round: 0, dl: 0 };
+      o[g.e] = (o[g.e] || 0) + g.n; by.set(k, o);
+    }
+    const pts = [...by.values()];
+    const max = Math.max(1, ...pts.map((p) => p.view + p.start));
+    for (const p of pts) {
+      const weight = p.view + p.start;
+      const r = 5 + Math.sqrt(weight / max) * 20;
+      const col = p.round ? COLORS.round : p.start ? COLORS.start : COLORS.view;
+      L.circleMarker([p.lat, p.lon], { radius: r + 6, stroke: false, fillColor: col, fillOpacity: 0.12 }).addTo(layer);
+      L.circleMarker([p.lat, p.lon], { radius: r, color: col, weight: 1.5, fillColor: col, fillOpacity: 0.45 })
+        .bindPopup(`<b>${flag(p.country)} ${esc(p.city || 'Ville inconnue')}</b><br>${esc(cname(p.country))}<br><br>👁 ${fmt(p.view)} pages vues<br>🃏 ${fmt(p.start)} parties lancées<br>♠ ${fmt(p.round)} donnes jouées${p.dl ? `<br>⬇ ${fmt(p.dl)} clics Télécharger` : ''}`)
+        .addTo(layer);
+    }
+    if (firstFit && pts.length) {
+      firstFit = false;
+      if (pts.length === 1) map.setView([pts[0].lat, pts[0].lon], 4);
+      else map.fitBounds(L.latLngBounds(pts.map((p) => [p.lat, p.lon])).pad(0.3), { maxZoom: 5 });
+      window.__mapView = { c: map.getCenter(), z: map.getZoom() };
+    }
+    return pts.length;
+  }
+
+  function render(d) {
+    const web = d.web || {}, jeu = d.jeu || {}, pro = d.pro || {}, dls = Array.isArray(d.telechargements) ? d.telechargements : [];
+    const sum = (arr, f) => (arr || []).reduce((a, x) => a + (f(x) || 0), 0);
+    const tot = (e, p) => sum((jeu.totaux || []).filter((x) => x.e === e && (p === undefined || x.p === p)), (x) => x.n);
+    const group = (e, names) => (jeu.totaux || []).filter((x) => x.e === e).reduce((m, x) => { const k = names ? (names[x.p] || x.p) : x.p; m[k] = (m[k] || 0) + x.n; return m; }, {});
+    const visits = sum(web.jours, (x) => x.visites), views = sum(web.jours, (x) => x.pages);
+    const base = (d.reset && d.reset.dl) || {};
+    const files = dls.flatMap((r) => r.fichiers).map((f) => ({ ...f, n: Math.max(0, f.n - (base[f.nom] || 0)) })).filter((f) => f.n > 0);
+    const dlTotal = sum(files, (x) => x.n);
+    const byOs = {}; for (const f of files) byOs[OSOF(f.nom)] = (byOs[OSOF(f.nom)] || 0) + f.n;
+    const starts = tot('start'), rounds = tot('round'), dlClicks = tot('dl'), welcome = tot('welcome');
+    const geo = pro.geo || [];
+    const countries = new Set([...(web.pays || []).map((x) => x.k), ...geo.map((g) => g.country)].filter(Boolean));
+    // Direct : tranches de 10 minutes sur 3 h
+    const now = Date.now();
+    const slots = []; for (let i = 17; i >= 0; i--) slots.push(new Date(Math.floor((now - i * 600e3) / 600e3) * 600e3).toISOString().slice(0, 16));
+    const liveBy = {}; for (const x of pro.live || []) liveBy[x.slot] = (liveBy[x.slot] || 0) + (x.e === 'view' || x.e === 'start' ? x.n : 0);
+    const liveVals = slots.map((s) => liveBy[s] || 0);
+    const nowCount = (liveVals[17] || 0) + (liveVals[16] || 0);
+    // Heures d'affluence (heure locale)
+    const heat = Array.from({ length: 7 }, () => Array(24).fill(0));
+    for (const x of pro.heat || []) { const dt = new Date(x.h + ':00:00Z'); heat[(dt.getDay() + 6) % 7][dt.getHours()] += x.n; }
+    const heatMax = Math.max(1, ...heat.flat());
+    const dayKeys = (web.jours || []).map((x) => x.k);
+    const roundsByDay = {}; for (const x of jeu.parJour || []) if (x.e === 'round') roundsByDay[x.day] = x.n;
+    const since = d.reset ? new Date(d.reset.date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long' }) : '';
+    const refs = (web.sources || []).map((x) => ({ k: srcLabel(x.k), n: x.visites }));
+    const refAgg = toList(refs.reduce((m, x) => { m[x.k] = (m[x.k] || 0) + x.n; return m; }, {}));
+    const google = refAgg.find((x) => x.k === 'Google');
+    const mobile = sum((web.appareils || []).filter((x) => x.k === 'mobile'), (x) => x.visites);
+
+    // Conseils de croissance calculés sur les données
+    const tips = [];
+    tips.push(google ? ['ok', '🔎', `<b>Google t'envoie ${fmt(google.n)} visiteurs.</b> Continue d'ajouter des pages utiles (guides, quiz) pour monter.`] : ['warn', '🔎', '<b>Google n\'envoie encore personne.</b> Normal : l\'indexation prend 1 à 3 semaines. Vérifie l\'avancement dans Search Console → Pages.']);
+    tips.push(visits && starts / visits < 0.3 ? ['warn', '🎯', `<b>Seulement ${pct(starts, visits)} des visiteurs lancent le jeu.</b> Un bouton « Jouer » plus visible ou une vidéo en haut de l'accueil aiderait.`] : ['ok', '🎯', `<b>${pct(starts, Math.max(visits, 1))} des visiteurs lancent le jeu.</b> Très bon taux, l'accueil donne envie.`]);
+    tips.push(['', '🤝', '<b>Chaque lien depuis un autre site = un vote pour Google.</b> Reddit (r/blackjack, r/WebGames), itch.io, Product Hunt, forums de cartes.']);
+    tips.push(['', '📱', mobile && visits && mobile / visits > 0.4 ? `<b>${pct(mobile, visits)} viennent du téléphone.</b> TikTok / Reels / Shorts sont ton meilleur canal : courtes vidéos de mains folles et de « bon ou mauvais coup ? ».` : '<b>Vidéos courtes</b> (TikTok, Reels, Shorts) : « Tu aurais tiré ? », mains à 5 places, coach qui corrige. Lien en bio vers le site.']);
+    tips.push(['', '🔗', '<b>Utilise des liens suivis</b> (en bas) pour savoir quel post amène vraiment du monde.']);
+
+    root.innerHTML = `
+      <div class="top">
+        <a class="logo" href="/" style="font-size:20px"><span>Blackjack Play</span></a>
+        <div><h1>Centre de contrôle</h1><div class="sub">Trafic, joueurs et carte en direct</div></div>
+        <span class="live-pill"><i></i>${fmt(nowCount)} en ce moment</span>
+        <div class="seg">${[[1, 'Aujourd\'hui'], [7, '7 j'], [30, '30 j'], [90, '90 j']].map(([n, l]) => `<button data-d="${n}" aria-pressed="${n === days}">${l}</button>`).join('')}</div>
+        <a class="ghost" href="/tableau/">Vue simple</a>
+      </div>
+      <div class="kpis">
+        <div class="kpi"><span>Visiteurs</span><b>${fmt(visits)}</b><small>${since && d.periode && new Date(d.periode.debut) >= new Date(d.reset.date) ? 'depuis le ' + since : days === 1 ? 'aujourd\'hui' : days + ' derniers jours'}</small></div>
+        <div class="kpi"><span>Pages vues</span><b>${fmt(views)}</b><small>${visits ? (views / visits).toFixed(1) : '0'} par visite</small></div>
+        <div class="kpi gold"><span>Parties lancées</span><b>${fmt(starts)}</b><small>dont appli PC : ${fmt(tot('start', 'desktop'))}</small></div>
+        <div class="kpi gold"><span>Donnes jouées</span><b>${fmt(rounds)}</b><small>${starts ? (rounds / starts).toFixed(1) : '0'} par partie</small></div>
+        <div class="kpi"><span>Visiteur → joueur</span><b>${pct(starts, visits)}</b><small>lancent le jeu</small></div>
+        <div class="kpi"><span>Clics Télécharger</span><b>${fmt(dlClicks)}</b><small>sur le site</small></div>
+        <div class="kpi"><span>Téléchargements</span><b>${fmt(dlTotal)}</b><small>GitHub${since ? ' depuis le ' + since : ''}</small></div>
+        <div class="kpi"><span>Pays</span><b>${fmt(countries.size)}</b><small>touchés</small></div>
+      </div>
+
+      <div class="g-map">
+        <div class="card"><h2>Carte des connexions <em>ville approximative · ${fmt(geo.length ? new Set(geo.map((g) => g.city + g.country)).size : 0)} lieux</em></h2>
+          <div id="map"></div>
+          <div class="maplegend"><span><i style="background:${COLORS.view}"></i>Visite du site</span><span><i style="background:${COLORS.start}"></i>A lancé le jeu</span><span><i style="background:${COLORS.round}"></i>A joué des donnes</span><span class="muted">Taille du point = nombre de visites. Clique un point pour le détail.</span></div>
+        </div>
+        <div class="side">
+          <div class="card"><h2>En direct <em>3 dernières heures</em></h2>
+            <div style="display:flex;align-items:end;gap:14px"><div><div class="bignum">${fmt(nowCount)}</div><div class="muted">visites ces 20 dernières minutes</div></div></div>
+            <canvas id="live" style="width:100%;height:70px;margin-top:12px;display:block"></canvas>
+            <div class="muted" style="display:flex;justify-content:space-between"><span>il y a 3 h</span><span>maintenant</span></div>
+          </div>
+          <div class="card"><h2>Activité récente</h2>
+            ${(pro.feed || []).length ? `<ul class="feed">${pro.feed.map((x) => `<li><time title="${esc(x.slot)}">${slotDate(x.slot).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}</time><span>${flag(x.country)}</span><span><b>${esc(x.city || cname(x.country))}</b> ${EV[x.e] ? EV[x.e][1] : x.e}${x.e === 'view' ? ' ' + esc(page(x.p)) : ''}${x.src === 'desktop' ? ' (appli PC)' : ''}${x.n > 1 ? ` ×${x.n}` : ''}</span></li>`).join('')}</ul>` : '<p class="muted">Les premières visites apparaîtront ici en direct.</p>'}
+          </div>
+        </div>
+      </div>
+
+      <div class="g2">
+        <div class="card"><h2>Évolution</h2>
+          <div class="legend"><span><i style="background:#e5c677"></i>Visiteurs</span><span><i style="background:#55b57f"></i>Donnes jouées</span></div>
+          <canvas class="chart" id="c1"></canvas>
+        </div>
+        <div class="card"><h2>Entonnoir</h2>
+          <div class="funnel">${[['Visiteurs', visits], ['Lancent le jeu', starts], ['Choisissent un niveau', welcome], ['Cliquent Télécharger', dlClicks]].map(([l, v], i, arr) => `<div><span>${l}</span><div class="fb" style="width:${(v / Math.max(1, arr[0][1], starts)) * 100}%"></div><b>${fmt(v)}</b></div>`).join('')}</div>
+          <p class="muted" style="margin:14px 0 0">Ta vraie mesure de succès : la part de visiteurs qui jouent, et combien de donnes ils enchaînent.</p>
+        </div>
+      </div>
+
+      <div class="g2">
+        <div class="card"><h2>Heures d'affluence <em>pages vues, heure de Paris</em></h2>
+          <div class="heat"><span></span>${Array.from({ length: 24 }, (_, hh) => `<span style="text-align:center">${hh % 3 === 0 ? hh : ''}</span>`).join('')}
+          ${['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'].map((dn, di) => `<span>${dn}</span>` + heat[di].map((v, hh) => `<i title="${dn} ${hh} h : ${v}" style="background:${v ? `rgba(229,198,119,${0.15 + 0.85 * v / heatMax})` : ''}"></i>`).join('')).join('')}</div>
+          <p class="muted" style="margin:10px 0 0">Poste tes vidéos et messages juste avant les cases les plus claires.</p>
+        </div>
+        <div class="card"><h2>Pour avoir encore plus de monde</h2><ul class="tips">${tips.map(([c, i, t]) => `<li><span class="ic ${c}">${i}</span><span>${t}</span></li>`).join('')}</ul></div>
+      </div>
+
+      <div class="g3">
+        <div class="card"><h2>D'où ils viennent</h2>${rows(refAgg, 8)}</div>
+        <div class="card"><h2>Pays</h2>${rows((web.pays || []).map((x) => ({ k: x.k, n: x.visites })), 8, (x) => `${flag(x.k)} ${esc(cname(x.k))}`)}</div>
+        <div class="card"><h2>Pages les plus vues</h2>${rows((web.pages || []).map((x) => ({ k: x.k, n: x.pages })), 8, (x) => esc(page(x.k)))}</div>
+      </div>
+
+      <div class="g4">
+        <div class="card"><h2>Appareils</h2>${donut((web.appareils || []).map((x) => ({ k: DEV[x.k] || x.k, n: x.visites })))}</div>
+        <div class="card"><h2>Systèmes</h2>${rows((web.systemes || []).map((x) => ({ k: x.k === 'Unknown' ? 'Inconnu' : x.k, n: x.visites })), 6)}</div>
+        <div class="card"><h2>Navigateurs</h2>${rows((web.navigateurs || []).map((x) => ({ k: x.k === 'Unknown' ? 'Inconnu' : x.k, n: x.visites })), 6)}</div>
+        <div class="card"><h2>Modes joués</h2>${donut(toList(group('round', MODES)))}</div>
+      </div>
+
+      <div class="g4">
+        <div class="card"><h2>Niveau choisi</h2>${rows(toList(group('welcome', LEVELS)), 4)}</div>
+        <div class="card"><h2>Mains par donne</h2>${rows(toList(group('hands')).map((x) => ({ k: x.k + (x.k === '1' ? ' main' : ' mains'), n: x.n })).sort((a, b) => parseInt(a.k) - parseInt(b.k)), 5)}</div>
+        <div class="card"><h2>Exercices ouverts</h2>${rows(toList(group('drill', DRILLS)), 5)}</div>
+        <div class="card"><h2>Téléchargements</h2>${donut(toList(byOs))}</div>
+      </div>
+
+      <div class="g2">
+        <div class="card"><h2>Liens de partage suivis</h2>
+          ${rows(toList(group('ref')), 8)}
+          <div class="share" style="margin-top:12px"><input id="refname" placeholder="ex. tiktok, reddit, insta-bio, potes"><button class="btn btn-gold" id="mk">Créer le lien</button><code id="reflink" title="Cliquer pour copier">Tape un nom pour créer un lien de partage suivi.</code></div>
+        </div>
+        <div class="card"><h2>Raccourcis</h2>
+          <p class="muted" style="margin:0">Tes outils, en un clic.</p>
+          <div class="links">
+            <a class="ghost" href="https://search.google.com/search-console?resource_id=sc-domain%3Ablackjack-play.app" target="_blank" rel="noopener">Google Search Console</a>
+            <a class="ghost" href="https://www.google.com/search?q=site%3Ablackjack-play.app" target="_blank" rel="noopener">Mes pages dans Google</a>
+            <a class="ghost" href="https://dash.cloudflare.com/" target="_blank" rel="noopener">Cloudflare</a>
+            <a class="ghost" href="https://github.com/blackjack-play-app/sabot/releases" target="_blank" rel="noopener">Versions GitHub</a>
+            <a class="ghost" href="https://pagespeed.web.dev/analysis?url=https%3A%2F%2Fblackjack-play.app%2F" target="_blank" rel="noopener">Vitesse du site</a>
+          </div>
+          <p class="upd" id="upd" style="margin:16px 0 0"></p>
+        </div>
+      </div>
+      <p class="muted">Données : Cloudflare Web Analytics (sans cookies), compteurs anonymes du jeu (ville approximative, aucune IP stockée), GitHub Releases. Tes propres appareils ne sont pas comptés. Mise à jour automatique toutes les 30 secondes. Lien privé : ne le partage pas.</p>`;
+
+    drawMap(geo);
+    bars(document.getElementById('live'), liveVals, '#3f7d5a');
+    area(document.getElementById('c1'), [
+      { color: '#e5c677', values: (web.jours || []).map((x) => x.visites) },
+      { color: '#55b57f', values: dayKeys.map((k) => roundsByDay[k] || 0) },
+    ], dayKeys);
+    document.getElementById('upd').textContent = 'Mis à jour ' + new Date().toLocaleTimeString('fr-FR');
+    root.querySelectorAll('[data-d]').forEach((b) => { b.onclick = () => { days = Number(b.dataset.d); firstFit = true; window.__mapView = null; if (map) { map.remove(); map = null; layer = null; } load(); }; });
+    const mk = () => {
+      const v = document.getElementById('refname').value.toLowerCase().replace(/[^a-z0-9-]/g, '').slice(0, 24);
+      document.getElementById('reflink').textContent = v ? `https://blackjack-play.app/?ref=${v}` : 'Tape un nom pour créer un lien de partage suivi.';
+    };
+    document.getElementById('mk').onclick = mk;
+    document.getElementById('refname').oninput = mk;
+    document.getElementById('reflink').onclick = (e) => { const t = e.target.textContent; if (t.startsWith('https')) { navigator.clipboard?.writeText(t); e.target.textContent = 'Copié !'; setTimeout(() => { e.target.textContent = t; }, 1200); } };
+  }
+
+  async function load() {
+    if (!key) return gate('Entre ta clé secrète pour ouvrir le centre de contrôle.');
+    try {
+      const r = await fetch('/api/dash?pro=1&jours=' + days, { headers: { 'X-Dash-Key': key }, cache: 'no-store' });
+      if (r.status === 404) { try { localStorage.removeItem('bp.dashkey'); } catch {} return gate('Clé incorrecte.'); }
+      const data = await r.json();
+      try {
+        const g = await fetch('https://api.github.com/repos/blackjack-play-app/sabot/releases?per_page=30', { headers: { Accept: 'application/vnd.github+json' } });
+        const rel = await g.json();
+        data.telechargements = (Array.isArray(rel) ? rel : []).map((x) => ({ version: x.tag_name, fichiers: x.assets.map((a) => ({ nom: a.name, n: a.download_count })) }));
+      } catch { data.telechargements = []; }
+      // On conserve la carte entre deux rafraîchissements
+      if (map) { map.remove(); map = null; layer = null; }
+      const center = window.__mapView;
+      const refVal = document.getElementById('refname')?.value || '';
+      render(data);
+      if (refVal) { document.getElementById('refname').value = refVal; document.getElementById('refname').oninput(); }
+      if (center && map) map.setView(center.c, center.z, { animate: false });
+      if (map) map.on('moveend', () => { window.__mapView = { c: map.getCenter(), z: map.getZoom() }; });
+    } catch (e) { gate('Impossible de charger les données : ' + esc(e.message)); }
+    clearTimeout(timer);
+    timer = setTimeout(() => { if (!document.hidden) load(); else document.addEventListener('visibilitychange', function f() { if (!document.hidden) { document.removeEventListener('visibilitychange', f); load(); } }); }, 30000);
+  }
+  load();
+})();
+</script>
+</body>
+</html>

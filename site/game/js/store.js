@@ -33,7 +33,7 @@ export const DEFAULT_SETTINGS = {
   startBank: 5000,
   quality: 'auto',
   style: { indices: 'fr', back: 'bordeaux', felt: 'vert', skin: 'gilet' },
-  audio: { master: 0.8, sfx: 0.8, voice: 0.9, voiceLevel: 'essentiel', ambience: false, ambienceVol: 0.35, muted: false },
+  audio: { master: 0.8, sfx: 0.8, voice: 0.9, voiceLevel: 'essentiel', ambience: false, ambienceVol: 0.35, music: true, musicVol: 0.35, musicStyle: 'jazz', muted: false },
   welcomed: false,
 };
 

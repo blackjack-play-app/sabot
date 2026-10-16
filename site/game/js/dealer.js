@@ -243,7 +243,7 @@ export class Dealer {
     let n = new THREE.Vector3().crossVectors(dir, pole);
     if (n.lengthSq() < 1e-6) n.set(1, 0, 0);
     n.normalize();
-    const upperDir = dir.clone().applyAxisAngle(n, -alpha);
+    const upperDir = dir.clone().applyAxisAngle(n, alpha);
     const down = new THREE.Vector3(0, -1, 0);
     arm.shoulder.quaternion.setFromUnitVectors(down, upperDir);
     const elbowPos = sh.clone().add(upperDir.clone().multiplyScalar(a));

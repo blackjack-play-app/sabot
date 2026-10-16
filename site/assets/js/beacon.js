@@ -13,4 +13,9 @@
   s.src = 'https://static.cloudflareinsights.com/beacon.min.js';
   s.setAttribute('data-cf-beacon', '{"token":"4cfd96d579a146f698ed615169ad17b1"}');
   document.head.append(s);
+  // Page vue pour la carte et le direct du tableau de bord (ville approximative côté serveur, rien d'autre)
+  try {
+    const body = JSON.stringify({ src: 'web', events: [{ e: 'view', p: location.pathname.toLowerCase().slice(0, 60) }] });
+    navigator.sendBeacon('/api/e', new Blob([body], { type: 'text/plain' }));
+  } catch { /* ignoré */ }
 })();

@@ -141,6 +141,9 @@ export class Panels {
       body.append(field('Voix du croupier', seg([['off', 'Muet'], ['essentiel', 'Essentiel'], ['bavard', 'Bavard']], A.voiceLevel, (v) => a.applyAudio({ voiceLevel: v })),
         'Essentiel : annonces importantes (assurance, blackjack, total du croupier). Bavard : annonce aussi tes totaux.'));
       body.append(field('Volume de la voix', range(0, 1, 0.05, A.voice, (v) => a.applyAudio({ voice: v }))));
+      body.append(field('Musique d’ambiance', toggle(A.music, (v) => a.applyAudio({ music: v })), 'Composée en direct par le jeu : jamais deux fois la même.'));
+      body.append(field('Style de musique', seg([['jazz', 'Lounge jazz'], ['calme', 'Piano calme']], A.musicStyle, (v) => a.applyAudio({ musicStyle: v }))));
+      body.append(field('Volume de la musique', range(0, 1, 0.05, A.musicVol, (v) => a.applyAudio({ musicVol: v }))));
       body.append(field('Ambiance de salle', toggle(A.ambience, (v) => a.applyAudio({ ambience: v })), 'Léger brouhaha et jetons au loin.'));
       body.append(field('Volume de l\'ambiance', range(0, 1, 0.05, A.ambienceVol, (v) => a.applyAudio({ ambienceVol: v }))));
       body.append(h('button', { class: 'btn', style: { marginTop: '12px' }, onclick: () => { a.audio.unlock(); a.audio.say('Faites vos jeux.', 'essentiel'); } }, icon('volume-2', 16), 'Tester la voix'));

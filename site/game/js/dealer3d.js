@@ -175,8 +175,8 @@ export class RealDealer {
     // Coude vers l'extérieur, le bas et l'arrière
     const pole = new THREE.Vector3(side * 0.9, -1, -0.5).normalize();
     const n = new THREE.Vector3().crossVectors(dir, pole).normalize();
-    const upperDir = dir.clone().applyAxisAngle(n, -alpha);
-    if (side < 0) upperDir.copy(dir).applyAxisAngle(n, -alpha);
+    // Rotation autour de (dir × pole) d'un angle positif : le bras s'écarte vers le pôle, donc le coude part vers l'extérieur
+    const upperDir = dir.clone().applyAxisAngle(n, alpha);
     aimBone(c.upper, c.upperDir, upperDir);
     const E = c.fore.getWorldPosition(new THREE.Vector3());
     aimBone(c.fore, c.foreDir, T.clone().sub(E));

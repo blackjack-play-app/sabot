@@ -230,7 +230,7 @@
 
   const SRCS = (b) => [b & 1 && 'site', b & 2 && 'appli PC', b & 4 && 'appli installée', b & 8 && 'itch.io'].filter(Boolean).join(' + ');
   const DEVICON = { mobile: '📱', tablet: '📱', desktop: '💻' };
-  const REFS = { '': 'Direct / message privé / appli', google: 'Google', bing: 'Bing', duckduckgo: 'DuckDuckGo', yahoo: 'Yahoo', qwant: 'Qwant', ecosia: 'Ecosia', facebook: 'Facebook', instagram: 'Instagram', tiktok: 'TikTok', youtube: 'YouTube', reddit: 'Reddit', discord: 'Discord', x: 'X (Twitter)', linkedin: 'LinkedIn', pinterest: 'Pinterest', itch: 'itch.io', producthunt: 'Product Hunt', github: 'GitHub', whatsapp: 'WhatsApp' };
+  const REFS = { '': 'Direct / message privé / appli', google: 'Google', bing: 'Bing', duckduckgo: 'DuckDuckGo', yahoo: 'Yahoo', qwant: 'Qwant', ecosia: 'Ecosia', facebook: 'Facebook', instagram: 'Instagram', tiktok: 'TikTok', youtube: 'YouTube', reddit: 'Reddit', discord: 'Discord', x: 'X (Twitter)', linkedin: 'LinkedIn', pinterest: 'Pinterest', itch: 'itch.io', producthunt: 'Product Hunt', github: 'GitHub', whatsapp: 'WhatsApp', chatgpt: 'ChatGPT', perplexity: 'Perplexity', copilot: 'Copilot', gemini: 'Gemini', claude: 'Claude' };
   const refName = (k) => REFS[k] ?? k;
   const dur = (s) => s < 60 ? '< 1 min' : s < 3600 ? Math.round(s / 60) + ' min' : Math.floor(s / 3600) + ' h ' + String(Math.round((s % 3600) / 60)).padStart(2, '0');
   const doing = (x) => x.page === '/game/' ? (x.rounds ? `joue${x.mode ? ' (' + (MODES[x.mode] || x.mode).toLowerCase() + ')' : ''}` : 'est à la table') : 'lit ' + page(x.page);

@@ -41,6 +41,9 @@ function parseUA(ua) {
 }
 
 // Source : nom de domaine du site d'origine, simplifié (google.fr, www.google.com → google)
+// Assistants IA : ChatGPT ajoute ?utm_source=chatgpt.com à ses liens
+const AI = /^(chatgpt|perplexity|copilot|gemini|claude)/;
+
 function cleanRef(r) {
   const h = String(r || '').toLowerCase().replace(/^www\.|^m\.|^l\.|^lm\.|^out\./, '').slice(0, 60);
   if (!/^[a-z0-9.-]+\.[a-z]{2,}$/.test(h) || /blackjack-play\.app$/.test(h)) return '';
@@ -102,7 +105,7 @@ export async function onRequestPost({ request, env }) {
       else if (e === 'drill') { v.drills += n; v.page = '/game/'; }
       else if (e === 'welcome') v.mode = p === 'casino' ? 'libre' : p;
       else if (e === 'dl') v.dl += n;
-      else if (e === 'ref') v.camp = p;
+      else if (e === 'ref') { if (AI.test(p)) v.ai = p.match(AI)[1]; else v.camp = p; }
       if (e === 'ping') continue;
       if (e !== 'view') {
         stmts.push(env.DB.prepare(
@@ -115,7 +118,7 @@ export async function onRequestPost({ request, env }) {
         ).bind(slot, e, e === 'view' ? p : (e === 'round' ? p : ''), src, country, city, lat, lon, n));
       }
     }
-    if (!v.page && !v.views && !v.starts && !v.rounds && !v.drills && !v.dl && !v.mode && !v.camp) {
+    if (!v.page && !v.views && !v.starts && !v.rounds && !v.drills && !v.dl && !v.mode && !v.camp && !v.ai) {
       if (stmts.length) await env.DB.batch(stmts);
       return new Response(null, { status: 204, headers: CORS });
     }
@@ -134,7 +137,7 @@ export async function onRequestPost({ request, env }) {
          mode = CASE WHEN excluded.mode <> '' THEN excluded.mode ELSE mode END,
          views = views + excluded.views, starts = starts + excluded.starts, rounds = rounds + excluded.rounds,
          drills = drills + excluded.drills, dl = dl + excluded.dl, ret = max(ret, excluded.ret)`,
-    ).bind(day, vid, t, SRC_BIT[src], country, city, lat, lon, device, os, browser, v.entry, cleanRef(body.r), v.camp, v.page, v.mode,
+    ).bind(day, vid, t, SRC_BIT[src], country, city, lat, lon, device, os, browser, v.entry, v.ai || cleanRef(body.r), v.camp, v.page, v.mode,
       v.views, v.starts, v.rounds, v.drills, v.dl, body.ret ? 1 : 0));
     // Présence par tranche de 10 minutes (courbe du direct, heures d'affluence en personnes)
     stmts.push(env.DB.prepare('INSERT OR IGNORE INTO presence (slot, vid) VALUES (?1, ?2)').bind(slot, vid));

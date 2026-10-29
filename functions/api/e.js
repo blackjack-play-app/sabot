@@ -17,6 +17,8 @@ const ALLOWED = {
 // Événements reportés sur la carte et l'activité détaillée (table hits)
 const GEO = new Set(['view', 'start', 'round', 'dl']);
 const SRC_BIT = { web: 1, desktop: 2, pwa: 4, itch: 8 };
+// Réseaux de data centers (robots d'indexation, scanners de liens) : Google, Amazon, Microsoft, Facebook, hébergeurs
+const DC_ASN = new Set([15169, 396982, 16509, 14618, 8075, 32934, 14061, 24940, 63949, 20473, 45102, 37963, 132203, 16276, 51167]);
 const BOT = /bot|crawl|spider|slurp|headless|lighthouse|pagespeed|preview|facebookexternalhit|embedly|python|curl|wget|httpclient|okhttp|go-http|java\//i;
 
 const CORS = {
@@ -77,6 +79,7 @@ export async function onRequestPost({ request, env }) {
     const list = Array.isArray(body.events) ? body.events.slice(0, 20) : [body];
     const src = /^(web|desktop|pwa|itch)$/.test(body.src) ? body.src : 'web';
     const cf = request.cf || {};
+    if (DC_ASN.has(Number(cf.asn))) return new Response(null, { status: 204, headers: CORS });
     const country = cf.country || '';
     const city = String(cf.city || '').slice(0, 60);
     const lat = Number.isFinite(+cf.latitude) ? Math.round(+cf.latitude * 10) / 10 : null;

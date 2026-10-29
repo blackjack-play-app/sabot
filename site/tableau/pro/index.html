@@ -261,7 +261,8 @@
     const heatMax = Math.max(1, ...heat.flat());
     const perDay = g.parJour || [];
     const google = (g.sources || []).find((x) => x.k === 'google');
-    const mobile = sum((g.appareils || []).filter((x) => x.k !== 'desktop'), (x) => x.n);
+    const mobile = sum((g.appareils || []).filter((x) => x.k === 'mobile' || x.k === 'tablet'), (x) => x.n);
+    const known = sum((g.appareils || []).filter((x) => x.k), (x) => x.n);
     const avgPlay = played ? (T.duree_joueurs || 0) / played : 0;
 
     // Conseils calculés sur les vraies données
@@ -270,7 +271,7 @@
     if (V >= 10) tips.push(launch / V < 0.4 ? ['warn', '🎯', `<b>${pct(launch, V)} des visiteurs ouvrent le jeu.</b> Mets le bouton « Jouer » encore plus en avant sur les guides.`] : ['ok', '🎯', `<b>${pct(launch, V)} des visiteurs ouvrent le jeu</b> et ${pct(played, V)} jouent au moins une donne.`]);
     if (played >= 5) tips.push(['', '⏱', `<b>Un joueur reste en moyenne ${dur(avgPlay)}.</b> ${T.accros ? fmt(T.accros) + ' ont enchaîné 10 donnes ou plus.' : ''}`]);
     tips.push(['', '🤝', '<b>Chaque lien depuis un autre site = un vote pour Google.</b> Reddit (r/blackjack, r/WebGames), itch.io, Product Hunt, forums de cartes.']);
-    tips.push(['', '📱', V && mobile / V > 0.4 ? `<b>${pct(mobile, V)} viennent du téléphone.</b> TikTok / Reels / Shorts sont ton meilleur canal.` : '<b>Vidéos courtes</b> (TikTok, Reels, Shorts) : « Tu aurais tiré ? », coach qui corrige. Lien en bio.']);
+    tips.push(['', '📱', known >= 10 && mobile / known > 0.4 ? `<b>${pct(mobile, known)} des visiteurs dont l'appareil est connu sont sur téléphone.</b> TikTok / Reels / Shorts sont ton meilleur canal.` : '<b>Vidéos courtes</b> (TikTok, Reels, Shorts) : « Tu aurais tiré ? », coach qui corrige. Lien en bio.']);
     tips.push(['', '🔗', '<b>Utilise des liens suivis</b> (en bas) pour savoir quel post amène vraiment des joueurs.']);
 
     const sessRow = (x) => {
@@ -344,9 +345,9 @@
       </div>
 
       <div class="g4">
-        <div class="card"><h2>Appareils</h2>${donut((g.appareils || []).map((x) => ({ k: DEV[x.k] || x.k, n: x.n })))}</div>
-        <div class="card"><h2>Systèmes</h2>${rows(g.systemes || [], 6)}</div>
-        <div class="card"><h2>Navigateurs</h2>${rows(g.navigateurs || [], 6)}</div>
+        <div class="card"><h2>Appareils</h2>${donut((g.appareils || []).map((x) => ({ k: DEV[x.k] || x.k || 'Inconnu (avant le 29 oct.)', n: x.n })))}</div>
+        <div class="card"><h2>Systèmes</h2>${rows((g.systemes || []).map((x) => ({ ...x, k: x.k || 'Inconnu (avant le 29 oct.)' })), 6)}</div>
+        <div class="card"><h2>Navigateurs</h2>${rows((g.navigateurs || []).map((x) => ({ ...x, k: x.k === '(estimé)' ? 'Inconnu (avant le 29 oct.)' : x.k })), 6)}</div>
         <div class="card"><h2>Modes joués <em>donnes</em></h2>${donut(toList(group('round', MODES)))}</div>
       </div>
 

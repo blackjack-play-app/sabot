@@ -1,0 +1,72 @@
+<!--
+{
+  "lang": "en",
+  "alt": "/16-contre-10-blackjack",
+  "path": "/en/16-vs-10-blackjack",
+  "priority": 0.7,
+  "updated": "2026-10-29",
+  "title": "16 vs 10 in Blackjack: Hit, Stand or Surrender? (The Real Numbers)",
+  "ogTitle": "16 vs 10 in blackjack: what to do",
+  "description": "16 against a dealer 10: the worst hand in blackjack. Hit, stand or surrender? The exact loss of each choice, the 3-card exception and the card counter's rule.",
+  "jsonld": {
+    "@context": "https://schema.org",
+    "@graph": [
+      { "@type": "Article", "headline": "16 vs 10 in blackjack: hit, stand or surrender?", "inLanguage": "en", "datePublished": "{{updated}}", "dateModified": "{{updated}}", "image": "{{domain}}/assets/img/screens/strategie.webp", "author": { "@type": "Organization", "name": "Blackjack Play" }, "publisher": { "@type": "Organization", "name": "Blackjack Play", "logo": { "@type": "ImageObject", "url": "{{domain}}/assets/img/icon-512.png" } }, "mainEntityOfPage": "{{domain}}/en/16-vs-10-blackjack" },
+      { "@type": "BreadcrumbList", "itemListElement": [ { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{domain}}/en/" }, { "@type": "ListItem", "position": 2, "name": "Learn", "item": "{{domain}}/en/learn" }, { "@type": "ListItem", "position": 3, "name": "16 vs 10", "item": "{{domain}}/en/16-vs-10-blackjack" } ] },
+      { "@type": "FAQPage", "mainEntity": [
+        { "@type": "Question", "name": "Should you hit 16 against a 10 in blackjack?", "acceptedAnswer": { "@type": "Answer", "text": "If surrender is allowed, surrender: you lose 50% of your bet instead of about 54%. Otherwise hit a two-card 16; stand on a 16 made of three or more cards." } },
+        { "@type": "Question", "name": "How much do you lose with 16 vs 10?", "acceptedAnswer": { "@type": "Answer", "text": "About 54% of the bet on average, whether you hit or stand. It is the worst hand in the game." } }
+      ] }
+    ]
+  }
+}
+-->
+<header class="page-head">
+  <div class="wrap">
+    <div class="crumbs"><a href="/en/">Home</a> › <a href="/en/learn">Learn</a> › 16 vs 10</div>
+    <h1>16 vs 10: hit, stand or surrender?</h1>
+    <p>The hand everyone hates. There is no good choice, only one that loses a little less. Here it is, with the numbers.</p>
+  </div>
+</header>
+<div class="wrap doc">
+  <nav class="toc" aria-label="Contents"><p>On this page</p><ol><li><a href="#answer">The answer</a></li><li><a href="#numbers">The numbers</a></li><li><a href="#exceptions">Exceptions</a></li><li><a href="#why">Why</a></li><li><a href="#faq">FAQ</a></li></ol></nav>
+  <article class="prose">
+    <h2 id="answer">The short answer</h2>
+    <ol>
+      <li><strong>Surrender</strong> if the table allows it.</li>
+      <li>Otherwise <strong>hit</strong> a two-card 16 (10 + 6, 9 + 7).</li>
+      <li><strong>Stand</strong> if your 16 has three or more cards (say 5 + 4 + 7).</li>
+      <li>With 8 + 8: <strong>split</strong> (see <a href="/en/when-to-split">when to split</a>).</li>
+    </ol>
+
+    <h2 id="numbers">What each choice costs</h2>
+    <table class="tbl">
+      <thead><tr><th>Choice</th><th>Average loss per hand</th></tr></thead>
+      <tbody>
+        <tr><td>Surrender</td><td><strong>50%</strong> of the bet (fixed)</td></tr>
+        <tr><td>Hit</td><td>about 54.0%</td></tr>
+        <tr><td>Stand</td><td>about 54.0% (a hair more than hitting)</td></tr>
+      </tbody>
+    </table>
+    <p>Exact calculation: infinite shoe, dealer stands on soft 17 and has checked for blackjack. Hitting and standing are almost tied; with a real 6-deck shoe and a 10 + 6, hitting is slightly better because you removed a 10 that could have helped the dealer.</p>
+    <div class="callout"><p>Over 100 hands of 16 vs 10 at $10: surrendering costs $500, hitting or standing about $540. It's not the play that wins, it's the one that loses least.</p></div>
+
+    <h2 id="exceptions">Exceptions</h2>
+    <ul>
+      <li><strong>Three-card 16 or more: stand.</strong> Your hand already holds several small cards, so fewer are left to save you.</li>
+      <li><strong>Card counters: stand when the Hi-Lo true count is zero or higher.</strong> The most famous deviation (see <a href="/en/card-counting">card counting</a>). A 10-rich shoe would bust you more often.</li>
+      <li><strong>European blackjack</strong> (no hole card): same answer, but surrender is rarely offered.</li>
+    </ul>
+
+    <h2 id="why">Why it's so bad</h2>
+    <p>With a 10 showing, the dealer ends on 17 or more <strong>77% of the time</strong> (<a href="/en/blackjack-odds#dealer">full table</a>). If you stand you only win when he busts: 23%. If you hit you bust 62% of the time, but when you draw an ace to a 5 you finally have a hand that can win. The two options balance out almost perfectly.</p>
+    <div class="try"><p>You get this hand about once every 50 hands. Learn to play it without hesitating.</p><a class="btn btn-gold" href="/en/blackjack-quiz">{{ico:target}}Take the quiz</a></div>
+
+    <h2 id="faq">FAQ</h2>
+    <div class="faq">
+      <details><summary>Should you hit 16 against a 10?</summary><p>If surrender is allowed, surrender. Otherwise hit a two-card 16, stand on a 16 of three or more cards.</p></details>
+      <details><summary>What about 16 against a 9 or an ace?</summary><p>Same idea: surrender if you can, otherwise hit. Against a 7 or 8, always hit (no surrender).</p></details>
+      <details><summary>And 15 against 10?</summary><p>Surrender if you can, otherwise hit. 15 against 9 or ace: hit.</p></details>
+    </div>
+  </article>
+</div>

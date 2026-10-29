@@ -174,6 +174,11 @@ for (const file of pageFiles) {
   let body = src.slice(m[0].length);
   const pv = { ...vars, updated: meta.updated || cfg.releaseDate };
   const lv = meta.lang === 'en' ? { ...varsEn, ...Object.fromEntries(Object.keys(cfg.downloads).map((k) => [`dl:${k}:size`, cfg.downloads[k].sizeEn])) } : vars;
+  // Liens Amazon : {{amz:fr:mots+clés}} → recherche Amazon (avec l'identifiant partenaire s'il est réglé dans site.config.json)
+  body = body.replace(/\{\{amz:(fr|com|co\.uk):([^}]+)\}\}/g, (all, tld, k) => {
+    const tag = (cfg.amazonTags || {})[tld];
+    return `https://www.amazon.${tld}/s?k=${k}${tag ? '&amp;tag=' + tag : ''}`;
+  });
   body = body.replace(/\{\{([\w:-]+)\}\}/g, (all, k) => (k in lv ? lv[k] : all));
   if (meta.lang === 'fr') {
     // Typographie française : espaces insécables (pas de « ? » ou « : » seuls en début de ligne)

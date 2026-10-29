@@ -1,0 +1,65 @@
+<!--
+{
+  "lang": "en",
+  "alt": "/assurance-blackjack",
+  "path": "/en/blackjack-insurance",
+  "priority": 0.7,
+  "updated": "2026-10-29",
+  "title": "Should You Take Insurance in Blackjack? (No, and Here Is the Math)",
+  "ogTitle": "Should you take insurance in blackjack?",
+  "description": "Blackjack insurance explained: how it works, why it loses about 7% of the amount insured, even money on a blackjack, and the one case where a card counter takes it.",
+  "jsonld": {
+    "@context": "https://schema.org",
+    "@graph": [
+      { "@type": "Article", "headline": "Should you take insurance in blackjack?", "inLanguage": "en", "datePublished": "{{updated}}", "dateModified": "{{updated}}", "image": "{{domain}}/assets/img/screens/strategie.webp", "author": { "@type": "Organization", "name": "Blackjack Play" }, "publisher": { "@type": "Organization", "name": "Blackjack Play", "logo": { "@type": "ImageObject", "url": "{{domain}}/assets/img/icon-512.png" } }, "mainEntityOfPage": "{{domain}}/en/blackjack-insurance" },
+      { "@type": "BreadcrumbList", "itemListElement": [ { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{domain}}/en/" }, { "@type": "ListItem", "position": 2, "name": "Learn", "item": "{{domain}}/en/learn" }, { "@type": "ListItem", "position": 3, "name": "Insurance", "item": "{{domain}}/en/blackjack-insurance" } ] },
+      { "@type": "FAQPage", "mainEntity": [
+        { "@type": "Question", "name": "Should you take insurance in blackjack?", "acceptedAnswer": { "@type": "Answer", "text": "No. The dealer has a 10 underneath about 31% of the time, while insurance needs 33.3% to break even. It loses about 7% of the amount insured." } },
+        { "@type": "Question", "name": "Should you take even money with a blackjack?", "acceptedAnswer": { "@type": "Answer", "text": "No: it is exactly the same as insuring. Declining wins a little more on average (about 1.04 times your bet instead of 1)." } }
+      ] }
+    ]
+  }
+}
+-->
+<header class="page-head">
+  <div class="wrap">
+    <div class="crumbs"><a href="/en/">Home</a> › <a href="/en/learn">Learn</a> › Insurance</div>
+    <h1>Should you take insurance in blackjack?</h1>
+    <p>No. The dealer offers it with a smile, and it is one of the best bets in the house… for the house. Here is the math in three lines.</p>
+  </div>
+</header>
+<div class="wrap doc">
+  <nav class="toc" aria-label="Contents"><p>On this page</p><ol><li><a href="#how">How it works</a></li><li><a href="#math">The math</a></li><li><a href="#even-money">Even money</a></li><li><a href="#counters">Counters</a></li><li><a href="#faq">FAQ</a></li></ol></nav>
+  <article class="prose">
+    <h2 id="how">How insurance works</h2>
+    <p>When the dealer's up card is an <strong>ace</strong>, he offers insurance before checking his hole card. You put up to half your bet. If he has blackjack (a 10 underneath), insurance pays <strong>2 to 1</strong>; otherwise you lose it and the round goes on.</p>
+    <div class="callout"><p><strong>Example:</strong> bet 10, insurance 5. Dealer has blackjack: you lose your 10 but win 10 on insurance, net 0. No blackjack: you lose the 5, and your hand plays out normally.</p></div>
+
+    <h2 id="math">The math</h2>
+    <p>Insurance pays 2 to 1, so it would need the dealer to have a 10 underneath <strong>more than one time in three</strong> (33.3%).</p>
+    <p>In a 6-deck shoe, after the dealer's ace and your two cards, about 96 of the remaining 309 to 311 cards are 10s: roughly <strong>31%</strong>.</p>
+    <table class="tbl">
+      <thead><tr><th>Over 100 insurance bets of $5</th><th>Result</th></tr></thead>
+      <tbody>
+        <tr><td>31 times the dealer has blackjack</td><td>+$10 × 31 = <strong>+$310</strong></td></tr>
+        <tr><td>69 times he doesn't</td><td>-$5 × 69 = <strong>-$345</strong></td></tr>
+        <tr><td>Net</td><td><strong>-$35</strong>, about -7%</td></tr>
+      </tbody>
+    </table>
+    <p>Your own hand barely matters: holding 20 doesn't make insurance better, quite the opposite (your two 10s are two fewer 10s for the dealer).</p>
+
+    <h2 id="even-money">"Even money" when you have blackjack</h2>
+    <p>With a blackjack against a dealer ace, you are offered a 1 to 1 payout right away. It is <strong>insurance in disguise</strong>: you trade an average win of about 1.04 times your bet for a guaranteed 1. Decline, unless you truly need the certainty.</p>
+
+    <h2 id="counters">The only time insurance pays</h2>
+    <p>A card counter takes it when the <strong>Hi-Lo true count reaches +3</strong>: the shoe then holds enough 10s to beat 33.3%. It is the single most valuable deviation. See <a href="/en/card-counting">card counting</a>.</p>
+    <div class="try"><p>In the game, counting mode tells you when insurance becomes worth it.</p><a class="btn btn-gold" href="/game/?lang=en&amp;mode=comptage">{{ico:brain}}Try counting mode</a></div>
+
+    <h2 id="faq">FAQ</h2>
+    <div class="faq">
+      <details><summary>Should you insure a 20?</summary><p>No. It is even worse than with a small hand: your two 10s are out of the shoe.</p></details>
+      <details><summary>Should you take even money?</summary><p>No, it is the same as insurance. Declining pays a little more on average.</p></details>
+      <details><summary>What about European blackjack?</summary><p>Insurance exists there too, with the same math: decline it.</p></details>
+    </div>
+  </article>
+</div>

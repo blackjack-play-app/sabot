@@ -89,5 +89,9 @@
       "sizeEn": "≈ 122 MB"
     }
   },
-  "downloadsVersion": "1.1.1"
+  "downloadsVersion": "1.1.1",
+  "amazonTags": {
+    "fr": "",
+    "com": ""
+  }
 }

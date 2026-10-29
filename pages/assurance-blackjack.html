@@ -1,0 +1,64 @@
+<!--
+{
+  "alt": "/en/blackjack-insurance",
+  "path": "/assurance-blackjack",
+  "priority": 0.7,
+  "updated": "2026-10-29",
+  "title": "Assurance au blackjack : faut-il la prendre ? (non, et voici le calcul)",
+  "ogTitle": "Faut-il prendre l'assurance au blackjack ?",
+  "description": "L'assurance au blackjack expliquée : comment elle fonctionne, pourquoi elle fait perdre environ 7 % de la somme assurée, « argent égal » sur un blackjack, et le seul cas où un compteur la prend.",
+  "jsonld": {
+    "@context": "https://schema.org",
+    "@graph": [
+      { "@type": "Article", "headline": "Assurance au blackjack : faut-il la prendre ?", "inLanguage": "fr", "datePublished": "{{updated}}", "dateModified": "{{updated}}", "image": "{{domain}}/assets/img/screens/strategie.webp", "author": { "@type": "Organization", "name": "Blackjack Play" }, "publisher": { "@type": "Organization", "name": "Blackjack Play", "logo": { "@type": "ImageObject", "url": "{{domain}}/assets/img/icon-512.png" } }, "mainEntityOfPage": "{{domain}}/assurance-blackjack" },
+      { "@type": "BreadcrumbList", "itemListElement": [ { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "{{domain}}/" }, { "@type": "ListItem", "position": 2, "name": "Apprendre", "item": "{{domain}}/apprendre" }, { "@type": "ListItem", "position": 3, "name": "Assurance", "item": "{{domain}}/assurance-blackjack" } ] },
+      { "@type": "FAQPage", "mainEntity": [
+        { "@type": "Question", "name": "Faut-il prendre l'assurance au blackjack ?", "acceptedAnswer": { "@type": "Answer", "text": "Non. Le croupier a un 10 caché dans environ 31 % des cas alors qu'il en faudrait 33,3 % pour que l'assurance soit rentable. Elle fait perdre environ 7 % de la somme assurée." } },
+        { "@type": "Question", "name": "Faut-il prendre « argent égal » avec un blackjack ?", "acceptedAnswer": { "@type": "Answer", "text": "Non plus : c'est exactement la même chose que s'assurer. En refusant, tu gagnes en moyenne un peu plus (environ 1,04 fois ta mise au lieu de 1)." } }
+      ] }
+    ]
+  }
+}
+-->
+<header class="page-head">
+  <div class="wrap">
+    <div class="crumbs"><a href="/">Accueil</a> › <a href="/apprendre">Apprendre</a> › Assurance</div>
+    <h1>Faut-il prendre l'assurance au blackjack ?</h1>
+    <p>Non. Le croupier te la propose avec un sourire, et c'est l'un des paris les plus rentables… pour le casino. Voici le calcul, en trois lignes.</p>
+  </div>
+</header>
+<div class="wrap doc">
+  <nav class="toc" aria-label="Sommaire"><p>Sur cette page</p><ol><li><a href="#fonctionnement">Comment ça marche</a></li><li><a href="#calcul">Le calcul</a></li><li><a href="#argent-egal">Argent égal</a></li><li><a href="#compteurs">Les compteurs</a></li><li><a href="#faq">Questions</a></li></ol></nav>
+  <article class="prose">
+    <h2 id="fonctionnement">Comment marche l'assurance</h2>
+    <p>Quand la carte visible du croupier est un <strong>as</strong>, il propose l'assurance avant de regarder sa carte cachée. Tu poses jusqu'à la moitié de ta mise. S'il a un blackjack (un 10 caché), l'assurance paie <strong>2 contre 1</strong> ; sinon, tu la perds et la donne continue.</p>
+    <div class="callout"><p><strong>Exemple :</strong> mise 10, assurance 5. Le croupier a un blackjack : tu perds tes 10 mais gagnes 10 sur l'assurance, bilan 0. Il n'a pas de blackjack : tu perds les 5 de l'assurance, et ta main se joue normalement.</p></div>
+
+    <h2 id="calcul">Le calcul</h2>
+    <p>L'assurance paie 2 contre 1 : pour être rentable, il faudrait que le croupier ait un 10 caché <strong>plus d'une fois sur trois</strong> (33,3 %).</p>
+    <p>Dans un sabot de 6 jeux, après l'as du croupier et tes deux cartes, il reste environ 96 cartes de valeur 10 sur 309 à 311. La probabilité est donc d'environ <strong>31 %</strong>.</p>
+    <table class="tbl">
+      <thead><tr><th>Sur 100 assurances de 5 €</th><th>Résultat</th></tr></thead>
+      <tbody>
+        <tr><td>31 fois le croupier a un blackjack</td><td>+10 € × 31 = <strong>+310 €</strong></td></tr>
+        <tr><td>69 fois il n'en a pas</td><td>-5 € × 69 = <strong>-345 €</strong></td></tr>
+        <tr><td>Bilan</td><td><strong>-35 €</strong>, soit environ -7 %</td></tr>
+      </tbody>
+    </table>
+    <p>Ta propre main n'y change presque rien : avoir 20 ne rend pas l'assurance meilleure, au contraire (tes deux 10 sont autant de 10 en moins pour le croupier).</p>
+
+    <h2 id="argent-egal">« Argent égal » quand tu as un blackjack</h2>
+    <p>Si tu as un blackjack et que le croupier montre un as, on te propose d'être payé 1 contre 1 tout de suite. C'est <strong>exactement une assurance</strong> déguisée : tu échanges un gain moyen d'environ 1,04 fois ta mise contre 1 fois garanti. Refuse, sauf si tu as vraiment besoin de la certitude.</p>
+
+    <h2 id="compteurs">Le seul cas où l'assurance est rentable</h2>
+    <p>Un compteur de cartes la prend quand le <strong>compte réel Hi-Lo atteint +3</strong> : le sabot contient alors assez de 10 pour dépasser les 33,3 %. C'est la plus importante de toutes les déviations. Voir <a href="/compter-les-cartes-blackjack">compter les cartes</a>.</p>
+    <div class="try"><p>Dans le jeu, le mode Comptage te dit quand l'assurance devient rentable.</p><a class="btn btn-gold" href="/game/?mode=comptage">{{ico:brain}}Essayer le comptage</a></div>
+
+    <h2 id="faq">Questions fréquentes</h2>
+    <div class="faq">
+      <details><summary>Faut-il prendre l'assurance avec un 20 ?</summary><p>Non. C'est même pire qu'avec une petite main : tes deux 10 ne sont plus dans le sabot.</p></details>
+      <details><summary>Faut-il prendre « argent égal » ?</summary><p>Non, c'est la même chose qu'une assurance. Refuser rapporte un peu plus en moyenne.</p></details>
+      <details><summary>Et au blackjack européen ?</summary><p>L'assurance existe aussi, avec le même calcul : à refuser.</p></details>
+    </div>
+  </article>
+</div>

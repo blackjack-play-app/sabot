@@ -1,0 +1,88 @@
+<!--
+{
+  "alt": "/en/blackjack-quiz",
+  "path": "/quiz-blackjack",
+  "priority": 0.9,
+  "updated": "2026-10-29",
+  "title": "Quiz blackjack : tirer, rester ou doubler ? Teste ta stratégie (20 mains)",
+  "ogTitle": "Quiz blackjack : tu aurais tiré ou resté ?",
+  "description": "Quiz gratuit de blackjack : 20 mains au hasard, choisis tirer, rester, doubler, séparer ou abandonner. Correction immédiate avec la stratégie de base et score à partager.",
+  "jsonld": {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Quiz",
+        "name": "Quiz de stratégie de base au blackjack",
+        "about": "Stratégie de base du blackjack",
+        "educationalLevel": "débutant à confirmé",
+        "inLanguage": "fr",
+        "isAccessibleForFree": true,
+        "dateModified": "{{updated}}",
+        "provider": { "@type": "Organization", "name": "Blackjack Play", "url": "{{domain}}/" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "{{domain}}/" },
+          { "@type": "ListItem", "position": 2, "name": "Apprendre", "item": "{{domain}}/apprendre" },
+          { "@type": "ListItem", "position": 3, "name": "Quiz blackjack", "item": "{{domain}}/quiz-blackjack" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Combien de bonnes réponses faut-il pour bien jouer au blackjack ?", "acceptedAnswer": { "@type": "Answer", "text": "Un joueur qui applique la stratégie de base sans erreur fait 20 sur 20. À partir de 17 sur 20, il ne reste que quelques mains pièges (mains souples, paires de 9, 12 contre 2 ou 3)." } },
+          { "@type": "Question", "name": "Sur quelles règles le quiz est-il basé ?", "acceptedAnswer": { "@type": "Answer", "text": "6 jeux de cartes, croupier qui reste sur 17 souple, doubler sur deux cartes et après séparation, abandon tardif autorisé. Ce sont les règles les plus courantes." } }
+        ]
+      }
+    ]
+  },
+  "scripts": "<script src=\"/assets/js/quiz.js\" defer></script>"
+}
+-->
+<header class="page-head">
+  <div class="wrap">
+    <div class="crumbs"><a href="/">Accueil</a> › <a href="/apprendre">Apprendre</a> › Quiz</div>
+    <h1>Quiz blackjack : tu aurais tiré ou resté ?</h1>
+    <p>20 mains tirées au hasard. Pour chacune, choisis le meilleur coup. La correction s'affiche tout de suite, avec la raison, d'après la stratégie de base.</p>
+  </div>
+</header>
+<div class="wrap doc">
+  <nav class="toc" aria-label="Sommaire"><p>Sur cette page</p><ol><li><a href="#jouer">Le quiz</a></li><li><a href="#score">Ton score</a></li><li><a href="#pieges">Les mains pièges</a></li><li><a href="#faq">Questions</a></li></ol></nav>
+  <article class="prose">
+    <h2 id="jouer">Le quiz (20 mains)</h2>
+    <div class="quiz" id="quiz"><noscript>Le quiz a besoin de JavaScript. Tu peux aussi faire l'exercice flash dans le jeu.</noscript></div>
+    <script type="application/json" id="quiz-chart">{{chart:json}}</script>
+
+    <h2 id="score">Que vaut ton score ?</h2>
+    <table class="tbl">
+      <thead><tr><th>Score</th><th>Niveau</th><th>Ce que ça coûte en vrai</th></tr></thead>
+      <tbody>
+        <tr><td>20 / 20</td><td>Stratégie parfaite</td><td>Avantage du casino ramené à environ 0,5 %</td></tr>
+        <tr><td>17 à 19</td><td>Très bon joueur</td><td>Environ 0,6 à 1 % : quelques mains souples ou paires à revoir</td></tr>
+        <tr><td>13 à 16</td><td>Joueur moyen de casino</td><td>Environ 1,5 à 2,5 % : les erreurs coûtent plus cher que tu ne le crois</td></tr>
+        <tr><td>Moins de 13</td><td>Débutant</td><td>3 % et plus : apprends d'abord <a href="/strategie-de-base-blackjack">le tableau</a></td></tr>
+      </tbody>
+    </table>
+    <p>Ces chiffres sont des ordres de grandeur : le coût exact dépend des mains sur lesquelles tu te trompes. Se tromper sur un 16 contre 10 coûte peu, refuser de doubler un 11 coûte beaucoup.</p>
+
+    <h2 id="pieges">Les 6 mains qui piègent presque tout le monde</h2>
+    <ol>
+      <li><strong>12 contre 2 ou 3 : on tire.</strong> Le croupier saute moins souvent avec un 2 ou un 3 qu'avec un 4, 5 ou 6.</li>
+      <li><strong>A,7 (18 souple) contre 9, 10 ou as : on tire.</strong> 18 paraît bon, mais il perd souvent contre ces cartes. Une carte ne peut pas te faire sauter.</li>
+      <li><strong>9,9 contre 7 : on reste.</strong> Ton 18 bat le 17 que le croupier fait le plus souvent avec un 7.</li>
+      <li><strong>8,8 contre 10 : on sépare.</strong> 16 est la pire main du jeu ; deux mains qui partent de 8 valent mieux.</li>
+      <li><strong>11 contre 10 : on double.</strong> Tu as plus de chances de finir à 21 que le croupier.</li>
+      <li><strong>Jamais d'assurance</strong> sans compter les cartes : elle coûte environ 7 % de la somme assurée (<a href="/probabilites-blackjack#assurance">le calcul</a>).</li>
+    </ol>
+    <div class="try"><p>Envie de t'entraîner sur une vraie table, avec un coach qui corrige chaque coup ?</p><a class="btn btn-gold" href="/game/?mode=coach">{{ico:play}}Jouer avec le coach</a></div>
+
+    <h2 id="faq">Questions fréquentes</h2>
+    <div class="faq">
+      <details><summary>Sur quelles règles le quiz est-il basé ?</summary><p>6 jeux de cartes, croupier qui reste sur 17 souple, doubler sur deux cartes et après séparation, abandon tardif autorisé. Ce sont les règles les plus courantes. Avec d'autres règles, quelques cases changent : le tableau intégré au jeu se recalcule selon tes réglages.</p></details>
+      <details><summary>« Doubler », c'est quoi exactement ?</summary><p>Tu doubles ta mise et tu reçois une seule carte, puis ta main s'arrête. On le fait quand on est favori. Explications détaillées : <a href="/quand-doubler-blackjack">quand doubler au blackjack</a>.</p></details>
+      <details><summary>Pourquoi le bouton « Séparer » n'apparaît pas toujours ?</summary><p>On ne peut séparer qu'une paire (deux cartes de même valeur). Voir <a href="/quand-separer-blackjack">quand séparer ses cartes</a>.</p></details>
+      <details><summary>Est-ce que bien jouer permet de gagner contre le casino ?</summary><p>Non. La stratégie de base réduit l'avantage du casino au minimum, mais il reste positif pour lui. Seul le comptage des cartes, dans des conditions rares, peut l'inverser. Blackjack Play est un entraîneur sans argent réel.</p></details>
+    </div>
+  </article>
+</div>

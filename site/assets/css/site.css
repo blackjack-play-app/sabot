@@ -277,3 +277,44 @@ canvas.chart { width: 100%; height: 260px; display: block; }
 .lang-switch a[aria-current="true"] { background: var(--ink); color: #15110d; }
 .lang-switch a:hover:not([aria-current="true"]) { color: var(--ink); }
 @media (max-width: 980px) { .site-head .lang-switch { display: none; } .site-head.open .head-cta { display: flex; position: absolute; top: 260px; left: 20px; } }
+
+/* Quiz de stratégie */
+.quiz { background: radial-gradient(ellipse at 50% 0%, #1d5a3c 0%, var(--felt-2, #123826) 70%); border: 1px solid var(--line); border-radius: 16px; padding: 20px; margin: 10px 0 30px; min-height: 380px; }
+.qhead { display: flex; justify-content: space-between; font-family: var(--cond); letter-spacing: .05em; color: var(--ink-2); font-size: 15px; }
+.qhead b { color: var(--gold-2); }
+.qbar { height: 4px; background: rgba(0,0,0,.3); border-radius: 3px; margin: 8px 0 18px; overflow: hidden; }
+.qbar i { display: block; height: 100%; background: var(--gold); transition: width .3s; }
+.qtable { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; text-align: center; }
+.qtable p { margin: 0 0 8px; color: var(--ink-2); font-size: 15px; }
+.qtable em { font-style: normal; color: var(--ink); font-weight: 600; }
+.qcards { display: flex; justify-content: center; gap: 8px; }
+.qcard { width: 64px; height: 90px; border-radius: 8px; background: #f6f1e6; color: #16110c; display: grid; place-items: center; align-content: center; box-shadow: 0 4px 12px rgba(0,0,0,.35); font-family: var(--cond); }
+.qcard b { font-size: 30px; line-height: 1; } .qcard i { font-style: normal; font-size: 24px; line-height: 1; }
+.qcard.red { color: #b3261e; }
+.qcard.back { background: repeating-linear-gradient(45deg, #7a1f1f 0 6px, #8e2a2a 6px 12px); border: 3px solid #f6f1e6; }
+.qacts { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin: 22px 0 6px; }
+.qacts .btn { min-width: 112px; }
+.qacts .btn.good { background: #2f7a4f; border-color: #55b57f; color: #fff; }
+.qacts .btn.bad { background: #7a2f2a; border-color: #d65a4c; color: #fff; }
+.qacts .btn:disabled { cursor: default; }
+.qfb { text-align: center; min-height: 90px; }
+.qfb p { margin: 10px auto 12px; max-width: 56ch; color: var(--ink); }
+.qfb .ok { color: #9fe0bb; } .qfb .ko { color: #f0a090; }
+.qend { text-align: center; padding: 20px 0; }
+.qend strong { display: block; font-family: var(--cond); font-size: 84px; line-height: 1; color: var(--gold-2); }
+.qend strong small { font-size: 32px; color: var(--ink-2); }
+@media (max-width: 560px) { .qcard { width: 52px; height: 74px; } .qcard b { font-size: 24px; } .qacts .btn { min-width: 0; flex: 1 1 40%; } }
+
+/* Grille de guides */
+.guides { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 22px 0 6px; }
+.guide { display: block; padding: 16px 18px; border: 1px solid var(--line); border-radius: 12px; background: var(--bg-2); text-decoration: none; transition: border-color .15s, transform .15s; }
+.guide:hover { border-color: var(--gold); transform: translateY(-2px); }
+.guide b { display: block; color: var(--ink); font-size: 17px; margin-bottom: 4px; }
+.guide span { color: var(--ink-3); font-size: 14.5px; }
+@media (max-width: 900px) { .guides { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .guides { grid-template-columns: 1fr; } }
+
+/* Glossaire */
+.gloss { margin: 10px 0 26px; }
+.gloss dt { font-weight: 600; color: var(--ink); margin-top: 16px; }
+.gloss dd { margin: 4px 0 0; color: var(--ink-2); }

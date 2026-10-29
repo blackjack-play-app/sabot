@@ -80,6 +80,47 @@ export async function onRequestGet({ request, env }) {
     out.jeu = { totaux: totals.results, parJour: perDay.results, pays: countries.results };
   } catch (e) { out.jeu = { erreur: String(e) }; }
 
+  // 2 bis. Personnes (table visitors : un visiteur = une personne par jour, tous supports confondus)
+  try {
+    const since = start.toISOString().slice(0, 10);
+    const nowS = Math.floor(end.getTime() / 1000);
+    const yday = new Date(end.getTime() - 864e5).toISOString().slice(0, 10);
+    const W = 'WHERE day >= ?1';
+    const [tot, perDay, live, recent, geo, refs, camps, devs, oses, brs, entries, srcs, presence, heat, first] = await env.DB.batch([
+      env.DB.prepare(`SELECT COUNT(*) AS visiteurs, SUM(starts > 0) AS lancent, SUM(rounds > 0) AS jouent, SUM(rounds >= 10) AS accros,
+        SUM(rounds) AS donnes, SUM(views) AS pages, SUM(dl > 0) AS telechargent, SUM(ret) AS reviennent, SUM(drills > 0) AS exercices,
+        SUM(CASE WHEN rounds > 0 THEN t1 - t0 ELSE 0 END) AS duree_joueurs, SUM(t1 - t0) AS duree,
+        SUM(srcs & 1 > 0) AS web, SUM(srcs & 2 > 0) AS desktop, SUM(srcs & 4 > 0) AS pwa, SUM(srcs & 8 > 0) AS itch FROM visitors ${W}`).bind(since),
+      env.DB.prepare(`SELECT day, COUNT(*) AS visiteurs, SUM(starts > 0) AS lancent, SUM(rounds > 0) AS jouent, SUM(rounds) AS donnes FROM visitors ${W} GROUP BY day ORDER BY day`).bind(since),
+      env.DB.prepare('SELECT vid, t0, t1, srcs, country, city, device, os, browser, page, mode, rounds, views, ref FROM visitors WHERE day >= ?1 AND t1 >= ?2 ORDER BY t1 DESC LIMIT 60').bind(yday, nowS - 180),
+      env.DB.prepare('SELECT t0, t1, srcs, country, city, device, os, browser, entry, ref, camp, page, mode, views, starts, rounds, drills, dl, ret FROM visitors WHERE day >= ?1 ORDER BY t1 DESC LIMIT 40').bind(yday),
+      env.DB.prepare(`SELECT city, country, lat, lon, COUNT(*) AS visiteurs, SUM(starts > 0) AS lancent, SUM(rounds > 0) AS jouent, SUM(rounds) AS donnes FROM visitors ${W} AND lat IS NOT NULL GROUP BY city, country`).bind(since),
+      env.DB.prepare(`SELECT ref AS k, COUNT(*) AS n, SUM(rounds > 0) AS j FROM visitors ${W} GROUP BY ref ORDER BY n DESC LIMIT 15`).bind(since),
+      env.DB.prepare(`SELECT camp AS k, COUNT(*) AS n, SUM(rounds > 0) AS j FROM visitors ${W} AND camp <> '' GROUP BY camp ORDER BY n DESC LIMIT 15`).bind(since),
+      env.DB.prepare(`SELECT device AS k, COUNT(*) AS n FROM visitors ${W} GROUP BY device ORDER BY n DESC`).bind(since),
+      env.DB.prepare(`SELECT os AS k, COUNT(*) AS n FROM visitors ${W} GROUP BY os ORDER BY n DESC`).bind(since),
+      env.DB.prepare(`SELECT browser AS k, COUNT(*) AS n FROM visitors ${W} GROUP BY browser ORDER BY n DESC`).bind(since),
+      env.DB.prepare(`SELECT entry AS k, COUNT(*) AS n, SUM(rounds > 0) AS j FROM visitors ${W} AND entry <> '' GROUP BY entry ORDER BY n DESC LIMIT 15`).bind(since),
+      env.DB.prepare(`SELECT country AS k, COUNT(*) AS n, SUM(rounds > 0) AS j FROM visitors ${W} GROUP BY country ORDER BY n DESC LIMIT 20`).bind(since),
+      env.DB.prepare('SELECT slot, COUNT(*) AS n FROM presence WHERE slot >= ?1 GROUP BY slot ORDER BY slot').bind(new Date(end.getTime() - 3 * 3600e3).toISOString().slice(0, 15) + '0'),
+      env.DB.prepare('SELECT substr(slot, 1, 13) AS h, COUNT(DISTINCT vid) AS n FROM presence WHERE slot >= ?1 GROUP BY h').bind(start.toISOString().slice(0, 15) + '0'),
+      env.DB.prepare('SELECT MIN(day) AS d FROM visitors'),
+    ]);
+    out.gens = {
+      totaux: tot.results[0], parJour: perDay.results, direct: live.results, recents: recent.results, carte: geo.results,
+      sources: refs.results, campagnes: camps.results, appareils: devs.results, systemes: oses.results, navigateurs: brs.results,
+      entrees: entries.results, pays: srcs.results, presence: presence.results, affluence: heat.results, depuis: first.results[0]?.d || null,
+      maintenant: nowS,
+    };
+    // Ménage : 120 jours de détail
+    if (Math.random() < 0.05) {
+      await env.DB.batch([
+        env.DB.prepare('DELETE FROM visitors WHERE day < ?1').bind(new Date(end.getTime() - 120 * 864e5).toISOString().slice(0, 10)),
+        env.DB.prepare('DELETE FROM presence WHERE slot < ?1').bind(new Date(end.getTime() - 120 * 864e5).toISOString().slice(0, 15) + '0'),
+      ]);
+    }
+  } catch (e) { out.gens = { erreur: String(e) }; }
+
   // 3. Carte, direct et heures d'affluence (table hits, tranches de 10 minutes)
   if (url.searchParams.get('pro')) {
     try {

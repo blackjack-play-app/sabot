@@ -9,3 +9,4 @@ site/downloads/
 .env.*
 *.env
 .wrangler/
+.dev.vars

@@ -1,0 +1,123 @@
+<!--
+{
+  "lang": "en",
+  "alt": "/probabilites-blackjack",
+  "path": "/en/blackjack-odds",
+  "priority": 0.8,
+  "updated": "2026-10-29",
+  "title": "Blackjack Odds and Probabilities: Bust Chances, Dealer Outcomes, Blackjack (Tables)",
+  "ogTitle": "Blackjack odds in tables",
+  "description": "Every useful blackjack probability: your bust chance when hitting 12 to 20, dealer bust odds by up card, the chance of a blackjack, the insurance math and the house edge.",
+  "jsonld": {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Article",
+        "headline": "Blackjack odds and probabilities: bust chances, dealer outcomes, blackjack",
+        "inLanguage": "en",
+        "image": "{{domain}}/assets/img/screens/strategie.webp",
+        "datePublished": "{{updated}}",
+        "dateModified": "{{updated}}",
+        "author": { "@type": "Organization", "name": "Blackjack Play" },
+        "publisher": { "@type": "Organization", "name": "Blackjack Play", "logo": { "@type": "ImageObject", "url": "{{domain}}/assets/img/icon-512.png" } },
+        "mainEntityOfPage": "{{domain}}/en/blackjack-odds"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{domain}}/en/" },
+          { "@type": "ListItem", "position": 2, "name": "Learn", "item": "{{domain}}/en/learn" },
+          { "@type": "ListItem", "position": 3, "name": "Blackjack odds", "item": "{{domain}}/en/blackjack-odds" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "What are the odds of getting a blackjack?", "acceptedAnswer": { "@type": "Answer", "text": "About 4.75%, roughly one hand in 21 with 6 decks." } },
+          { "@type": "Question", "name": "Which dealer up card busts the most?", "acceptedAnswer": { "@type": "Answer", "text": "The 5 and the 6 (about 42%), then the 4 (39%). With an ace showing, the dealer busts only about 17% of the time." } },
+          { "@type": "Question", "name": "What are the odds of busting when hitting 16?", "acceptedAnswer": { "@type": "Answer", "text": "About 62%: any card from 6 to king busts you. But against a 7 or higher, standing on 16 loses even more often, which is why you hit." } }
+        ]
+      }
+    ]
+  }
+}
+-->
+<header class="page-head">
+  <div class="wrap">
+    <div class="crumbs"><a href="/en/">Home</a> › <a href="/en/learn">Learn</a> › Odds</div>
+    <h1>Blackjack odds and probabilities</h1>
+    <p>The numbers behind every decision: how often you bust when you hit, how often the dealer busts with each up card, and why insurance is a bad bet.</p>
+  </div>
+</header>
+<div class="wrap doc">
+  <nav class="toc" aria-label="Contents"><p>On this page</p><ol><li><a href="#player">Busting when you hit</a></li><li><a href="#dealer">The dealer</a></li><li><a href="#blackjack">Blackjack</a></li><li><a href="#insurance">Insurance</a></li><li><a href="#edge">House edge</a></li><li><a href="#faq">FAQ</a></li></ol></nav>
+  <article class="prose">
+    <p>Exact figures for an infinite shoe (very close to 6 or 8 decks), dealer stands on soft 17. Dealer figures assume he has already checked for blackjack, as in most casinos.</p>
+
+    <h2 id="player">Your chance of busting if you take a card</h2>
+    <table class="tbl">
+      <thead><tr><th>Your hand (hard)</th><th>Cards that bust you</th><th>Bust chance</th></tr></thead>
+      <tbody>
+        <tr><td>11 or less</td><td>none</td><td>0%</td></tr>
+        <tr><td>12</td><td>10, J, Q, K</td><td>31%</td></tr>
+        <tr><td>13</td><td>9 to king</td><td>38%</td></tr>
+        <tr><td>14</td><td>8 to king</td><td>46%</td></tr>
+        <tr><td>15</td><td>7 to king</td><td>54%</td></tr>
+        <tr><td>16</td><td>6 to king</td><td>62%</td></tr>
+        <tr><td>17</td><td>5 to king</td><td>69%</td></tr>
+        <tr><td>18</td><td>4 to king</td><td>77%</td></tr>
+        <tr><td>19</td><td>3 to king</td><td>85%</td></tr>
+        <tr><td>20</td><td>2 to king</td><td>92%</td></tr>
+      </tbody>
+    </table>
+    <p>A <strong>soft</strong> hand (with an ace counted as 11) can never bust with one card: the ace becomes 1.</p>
+
+    <h2 id="dealer">How the dealer finishes, by up card</h2>
+    <table class="tbl">
+      <thead><tr><th>Card</th><th>Bust</th><th>17</th><th>18</th><th>19</th><th>20</th><th>21</th></tr></thead>
+      <tbody>
+        <tr><td>2</td><td><strong>35%</strong></td><td>14%</td><td>13%</td><td>13%</td><td>12%</td><td>12%</td></tr>
+        <tr><td>3</td><td><strong>37%</strong></td><td>13%</td><td>13%</td><td>13%</td><td>12%</td><td>11%</td></tr>
+        <tr><td>4</td><td><strong>39%</strong></td><td>13%</td><td>13%</td><td>12%</td><td>12%</td><td>11%</td></tr>
+        <tr><td>5</td><td><strong>42%</strong></td><td>12%</td><td>12%</td><td>12%</td><td>11%</td><td>11%</td></tr>
+        <tr><td>6</td><td><strong>42%</strong></td><td>17%</td><td>11%</td><td>11%</td><td>10%</td><td>10%</td></tr>
+        <tr><td>7</td><td>26%</td><td>37%</td><td>14%</td><td>8%</td><td>8%</td><td>7%</td></tr>
+        <tr><td>8</td><td>24%</td><td>13%</td><td>36%</td><td>13%</td><td>7%</td><td>7%</td></tr>
+        <tr><td>9</td><td>23%</td><td>12%</td><td>12%</td><td>35%</td><td>12%</td><td>6%</td></tr>
+        <tr><td>10, J, Q, K</td><td>23%</td><td>12%</td><td>12%</td><td>12%</td><td>37%</td><td>4%</td></tr>
+        <tr><td>Ace</td><td>17%</td><td>19%</td><td>19%</td><td>19%</td><td>19%</td><td>8%</td></tr>
+      </tbody>
+    </table>
+    <p>This table explains all of <a href="/en/basic-strategy">basic strategy</a>: against 2 to 6 the dealer busts often, so you stand on 12 to 16 and double more. Against 7 to ace he usually ends on 17 or more: a 16 only wins if he busts, so you hit.</p>
+    <div class="callout"><p><strong>16 against a 10:</strong> if you stand, you only win when the dealer busts (23%). If you hit, you bust 62% of the time, but when you don't you often have a real hand. Both lose; hitting (or surrendering if allowed) loses slightly less.</p></div>
+
+    <h2 id="blackjack">The chance of a blackjack</h2>
+    <p>An ace plus a 10-value card on your first two cards: <strong>about 4.75%</strong>, roughly <strong>one hand in 21</strong>. The dealer has the same chance. Paid 3 to 2, blackjack is a big part of what the player wins back; paid 6 to 5, the house edge goes up by about 1.4 points. Avoid 6:5 tables.</p>
+
+    <h2 id="insurance">The insurance math</h2>
+    <p>The dealer shows an ace and offers insurance: you bet half your stake, paid 2 to 1 if he has a 10 underneath. In a 6-deck shoe, about 96 of the remaining 311 cards are 10s: roughly <strong>31%</strong>. Insurance would need more than 33.3% to break even.</p>
+    <p>Result: insurance loses about <strong>7% of the amount insured</strong>. Taking "even money" on a blackjack is the same bet. Only a card counter takes it, from a Hi-Lo true count of +3 (see <a href="/en/card-counting">card counting</a>).</p>
+
+    <h2 id="edge">The house edge</h2>
+    <table class="tbl">
+      <thead><tr><th>How you play</th><th>House edge</th></tr></thead>
+      <tbody>
+        <tr><td>Perfect basic strategy (6 decks, 3:2, common rules)</td><td>about 0.5%</td></tr>
+        <tr><td>Same, but blackjack pays 6:5</td><td>about 1.9%</td></tr>
+        <tr><td>Playing "by feel"</td><td>2 to 4%</td></tr>
+        <tr><td>Mimic the dealer (hit to 17, never double)</td><td>about 5.5%</td></tr>
+        <tr><td>Card counter with a wide bet spread</td><td>-0.5% to -1.5% (player edge)</td></tr>
+      </tbody>
+    </table>
+    <p>The game's simulator plays hundreds of thousands of hands in seconds with your own rules: <a href="/en/blackjack-simulator">try the simulator</a>.</p>
+    <div class="try"><p>You know the numbers. Would you have hit?</p><a class="btn btn-gold" href="/en/blackjack-quiz">{{ico:target}}Take the quiz</a></div>
+
+    <h2 id="faq">FAQ</h2>
+    <div class="faq">
+      <details><summary>What are the odds of a blackjack?</summary><p>About 4.75%, roughly one hand in 21 with 6 decks.</p></details>
+      <details><summary>Which dealer card busts the most?</summary><p>The 5 and 6 (about 42%), then the 4 (39%). With an ace, the dealer busts only about 17% of the time.</p></details>
+      <details><summary>How often does the dealer bust overall?</summary><p>About 28% of the time across all up cards. The player busts more often because he acts first: that is where the house edge comes from.</p></details>
+      <details><summary>Do cards already dealt change the odds?</summary><p>Yes, a little: that is the idea behind card counting. Many small cards gone = a shoe rich in 10s and aces, better for the player.</p></details>
+    </div>
+  </article>
+</div>

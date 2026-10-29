@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  <url><loc>https://blackjack-play.app/apprendre</loc><lastmod>2026-10-15</lastmod><priority>0.9</priority>
+  <url><loc>https://blackjack-play.app/apprendre</loc><lastmod>2026-10-29</lastmod><priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="fr" href="https://blackjack-play.app/apprendre"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://blackjack-play.app/en/learn"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://blackjack-play.app/en/learn"/></url>
@@ -8,11 +8,19 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://blackjack-play.app/compter-les-cartes-blackjack"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://blackjack-play.app/en/card-counting"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://blackjack-play.app/en/card-counting"/></url>
-  <url><loc>https://blackjack-play.app/credits</loc><lastmod>2026-10-15</lastmod><priority>0.3</priority>
+  <url><loc>https://blackjack-play.app/credits</loc><lastmod>2026-10-29</lastmod><priority>0.3</priority>
     <xhtml:link rel="alternate" hreflang="fr" href="https://blackjack-play.app/credits"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://blackjack-play.app/en/credits"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://blackjack-play.app/en/credits"/></url>
-  <url><loc>https://blackjack-play.app/</loc><lastmod>2026-10-15</lastmod><priority>1</priority>
+  <url><loc>https://blackjack-play.app/erreurs-blackjack</loc><lastmod>2026-10-29</lastmod><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://blackjack-play.app/erreurs-blackjack"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://blackjack-play.app/en/blackjack-mistakes"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://blackjack-play.app/en/blackjack-mistakes"/></url>
+  <url><loc>https://blackjack-play.app/glossaire-blackjack</loc><lastmod>2026-10-29</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://blackjack-play.app/glossaire-blackjack"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://blackjack-play.app/en/blackjack-glossary"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://blackjack-play.app/en/blackjack-glossary"/></url>
+  <url><loc>https://blackjack-play.app/</loc><lastmod>2026-10-29</lastmod><priority>1</priority>
     <xhtml:link rel="alternate" hreflang="fr" href="https://blackjack-play.app/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://blackjack-play.app/en/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://blackjack-play.app/en/"/></url>
@@ -20,6 +28,22 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://blackjack-play.app/jeu-blackjack-gratuit"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://blackjack-play.app/en/free-blackjack-game"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://blackjack-play.app/en/free-blackjack-game"/></url>
+  <url><loc>https://blackjack-play.app/probabilites-blackjack</loc><lastmod>2026-10-29</lastmod><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://blackjack-play.app/probabilites-blackjack"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://blackjack-play.app/en/blackjack-odds"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://blackjack-play.app/en/blackjack-odds"/></url>
+  <url><loc>https://blackjack-play.app/quand-doubler-blackjack</loc><lastmod>2026-10-29</lastmod><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://blackjack-play.app/quand-doubler-blackjack"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://blackjack-play.app/en/when-to-double-down"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://blackjack-play.app/en/when-to-double-down"/></url>
+  <url><loc>https://blackjack-play.app/quand-separer-blackjack</loc><lastmod>2026-10-29</lastmod><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://blackjack-play.app/quand-separer-blackjack"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://blackjack-play.app/en/when-to-split"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://blackjack-play.app/en/when-to-split"/></url>
+  <url><loc>https://blackjack-play.app/quiz-blackjack</loc><lastmod>2026-10-29</lastmod><priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://blackjack-play.app/quiz-blackjack"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://blackjack-play.app/en/blackjack-quiz"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://blackjack-play.app/en/blackjack-quiz"/></url>
   <url><loc>https://blackjack-play.app/regles-du-blackjack</loc><lastmod>2026-10-15</lastmod><priority>0.85</priority>
     <xhtml:link rel="alternate" hreflang="fr" href="https://blackjack-play.app/regles-du-blackjack"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://blackjack-play.app/en/blackjack-rules"/>
@@ -41,6 +65,22 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://blackjack-play.app/en/basic-strategy"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://blackjack-play.app/strategie-de-base-blackjack"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://blackjack-play.app/en/basic-strategy"/></url>
+  <url><loc>https://blackjack-play.app/en/blackjack-glossary</loc><lastmod>2026-10-29</lastmod><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://blackjack-play.app/en/blackjack-glossary"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://blackjack-play.app/glossaire-blackjack"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://blackjack-play.app/en/blackjack-glossary"/></url>
+  <url><loc>https://blackjack-play.app/en/blackjack-mistakes</loc><lastmod>2026-10-29</lastmod><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://blackjack-play.app/en/blackjack-mistakes"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://blackjack-play.app/erreurs-blackjack"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://blackjack-play.app/en/blackjack-mistakes"/></url>
+  <url><loc>https://blackjack-play.app/en/blackjack-odds</loc><lastmod>2026-10-29</lastmod><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://blackjack-play.app/en/blackjack-odds"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://blackjack-play.app/probabilites-blackjack"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://blackjack-play.app/en/blackjack-odds"/></url>
+  <url><loc>https://blackjack-play.app/en/blackjack-quiz</loc><lastmod>2026-10-29</lastmod><priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://blackjack-play.app/en/blackjack-quiz"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://blackjack-play.app/quiz-blackjack"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://blackjack-play.app/en/blackjack-quiz"/></url>
   <url><loc>https://blackjack-play.app/en/blackjack-rules</loc><lastmod>2026-10-15</lastmod><priority>0.85</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://blackjack-play.app/en/blackjack-rules"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://blackjack-play.app/regles-du-blackjack"/>
@@ -53,7 +93,7 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://blackjack-play.app/en/card-counting"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://blackjack-play.app/compter-les-cartes-blackjack"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://blackjack-play.app/en/card-counting"/></url>
-  <url><loc>https://blackjack-play.app/en/credits</loc><lastmod>2026-10-15</lastmod><priority>0.3</priority>
+  <url><loc>https://blackjack-play.app/en/credits</loc><lastmod>2026-10-29</lastmod><priority>0.3</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://blackjack-play.app/en/credits"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://blackjack-play.app/credits"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://blackjack-play.app/en/credits"/></url>
@@ -65,11 +105,11 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://blackjack-play.app/en/free-blackjack-game"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://blackjack-play.app/jeu-blackjack-gratuit"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://blackjack-play.app/en/free-blackjack-game"/></url>
-  <url><loc>https://blackjack-play.app/en/</loc><lastmod>2026-10-15</lastmod><priority>1</priority>
+  <url><loc>https://blackjack-play.app/en/</loc><lastmod>2026-10-29</lastmod><priority>1</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://blackjack-play.app/en/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://blackjack-play.app/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://blackjack-play.app/en/"/></url>
-  <url><loc>https://blackjack-play.app/en/learn</loc><lastmod>2026-10-15</lastmod><priority>0.9</priority>
+  <url><loc>https://blackjack-play.app/en/learn</loc><lastmod>2026-10-29</lastmod><priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://blackjack-play.app/en/learn"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://blackjack-play.app/apprendre"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://blackjack-play.app/en/learn"/></url>
@@ -77,5 +117,13 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://blackjack-play.app/en/stats"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://blackjack-play.app/statistiques"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://blackjack-play.app/en/stats"/></url>
+  <url><loc>https://blackjack-play.app/en/when-to-double-down</loc><lastmod>2026-10-29</lastmod><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://blackjack-play.app/en/when-to-double-down"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://blackjack-play.app/quand-doubler-blackjack"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://blackjack-play.app/en/when-to-double-down"/></url>
+  <url><loc>https://blackjack-play.app/en/when-to-split</loc><lastmod>2026-10-29</lastmod><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://blackjack-play.app/en/when-to-split"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://blackjack-play.app/quand-separer-blackjack"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://blackjack-play.app/en/when-to-split"/></url>
   <url><loc>https://blackjack-play.app/game/</loc><lastmod>2026-10-15</lastmod><priority>0.9</priority></url>
 </urlset>

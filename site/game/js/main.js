@@ -127,21 +127,30 @@ window.addEventListener('keydown', (e) => {
 });
 const TRACK_ON = window.sabotDesktop || ON_ITCH || /(^|\.)blackjack-play\.app$|pages\.dev$/.test(location.hostname);
 let trackQueue = [];
+// Joueur qui revient : il a déjà joué un autre jour (d'après ses propres statistiques locales, rien n'est stocké en plus)
+const RETURNING = (stats.bankHistory?.[0]?.t || Date.now()) < new Date().setHours(0, 0, 0, 0) ? 1 : 0;
+// Site d'origine (ex. la page itch.io qui contient le jeu), seulement s'il est extérieur
+let TRACK_REF = '';
+try { const h = new URL(document.referrer).hostname; if (!/blackjack-play\.app$/.test(h)) TRACK_REF = h; } catch { /* arrivée directe */ }
 function track(e, p, n = 1) {
   if (!TRACK_ON || noTrack()) return;
   const same = trackQueue.find((x) => x.e === e && x.p === p);
   if (same) same.n += n; else trackQueue.push({ e, p: String(p), n });
-  clearTimeout(track.t);
-  track.t = setTimeout(flushTrack, 15000);
+  // Envoi groupé au plus toutes les 10 s (le lancement part tout de suite pour le direct)
+  if (e === 'start') return flushTrack();
+  if (!track.t) track.t = setTimeout(flushTrack, 10000);
 }
 function flushTrack() {
+  clearTimeout(track.t); track.t = 0;
   if (!trackQueue.length) return;
-  const body = JSON.stringify({ src: TRACK_SRC, events: trackQueue.splice(0, 20) });
+  const body = JSON.stringify({ src: TRACK_SRC, r: TRACK_REF, ret: RETURNING, events: trackQueue.splice(0, 20) });
   try {
     if (navigator.sendBeacon) navigator.sendBeacon(TRACK_URL, new Blob([body], { type: 'text/plain' }));
     else fetch(TRACK_URL, { method: 'POST', body, keepalive: true });
   } catch { /* hors ligne : tant pis */ }
 }
+// « Toujours là » chaque minute tant que le jeu est visible : la présence en direct ne retombe pas pendant une partie
+setInterval(() => { if (!document.hidden) { track('ping', '/game/'); flushTrack(); } }, 60000);
 document.addEventListener('visibilitychange', () => { if (document.hidden) flushTrack(); });
 
 // ------------------------------------------------------------------ Utilitaires

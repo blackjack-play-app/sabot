@@ -102,6 +102,7 @@
   }
 
   function render(d) {
+    const g = d.gens || {}, G = g.totaux || {};
     const web = d.web || {}, jeu = d.jeu || {}, dls = Array.isArray(d.telechargements) ? d.telechargements : [];
     const sum = (arr, f) => (arr || []).reduce((a, x) => a + (f(x) || 0), 0);
     const tot = (e, p) => sum((jeu.totaux || []).filter((x) => x.e === e && (p === undefined || x.p === p)), (x) => x.n);
@@ -125,11 +126,11 @@
         <a class="btn btn-gold" href="/tableau/pro/" style="height:40px">Centre de contrôle (carte, direct)</a>
       </div>
       <div class="kpis6">
-        <div class="stat"><span>Visiteurs</span><b>${fmt(visits)}</b><small>${clipped ? 'depuis le ' + since : days + ' derniers jours'}</small></div>
-        <div class="stat"><span>Pages vues</span><b>${fmt(views)}</b><small>${visits ? (views / visits).toFixed(1) : '0'} par visite</small></div>
-        <div class="stat"><span>Parties lancées</span><b>${fmt(tot('start'))}</b><small>dont appli PC : ${fmt(sum((jeu.totaux || []).filter((x) => x.e === 'start' && x.p === 'desktop'), (x) => x.n))}</small></div>
-        <div class="stat"><span>Donnes jouées</span><b>${fmt(tot('round'))}</b><small>toutes plateformes</small></div>
-        <div class="stat"><span>Clics « Télécharger »</span><b>${fmt(tot('dl'))}</b><small>sur le site</small></div>
+        <div class="stat"><span>Visiteurs</span><b>${fmt(G.visiteurs)}</b><small>personnes${g.depuis ? ' (comptées depuis le ' + new Date(g.depuis + 'T12:00:00Z').toLocaleDateString('fr-FR', { day: 'numeric', month: 'long' }) + ')' : ''}</small></div>
+        <div class="stat"><span>Ouvrent le jeu</span><b>${fmt(G.lancent)}</b><small>${G.visiteurs ? Math.round(100 * G.lancent / G.visiteurs) : 0} % des visiteurs</small></div>
+        <div class="stat"><span>Joueurs</span><b>${fmt(G.jouent)}</b><small>au moins 1 donne jouée</small></div>
+        <div class="stat"><span>Donnes jouées</span><b>${fmt(G.donnes)}</b><small>${G.jouent ? (G.donnes / G.jouent).toFixed(1) : '0'} par joueur</small></div>
+        <div class="stat"><span>En ligne</span><b>${fmt((g.direct || []).length)}</b><small>en ce moment</small></div>
         <div class="stat"><span>Téléchargements</span><b>${fmt(dlTotal)}</b><small>${since ? 'depuis le ' + since : 'depuis le début'} (GitHub)</small></div>
       </div>
       <div class="panel"><h2>Évolution</h2><div class="legend2"><span><i style="background:#c9a24a"></i>Visiteurs</span><span><i style="background:#55b57f"></i>Donnes jouées</span></div><canvas class="chart" id="c1"></canvas></div>

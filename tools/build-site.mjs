@@ -46,7 +46,7 @@ const T = {
     tagline: 'Entraîneur de blackjack gratuit, en 3D, dans le navigateur ou sur ordinateur.', noMoney: 'Jetons fictifs · aucun argent réel',
     cols: [
       ['Jeu', [['/jeu-blackjack-gratuit', 'Jeu de blackjack gratuit'], ['/game/', 'Jouer en ligne'], ['/telecharger', 'Windows, macOS, Linux'], ['/statistiques', 'Mes statistiques'], ['/game/?drill=flash', 'Exercice flash']]],
-      ['Apprendre', [['/regles-du-blackjack', 'Règles du blackjack'], ['/strategie-de-base-blackjack', 'Stratégie de base'], ['/compter-les-cartes-blackjack', 'Compter les cartes'], ['/simulateur-blackjack', 'Simulateur'], ['/apprendre', 'Guide complet']]],
+      ['Apprendre', [['/regles-du-blackjack', 'Règles du blackjack'], ['/strategie-de-base-blackjack', 'Stratégie de base'], ['/compter-les-cartes-blackjack', 'Compter les cartes'], ['/quand-doubler-blackjack', 'Quand doubler'], ['/quand-separer-blackjack', 'Quand séparer'], ['/probabilites-blackjack', 'Probabilités'], ['/quiz-blackjack', 'Quiz stratégie'], ['/erreurs-blackjack', 'Erreurs fréquentes'], ['/glossaire-blackjack', 'Glossaire'], ['/simulateur-blackjack', 'Simulateur'], ['/apprendre', 'Guide complet']]],
       ['Infos', [['/credits', 'Crédits et licences'], ['/credits#confidentialite', 'Confidentialité'], ['/credits#jeu-responsable', 'Jeu responsable']]],
     ],
     legal: 'Blackjack Play est un outil d\'entraînement. Aucun pari, aucune mise d\'argent, aucun gain. Le blackjack réel reste un jeu de hasard où le casino garde l\'avantage.',
@@ -58,7 +58,7 @@ const T = {
     tagline: 'Free 3D blackjack trainer, in your browser or on your computer.', noMoney: 'Play chips only · no real money',
     cols: [
       ['Game', [['/en/free-blackjack-game', 'Free blackjack game'], ['/game/?lang=en', 'Play online'], ['/en/download', 'Windows, macOS, Linux'], ['/en/stats', 'My stats'], ['/game/?lang=en&drill=flash', 'Flash drill']]],
-      ['Learn', [['/en/blackjack-rules', 'Blackjack rules'], ['/en/basic-strategy', 'Basic strategy'], ['/en/card-counting', 'Card counting'], ['/en/blackjack-simulator', 'Simulator'], ['/en/learn', 'Full guide']]],
+      ['Learn', [['/en/blackjack-rules', 'Blackjack rules'], ['/en/basic-strategy', 'Basic strategy'], ['/en/card-counting', 'Card counting'], ['/en/when-to-double-down', 'When to double'], ['/en/when-to-split', 'When to split'], ['/en/blackjack-odds', 'Odds'], ['/en/blackjack-quiz', 'Strategy quiz'], ['/en/blackjack-mistakes', 'Common mistakes'], ['/en/blackjack-glossary', 'Glossary'], ['/en/blackjack-simulator', 'Simulator'], ['/en/learn', 'Full guide']]],
       ['Info', [['/en/credits', 'Credits & licenses'], ['/en/credits#privacy', 'Privacy'], ['/en/credits#responsible-gaming', 'Responsible gaming']]],
     ],
     legal: 'Blackjack Play is a training tool. No betting, no real money, no winnings. Real blackjack is still a game of chance where the casino keeps the edge.',
@@ -155,6 +155,8 @@ const vars = {
 };
 const ch = chartHTML(DEFAULT_RULES);
 vars['chart:hard'] = ch.hard; vars['chart:soft'] = ch.soft; vars['chart:pairs'] = ch.pairs;
+// Tableau brut pour le quiz (codes H, S, D, Ds, P, Rh par main et carte du croupier)
+{ const c = buildChart(DEFAULT_RULES); vars['chart:json'] = JSON.stringify({ hard: c.hard, soft: c.soft, pairs: c.pairs }); }
 for (const [k, f] of Object.entries(cfg.downloads)) { vars[`dl:${k}:url`] = cfg.downloadBase + f.file; vars[`dl:${k}:size`] = f.size; vars[`dl:${k}:file`] = f.file; vars[`dl:${k}:sizeEn`] = f.sizeEn; }
 
 const chEn = chartHTML(DEFAULT_RULES, 'en');
@@ -170,26 +172,27 @@ for (const file of pageFiles) {
   const meta = JSON.parse(m[1]);
   meta.lang = meta.lang || 'fr';
   let body = src.slice(m[0].length);
+  const pv = { ...vars, updated: meta.updated || cfg.releaseDate };
   const lv = meta.lang === 'en' ? { ...varsEn, ...Object.fromEntries(Object.keys(cfg.downloads).map((k) => [`dl:${k}:size`, cfg.downloads[k].sizeEn])) } : vars;
   body = body.replace(/\{\{([\w:-]+)\}\}/g, (all, k) => (k in lv ? lv[k] : all));
   if (meta.lang === 'fr') {
     // Typographie française : espaces insécables (pas de « ? » ou « : » seuls en début de ligne)
     body = body.replace(/>([^<]+)</g, (all, txt) => '>' + txt.replace(/« /g, '«\u00a0').replace(/ »/g, '\u00a0»').replace(/ ([:;?!])(?=\s|$)/g, '\u00a0$1') + '<');
   }
-  if (meta.jsonld) meta.jsonld = JSON.parse(JSON.stringify(meta.jsonld).replace(/\{\{([\w:-]+)\}\}/g, (all, k) => (k in vars ? String(vars[k]).replace(/"/g, '\\"') : all)));
+  if (meta.jsonld) meta.jsonld = JSON.parse(JSON.stringify(meta.jsonld).replace(/\{\{([\w:-]+)\}\}/g, (all, k) => (k in pv ? String(pv[k]).replace(/"/g, '\\"') : all)));
   const out = layout(meta, body);
   const dest = meta.out || (meta.path === '/' ? 'index.html' : meta.path === '/en/' ? 'en/index.html' : meta.path.replace(/^\//, '') + '.html');
   fs.mkdirSync(path.dirname(path.join(SITE, dest)), { recursive: true });
   fs.writeFileSync(path.join(SITE, dest), out);
-  if (!meta.noindex) sitemap.push({ loc: DOMAIN + meta.path, priority: meta.priority || 0.6, lang: meta.lang, alt: meta.alt ? DOMAIN + meta.alt : null });
+  if (!meta.noindex) sitemap.push({ loc: DOMAIN + meta.path, priority: meta.priority || 0.6, lang: meta.lang, alt: meta.alt ? DOMAIN + meta.alt : null, lastmod: meta.updated || cfg.releaseDate });
   console.log('page', dest);
 }
-sitemap.push({ loc: DOMAIN + '/game/', priority: 0.9 });
+sitemap.push({ loc: DOMAIN + '/game/', priority: 0.9, lastmod: cfg.gameUpdated || cfg.releaseDate });
 fs.writeFileSync(path.join(SITE, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 ${sitemap.map((s) => {
   const alts = s.alt ? `\n    <xhtml:link rel="alternate" hreflang="${s.lang}" href="${s.loc}"/>\n    <xhtml:link rel="alternate" hreflang="${s.lang === 'fr' ? 'en' : 'fr'}" href="${s.alt}"/>\n    <xhtml:link rel="alternate" hreflang="x-default" href="${s.lang === 'en' ? s.loc : s.alt}"/>` : '';
-  return `  <url><loc>${s.loc}</loc><lastmod>${cfg.releaseDate}</lastmod><priority>${s.priority}</priority>${alts}</url>`;
+  return `  <url><loc>${s.loc}</loc><lastmod>${s.lastmod || cfg.releaseDate}</lastmod><priority>${s.priority}</priority>${alts}</url>`;
 }).join('\n')}
 </urlset>
 `);

@@ -1,0 +1,89 @@
+<!--
+{
+  "lang": "en",
+  "alt": "/quiz-blackjack",
+  "path": "/en/blackjack-quiz",
+  "priority": 0.9,
+  "updated": "2026-10-29",
+  "title": "Blackjack Quiz: Hit, Stand or Double? Test Your Basic Strategy (20 hands)",
+  "ogTitle": "Blackjack quiz: would you hit or stand?",
+  "description": "Free blackjack strategy quiz: 20 random hands, choose hit, stand, double, split or surrender. Instant feedback based on basic strategy, and a score to share.",
+  "jsonld": {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Quiz",
+        "name": "Blackjack basic strategy quiz",
+        "about": "Blackjack basic strategy",
+        "educationalLevel": "beginner to advanced",
+        "inLanguage": "en",
+        "isAccessibleForFree": true,
+        "dateModified": "{{updated}}",
+        "provider": { "@type": "Organization", "name": "Blackjack Play", "url": "{{domain}}/en/" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{domain}}/en/" },
+          { "@type": "ListItem", "position": 2, "name": "Learn", "item": "{{domain}}/en/learn" },
+          { "@type": "ListItem", "position": 3, "name": "Blackjack quiz", "item": "{{domain}}/en/blackjack-quiz" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "What score means I play blackjack well?", "acceptedAnswer": { "@type": "Answer", "text": "A player who follows basic strategy perfectly scores 20 out of 20. From 17 up, only a few tricky hands remain (soft hands, pairs of 9s, 12 against a 2 or 3)." } },
+          { "@type": "Question", "name": "Which rules is the quiz based on?", "acceptedAnswer": { "@type": "Answer", "text": "6 decks, dealer stands on soft 17, double on any two cards and after splitting, late surrender allowed. These are the most common rules." } }
+        ]
+      }
+    ]
+  },
+  "scripts": "<script src=\"/assets/js/quiz.js\" defer></script>"
+}
+-->
+<header class="page-head">
+  <div class="wrap">
+    <div class="crumbs"><a href="/en/">Home</a> › <a href="/en/learn">Learn</a> › Quiz</div>
+    <h1>Blackjack quiz: would you hit or stand?</h1>
+    <p>20 random hands. Pick the best play for each one. You get the answer right away, with the reason, based on basic strategy.</p>
+  </div>
+</header>
+<div class="wrap doc">
+  <nav class="toc" aria-label="Contents"><p>On this page</p><ol><li><a href="#play">The quiz</a></li><li><a href="#score">Your score</a></li><li><a href="#traps">Trap hands</a></li><li><a href="#faq">FAQ</a></li></ol></nav>
+  <article class="prose">
+    <h2 id="play">The quiz (20 hands)</h2>
+    <div class="quiz" id="quiz"><noscript>The quiz needs JavaScript. You can also try the flash drill in the game.</noscript></div>
+    <script type="application/json" id="quiz-chart">{{chart:json}}</script>
+
+    <h2 id="score">What does your score mean?</h2>
+    <table class="tbl">
+      <thead><tr><th>Score</th><th>Level</th><th>What it costs at a real table</th></tr></thead>
+      <tbody>
+        <tr><td>20 / 20</td><td>Perfect strategy</td><td>House edge down to about 0.5%</td></tr>
+        <tr><td>17 to 19</td><td>Strong player</td><td>About 0.6 to 1%: a few soft hands or pairs to review</td></tr>
+        <tr><td>13 to 16</td><td>Average casino player</td><td>About 1.5 to 2.5%: mistakes cost more than you think</td></tr>
+        <tr><td>Under 13</td><td>Beginner</td><td>3% or more: learn <a href="/en/basic-strategy">the chart</a> first</td></tr>
+      </tbody>
+    </table>
+    <p>These are rough figures: the exact cost depends on which hands you get wrong. Misplaying 16 against a 10 costs little; refusing to double 11 costs a lot.</p>
+
+    <h2 id="traps">6 hands that trick almost everyone</h2>
+    <ol>
+      <li><strong>12 against a 2 or 3: hit.</strong> The dealer busts less often with a 2 or 3 than with a 4, 5 or 6.</li>
+      <li><strong>A,7 (soft 18) against 9, 10 or ace: hit.</strong> 18 looks good but often loses to those cards, and one card can't bust you.</li>
+      <li><strong>9,9 against a 7: stand.</strong> Your 18 beats the 17 the dealer usually makes with a 7.</li>
+      <li><strong>8,8 against a 10: split.</strong> 16 is the worst hand in the game; two hands starting at 8 lose less.</li>
+      <li><strong>11 against a 10: double.</strong> You are more likely to end on 21 than the dealer.</li>
+      <li><strong>Never take insurance</strong> unless you count cards: it loses about 7% of what you insure (<a href="/en/blackjack-odds#insurance">the math</a>).</li>
+    </ol>
+    <div class="try"><p>Want to practice at a real 3D table, with a coach that corrects every move?</p><a class="btn btn-gold" href="/game/?lang=en&amp;mode=coach">{{ico:play}}Play with the coach</a></div>
+
+    <h2 id="faq">FAQ</h2>
+    <div class="faq">
+      <details><summary>Which rules is the quiz based on?</summary><p>6 decks, dealer stands on soft 17, double on any two cards and after splitting, late surrender allowed. With other rules a few cells change: the chart in the game updates to match your settings.</p></details>
+      <details><summary>What does "double" mean?</summary><p>You double your bet and get exactly one more card. You do it when you are the favourite. Details: <a href="/en/when-to-double-down">when to double down</a>.</p></details>
+      <details><summary>Why is "Split" not always shown?</summary><p>You can only split a pair (two cards of the same value). See <a href="/en/when-to-split">when to split</a>.</p></details>
+      <details><summary>Does good play let you beat the casino?</summary><p>No. Basic strategy cuts the house edge to the minimum, but it stays positive. Only card counting, in rare conditions, can flip it. Blackjack Play is a trainer with no real money.</p></details>
+    </div>
+  </article>
+</div>

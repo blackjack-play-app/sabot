@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Probabilités au blackjack : chances de sauter, du croupier et du blackjack (tableaux)</title>
+<meta name="description" content="Toutes les probabilités utiles du blackjack : chances de sauter en tirant (12 à 20), chances que le croupier saute selon sa carte, probabilité d'un blackjack, calcul de l'assurance et avantage du casino.">
+<link rel="canonical" href="https://blackjack-play.app/probabilites-blackjack">
+<link rel="alternate" hreflang="fr" href="https://blackjack-play.app/probabilites-blackjack">
+<link rel="alternate" hreflang="en" href="https://blackjack-play.app/en/blackjack-odds">
+<link rel="alternate" hreflang="x-default" href="https://blackjack-play.app/en/blackjack-odds">
+<meta name="theme-color" content="#0d0b09">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Blackjack Play">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:title" content="Probabilités du blackjack en tableaux">
+<meta property="og:description" content="Toutes les probabilités utiles du blackjack : chances de sauter en tirant (12 à 20), chances que le croupier saute selon sa carte, probabilité d'un blackjack, calcul de l'assurance et avantage du casino.">
+<meta property="og:url" content="https://blackjack-play.app/probabilites-blackjack">
+<meta property="og:image" content="https://blackjack-play.app/assets/img/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="preload" href="/assets/fonts/source-serif-4-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/site.css">
+<script src="/assets/js/beacon.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"Probabilités au blackjack : chances de sauter, du croupier et du blackjack","inLanguage":"fr","image":"https://blackjack-play.app/assets/img/screens/strategie.webp","datePublished":"2026-10-29","dateModified":"2026-10-29","author":{"@type":"Organization","name":"Blackjack Play"},"publisher":{"@type":"Organization","name":"Blackjack Play","logo":{"@type":"ImageObject","url":"https://blackjack-play.app/assets/img/icon-512.png"}},"mainEntityOfPage":"https://blackjack-play.app/probabilites-blackjack"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://blackjack-play.app/"},{"@type":"ListItem","position":2,"name":"Apprendre","item":"https://blackjack-play.app/apprendre"},{"@type":"ListItem","position":3,"name":"Probabilités","item":"https://blackjack-play.app/probabilites-blackjack"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Quelle est la probabilité d'avoir un blackjack ?","acceptedAnswer":{"@type":"Answer","text":"Environ 4,75 %, soit à peu près une main sur 21 avec 6 jeux de cartes."}},{"@type":"Question","name":"Quelle carte du croupier saute le plus souvent ?","acceptedAnswer":{"@type":"Answer","text":"Le 6 (environ 42 %) et le 5 (environ 42 %), puis le 4 (39 %). Avec un as visible, le croupier ne saute que dans environ 17 % des cas."}},{"@type":"Question","name":"Quelles sont les chances de sauter en tirant sur 16 ?","acceptedAnswer":{"@type":"Answer","text":"Environ 62 % : toute carte de 6 à roi fait sauter. Mais contre un 7 ou plus, rester sur 16 perd encore plus souvent, d'où la règle de tirer."}}]}]}</script>
+</head>
+<body class="" data-lang="fr" data-alt="/en/blackjack-odds">
+<a class="skip" href="#contenu">Aller au contenu</a>
+<header class="site-head">
+  <div class="wrap">
+    <a class="logo" href="/" aria-label="Blackjack Play, accueil"><svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true"><rect x="3" y="5" width="18" height="24" rx="3" fill="#efe6d2" transform="rotate(-10 12 17)"/><rect x="11" y="3" width="18" height="24" rx="3" fill="#c9a24a"/><path d="M20 9c-3 3-5 5-5 7.5a2.5 2.5 0 0 0 4.4 1.6c-.2 1.2-.8 2.2-1.6 2.9h4.4c-.8-.7-1.4-1.7-1.6-2.9a2.5 2.5 0 0 0 4.4-1.6C25 14 23 12 20 9z" fill="#14100c"/></svg><span>Blackjack Play</span></a>
+    <nav class="nav" aria-label="Navigation principale"><a href="/">Accueil</a><a href="/game/">Jouer</a><a href="/telecharger">Télécharger</a><a href="/apprendre">Apprendre</a><a href="/statistiques">Statistiques</a></nav>
+    <div class="head-cta"><div class="lang-switch" role="group" aria-label="Langue">
+      <a href="/probabilites-blackjack" hreflang="fr" lang="fr" data-setlang="fr" title="Français" aria-current="true"><svg viewBox="0 0 30 20" width="24" height="16" aria-hidden="true"><rect width="10" height="20" fill="#002654"/><rect x="10" width="10" height="20" fill="#fff"/><rect x="20" width="10" height="20" fill="#ce1126"/></svg><span>FR</span></a>
+      <a href="/en/blackjack-odds" hreflang="en" lang="en" data-setlang="en" title="English"><svg viewBox="0 0 60 40" width="24" height="16" aria-hidden="true"><clipPath id="uk"><rect width="60" height="40"/></clipPath><g clip-path="url(#uk)"><rect width="60" height="40" fill="#012169"/><path d="M0 0l60 40M60 0L0 40" stroke="#fff" stroke-width="8"/><path d="M0 0l60 40M60 0L0 40" stroke="#c8102e" stroke-width="3"/><path d="M30 0v40M0 20h60" stroke="#fff" stroke-width="12"/><path d="M30 0v40M0 20h60" stroke="#c8102e" stroke-width="7"/></g></svg><span>EN</span></a>
+    </div><a class="btn btn-gold btn-sm" href="/game/"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="6 3 20 12 6 21 6 3" /></svg>Jouer</a></div>
+    <button class="menu-btn" aria-label="Menu" aria-expanded="false"><svg class="ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h.01" /> <path d="M3 18h.01" /> <path d="M3 6h.01" /> <path d="M8 12h13" /> <path d="M8 18h13" /> <path d="M8 6h13" /></svg></button>
+  </div>
+</header>
+<main id="contenu">
+<header class="page-head">
+  <div class="wrap">
+    <div class="crumbs"><a href="/">Accueil</a> › <a href="/apprendre">Apprendre</a> › Probabilités</div>
+    <h1>Les probabilités du blackjack</h1>
+    <p>Les chiffres derrière chaque décision : combien de fois tu sautes en tirant, combien de fois le croupier saute selon sa carte, et pourquoi l'assurance est un mauvais pari.</p>
+  </div>
+</header>
+<div class="wrap doc">
+  <nav class="toc" aria-label="Sommaire"><p>Sur cette page</p><ol><li><a href="#joueur">Sauter en tirant</a></li><li><a href="#croupier">Le croupier</a></li><li><a href="#blackjack">Le blackjack</a></li><li><a href="#assurance">L'assurance</a></li><li><a href="#avantage">Avantage du casino</a></li><li><a href="#faq">Questions</a></li></ol></nav>
+  <article class="prose">
+    <p>Calculs exacts avec un sabot infini (très proche de 6 ou 8 jeux), croupier qui reste sur 17 souple. Les chiffres du croupier supposent qu'il a déjà vérifié qu'il n'a pas de blackjack, comme dans la plupart des casinos.</p>
+
+    <h2 id="joueur">Chances de sauter si tu tires une carte</h2>
+    <table class="tbl">
+      <thead><tr><th>Ta main (dure)</th><th>Cartes qui font sauter</th><th>Risque de sauter</th></tr></thead>
+      <tbody>
+        <tr><td>11 ou moins</td><td>aucune</td><td>0 %</td></tr>
+        <tr><td>12</td><td>10, V, D, R</td><td>31 %</td></tr>
+        <tr><td>13</td><td>9 à roi</td><td>38 %</td></tr>
+        <tr><td>14</td><td>8 à roi</td><td>46 %</td></tr>
+        <tr><td>15</td><td>7 à roi</td><td>54 %</td></tr>
+        <tr><td>16</td><td>6 à roi</td><td>62 %</td></tr>
+        <tr><td>17</td><td>5 à roi</td><td>69 %</td></tr>
+        <tr><td>18</td><td>4 à roi</td><td>77 %</td></tr>
+        <tr><td>19</td><td>3 à roi</td><td>85 %</td></tr>
+        <tr><td>20</td><td>2 à roi</td><td>92 %</td></tr>
+      </tbody>
+    </table>
+    <p>Une main <strong>souple</strong> (avec un as compté 11) ne peut jamais sauter avec une carte : l'as redevient 1.</p>
+
+    <h2 id="croupier">Comment finit le croupier, selon sa carte visible</h2>
+    <table class="tbl">
+      <thead><tr><th>Carte</th><th>Saute</th><th>17</th><th>18</th><th>19</th><th>20</th><th>21</th></tr></thead>
+      <tbody>
+        <tr><td>2</td><td><strong>35 %</strong></td><td>14 %</td><td>13 %</td><td>13 %</td><td>12 %</td><td>12 %</td></tr>
+        <tr><td>3</td><td><strong>37 %</strong></td><td>13 %</td><td>13 %</td><td>13 %</td><td>12 %</td><td>11 %</td></tr>
+        <tr><td>4</td><td><strong>39 %</strong></td><td>13 %</td><td>13 %</td><td>12 %</td><td>12 %</td><td>11 %</td></tr>
+        <tr><td>5</td><td><strong>42 %</strong></td><td>12 %</td><td>12 %</td><td>12 %</td><td>11 %</td><td>11 %</td></tr>
+        <tr><td>6</td><td><strong>42 %</strong></td><td>17 %</td><td>11 %</td><td>11 %</td><td>10 %</td><td>10 %</td></tr>
+        <tr><td>7</td><td>26 %</td><td>37 %</td><td>14 %</td><td>8 %</td><td>8 %</td><td>7 %</td></tr>
+        <tr><td>8</td><td>24 %</td><td>13 %</td><td>36 %</td><td>13 %</td><td>7 %</td><td>7 %</td></tr>
+        <tr><td>9</td><td>23 %</td><td>12 %</td><td>12 %</td><td>35 %</td><td>12 %</td><td>6 %</td></tr>
+        <tr><td>10, V, D, R</td><td>23 %</td><td>12 %</td><td>12 %</td><td>12 %</td><td>37 %</td><td>4 %</td></tr>
+        <tr><td>As</td><td>17 %</td><td>19 %</td><td>19 %</td><td>19 %</td><td>19 %</td><td>8 %</td></tr>
+      </tbody>
+    </table>
+    <p>Ce tableau explique toute la <a href="/strategie-de-base-blackjack">stratégie de base</a> : contre 2 à 6, le croupier saute souvent, donc tu restes sur 12 à 16 et tu doubles plus. Contre 7 à as, il finit le plus souvent à 17 ou plus : une main de 16 ne gagne alors que si le croupier saute, d'où l'intérêt de tirer.</p>
+    <div class="callout"><p><strong>Le 16 contre 10 :</strong> en restant, tu ne gagnes que si le croupier saute (23 %). En tirant, tu sautes 62 % du temps, mais quand tu ne sautes pas tu as souvent une vraie main. Les deux sont perdants ; tirer (ou abandonner si la table le permet) perd un peu moins.</p></div>
+
+    <h2 id="blackjack">La probabilité d'un blackjack</h2>
+    <p>Un as et une carte de valeur 10 dès les deux premières cartes : <strong>environ 4,75 %</strong>, soit à peu près <strong>une main sur 21</strong>. Le croupier a la même probabilité. Payé 3 contre 2, le blackjack rapporte une bonne partie de ce que le joueur récupère sur le casino ; payé 6 contre 5, l'avantage du casino augmente d'environ 1,4 point. Évite les tables à 6 contre 5.</p>
+
+    <h2 id="assurance">Le calcul de l'assurance</h2>
+    <p>Le croupier montre un as et te propose l'assurance : tu mises la moitié de ta mise, payée 2 contre 1 s'il a un 10 caché. Dans un sabot de 6 jeux, il reste environ 96 cartes de valeur 10 sur 311 : la probabilité est d'environ <strong>31 %</strong>. Pour que l'assurance soit rentable, il faudrait plus de 33,3 %.</p>
+    <p>Résultat : l'assurance fait perdre environ <strong>7 % de la somme assurée</strong>. « Assurer un blackjack » (prendre « argent égal ») revient au même. Seul un compteur la prend, quand le compte réel Hi-Lo atteint +3 (voir <a href="/compter-les-cartes-blackjack">compter les cartes</a>).</p>
+
+    <h2 id="avantage">L'avantage du casino</h2>
+    <table class="tbl">
+      <thead><tr><th>Façon de jouer</th><th>Avantage du casino</th></tr></thead>
+      <tbody>
+        <tr><td>Stratégie de base parfaite (6 jeux, 3:2, règles courantes)</td><td>environ 0,5 %</td></tr>
+        <tr><td>Même chose, mais blackjack payé 6:5</td><td>environ 1,9 %</td></tr>
+        <tr><td>Joueur « au feeling »</td><td>2 à 4 %</td></tr>
+        <tr><td>Imiter le croupier (tirer jusqu'à 17, jamais doubler)</td><td>environ 5,5 %</td></tr>
+        <tr><td>Compteur de cartes avec un grand écart de mises</td><td>de -0,5 % à -1,5 % (avantage au joueur)</td></tr>
+      </tbody>
+    </table>
+    <p>Le simulateur du jeu fait jouer des centaines de milliers de mains en quelques secondes avec tes propres règles : <a href="/simulateur-blackjack">essaie le simulateur</a>.</p>
+    <div class="try"><p>Tu connais les chiffres. Et en vrai, tu aurais tiré ?</p><a class="btn btn-gold" href="/quiz-blackjack"><svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /> <circle cx="12" cy="12" r="6" /> <circle cx="12" cy="12" r="2" /></svg>Faire le quiz</a></div>
+
+    <h2 id="faq">Questions fréquentes</h2>
+    <div class="faq">
+      <details><summary>Quelle est la probabilité d'avoir un blackjack ?</summary><p>Environ 4,75 %, soit à peu près une main sur 21 avec 6 jeux de cartes.</p></details>
+      <details><summary>Quelle carte du croupier saute le plus ?</summary><p>Le 5 et le 6 (environ 42 %), puis le 4 (39 %). Avec un as, le croupier ne saute que dans environ 17 % des cas.</p></details>
+      <details><summary>Combien de fois le croupier saute-t-il en moyenne ?</summary><p>Environ 28 % du temps, toutes cartes confondues. Le joueur saute plus souvent parce qu'il joue avant lui : c'est l'origine de l'avantage du casino.</p></details>
+      <details><summary>Les cartes déjà sorties changent-elles les probabilités ?</summary><p>Oui, un peu : c'est le principe du comptage des cartes. Beaucoup de petites cartes sorties = sabot riche en 10 et en as, plus favorable au joueur.</p></details>
+    </div>
+  </article>
+</div>
+
+</main>
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="logo" href="/"><svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true"><rect x="3" y="5" width="18" height="24" rx="3" fill="#efe6d2" transform="rotate(-10 12 17)"/><rect x="11" y="3" width="18" height="24" rx="3" fill="#c9a24a"/><path d="M20 9c-3 3-5 5-5 7.5a2.5 2.5 0 0 0 4.4 1.6c-.2 1.2-.8 2.2-1.6 2.9h4.4c-.8-.7-1.4-1.7-1.6-2.9a2.5 2.5 0 0 0 4.4-1.6C25 14 23 12 20 9z" fill="#14100c"/></svg><span>Blackjack Play</span></a>
+        <p style="margin:14px 0 14px;max-width:36ch">Entraîneur de blackjack gratuit, en 3D, dans le navigateur ou sur ordinateur.</p>
+        <span class="no-money">Jetons fictifs · aucun argent réel</span>
+        <div style="margin-top:16px"><div class="lang-switch" role="group" aria-label="Langue">
+      <a href="/probabilites-blackjack" hreflang="fr" lang="fr" data-setlang="fr" title="Français" aria-current="true"><svg viewBox="0 0 30 20" width="24" height="16" aria-hidden="true"><rect width="10" height="20" fill="#002654"/><rect x="10" width="10" height="20" fill="#fff"/><rect x="20" width="10" height="20" fill="#ce1126"/></svg><span>FR</span></a>
+      <a href="/en/blackjack-odds" hreflang="en" lang="en" data-setlang="en" title="English"><svg viewBox="0 0 60 40" width="24" height="16" aria-hidden="true"><clipPath id="uk"><rect width="60" height="40"/></clipPath><g clip-path="url(#uk)"><rect width="60" height="40" fill="#012169"/><path d="M0 0l60 40M60 0L0 40" stroke="#fff" stroke-width="8"/><path d="M0 0l60 40M60 0L0 40" stroke="#c8102e" stroke-width="3"/><path d="M30 0v40M0 20h60" stroke="#fff" stroke-width="12"/><path d="M30 0v40M0 20h60" stroke="#c8102e" stroke-width="7"/></g></svg><span>EN</span></a>
+    </div></div>
+      </div>
+      <div><h4>Jeu</h4><ul><li><a href="/jeu-blackjack-gratuit">Jeu de blackjack gratuit</a></li><li><a href="/game/">Jouer en ligne</a></li><li><a href="/telecharger">Windows, macOS, Linux</a></li><li><a href="/statistiques">Mes statistiques</a></li><li><a href="/game/?drill=flash">Exercice flash</a></li></ul></div>
+      <div><h4>Apprendre</h4><ul><li><a href="/regles-du-blackjack">Règles du blackjack</a></li><li><a href="/strategie-de-base-blackjack">Stratégie de base</a></li><li><a href="/compter-les-cartes-blackjack">Compter les cartes</a></li><li><a href="/quand-doubler-blackjack">Quand doubler</a></li><li><a href="/quand-separer-blackjack">Quand séparer</a></li><li><a href="/probabilites-blackjack">Probabilités</a></li><li><a href="/quiz-blackjack">Quiz stratégie</a></li><li><a href="/erreurs-blackjack">Erreurs fréquentes</a></li><li><a href="/glossaire-blackjack">Glossaire</a></li><li><a href="/simulateur-blackjack">Simulateur</a></li><li><a href="/apprendre">Guide complet</a></li></ul></div>
+      <div><h4>Infos</h4><ul><li><a href="/credits">Crédits et licences</a></li><li><a href="/credits#confidentialite">Confidentialité</a></li><li><a href="/credits#jeu-responsable">Jeu responsable</a></li></ul></div>
+    </div>
+    <div class="foot-legal">
+      <span>Blackjack Play est un outil d'entraînement. Aucun pari, aucune mise d'argent, aucun gain. Le blackjack réel reste un jeu de hasard où le casino garde l'avantage.</span>
+      <span>Version 1.1.1</span>
+    </div>
+  </div>
+</footer>
+<script src="/assets/js/site.js" defer></script>
+
+</body>
+</html>

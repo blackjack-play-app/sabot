@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Centre de contrôle — Blackjack Play</title>
+<title>Centre de contrôle</title>
 <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="/assets/css/site.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
@@ -63,9 +63,19 @@
   .bar { height: 6px; background: rgba(255,255,255,.05); border-radius: 4px; overflow: hidden; }
   .bar i { display: block; height: 100%; background: linear-gradient(90deg, #b88d34, #e5c677); border-radius: 4px; }
   .funnel { display: grid; gap: 8px; }
-  .funnel div { display: grid; grid-template-columns: 170px minmax(0, 1fr) 70px; gap: 12px; align-items: center; font-size: 14px; color: var(--ink-2); }
+  .funnel div { display: grid; grid-template-columns: 150px minmax(0, 1fr) 100px; gap: 12px; align-items: center; font-size: 14px; color: var(--ink-2); }
   .funnel .fb { height: 26px; border-radius: 6px; background: linear-gradient(90deg, rgba(229,198,119,.85), rgba(229,198,119,.35)); min-width: 4px; }
   .funnel b { font-family: var(--cond); font-size: 18px; color: var(--ink); text-align: right; }
+  .sess { list-style: none; margin: 0; padding: 0; max-height: 340px; overflow: auto; }
+  .sess.now { max-height: 220px; margin-top: 8px; }
+  .sess li { display: grid; grid-template-columns: 50px 22px minmax(0, 1fr); gap: 8px; align-items: start; padding: 8px 0; border-top: 1px solid var(--line); font-size: 13.5px; }
+  .sess time { color: var(--ink-3); font-family: var(--cond); font-size: 14px; line-height: 1.2; }
+  .sess time small { display: block; font-size: 12px; opacity: .8; }
+  .sess .l1 { color: var(--ink-2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .sess .l1 b { color: var(--ink); font-weight: 500; }
+  .sess .l2 { color: var(--ink-3); font-size: 12.5px; margin-top: 2px; }
+  .sess .ok { color: #9fe0bb; font-weight: 500; } .sess .dlb { color: #e0a08f; font-weight: 500; }
+  .funnel b small { font-size: 12px; color: var(--ink-3); font-weight: 400; margin-left: 4px; }
   .heat { display: grid; grid-template-columns: 34px repeat(24, minmax(0, 1fr)); gap: 3px; font-size: 10.5px; color: var(--ink-3); font-family: var(--cond); }
   .heat i { aspect-ratio: 1; border-radius: 3px; background: rgba(229,198,119,.05); }
   .donut { display: flex; align-items: center; gap: 18px; }
@@ -121,7 +131,7 @@
   const COLORS = { view: '#6aa8ff', start: '#e5c677', round: '#55b57f', dl: '#e0795f' };
   const PAL = ['#e5c677', '#55b57f', '#6aa8ff', '#e0795f', '#b48cf0', '#7fd1d1'];
   const OSOF = (n) => /Windows|Setup|Portable|\.exe/.test(n) ? 'Windows' : /macOS|\.dmg/.test(n) ? 'macOS' : 'Linux';
-  const PAGES = { '/': 'Accueil', '/en/': 'Accueil (EN)', '/game/': 'Le jeu', '/telecharger': 'Télécharger', '/en/download': 'Download (EN)', '/apprendre': 'Apprendre', '/en/learn': 'Learn (EN)', '/regles-du-blackjack': 'Règles', '/strategie-de-base-blackjack': 'Stratégie de base', '/compter-les-cartes-blackjack': 'Comptage', '/simulateur-blackjack': 'Simulateur', '/jeu-blackjack-gratuit': 'Jeu gratuit', '/statistiques': 'Statistiques', '/credits': 'Crédits', '/merci': 'Merci' };
+  const PAGES = { '/': 'Accueil', '/en/': 'Accueil (EN)', '/game/': 'Le jeu', '/telecharger': 'Télécharger', '/en/download': 'Download (EN)', '/apprendre': 'Apprendre', '/en/learn': 'Learn (EN)', '/regles-du-blackjack': 'Règles', '/strategie-de-base-blackjack': 'Stratégie de base', '/compter-les-cartes-blackjack': 'Comptage', '/simulateur-blackjack': 'Simulateur', '/jeu-blackjack-gratuit': 'Jeu gratuit', '/statistiques': 'Statistiques', '/credits': 'Crédits', '/merci': 'Merci', '/en/thanks': 'Thanks (EN)', '/quiz-blackjack': 'Quiz', '/en/blackjack-quiz': 'Quiz (EN)', '/quand-doubler-blackjack': 'Quand doubler', '/en/when-to-double-down': 'Double down (EN)', '/quand-separer-blackjack': 'Quand séparer', '/en/when-to-split': 'Split (EN)', '/probabilites-blackjack': 'Probabilités', '/en/blackjack-odds': 'Odds (EN)', '/erreurs-blackjack': 'Erreurs', '/en/blackjack-mistakes': 'Mistakes (EN)', '/glossaire-blackjack': 'Glossaire', '/en/blackjack-glossary': 'Glossary (EN)', '/en/basic-strategy': 'Basic strategy (EN)', '/en/blackjack-rules': 'Rules (EN)', '/en/card-counting': 'Card counting (EN)', '/en/free-blackjack-game': 'Free game (EN)', '/en/blackjack-simulator': 'Simulator (EN)', '/en/stats': 'Stats (EN)' };
   const page = (p) => PAGES[p] || p;
 
   function gate(msg) {
@@ -187,7 +197,7 @@
     ctx.globalAlpha = 1;
   }
 
-  function drawMap(geo) {
+  function drawMap(pts, old) {
     if (!window.L) { document.getElementById('map').innerHTML = '<p class="muted" style="padding:20px">Carte indisponible (bibliothèque non chargée).</p>'; return; }
     if (!map) {
       map = L.map('map', { worldCopyJump: true, zoomControl: true, attributionControl: true, minZoom: 1 }).setView([30, 5], 2);
@@ -195,139 +205,149 @@
     }
     if (layer) layer.remove();
     layer = L.layerGroup().addTo(map);
-    const by = new Map();
-    for (const g of geo) {
-      if (g.lat == null || g.lon == null) continue;
-      const k = g.lat + ',' + g.lon;
-      const o = by.get(k) || { lat: g.lat, lon: g.lon, city: g.city, country: g.country, view: 0, start: 0, round: 0, dl: 0 };
-      o[g.e] = (o[g.e] || 0) + g.n; by.set(k, o);
-    }
-    const pts = [...by.values()];
-    const max = Math.max(1, ...pts.map((p) => p.view + p.start));
+    // Lieux de l'ancien comptage (avant le comptage par personne) : petits points gris
+    const known = new Set(pts.map((p) => p.lat + ',' + p.lon));
+    const oldBy = new Map();
+    for (const g of old) { if (g.lat == null || g.lon == null || known.has(g.lat + ',' + g.lon)) continue; oldBy.set(g.lat + ',' + g.lon, g); }
+    for (const g of oldBy.values()) L.circleMarker([g.lat, g.lon], { radius: 3, stroke: false, fillColor: '#8a8070', fillOpacity: 0.5 }).bindPopup(`<b>${flag(g.country)} ${esc(g.city || 'Ville inconnue')}</b><br>Visite avant le nouveau comptage`).addTo(layer);
+    const max = Math.max(1, ...pts.map((p) => p.visiteurs));
     for (const p of pts) {
-      const weight = p.view + p.start;
-      const r = 5 + Math.sqrt(weight / max) * 20;
-      const col = p.round ? COLORS.round : p.start ? COLORS.start : COLORS.view;
+      const r = 5 + Math.sqrt(p.visiteurs / max) * 20;
+      const col = p.jouent ? COLORS.round : p.lancent ? COLORS.start : COLORS.view;
       L.circleMarker([p.lat, p.lon], { radius: r + 6, stroke: false, fillColor: col, fillOpacity: 0.12 }).addTo(layer);
       L.circleMarker([p.lat, p.lon], { radius: r, color: col, weight: 1.5, fillColor: col, fillOpacity: 0.45 })
-        .bindPopup(`<b>${flag(p.country)} ${esc(p.city || 'Ville inconnue')}</b><br>${esc(cname(p.country))}<br><br>👁 ${fmt(p.view)} pages vues<br>🃏 ${fmt(p.start)} parties lancées<br>♠ ${fmt(p.round)} donnes jouées${p.dl ? `<br>⬇ ${fmt(p.dl)} clics Télécharger` : ''}`)
+        .bindPopup(`<b>${flag(p.country)} ${esc(p.city || 'Ville inconnue')}</b><br>${esc(cname(p.country))}<br><br>👤 ${fmt(p.visiteurs)} visiteur${p.visiteurs > 1 ? 's' : ''}<br>🃏 ${fmt(p.lancent)} ont ouvert le jeu<br>♠ ${fmt(p.jouent)} ont joué · ${fmt(p.donnes)} donnes`)
         .addTo(layer);
     }
-    if (firstFit && pts.length) {
+    const all = [...pts, ...oldBy.values()];
+    if (firstFit && all.length) {
       firstFit = false;
-      if (pts.length === 1) map.setView([pts[0].lat, pts[0].lon], 4);
-      else map.fitBounds(L.latLngBounds(pts.map((p) => [p.lat, p.lon])).pad(0.3), { maxZoom: 5 });
+      if (all.length === 1) map.setView([all[0].lat, all[0].lon], 4);
+      else map.fitBounds(L.latLngBounds(all.map((p) => [p.lat, p.lon])).pad(0.3), { maxZoom: 5 });
       window.__mapView = { c: map.getCenter(), z: map.getZoom() };
     }
-    return pts.length;
   }
 
+  const SRCS = (b) => [b & 1 && 'site', b & 2 && 'appli PC', b & 4 && 'appli installée', b & 8 && 'itch.io'].filter(Boolean).join(' + ');
+  const DEVICON = { mobile: '📱', tablet: '📱', desktop: '💻' };
+  const REFS = { '': 'Direct / message privé / appli', google: 'Google', bing: 'Bing', duckduckgo: 'DuckDuckGo', yahoo: 'Yahoo', qwant: 'Qwant', ecosia: 'Ecosia', facebook: 'Facebook', instagram: 'Instagram', tiktok: 'TikTok', youtube: 'YouTube', reddit: 'Reddit', discord: 'Discord', x: 'X (Twitter)', linkedin: 'LinkedIn', pinterest: 'Pinterest', itch: 'itch.io', producthunt: 'Product Hunt', github: 'GitHub', whatsapp: 'WhatsApp' };
+  const refName = (k) => REFS[k] ?? k;
+  const dur = (s) => s < 60 ? '< 1 min' : s < 3600 ? Math.round(s / 60) + ' min' : Math.floor(s / 3600) + ' h ' + String(Math.round((s % 3600) / 60)).padStart(2, '0');
+  const doing = (x) => x.page === '/game/' ? (x.rounds ? `joue${x.mode ? ' (' + (MODES[x.mode] || x.mode).toLowerCase() + ')' : ''}` : 'est à la table') : 'lit ' + page(x.page);
+  const hhmm = (s) => new Date(s * 1000).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
+
   function render(d) {
-    const web = d.web || {}, jeu = d.jeu || {}, pro = d.pro || {}, dls = Array.isArray(d.telechargements) ? d.telechargements : [];
+    const web = d.web || {}, jeu = d.jeu || {}, pro = d.pro || {}, g = d.gens || {}, dls = Array.isArray(d.telechargements) ? d.telechargements : [];
+    const T = g.totaux || {};
     const sum = (arr, f) => (arr || []).reduce((a, x) => a + (f(x) || 0), 0);
-    const tot = (e, p) => sum((jeu.totaux || []).filter((x) => x.e === e && (p === undefined || x.p === p)), (x) => x.n);
     const group = (e, names) => (jeu.totaux || []).filter((x) => x.e === e).reduce((m, x) => { const k = names ? (names[x.p] || x.p) : x.p; m[k] = (m[k] || 0) + x.n; return m; }, {});
-    const visits = sum(web.jours, (x) => x.visites), views = sum(web.jours, (x) => x.pages);
     const base = (d.reset && d.reset.dl) || {};
     const files = dls.flatMap((r) => r.fichiers).map((f) => ({ ...f, n: Math.max(0, f.n - (base[f.nom] || 0)) })).filter((f) => f.n > 0);
     const dlTotal = sum(files, (x) => x.n);
     const byOs = {}; for (const f of files) byOs[OSOF(f.nom)] = (byOs[OSOF(f.nom)] || 0) + f.n;
-    const starts = tot('start'), rounds = tot('round'), dlClicks = tot('dl'), welcome = tot('welcome');
-    const geo = pro.geo || [];
-    const countries = new Set([...(web.pays || []).map((x) => x.k), ...geo.map((g) => g.country)].filter(Boolean));
-    // Direct : tranches de 10 minutes sur 3 h
+    const V = T.visiteurs || 0, launch = T.lancent || 0, played = T.jouent || 0;
+    const live = g.direct || [];
+    const countries = new Set((g.pays || []).map((x) => x.k).filter(Boolean));
+    const since = g.depuis ? new Date(g.depuis + 'T12:00:00Z').toLocaleDateString('fr-FR', { day: 'numeric', month: 'long' }) : '';
+    const periodTxt = days === 1 ? 'aujourd\'hui' : g.depuis && new Date(g.depuis) > new Date(Date.now() - days * 864e5) ? 'depuis le ' + since : days + ' derniers jours';
+    // Direct : personnes actives par tranche de 10 minutes sur 3 h
     const now = Date.now();
     const slots = []; for (let i = 17; i >= 0; i--) slots.push(new Date(Math.floor((now - i * 600e3) / 600e3) * 600e3).toISOString().slice(0, 16));
-    const liveBy = {}; for (const x of pro.live || []) liveBy[x.slot] = (liveBy[x.slot] || 0) + (x.e === 'view' || x.e === 'start' ? x.n : 0);
-    const liveVals = slots.map((s) => liveBy[s] || 0);
-    const nowCount = (liveVals[17] || 0) + (liveVals[16] || 0);
-    // Heures d'affluence (heure locale)
+    const presBy = {}; for (const x of g.presence || []) presBy[x.slot] = x.n;
+    const liveVals = slots.map((s) => presBy[s] || 0);
+    // Heures d'affluence (personnes actives, heure locale)
     const heat = Array.from({ length: 7 }, () => Array(24).fill(0));
-    for (const x of pro.heat || []) { const dt = new Date(x.h + ':00:00Z'); heat[(dt.getDay() + 6) % 7][dt.getHours()] += x.n; }
+    for (const x of g.affluence || []) { const dt = new Date(x.h + ':00:00Z'); heat[(dt.getDay() + 6) % 7][dt.getHours()] += x.n; }
     const heatMax = Math.max(1, ...heat.flat());
-    const dayKeys = (web.jours || []).map((x) => x.k);
-    const roundsByDay = {}; for (const x of jeu.parJour || []) if (x.e === 'round') roundsByDay[x.day] = x.n;
-    const since = d.reset ? new Date(d.reset.date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long' }) : '';
-    const refs = (web.sources || []).map((x) => ({ k: srcLabel(x.k), n: x.visites }));
-    const refAgg = toList(refs.reduce((m, x) => { m[x.k] = (m[x.k] || 0) + x.n; return m; }, {}));
-    const google = refAgg.find((x) => x.k === 'Google');
-    const mobile = sum((web.appareils || []).filter((x) => x.k === 'mobile'), (x) => x.visites);
+    const perDay = g.parJour || [];
+    const google = (g.sources || []).find((x) => x.k === 'google');
+    const mobile = sum((g.appareils || []).filter((x) => x.k !== 'desktop'), (x) => x.n);
+    const avgPlay = played ? (T.duree_joueurs || 0) / played : 0;
 
-    // Conseils de croissance calculés sur les données
+    // Conseils calculés sur les vraies données
     const tips = [];
-    tips.push(google ? ['ok', '🔎', `<b>Google t'envoie ${fmt(google.n)} visiteurs.</b> Continue d'ajouter des pages utiles (guides, quiz) pour monter.`] : ['warn', '🔎', '<b>Google n\'envoie encore personne.</b> Normal : l\'indexation prend 1 à 3 semaines. Vérifie l\'avancement dans Search Console → Pages.']);
-    tips.push(visits && starts / visits < 0.3 ? ['warn', '🎯', `<b>Seulement ${pct(starts, visits)} des visiteurs lancent le jeu.</b> Un bouton « Jouer » plus visible ou une vidéo en haut de l'accueil aiderait.`] : ['ok', '🎯', `<b>${pct(starts, Math.max(visits, 1))} des visiteurs lancent le jeu.</b> Très bon taux, l'accueil donne envie.`]);
+    tips.push(google ? ['ok', '🔎', `<b>Google t'a amené ${fmt(google.n)} personne${google.n > 1 ? 's' : ''}</b> (${fmt(google.j)} ont joué). Chaque nouveau guide utile = une nouvelle porte d'entrée.`] : ['warn', '🔎', '<b>Google n\'envoie encore presque personne.</b> Normal au début : chaque page met 1 à 4 semaines à remonter. Continue les guides.']);
+    if (V >= 10) tips.push(launch / V < 0.4 ? ['warn', '🎯', `<b>${pct(launch, V)} des visiteurs ouvrent le jeu.</b> Mets le bouton « Jouer » encore plus en avant sur les guides.`] : ['ok', '🎯', `<b>${pct(launch, V)} des visiteurs ouvrent le jeu</b> et ${pct(played, V)} jouent au moins une donne.`]);
+    if (played >= 5) tips.push(['', '⏱', `<b>Un joueur reste en moyenne ${dur(avgPlay)}.</b> ${T.accros ? fmt(T.accros) + ' ont enchaîné 10 donnes ou plus.' : ''}`]);
     tips.push(['', '🤝', '<b>Chaque lien depuis un autre site = un vote pour Google.</b> Reddit (r/blackjack, r/WebGames), itch.io, Product Hunt, forums de cartes.']);
-    tips.push(['', '📱', mobile && visits && mobile / visits > 0.4 ? `<b>${pct(mobile, visits)} viennent du téléphone.</b> TikTok / Reels / Shorts sont ton meilleur canal : courtes vidéos de mains folles et de « bon ou mauvais coup ? ».` : '<b>Vidéos courtes</b> (TikTok, Reels, Shorts) : « Tu aurais tiré ? », mains à 5 places, coach qui corrige. Lien en bio vers le site.']);
-    tips.push(['', '🔗', '<b>Utilise des liens suivis</b> (en bas) pour savoir quel post amène vraiment du monde.']);
+    tips.push(['', '📱', V && mobile / V > 0.4 ? `<b>${pct(mobile, V)} viennent du téléphone.</b> TikTok / Reels / Shorts sont ton meilleur canal.` : '<b>Vidéos courtes</b> (TikTok, Reels, Shorts) : « Tu aurais tiré ? », coach qui corrige. Lien en bio.']);
+    tips.push(['', '🔗', '<b>Utilise des liens suivis</b> (en bas) pour savoir quel post amène vraiment des joueurs.']);
+
+    const sessRow = (x) => {
+      const badges = [x.views && `${x.views} page${x.views > 1 ? 's' : ''}`, x.starts && 'a ouvert le jeu', x.rounds && `<b class="ok">${x.rounds} donne${x.rounds > 1 ? 's' : ''}</b>`, x.drills && 'exercices', x.dl && '<b class="dlb">a téléchargé</b>', x.ret && 'revient'].filter(Boolean).join(' · ');
+      const from = x.camp ? 'lien « ' + x.camp + ' »' : refName(x.ref);
+      return `<li><time>${hhmm(x.t0)}<small>${dur(x.t1 - x.t0)}</small></time><span>${flag(x.country)}</span><div><div class="l1"><b>${esc(x.city || cname(x.country))}</b> ${DEVICON[x.device] || ''} ${esc(x.os)} · ${esc(SRCS(x.srcs))}</div><div class="l2">${badges || 'a regardé'} <span class="muted">· venu de ${esc(from)}${x.entry ? ', entré par ' + esc(page(x.entry)) : ''}</span></div></div></li>`;
+    };
 
     root.innerHTML = `
       <div class="top">
         <a class="logo" href="/" style="font-size:20px"><span>Blackjack Play</span></a>
-        <div><h1>Centre de contrôle</h1><div class="sub">Trafic, joueurs et carte en direct</div></div>
-        <span class="live-pill"><i></i>${fmt(nowCount)} en ce moment</span>
+        <div><h1>Centre de contrôle</h1><div class="sub">Des personnes, pas des clics</div></div>
+        <span class="live-pill"><i></i>${fmt(live.length)} en ligne</span>
         <div class="seg">${[[1, 'Aujourd\'hui'], [7, '7 j'], [30, '30 j'], [90, '90 j']].map(([n, l]) => `<button data-d="${n}" aria-pressed="${n === days}">${l}</button>`).join('')}</div>
         <a class="ghost" href="/tableau/">Vue simple</a>
       </div>
+      ${g.erreur ? `<p class="muted">Compteur de personnes indisponible : ${esc(g.erreur)}</p>` : ''}
       <div class="kpis">
-        <div class="kpi"><span>Visiteurs</span><b>${fmt(visits)}</b><small>${since && d.periode && new Date(d.periode.debut) >= new Date(d.reset.date) ? 'depuis le ' + since : days === 1 ? 'aujourd\'hui' : days + ' derniers jours'}</small></div>
-        <div class="kpi"><span>Pages vues</span><b>${fmt(views)}</b><small>${visits ? (views / visits).toFixed(1) : '0'} par visite</small></div>
-        <div class="kpi gold"><span>Parties lancées</span><b>${fmt(starts)}</b><small>appli PC : ${fmt(tot('start', 'desktop'))} · itch.io : ${fmt(tot('start', 'itch'))}</small></div>
-        <div class="kpi gold"><span>Donnes jouées</span><b>${fmt(rounds)}</b><small>${starts ? (rounds / starts).toFixed(1) : '0'} par partie</small></div>
-        <div class="kpi"><span>Visiteur → joueur</span><b>${pct(starts, visits)}</b><small>lancent le jeu</small></div>
-        <div class="kpi"><span>Clics Télécharger</span><b>${fmt(dlClicks)}</b><small>sur le site</small></div>
-        <div class="kpi"><span>Téléchargements</span><b>${fmt(dlTotal)}</b><small>GitHub${since ? ' depuis le ' + since : ''}</small></div>
-        <div class="kpi"><span>Pays</span><b>${fmt(countries.size)}</b><small>touchés</small></div>
+        <div class="kpi"><span>Visiteurs</span><b>${fmt(V)}</b><small>personnes · ${periodTxt}</small></div>
+        <div class="kpi"><span>Ouvrent le jeu</span><b>${fmt(launch)}</b><small>${pct(launch, V)} des visiteurs</small></div>
+        <div class="kpi gold"><span>Joueurs</span><b>${fmt(played)}</b><small>${pct(played, V)} jouent au moins 1 donne</small></div>
+        <div class="kpi gold"><span>Donnes jouées</span><b>${fmt(T.donnes)}</b><small>${played ? (T.donnes / played).toFixed(1) : '0'} par joueur</small></div>
+        <div class="kpi"><span>Temps de jeu</span><b>${played ? dur(avgPlay) : '—'}</b><small>moyenne par joueur</small></div>
+        <div class="kpi"><span>Reviennent</span><b>${fmt(T.reviennent)}</b><small>avaient déjà joué un autre jour</small></div>
+        <div class="kpi"><span>Téléchargements</span><b>${fmt(dlTotal)}</b><small>GitHub${d.reset ? ' depuis le ' + new Date(d.reset.date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long' }) : ''}</small></div>
+        <div class="kpi"><span>Pays</span><b>${fmt(countries.size)}</b><small>site ${fmt(T.web)} · PC ${fmt(T.desktop)} · itch ${fmt(T.itch)}</small></div>
       </div>
 
       <div class="g-map">
-        <div class="card"><h2>Carte des connexions <em>ville approximative · ${fmt(geo.length ? new Set(geo.map((g) => g.city + g.country)).size : 0)} lieux</em></h2>
+        <div class="card"><h2>Carte des visiteurs <em>ville approximative · ${fmt((g.carte || []).length)} lieux</em></h2>
           <div id="map"></div>
-          <div class="maplegend"><span><i style="background:${COLORS.view}"></i>Visite du site</span><span><i style="background:${COLORS.start}"></i>A lancé le jeu</span><span><i style="background:${COLORS.round}"></i>A joué des donnes</span><span class="muted">Taille du point = nombre de visites. Clique un point pour le détail.</span></div>
+          <div class="maplegend"><span><i style="background:${COLORS.view}"></i>A visité</span><span><i style="background:${COLORS.start}"></i>A ouvert le jeu</span><span><i style="background:${COLORS.round}"></i>A joué</span><span><i style="background:#8a8070"></i>Avant le nouveau comptage</span><span class="muted">Taille = nombre de personnes.</span></div>
         </div>
         <div class="side">
-          <div class="card"><h2>En direct <em>3 dernières heures</em></h2>
-            <div style="display:flex;align-items:end;gap:14px"><div><div class="bignum">${fmt(nowCount)}</div><div class="muted">visites ces 20 dernières minutes</div></div></div>
-            <canvas id="live" style="width:100%;height:70px;margin-top:12px;display:block"></canvas>
-            <div class="muted" style="display:flex;justify-content:space-between"><span>il y a 3 h</span><span>maintenant</span></div>
+          <div class="card"><h2>En ligne maintenant <em>actifs ces 3 dernières minutes</em></h2>
+            <div class="bignum">${fmt(live.length)}</div>
+            ${live.length ? `<ul class="sess now">${live.map((x) => `<li><time>${dur(x.t1 - x.t0)}</time><span>${flag(x.country)}</span><div><div class="l1"><b>${esc(x.city || cname(x.country))}</b> ${DEVICON[x.device] || ''} ${esc(SRCS(x.srcs))}</div><div class="l2">${doing(x)}${x.rounds ? ` · ${x.rounds} donne${x.rounds > 1 ? 's' : ''}` : ''}</div></div></li>`).join('')}</ul>` : '<p class="muted" style="margin:6px 0 0">Personne pour l\'instant. Une personne reste affichée tant que sa page ou le jeu est ouvert devant elle.</p>'}
+            <canvas id="live" style="width:100%;height:64px;margin-top:12px;display:block"></canvas>
+            <div class="muted" style="display:flex;justify-content:space-between"><span>il y a 3 h</span><span>personnes actives / 10 min</span><span>maintenant</span></div>
           </div>
-          <div class="card"><h2>Activité récente</h2>
-            ${(pro.feed || []).length ? `<ul class="feed">${pro.feed.map((x) => `<li><time title="${esc(x.slot)}">${slotDate(x.slot).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}</time><span>${flag(x.country)}</span><span><b>${esc(x.city || cname(x.country))}</b> ${EV[x.e] ? EV[x.e][1] : x.e}${x.e === 'view' ? ' ' + esc(page(x.p)) : ''}${x.src === 'desktop' ? ' (appli PC)' : ''}${x.n > 1 ? ` ×${x.n}` : ''}</span></li>`).join('')}</ul>` : '<p class="muted">Les premières visites apparaîtront ici en direct.</p>'}
+          <div class="card"><h2>Dernières visites <em>une ligne = une personne</em></h2>
+            ${(g.recents || []).length ? `<ul class="sess">${g.recents.map(sessRow).join('')}</ul>` : '<p class="muted">Les prochaines visites apparaîtront ici.</p>'}
           </div>
         </div>
       </div>
 
       <div class="g2">
-        <div class="card"><h2>Évolution</h2>
-          <div class="legend"><span><i style="background:#e5c677"></i>Visiteurs</span><span><i style="background:#55b57f"></i>Donnes jouées</span></div>
+        <div class="card"><h2>Évolution <em>par jour</em></h2>
+          <div class="legend"><span><i style="background:#e5c677"></i>Visiteurs</span><span><i style="background:#55b57f"></i>Joueurs</span></div>
           <canvas class="chart" id="c1"></canvas>
         </div>
-        <div class="card"><h2>Entonnoir</h2>
-          <div class="funnel">${[['Visiteurs', visits], ['Lancent le jeu', starts], ['Choisissent un niveau', welcome], ['Cliquent Télécharger', dlClicks]].map(([l, v], i, arr) => `<div><span>${l}</span><div class="fb" style="width:${(v / Math.max(1, arr[0][1], starts)) * 100}%"></div><b>${fmt(v)}</b></div>`).join('')}</div>
-          <p class="muted" style="margin:14px 0 0">Ta vraie mesure de succès : la part de visiteurs qui jouent, et combien de donnes ils enchaînent.</p>
+        <div class="card"><h2>Parcours <em>${periodTxt}</em></h2>
+          <div class="funnel">${[['Visiteurs', V], ['Ouvrent le jeu', launch], ['Jouent 1 donne', played], ['Jouent 10 donnes +', T.accros || 0], ['Font les exercices', T.exercices || 0], ['Cliquent Télécharger', T.telechargent || 0]].map(([l, v]) => `<div><span>${l}</span><div class="fb" style="width:${(v / Math.max(1, V)) * 100}%"></div><b>${fmt(v)} <small>${pct(v, V)}</small></b></div>`).join('')}</div>
+          <p class="muted" style="margin:14px 0 0">Chaque étape compte des personnes : jamais plus de 100 %. Ta vraie mesure de succès : la part qui joue, et combien de temps.</p>
         </div>
       </div>
 
       <div class="g2">
-        <div class="card"><h2>Heures d'affluence <em>pages vues, heure de Paris</em></h2>
+        <div class="card"><h2>Heures d'affluence <em>personnes actives, heure de Paris</em></h2>
           <div class="heat"><span></span>${Array.from({ length: 24 }, (_, hh) => `<span style="text-align:center">${hh % 3 === 0 ? hh : ''}</span>`).join('')}
-          ${['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'].map((dn, di) => `<span>${dn}</span>` + heat[di].map((v, hh) => `<i title="${dn} ${hh} h : ${v}" style="background:${v ? `rgba(229,198,119,${0.15 + 0.85 * v / heatMax})` : ''}"></i>`).join('')).join('')}</div>
+          ${['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'].map((dn, di) => `<span>${dn}</span>` + heat[di].map((v, hh) => `<i title="${dn} ${hh} h : ${v} personne(s)" style="background:${v ? `rgba(229,198,119,${0.15 + 0.85 * v / heatMax})` : ''}"></i>`).join('')).join('')}</div>
           <p class="muted" style="margin:10px 0 0">Poste tes vidéos et messages juste avant les cases les plus claires.</p>
         </div>
         <div class="card"><h2>Pour avoir encore plus de monde</h2><ul class="tips">${tips.map(([c, i, t]) => `<li><span class="ic ${c}">${i}</span><span>${t}</span></li>`).join('')}</ul></div>
       </div>
 
       <div class="g3">
-        <div class="card"><h2>D'où ils viennent</h2>${rows(refAgg, 8)}</div>
-        <div class="card"><h2>Pays</h2>${rows((web.pays || []).map((x) => ({ k: x.k, n: x.visites })), 8, (x) => `${flag(x.k)} ${esc(cname(x.k))}`)}</div>
-        <div class="card"><h2>Pages les plus vues</h2>${rows((web.pages || []).map((x) => ({ k: x.k, n: x.pages })), 8, (x) => esc(page(x.k)))}</div>
+        <div class="card"><h2>D'où ils viennent <em>personnes · dont joueurs</em></h2>${rows(g.sources || [], 10, (x) => esc(refName(x.k)) + ` <span class="muted">· ${fmt(x.j)} j.</span>`)}</div>
+        <div class="card"><h2>Pays <em>personnes · dont joueurs</em></h2>${rows(g.pays || [], 10, (x) => `${flag(x.k)} ${esc(cname(x.k))} <span class="muted">· ${fmt(x.j)} j.</span>`)}</div>
+        <div class="card"><h2>Page d'arrivée <em>personnes · dont joueurs</em></h2>${rows(g.entrees || [], 10, (x) => esc(page(x.k)) + ` <span class="muted">· ${fmt(x.j)} j.</span>`)}</div>
       </div>
 
       <div class="g4">
-        <div class="card"><h2>Appareils</h2>${donut((web.appareils || []).map((x) => ({ k: DEV[x.k] || x.k, n: x.visites })))}</div>
-        <div class="card"><h2>Systèmes</h2>${rows((web.systemes || []).map((x) => ({ k: x.k === 'Unknown' ? 'Inconnu' : x.k, n: x.visites })), 6)}</div>
-        <div class="card"><h2>Navigateurs</h2>${rows((web.navigateurs || []).map((x) => ({ k: x.k === 'Unknown' ? 'Inconnu' : x.k, n: x.visites })), 6)}</div>
-        <div class="card"><h2>Modes joués</h2>${donut(toList(group('round', MODES)))}</div>
+        <div class="card"><h2>Appareils</h2>${donut((g.appareils || []).map((x) => ({ k: DEV[x.k] || x.k, n: x.n })))}</div>
+        <div class="card"><h2>Systèmes</h2>${rows(g.systemes || [], 6)}</div>
+        <div class="card"><h2>Navigateurs</h2>${rows(g.navigateurs || [], 6)}</div>
+        <div class="card"><h2>Modes joués <em>donnes</em></h2>${donut(toList(group('round', MODES)))}</div>
       </div>
 
       <div class="g4">
@@ -337,16 +357,17 @@
         <div class="card"><h2>Téléchargements</h2>${donut(toList(byOs))}</div>
       </div>
 
-      <div class="g2">
-        <div class="card"><h2>Liens de partage suivis</h2>
-          ${rows(toList(group('ref')), 8)}
+      <div class="g3">
+        <div class="card"><h2>Liens de partage suivis <em>personnes · dont joueurs</em></h2>
+          ${rows(g.campagnes || [], 8, (x) => esc(x.k) + ` <span class="muted">· ${fmt(x.j)} j.</span>`)}
           <div class="share" style="margin-top:12px"><input id="refname" placeholder="ex. tiktok, reddit, insta-bio, potes"><button class="btn btn-gold" id="mk">Créer le lien</button><code id="reflink" title="Cliquer pour copier">Tape un nom pour créer un lien de partage suivi.</code></div>
         </div>
+        <div class="card"><h2>Pages les plus vues <em>Cloudflare</em></h2>${rows((web.pages || []).map((x) => ({ k: x.k, n: x.pages })), 8, (x) => esc(page(x.k)))}</div>
         <div class="card"><h2>Raccourcis</h2>
-          <p class="muted" style="margin:0">Tes outils, en un clic.</p>
           <div class="links">
             <a class="ghost" href="https://search.google.com/search-console?resource_id=sc-domain%3Ablackjack-play.app" target="_blank" rel="noopener">Google Search Console</a>
             <a class="ghost" href="https://www.google.com/search?q=site%3Ablackjack-play.app" target="_blank" rel="noopener">Mes pages dans Google</a>
+            <a class="ghost" href="https://itch.io/dashboard" target="_blank" rel="noopener">itch.io</a>
             <a class="ghost" href="https://dash.cloudflare.com/" target="_blank" rel="noopener">Cloudflare</a>
             <a class="ghost" href="https://github.com/blackjack-play-app/sabot/releases" target="_blank" rel="noopener">Versions GitHub</a>
             <a class="ghost" href="https://pagespeed.web.dev/analysis?url=https%3A%2F%2Fblackjack-play.app%2F" target="_blank" rel="noopener">Vitesse du site</a>
@@ -354,14 +375,14 @@
           <p class="upd" id="upd" style="margin:16px 0 0"></p>
         </div>
       </div>
-      <p class="muted">Données : Cloudflare Web Analytics (sans cookies), compteurs anonymes du jeu (ville approximative, aucune IP stockée), GitHub Releases. Tes propres appareils ne sont pas comptés. Mise à jour automatique toutes les 30 secondes. Lien privé : ne le partage pas.</p>`;
+      <p class="muted">Comment on compte : un visiteur = une personne par jour, qu'elle passe par le site, l'appli PC ou itch.io (empreinte anonyme recalculée chaque jour, aucune IP stockée, aucun cookie). « En ligne » = page ou jeu ouvert et visible, signal toutes les minutes. Comptage par personne depuis le ${since || 'début'} ; avant, l'ancien tableau additionnait des clics (d'où les « 124 % »). Tes propres appareils ne sont pas comptés. Mise à jour toutes les 30 secondes. Lien privé : ne le partage pas.</p>`;
 
-    drawMap(geo);
+    drawMap(g.carte || [], pro.geo || []);
     bars(document.getElementById('live'), liveVals, '#3f7d5a');
     area(document.getElementById('c1'), [
-      { color: '#e5c677', values: (web.jours || []).map((x) => x.visites) },
-      { color: '#55b57f', values: dayKeys.map((k) => roundsByDay[k] || 0) },
-    ], dayKeys);
+      { color: '#e5c677', values: perDay.map((x) => x.visiteurs) },
+      { color: '#55b57f', values: perDay.map((x) => x.jouent) },
+    ], perDay.map((x) => x.day));
     document.getElementById('upd').textContent = 'Mis à jour ' + new Date().toLocaleTimeString('fr-FR');
     root.querySelectorAll('[data-d]').forEach((b) => { b.onclick = () => { days = Number(b.dataset.d); firstFit = true; window.__mapView = null; if (map) { map.remove(); map = null; layer = null; } load(); }; });
     const mk = () => {

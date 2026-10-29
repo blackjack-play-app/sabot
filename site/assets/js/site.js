@@ -123,6 +123,7 @@
   const send = (events) => {
     if (!/(^|\.)blackjack-play\.app$|pages\.dev$/.test(location.hostname)) return;
     try { if (navigator.webdriver || localStorage.getItem('bp.notrack') === '1') return; } catch { /* ignoré */ }
+    if (window.bpSend) return window.bpSend(events);
     const body = JSON.stringify({ src: 'web', events });
     try { navigator.sendBeacon('/api/e', new Blob([body], { type: 'text/plain' })); } catch { /* ignoré */ }
   };
@@ -136,7 +137,8 @@
       location.href = TXT.thanks + '?f=' + encodeURIComponent(a.dataset.dl);
     }
   });
-  const ref = new URLSearchParams(location.search).get('ref');
+  const qs = new URLSearchParams(location.search);
+  const ref = qs.get('ref') || qs.get('utm_source');
   if (ref) {
     const clean = ref.toLowerCase().replace(/[^a-z0-9-]/g, '').slice(0, 24);
     let seen = false;
